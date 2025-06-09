@@ -28,11 +28,18 @@
             }"
           />
         </div>
-        <SettingOutlined style="color:#9370DB;" class="hover:cursor-pointer" />
+      
+        <div class="flex mr-3 px-3 py-1 bg-[#9370DB] gap-3 rounded-lg hover:cursor-pointer" @click="drawer.showDrawer()">
+          <p class="text-sm text-white">Your Preference</p>  
+          <SettingOutlined style="color:white;" />
+        </div>
+        
       </div>
       <!-- scroll -->
       <a-scroll class="w-full flex flex-col items-center flex-grow overflow-y-auto">
-        <div class="grid w-3/5 py-10 gap-y-5">
+        <div class="grid w-3/5 py-10 gap-y-7">
+          <UserProm></UserProm>
+          <AiRes></AiRes>
           <UserProm></UserProm>
           <AiRes></AiRes>
         </div>
@@ -50,6 +57,8 @@
       </div>
     </div>
   </div>
+
+  <PreferenceDrawer></PreferenceDrawer>
 </template>
 
 <script lang="ts">
@@ -57,12 +66,22 @@ import { defineComponent } from 'vue';
 import SideBar from '@/components/SideBar.vue';
 import UserProm from '@/components/UserProm.vue';
 import AiRes from '@/components/AiRes.vue';
+import { useDrawerStore } from '@/stores/drawer.ts'
+import PreferenceDrawer from '@/components/PreferenceDrawer.vue';
 
 export default defineComponent({
   components: {
     SideBar,
     UserProm,
     AiRes,
+    PreferenceDrawer,
   },
+  setup() {
+    const drawer = useDrawerStore();
+
+    return {
+      drawer,
+    }
+  }
 })
 </script>

@@ -17,9 +17,7 @@
   </div>
 
   <a-drawer title="Maldives" size=large :open="open" @close="onClose">
-    <p>Some contents...</p>
-    <p>Some contents...</p>
-    <p>Some contents...</p>
+    <img src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />
   </a-drawer>
 </template>
 
