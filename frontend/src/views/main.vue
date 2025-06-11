@@ -1,9 +1,9 @@
 <template>
   <div class="flex">
     <SideBar></SideBar>
-    <div class="min-h-screen w-full bg-white text-gray-800 flex flex-col items-center py-20 px-4">
+    <div class="min-h-screen w-full text-gray-800 flex flex-col items-center  px-4">
       <header>
-        <div class="text-3xl flex justify-center gap-2">
+        <div class="text-3xl flex justify-center gap-2 pt-20">
           <RocketTwoTone two-tone-color="#8A54FF" />
           <span class="text-gradient font-bold">YOURT</span><span class="-ml-2">ravel</span>
         </div>
@@ -11,7 +11,7 @@
 
       <section class="mt-15 w-full max-w-2xl">
           <a-textarea 
-            v-model:value="value"
+            v-model:value="prompt"
             placeholder="Tell me anything about the trip you want"
             :auto-size="{ minRows: 4, maxRows: 7}"
             class="shadow-lg shadow-violet-300/20"

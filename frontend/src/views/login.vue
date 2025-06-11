@@ -9,9 +9,15 @@
             mx-auto"> 
         <h1 class="font-semibold text-2xl text-indigo-900 mb-2 text-center">Login to YOURTravel</h1>
         <p class="mb-10 text-center text-gray-500 text-sm">Enter your user name to login</p>
-        <a-textarea v-model:value="value" placeholder="User Name" :auto-size="{ minRows: 2 }" />
+        <a-textarea v-model:value="userName"  placeholder="User Name" :auto-size="{ minRows: 2 }" />
         <p class="mt-4 ml-2 text-xs text-violet-400">Don't have an account? Automatically registered upon logging in</p>
-        <a-button class="mt-10 w-full mx-auto block" type="primary">Login</a-button>
+        <a-button 
+          class="mt-10 w-full mx-auto block" 
+          type="primary"
+          @click="handleLogin"
+          :disabled="userName === ''"
+        >Login</a-button>
+
         <p class="mt-4 text-center text-gray-300 text-xs">By Logging In, you agree to our Terms of Service and Privacy Policy</p>
       </div>
     </div>
@@ -19,13 +25,33 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
+import { useRouter } from 'vue-router';
 import SideBar from '@/components/SideBar.vue';
+import { useAuthStore } from '@/stores/auth.ts';
+import axios from "axios";
 
 export default defineComponent({
   components: {
     SideBar,
   },
+  setup() {
+    const userName = ref<string>('');
+    const auth = useAuthStore();
+    const router = useRouter();
+
+    const handleLogin = async () => {
+      const res = await axios.post('/login', {userName: userName.value});
+      console.log(res.data);
+      auth.setToken(res.data);
+      router.push('/');
+    };
+
+    return {
+      userName,
+      handleLogin,
+    }
+  }
 })
 </script>
 
@@ -36,5 +62,13 @@ export default defineComponent({
   background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
+}
+
+.error-border {
+  border-color: #ff4d4f;
+}
+.error-text {
+  color: #ff4d4f;
+  font-size: 12px;
 }
 </style>

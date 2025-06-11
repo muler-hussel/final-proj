@@ -4,10 +4,13 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 import Antd from 'ant-design-vue'
-import * as Icons from '@ant-design/icons-vue';
+import * as Icons from '@ant-design/icons-vue'
+import axios from 'axios'
 
 const pinia = createPinia()
 const app = createApp(App)
+
+axios.defaults.baseURL = import.meta.env.VITE_SERVER
 
 app.use(Antd).use(router).use(pinia).mount('#app')
 
