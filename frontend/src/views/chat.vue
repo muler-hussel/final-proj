@@ -8,13 +8,15 @@
           <p class="ml-2 font-semibold text-indigo-900 
             hover:cursor-pointer hover:underline 
             truncate overflow-hidden text-ellipsis"
+            @click="onEditTitle"
+            v-if="!changeTitle"
           >Title of trip Title of trip Title of trip Title of trip</p>
-          <EditOutlined style="color:#9370DB;" class="hover:cursor-pointer" />
-          <!-- <a-input v-model:value="value" placeholder="Basic usage">
+          <EditOutlined style="color:#9370DB;" class="hover:cursor-pointer" @click="onEditTitle" v-if="!changeTitle" />
+          <a-input v-model:value="value" placeholder="Enter your trip title" v-else pressEnter="completeChange">
             <template #suffix>
               <EnterOutlined style="color:#9370DB; font-size: smaller;" />
             </template>
-          </a-input> -->
+          </a-input>
         </div>
         <div class="flex ml-auto mr-3 px-3 py-1 border gap-3 rounded-lg border-gray-300 hover:cursor-pointer">
           <HeartOutlined style="color:#9370DB;" />
@@ -62,7 +64,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import SideBar from '@/components/SideBar.vue';
 import UserProm from '@/components/UserProm.vue';
 import AiRes from '@/components/AiRes.vue';
@@ -78,9 +80,19 @@ export default defineComponent({
   },
   setup() {
     const drawer = useDrawerStore();
+    const changeTitle = ref<Boolean>(false);
+
+    const onEditTitle = () => changeTitle.value = true;
+
+    const completeChange = () => {
+      changeTitle.value = false;
+    }
 
     return {
       drawer,
+      changeTitle,
+      onEditTitle,
+      completeChange,
     }
   }
 })

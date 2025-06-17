@@ -2,8 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.db.mongodb import mongodb
 from contextlib import asynccontextmanager
-from app.api import auth
-# from app.api import chat, recommend, graph
+from app.api import auth, chat
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -22,10 +21,10 @@ app.add_middleware(
 )
 
 app.include_router(auth.router)
-# app.include_router(chat.router, prefix="/chat", tags=["Chat"])
+app.include_router(chat.router)
 # app.include_router(recommend.router, prefix="/recommend", tags=["Recommend"])
 # app.include_router(graph.router, prefix="/graph", tags=["Graph"])
 
 @app.get("/")
 def root():
-    return {"message": "Welcome to YOURTravel"}
+  return {"message": "Welcome to YOURTravel"}

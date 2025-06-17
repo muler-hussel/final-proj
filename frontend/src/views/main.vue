@@ -60,6 +60,7 @@ export default defineComponent({
     SideBar,
   },
   setup() {
+    const prompt = ref<string>('');
     const checked = ref<boolean>(false);
     const cardData = [
       {
@@ -91,6 +92,7 @@ export default defineComponent({
     return {
       checked,
       cardData,
+      prompt,
     }
   }
 })
