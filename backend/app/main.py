@@ -6,18 +6,18 @@ from app.api import auth, chat
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    await mongodb.connect()
-    yield
-    await mongodb.close()
+  await mongodb.connect()
+  yield
+  await mongodb.close()
 
 app = FastAPI(title="YOURTravel", version="0.1", lifespan=lifespan)
 
 app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+  CORSMiddleware,
+  allow_origins=["*"],
+  allow_credentials=True,
+  allow_methods=["*"],
+  allow_headers=["*"],
 )
 
 app.include_router(auth.router)

@@ -16,7 +16,7 @@ class RedisService:
   # Connect to redis
   def _connect_redis(cls):
     try:
-      redis_client = redis.Redis(host="localhost", port=6379, db=0, decode_responses=True)
+      redis_client = redis.Redis(host="127.0.0.1", port=6379, db=0, decode_responses=True)
       redis_client.ping()
       print("Connected to Redis successfully!")
       return redis_client
@@ -45,7 +45,7 @@ class RedisService:
         return None
     return None
 
-  # TODO set expire time; store data in mongodb; delete history and shortlist according to keys
+  # TODO: set expire time; store data in mongodb; delete history and shortlist according to keys
   def save_session_state(self, session_state: SessionState) -> bool:
     if not self._redis_client:
       return False
@@ -109,7 +109,7 @@ class RedisService:
     if not session_state:
       return []
     
-    # TODO should use redis list to realize pages, not get all conversations
+    # TODO: should use redis list to realize pages, not get all conversations
     return self._redis_client.lrange(session_state.history_key, 0, -1)
 
   # Deal with shortlist

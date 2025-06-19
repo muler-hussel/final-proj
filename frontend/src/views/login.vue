@@ -42,7 +42,6 @@ export default defineComponent({
 
     const handleLogin = async () => {
       const res = await axios.post('/login', {userName: userName.value});
-      console.log(res.data);
       auth.setToken(res.data);
       router.push('/');
     };

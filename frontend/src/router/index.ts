@@ -13,7 +13,7 @@ const router = createRouter({
       component: () => import('../views/login.vue')
     },
     {
-      path: '/chat',
+      path: '/chat/:userId/:sessionId',
       component: () => import('../views/chat.vue'),
       meta: { requiresAuth: true } 
     },

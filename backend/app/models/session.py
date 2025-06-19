@@ -27,11 +27,11 @@ class ShortlistItem(BaseModel):
 
   class Config:
     arbitrary_types_allowed = True
-    orm_mode = True
+    from_attributes = True
 
 ShortlistItem.model_rebuild()
 
-# Profile according to preferences in one session. TODO
+# Profile according to preferences in one session. TODO:
 class ShortTermProfile(BaseModel):
   preferences: List[str] = []
   shortlist_tags: Dict[str, int] = {}

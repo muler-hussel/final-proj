@@ -1,23 +1,23 @@
 from langchain_core.prompts import ChatPromptTemplate
 
-# TODO maybe use xml tags
-# Automatically generate trip title
-GENERATE_SESSION_TITLE_PROMPT = ChatPromptTemplate.from_messages([
-    ("system", """You are an AI assistant. Based on the user's initial prompt, generate a concise and relevant title for a travel planning session.
-    The title should capture the essence of the travel plan. If the prompt contains specific destination/date/preferences, incorporate them.
-    If the prompt is generic, generate a general title like "New Trip".
-    Keep the title short, ideally under 15 characters.
-    Examples:
-    - User: "I want to visit Japan" -> Title: "Trip to Japan"
-    - User: "My family of three wants to go on vacation to the seaside next summer." -> Title: "Family Island Vacation"
-    - User: "Help me plan a backpacking trip to Europe" -> Title: "Backpacking Trip to Europe"
-    - User: "Hello" -> Title: "New Trip"
-    """),
-    ("human", "Initial Prompt: {prompt}\nSuggested Title:")
+# TODO: maybe use xml tags
+# Automatically generate trip title TODO:cannot fully summarize
+GENERATE_SESSION_TITLE_PROMPT = ChatPromptTemplate([
+  ("system", """You are an AI assistant. Based on the user's initial prompt, generate a concise and relevant title for a travel planning session.
+  The title should capture the essence of the travel plan. If the prompt contains specific destination/date/preferences, incorporate them.
+  If the prompt is generic, generate a general title like "New Trip".
+  Keep the title short, ideally under 15 characters.
+  Examples:
+  - User: "I want to visit Japan" -> Title: "Trip to Japan"
+  - User: "My family of three wants to go on vacation to the seaside next summer." -> Title: "Family Island Vacation"
+  - User: "Help me plan a backpacking trip to Europe" -> Title: "Backpacking Trip to Europe"
+  - User: "Hello" -> Title: "New Trip"
+  """),
+  ("human", "Initial Prompt: {prompt}\nSuggested Title:")
 ])
 
-# Examples and prompt for filling slot
-SLOT_FILLING_PROMPT = ChatPromptTemplate.from_messages([
+# Examples and prompt for filling slot TODO: sometimes performs well, sometimes not. Try methods in langchain maybe
+SLOT_FILLING_PROMPT = ChatPromptTemplate([
   ("system", """You are an expert travel assistant. Your task is to extract specific travel-related information from the user's conversation history.
   Extract the following details:
   - destination: The user's desired travel destination (e.g., 'Paris', 'Japan', 'a beach holiday').
@@ -31,9 +31,9 @@ SLOT_FILLING_PROMPT = ChatPromptTemplate.from_messages([
 ])
 
 # Initialize todo list at the beginning of session
-GENERATE_TODO_PROMPT = ChatPromptTemplate.from_messages([
+GENERATE_TODO_PROMPT = ChatPromptTemplate([
   ("system", """You are a helpful AI assistant managing a user's travel planning session.
-  Based on the current state of the travel planning (user_id: {user_id}, session_id: {session_id}, current_slots: {slots}), generate an initial, ordered to-do list for planning this trip.
+  Based on the current state of the travel planning (user_id: {user_id}, session_id: {session_id}), generate an initial, ordered to-do list for planning this trip.
   Each item in the list should be a clear, actionable step.
   
   **Important: The list MUST always include the following final steps:**
@@ -52,8 +52,8 @@ GENERATE_TODO_PROMPT = ChatPromptTemplate.from_messages([
   ("human", "Generate the initial to-do list.")
 ])
 
-# Adjust todo list TODO
-ADJUST_TODO_PROMPT = ChatPromptTemplate.from_messages([
+# Adjust todo list TODO:
+ADJUST_TODO_PROMPT = ChatPromptTemplate([
   ("system", """You are a helpful AI assistant managing a user's travel planning session.
   The current to-do list is:
   {current_todo}
@@ -97,20 +97,16 @@ If you need to add or modify anything, please let me know.
 If not, you can click the **Next button** to generate the travel route.
 """
 
-# Response of ai TODO short & long term prompt
-BASIC_PROMPT = ChatPromptTemplate.from_messages([
+# Response of ai TODO: short & long term prompt
+BASIC_PROMPT = ChatPromptTemplate([
   ("system", """You are a polite and helpful AI travel assistant. Your goal is to guide the user through planning their trip.
   
   Current Session Context:
   User ID: {user_id}
   Session ID: {session_id}
   
-  Current Filled Information:
-  {slots}
-  
   Current To-Do Step: {current_todo_step}
-  Remaining To-Do:
-  {remaining_todo}
+  History: {history}
   
   **Instructions for your response:**
   1.  **Respond to the user's input naturally.**

@@ -8,7 +8,7 @@ class MongoDB:
   def __init__(self):
     self.client = None
     self.db = None
-    self.user_profiles = None
+    self.user_profile = None
 
   async def connect(self):
     """connect mongodb"""
@@ -16,7 +16,7 @@ class MongoDB:
     try:
       self.client = AsyncMongoClient(os.getenv("MONGODB_URI"))
       self.db = self.client.get_database("yourtravel")
-      self.user_profiles = UserProfile(self.db)
+      self.user_profile = UserProfile(self.db)
       await self.client.admin.command('ping') 
       print("Successfully connected to MongoDB!")
     except ConnectionFailure as e:
@@ -26,7 +26,7 @@ class MongoDB:
   async def close(self):
     """close connection to db"""
     if self.client:
-      self.client.close()
+      await self.client.close()
       print("MongoDB connection closed.")
 
 mongodb = MongoDB()

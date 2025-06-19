@@ -1,8 +1,8 @@
 import os
-import getpass
-from langchain.chat_models import init_chat_model
+from dotenv import load_dotenv
+from langchain_openai.chat_models.base import BaseChatOpenAI
 from langchain_core.output_parsers import StrOutputParser
-from langchain_core.pydantic_v1 import BaseModel
+from pydantic import BaseModel
 from typing import List, Optional
 from app.models.session import SessionState, SlotData
 from app.utils.prompts import GENERATE_SESSION_TITLE_PROMPT
@@ -21,9 +21,27 @@ class SlotDataExtractor(BaseModel):
 
 class ChatService:
   def __init__(self):
-    if not os.environ.get("GEMINI_API_KEY"):
-      os.environ["GEMINI_API_KEY"] = getpass.getpass("Enter API key for Google Gemini: ")
-    self.language_model = init_chat_model("gemini-2.0-flash", model_provider="google_genai")
+    # if not os.environ.get("GEMINI_API_KEY"):
+    #   os.environ["GEMINI_API_KEY"] = getpass.getpass("Enter API key for Google Gemini: ")
+    # try:
+    #   self.language_model = ChatGoogleGenerativeAI(model="gemini-2.5-flash-preview-05-20")
+    # if not os.environ.get("OPENAI_API_KEY"):
+    #   os.environ["OPENAI_API_KEY"] = getpass.getpass("Enter API key for OpenAI: ")
+    load_dotenv()
+    OPENAI_KEY = os.getenv("API_KEY")
+    
+    try:
+      self.language_model = BaseChatOpenAI(model_name="gpt-4o-mini", openai_api_base="https://free.v36.cm/v1", openai_api_key=OPENAI_KEY)
+    except:
+      print("Fail to initialize llm")
+      raise
+    
+    # Generate title according to prompt
+    self.title_generation_chain = (
+      GENERATE_SESSION_TITLE_PROMPT 
+      | self.language_model 
+      | StrOutputParser()
+    )
 
     # Slot fill in
     self.slot_extraction_chain = (
@@ -54,9 +72,8 @@ class ChatService:
   # Automatically generate trip title
   async def generate_session_title(self, prompt: str) -> str:
     try:
-      title_chain = GENERATE_SESSION_TITLE_PROMPT | self.language_model | StrOutputParser()
-      generated_title = await title_chain.ainvoke({"prompt": prompt})
-      return generated_title.strip()
+      generated_title = await self.title_generation_chain.ainvoke({"prompt": prompt})
+      return generated_title.strip('"').strip()
     except Exception as e:
       print(f"Error generating session title: {e}")
       return "New Trip"
@@ -65,6 +82,9 @@ class ChatService:
   async def extract_slots(self, conversation_history: str) -> SlotData:
     try:
       extractor_output = await self.slot_extraction_chain.ainvoke({"history": conversation_history})
+      # None cannot be model_dump
+      if extractor_output is None:
+        return SlotData()
       return SlotData(**extractor_output.model_dump(exclude_unset=True))
     except Exception as e:
       print(f"Error extracting slots: {e}")
@@ -89,15 +109,17 @@ class ChatService:
     return [step.strip() for step in adjusted_todo_str.split('\n') if step.strip()]
 
   async def get_ai_response(self, session_state: SessionState, user_input: str, missing_info_prompt: Optional[str] = None) -> str:   
-    # TODO maybe not forward step
+    # TODO: maybe not forward step
     current_todo_step_str = f"Current Step: {session_state.todo_step + 1}. {session_state.todo[session_state.todo_step]}" if session_state.todo else "No active todo step."
-    
+    history_str = "\n".join(session_state.history[-10:]) # recent 10 conversation
+
     prompt_data = {
       "user_id": session_state.user_id,
       "session_id": session_state.session_id,
       "user_input": user_input,
       "missing_info_prompt": missing_info_prompt if missing_info_prompt else "",
       "current_todo_step": current_todo_step_str,
+      "history": history_str,
     }
 
     response = await self.primary_assistant_chain.ainvoke(prompt_data)

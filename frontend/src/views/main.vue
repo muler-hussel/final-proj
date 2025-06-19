@@ -10,23 +10,23 @@
       </header>
 
       <section class="mt-15 w-full max-w-2xl">
-          <a-textarea 
-            v-model:value="prompt"
-            placeholder="Tell me anything about the trip you want"
-            :auto-size="{ minRows: 4, maxRows: 7}"
-            class="shadow-lg shadow-violet-300/20"
-          />
-          <div class="flex justify-end mt-3 gap-x-5 items-center">
-            <a-popover>
-              <template #content>
-                <p>Skips all clarification questions.</p>
-                <p>Create your trip with any infomation.</p>
-              </template>
-              <a-switch v-model:checked="checked" size="small" />
-              <span class="text-sm text-gray-500 ml-2">Easy Plan</span>
-            </a-popover>
-            <a-button>Submit</a-button>
-          </div>
+        <a-textarea 
+          v-model:value="prompt"
+          placeholder="Tell me anything about the trip you want"
+          :auto-size="{ minRows: 4, maxRows: 7}"
+          class="shadow-lg shadow-violet-300/20"
+        />
+        <div class="flex justify-end mt-3 gap-x-5 items-center">
+          <a-popover>
+            <template #content>
+              <p>Skips all clarification questions.</p>
+              <p>Create your trip with any infomation.</p>
+            </template>
+            <a-switch v-model:checked="easyPlan" size="small" />
+            <span class="text-sm text-gray-500 ml-2">Easy Plan</span>
+          </a-popover>
+          <a-button @click="submitPrompt">Submit</a-button>
+        </div>
       </section>
 
       <section class="mt-12">
@@ -54,6 +54,9 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import SideBar from '@/components/SideBar.vue';
+import { useAuthStore } from '@/stores/auth.ts';
+import { useRouter } from 'vue-router';
+import axios from "axios";
 
 export default defineComponent({
   components: {
@@ -61,7 +64,9 @@ export default defineComponent({
   },
   setup() {
     const prompt = ref<string>('');
-    const checked = ref<boolean>(false);
+    const easyPlan = ref<boolean>(false);
+    const auth = useAuthStore();
+    const router = useRouter();
     const cardData = [
       {
         title: "Hidden Gems",
@@ -88,11 +93,29 @@ export default defineComponent({
         description: "Epic 5-day Iceland itinerary with adventure highlights."
       }
     ]
+    
+    const submitPrompt = async () => {
+      try {
+        const res = await axios.post(`/chat/${auth.token}/init`, {
+          user_input: prompt.value,
+        });
+        const userId = res.data.user_id;
+        const sessionId = res.data.session_id;
+        router.push({
+          path: `/chat/${userId}/${sessionId}`,
+          // Vue Router LocationQueryValueRaw cannot be boolean
+          query: { isEasyPlan: easyPlan.value ? 'true' : 'false' }
+        });
+      } catch (e) {
+        alert("Failed to start session. Please try again.");
+      }
+    };
 
     return {
-      checked,
+      easyPlan,
       cardData,
       prompt,
+      submitPrompt,
     }
   }
 })
