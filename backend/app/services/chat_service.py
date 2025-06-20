@@ -12,6 +12,8 @@ from app.utils.prompts import (
     ADJUST_TODO_PROMPT,
     BASIC_PROMPT
 )
+from app.utils.logger import logger
+from app.services.redis_service import redis_service
 
 class SlotDataExtractor(BaseModel):
   destination: Optional[str]
@@ -73,6 +75,7 @@ class ChatService:
   async def generate_session_title(self, prompt: str) -> str:
     try:
       generated_title = await self.title_generation_chain.ainvoke({"prompt": prompt})
+      logger.info(f"prompt: {prompt}, generated title: {generated_title}")
       return generated_title.strip('"').strip()
     except Exception as e:
       print(f"Error generating session title: {e}")
@@ -82,6 +85,7 @@ class ChatService:
   async def extract_slots(self, conversation_history: str) -> SlotData:
     try:
       extractor_output = await self.slot_extraction_chain.ainvoke({"history": conversation_history})
+      logger.info(f"prompt: {conversation_history}, extracted preferences: {extractor_output}")
       # None cannot be model_dump
       if extractor_output is None:
         return SlotData()
@@ -91,12 +95,14 @@ class ChatService:
       return SlotData()
 
   # Initial todo list
-  async def generate_initial_todo_list(self, user_id: str, session_id: str) -> List[str]:
+  async def generate_initial_todo_list(self, user_id: str, session_id: str, user_input: str) -> List[str]:
     prompt_data = {
       "user_id": user_id,
-      "session_id": session_id
+      "session_id": session_id,
+      "user_input": user_input
     }
     todo_list_str = await self.todo_generation_chain.ainvoke(prompt_data)
+    logger.info(f"prompt: {user_input}, generated todo list: {todo_list_str}")
     return [step.strip() for step in todo_list_str.split('\n') if step.strip()]
 
   # Adjust todo list
@@ -106,16 +112,20 @@ class ChatService:
       "user_input": user_input
     }
     adjusted_todo_str = await self.todo_adjustment_chain.ainvoke(prompt_data)
+    logger.info(f"prompt: {prompt_data}, adjusted todo list: {adjusted_todo_str}")
     return [step.strip() for step in adjusted_todo_str.split('\n') if step.strip()]
 
   async def get_ai_response(self, session_state: SessionState, user_input: str, missing_info_prompt: Optional[str] = None) -> str:   
-    # TODO: maybe not forward step
+    # TODO: maybe not forward step, maybe not recent 10
+    user_id = session_state.user_id
+    session_id = session_state.session_id
     current_todo_step_str = f"Current Step: {session_state.todo_step + 1}. {session_state.todo[session_state.todo_step]}" if session_state.todo else "No active todo step."
-    history_str = "\n".join(session_state.history[-10:]) # recent 10 conversation
+    history = redis_service.get_history(user_id, session_id)[-10:] # recent 10 conversation
+    history_str = "\n".join(f"{msg['role']}: {msg['content']}" for msg in history)
 
     prompt_data = {
-      "user_id": session_state.user_id,
-      "session_id": session_state.session_id,
+      "user_id": user_id,
+      "session_id": session_id,
       "user_input": user_input,
       "missing_info_prompt": missing_info_prompt if missing_info_prompt else "",
       "current_todo_step": current_todo_step_str,
@@ -123,6 +133,7 @@ class ChatService:
     }
 
     response = await self.primary_assistant_chain.ainvoke(prompt_data)
+    logger.info(f"prompt: {prompt_data}, ai response: {response}")
     return response
 
 chat_service = ChatService()

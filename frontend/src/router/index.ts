@@ -13,9 +13,17 @@ const router = createRouter({
       component: () => import('../views/login.vue')
     },
     {
-      path: '/chat/:userId/:sessionId',
+      path: '/chat/:sessionId',
       component: () => import('../views/chat.vue'),
       meta: { requiresAuth: true } 
+    },
+    {
+      path: '/chat/new',
+      component: () => import('../views/chat.vue'),
+      meta: { 
+        requiresAuth: true,
+        isTransitional: true // Transit from new to :sessionid
+      }
     },
     {
       path: '/:pathMatch(.*)*',

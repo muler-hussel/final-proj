@@ -3,9 +3,10 @@ import os
 import subprocess
 from logging.handlers import TimedRotatingFileHandler
 
-# Logging setting, aiming at recording ai response
+# Logging setting, aiming at recording ai response to different prompts
+# System prompt version related to git commit hash
 # Stored at /logs/app.log.{datetime}
-# Log into a new file every week
+# Log into a new file everyday
 # Also print in console
 LOG_DIR = "logs"
 os.makedirs(LOG_DIR, exist_ok=True)
@@ -25,8 +26,8 @@ class CommitFilter(logging.Filter):
 
 log_file_handler = TimedRotatingFileHandler(
   filename=f"{LOG_DIR}/app.log",
-  when="W0", # Monday
-  interval=1, # Every week
+  when="D",
+  interval=1, # Every day
   encoding="utf-8"
 )
 log_file_handler.addFilter(CommitFilter())

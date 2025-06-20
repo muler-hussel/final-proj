@@ -10,13 +10,15 @@ from app.utils.prompts import MISSING_SLOT_PROMPT_FIRST_INPUT, MISSING_SLOT_PROM
 router = APIRouter(prefix="/chat", tags=["chat"])
 
 class ChatRequest(BaseModel):
-    user_input: str
+  user_id: str
+  user_input: str
 
 # New chat with or without prompt.
 # Suitable for both easy plan and chatting with ai
-@router.post("/{user_id}/init", response_model=SessionState)
-async def create_session(user_id: str = Path(...), data: ChatRequest = Body(...)):
+@router.post("/init", response_model=SessionState)
+async def create_session(data: ChatRequest = Body(...)):
   session_id = str(uuid.uuid4())
+  user_id = data.user_id
   session_title = f"Trip for {user_id}"
   initial_prompt = data.user_input
 
@@ -24,46 +26,30 @@ async def create_session(user_id: str = Path(...), data: ChatRequest = Body(...)
     generated_title = await chat_service.generate_session_title(initial_prompt)
     if generated_title:
       session_title = generated_title
-    print(session_title)
   session_state = SessionState(user_id=user_id, session_id=session_id, title=session_title)
   redis_service.save_session_state(session_state)
-
-  # If initial_prompt, should be stored in history conversation
-  if initial_prompt:
-    redis_service.append_history(user_id, session_id, f"User: {initial_prompt}")
-
-    # Extract slots
-    extracted_slots = await chat_service.extract_slots([f"User: {initial_prompt}"])
-    print(extracted_slots)
-    if extracted_slots:
-      session_state = redis_service.update_slots(user_id, session_id, extracted_slots)
-    
-    # Generate Todo List
-    if not session_state.todo:
-      session_state.todo = await chat_service.generate_initial_todo_list(user_id, session_id)
-      print(session_state.todo)
-      session_state.todo_step = 0
-      redis_service.save_session_state(session_state)
   return session_state
 
 # Get session when refresh or from history chats
-@router.get("/{user_id}/{session_id}", response_model=SessionState)
-async def get_session(user_id: str = Path(...), session_id: str = Path(...), ):
+@router.get("/{session_id}", response_model=SessionState)
+async def get_session(session_id: str = Path(...), data: ChatRequest = Body()):
+  user_id = data.user_id
   session_state = redis_service.load_session_state(user_id, session_id)
   if not session_state:
     raise HTTPException(status_code=404, detail="Session not found or expired")
   return session_state
 
 # Answer to user prompts, justify todo list, todo step, slots, update session info
-@router.post("/{user_id}/{session_id}/res", response_model=Dict[str, Any])
-async def chat_with_ai(user_id: str = Path(...), session_id: str = Path(...), data: ChatRequest = Body(...)):
+@router.post("/{session_id}/res", response_model=Dict[str, Any])
+async def chat_with_ai(session_id: str = Path(...), data: ChatRequest = Body(...)):
+  user_id = data.user_id
   session_state = redis_service.load_session_state(user_id, session_id)
   if not session_state:
     raise HTTPException(status_code=404, detail="Session not found or expired. Please start a new session.")
 
   user_input = data.user_input
   # update session history with user prompts
-  redis_service.append_history(user_id, session_id, f"User: {user_input}")
+  redis_service.append_history(user_id, session_id, user_input, "user")
 
   # slot extract
   extracted_slots_from_input = await chat_service.extract_slots(user_input)
@@ -74,28 +60,29 @@ async def chat_with_ai(user_id: str = Path(...), session_id: str = Path(...), da
 
   # Todo List
   # first prompt
+  is_first_user_input = 1
   if not session_state.todo:
     session_state.todo = await chat_service.generate_initial_todo_list(
-      user_id, session_id
+      user_id, session_id, user_input
     )
     session_state.todo_step = 0
     redis_service.save_session_state(session_state)
   # TODO: extract todo from prompts, adjust todolist, adjust todostep
   else:
+    is_first_user_input = 0
     adjusted_todo = await chat_service.adjust_todo_list(
-      session_state.todo, user_input, session_state.slots
+      session_state.todo, user_input
     )
     if adjusted_todo != session_state.todo:
       session_state.todo = adjusted_todo
       redis_service.save_session_state(session_state)
 
   # When first prompt arrives or before create a trip, remind of completing slots
-  is_first_user_input = len(session_state.history) == 1
   missing_info_prompt = None
   if not check_slots_complete(session_state.slots):
     if is_first_user_input:
-        missing_info_prompt = MISSING_SLOT_PROMPT_FIRST_INPUT
-    elif session_state.todo:
+      missing_info_prompt = MISSING_SLOT_PROMPT_FIRST_INPUT
+    else:
       generate_route_index = -2
       try:
         generate_route_index = session_state.todo.index("Draft a detailed itinerary")
@@ -109,19 +96,22 @@ async def chat_with_ai(user_id: str = Path(...), session_id: str = Path(...), da
             people=session_state.slots.people or "Not provided",
             preferences=", ".join(session_state.slots.preferences) if session_state.slots.preferences else "Not provided"
           )
-        session_state.reminded = True # 标记已提醒
+        session_state.reminded = True
         redis_service.save_session_state(session_state)
 
   # Ai response, update session history
   ai_response_text = await chat_service.get_ai_response(
     session_state, user_input, missing_info_prompt
   )
-  redis_service.append_history(user_id, session_id, f"AI: {ai_response_text}")
+  redis_service.append_history(user_id, session_id, ai_response_text, "ai")
 
   response = {
     "user_id": user_id,
     "session_id": session_id,
-    "ai_response": ai_response_text,
+    "ai_response": {
+      "role": "ai",
+      "content": ai_response_text,
+    },
     "current_slots": session_state.slots.model_dump(),
     "current_todo": session_state.todo,
     "current_todo_step_index": session_state.todo_step,

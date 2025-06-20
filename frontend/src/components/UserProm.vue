@@ -1,12 +1,13 @@
 <template>
   <div class="flex items-center p-4 bg-violet-50 h-fit rounded-l-2xl rounded-b-2xl w-fit ml-auto text-justify">
-    <p class="text-gray-700">what user typed in input</p>
+    <p class="text-gray-700">{{ content }}</p>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
 
-export default defineComponent({
-})
+defineProps<{
+  content: string
+}>()
+
 </script>

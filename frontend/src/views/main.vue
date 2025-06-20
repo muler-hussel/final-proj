@@ -25,7 +25,7 @@
             <a-switch v-model:checked="easyPlan" size="small" />
             <span class="text-sm text-gray-500 ml-2">Easy Plan</span>
           </a-popover>
-          <a-button @click="submitPrompt">Submit</a-button>
+          <a-button @click="submitPrompt" :disabled="prompt === ''">Submit</a-button>
         </div>
       </section>
 
@@ -54,9 +54,8 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import SideBar from '@/components/SideBar.vue';
-import { useAuthStore } from '@/stores/auth.ts';
 import { useRouter } from 'vue-router';
-import axios from "axios";
+import { useFirstPromStore } from '@/stores/firstPrompt';
 
 export default defineComponent({
   components: {
@@ -65,7 +64,6 @@ export default defineComponent({
   setup() {
     const prompt = ref<string>('');
     const easyPlan = ref<boolean>(false);
-    const auth = useAuthStore();
     const router = useRouter();
     const cardData = [
       {
@@ -93,21 +91,13 @@ export default defineComponent({
         description: "Epic 5-day Iceland itinerary with adventure highlights."
       }
     ]
+    const firstPromptStore = useFirstPromStore()
     
     const submitPrompt = async () => {
-      try {
-        const res = await axios.post(`/chat/${auth.token}/init`, {
-          user_input: prompt.value,
-        });
-        const userId = res.data.user_id;
-        const sessionId = res.data.session_id;
-        router.push({
-          path: `/chat/${userId}/${sessionId}`,
-          // Vue Router LocationQueryValueRaw cannot be boolean
-          query: { isEasyPlan: easyPlan.value ? 'true' : 'false' }
-        });
-      } catch (e) {
-        alert("Failed to start session. Please try again.");
+      router.push("/chat/new");
+      firstPromptStore.firstPromptData = {
+        isEasyPlan: easyPlan.value,
+        user_input: prompt.value
       }
     };
 

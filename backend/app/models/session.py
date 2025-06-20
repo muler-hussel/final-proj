@@ -46,6 +46,13 @@ class SlotData(BaseModel):
   people: Optional[str] = None
   preferences: Optional[List[str]] = None
 
+# Items in todo list should have types, 
+# so that ai can determine which steps can be completed automatically, 
+# while others need user feedback
+class TodoItem(BaseModel):
+  description: str
+  type: str
+
 # Conversation history, slots, 
 # reminding user to complete slot, 
 # todo list of ai, step ai is about to do, shortlist
@@ -58,7 +65,7 @@ class SessionState(BaseModel):
   slots: SlotData = SlotData()
   reminded: bool = False
   step: str = "init"
-  todo: List[str] = []
+  todo: List[TodoItem] = []
   todo_step: int = 0
   short_term_profile: ShortTermProfile = ShortTermProfile()
 

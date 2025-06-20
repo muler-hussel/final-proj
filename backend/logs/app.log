@@ -1,0 +1,143 @@
+2025-06-20 00:46:57,220 - [INFO] - httpx - 9144f999037e3dd705d54a4b2265843801dd7987 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 00:46:57,230 - [INFO] - TravelAI - 9144f999037e3dd705d54a4b2265843801dd7987 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated title: "Hidden Kyoto Gems"
+2025-06-20 00:47:00,641 - [INFO] - httpx - 9144f999037e3dd705d54a4b2265843801dd7987 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 00:47:00,644 - [INFO] - TravelAI - 9144f999037e3dd705d54a4b2265843801dd7987 - prompt: ['User: Find secret gardens and offbeat attractions in Kyoto.'], generated title: None
+2025-06-20 00:47:02,489 - [INFO] - httpx - 9144f999037e3dd705d54a4b2265843801dd7987 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 00:47:02,501 - [INFO] - TravelAI - 9144f999037e3dd705d54a4b2265843801dd7987 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': 'dfd9667a-e891-4202-bb62-22c944c59438'}, generated title: 
+- Collect more information about user preferences.
+- Research potential destinations based on user interests.
+- Research attractions in the selected destination(s).
+- Present initial destination and attraction ideas to the user.
+- Refine suggestions based on user feedback.
+- Draft a detailed itinerary.
+- Finalize itinerary document for user.
+2025-06-20 00:47:42,630 - [INFO] - openai._base_client - 9144f999037e3dd705d54a4b2265843801dd7987 - Retrying request to /chat/completions in 0.397833 seconds
+2025-06-20 00:47:43,047 - [INFO] - openai._base_client - 9144f999037e3dd705d54a4b2265843801dd7987 - Retrying request to /chat/completions in 0.989692 seconds
+2025-06-20 00:47:44,063 - [INFO] - openai._base_client - 9144f999037e3dd705d54a4b2265843801dd7987 - Retrying request to /chat/completions in 0.384193 seconds
+2025-06-20 00:47:44,452 - [INFO] - openai._base_client - 9144f999037e3dd705d54a4b2265843801dd7987 - Retrying request to /chat/completions in 0.847970 seconds
+2025-06-20 00:47:45,316 - [INFO] - openai._base_client - 9144f999037e3dd705d54a4b2265843801dd7987 - Retrying request to /chat/completions in 0.416920 seconds
+2025-06-20 00:47:45,737 - [INFO] - openai._base_client - 9144f999037e3dd705d54a4b2265843801dd7987 - Retrying request to /chat/completions in 0.933168 seconds
+2025-06-20 04:18:25,574 - [INFO] - httpx - 9144f999037e3dd705d54a4b2265843801dd7987 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 04:18:25,584 - [INFO] - TravelAI - 9144f999037e3dd705d54a4b2265843801dd7987 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated title: Kyoto Hidden Gems
+2025-06-20 04:18:27,054 - [INFO] - httpx - 9144f999037e3dd705d54a4b2265843801dd7987 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 04:18:27,058 - [INFO] - TravelAI - 9144f999037e3dd705d54a4b2265843801dd7987 - prompt: {'Find secret gardens and offbeat attractions in Kyoto.'}, extracted preferences: destination='Kyoto' date=None people=None preferences=['nature']
+2025-06-20 04:18:29,145 - [INFO] - httpx - 9144f999037e3dd705d54a4b2265843801dd7987 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 04:18:29,150 - [INFO] - TravelAI - 9144f999037e3dd705d54a4b2265843801dd7987 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated todo list: 
+- Collect more information about user preferences regarding secret gardens and offbeat attractions in Kyoto.
+- Research potential secret gardens in Kyoto.
+- Research offbeat attractions in Kyoto.
+- Compile a list of secret gardens and offbeat attractions based on research findings.
+- Present initial garden and attraction ideas to the user for feedback.
+- Refine suggestions based on user feedback.
+- Draft a detailed itinerary.
+- Finalize itinerary document for user.
+2025-06-20 04:22:32,329 - [INFO] - httpx - 9144f999037e3dd705d54a4b2265843801dd7987 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 04:22:32,332 - [INFO] - TravelAI - 9144f999037e3dd705d54a4b2265843801dd7987 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated title: Kyoto Hidden Gems
+2025-06-20 04:22:34,098 - [INFO] - httpx - 9144f999037e3dd705d54a4b2265843801dd7987 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 04:22:34,103 - [INFO] - TravelAI - 9144f999037e3dd705d54a4b2265843801dd7987 - prompt: {'Find secret gardens and offbeat attractions in Kyoto.'}, extracted preferences: destination='Kyoto' date=None people=None preferences=['offbeat attractions', 'secret gardens']
+2025-06-20 04:22:36,263 - [INFO] - httpx - 9144f999037e3dd705d54a4b2265843801dd7987 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 04:22:36,266 - [INFO] - TravelAI - 9144f999037e3dd705d54a4b2265843801dd7987 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated todo list: 
+- Collect more information about the user's preferences for gardens and attractions (e.g., interests, accessibility).
+- Research secret gardens and offbeat attractions in Kyoto.
+- Identify unique lesser-known sites and experiences in Kyoto.
+- Compile a list of recommended secret gardens and offbeat attractions.
+- Present initial destination/attraction ideas to the user.
+- Refine suggestions based on user feedback.
+- Draft a detailed itinerary.
+- Finalize itinerary document for user.
+2025-06-20 04:24:25,071 - [INFO] - httpx - 9144f999037e3dd705d54a4b2265843801dd7987 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 04:24:25,080 - [INFO] - TravelAI - 9144f999037e3dd705d54a4b2265843801dd7987 - prompt: Best cities in Italy for history, landscapes, and food., generated title: "Explore Italy"
+2025-06-20 04:24:26,641 - [INFO] - httpx - 9144f999037e3dd705d54a4b2265843801dd7987 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 04:24:26,645 - [INFO] - TravelAI - 9144f999037e3dd705d54a4b2265843801dd7987 - prompt: {'Best cities in Italy for history, landscapes, and food.'}, extracted preferences: destination='Italy' date=None people=None preferences=['history', 'landscapes', 'food']
+2025-06-20 04:24:29,461 - [INFO] - httpx - 9144f999037e3dd705d54a4b2265843801dd7987 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 04:24:29,464 - [INFO] - TravelAI - 9144f999037e3dd705d54a4b2265843801dd7987 - prompt: Best cities in Italy for history, landscapes, and food., generated todo list: 
+- Collect more information about user preferences for travel dates and budget.
+- Research potential cities in Italy known for history, landscapes, and food.
+- Create a shortlist of cities that fit the user’s criteria.
+- Research attractions and activities in each shortlisted city.
+- Look into local culinary experiences and famous dishes in these cities.
+- Present initial destination and attraction ideas to the user.
+- Refine suggestions based on user feedback.
+- Draft a detailed itinerary.
+- Finalize itinerary document for user.
+2025-06-20 04:24:30,973 - [INFO] - httpx - 9144f999037e3dd705d54a4b2265843801dd7987 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 04:24:30,975 - [INFO] - TravelAI - 9144f999037e3dd705d54a4b2265843801dd7987 - prompt: Best cities in Italy for history, landscapes, and food., extracted preferences: destination='Italy' date=None people=None preferences=['history', 'nature', 'foodie']
+2025-06-20 04:59:11,732 - [INFO] - httpx - 9144f999037e3dd705d54a4b2265843801dd7987 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 04:59:11,740 - [INFO] - TravelAI - 9144f999037e3dd705d54a4b2265843801dd7987 - prompt: 4-day Paris trip: mix of landmarks, hidden gems, and food., generated title: Paris 4-Day Tour
+2025-06-20 04:59:13,303 - [INFO] - httpx - 9144f999037e3dd705d54a4b2265843801dd7987 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 04:59:13,309 - [INFO] - TravelAI - 9144f999037e3dd705d54a4b2265843801dd7987 - prompt: {'4-day Paris trip: mix of landmarks, hidden gems, and food.'}, extracted preferences: destination='Paris' date='4-day' people=None preferences=['landmarks', 'hidden gems', 'food']
+2025-06-20 04:59:14,438 - [INFO] - httpx - 9144f999037e3dd705d54a4b2265843801dd7987 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 04:59:14,441 - [INFO] - TravelAI - 9144f999037e3dd705d54a4b2265843801dd7987 - prompt: 4-day Paris trip: mix of landmarks, hidden gems, and food., extracted preferences: destination='Paris' date='4 days' people=None preferences=['landmarks', 'hidden gems', 'food']
+2025-06-20 04:59:16,015 - [INFO] - httpx - 9144f999037e3dd705d54a4b2265843801dd7987 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 04:59:16,017 - [INFO] - TravelAI - 9144f999037e3dd705d54a4b2265843801dd7987 - prompt: 4-day Paris trip: mix of landmarks, hidden gems, and food., generated todo list: 
+- Collect more information about user preferences (e.g., cuisine types, specific landmarks of interest).
+- Research popular landmarks in Paris.
+- Research lesser-known hidden gems in Paris.
+- Research local food experiences and culinary tours in Paris.
+- Present initial destination and attraction ideas to the user.
+- Refine suggestions based on user feedback.
+- Draft a detailed itinerary.
+- Finalize itinerary document for user.
+2025-06-20 05:11:47,875 - [INFO] - httpx - 9144f999037e3dd705d54a4b2265843801dd7987 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 05:11:47,889 - [INFO] - TravelAI - 9144f999037e3dd705d54a4b2265843801dd7987 - prompt: Vegetarian-friendly restaurants in Austin with great ambiance., generated title: "Veggie Dining in Austin"
+2025-06-20 05:11:48,974 - [INFO] - httpx - 9144f999037e3dd705d54a4b2265843801dd7987 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 05:11:48,981 - [INFO] - TravelAI - 9144f999037e3dd705d54a4b2265843801dd7987 - prompt: Vegetarian-friendly restaurants in Austin with great ambiance., extracted preferences: destination='Austin' date=None people=None preferences=['vegetarian', 'great ambiance']
+2025-06-20 05:11:56,472 - [INFO] - httpx - 9144f999037e3dd705d54a4b2265843801dd7987 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 05:11:56,477 - [INFO] - TravelAI - 9144f999037e3dd705d54a4b2265843801dd7987 - prompt: Vegetarian-friendly restaurants in Austin with great ambiance., generated todo list: 
+- Collect more information about user preferences for dining and ambiance.
+- Research vegetarian-friendly restaurants in Austin.
+- Evaluate restaurants based on ambiance and user reviews.
+- Compile a list of top vegetarian-friendly restaurants with great ambiance in Austin.
+- Present restaurant options to the user for feedback.
+- Refine restaurant suggestions based on user feedback.
+- Research other attractions and activities in Austin to complement dining experiences.
+- Present additional activity options to the user.
+- Refine activity suggestions based on user feedback.
+- Draft a detailed itinerary.
+- Finalize itinerary document for user.
+2025-06-20 07:14:48,132 - [INFO] - httpx - 9144f999037e3dd705d54a4b2265843801dd7987 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 07:14:48,148 - [INFO] - TravelAI - 9144f999037e3dd705d54a4b2265843801dd7987 - prompt: Beaches with ideal February weather and vibes., generated title: February Beach Trip
+2025-06-20 07:14:49,474 - [INFO] - httpx - 9144f999037e3dd705d54a4b2265843801dd7987 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 07:14:49,479 - [INFO] - TravelAI - 9144f999037e3dd705d54a4b2265843801dd7987 - prompt: Beaches with ideal February weather and vibes., extracted preferences: destination='beaches' date='February' people=None preferences=['relaxing']
+2025-06-20 07:14:52,279 - [INFO] - httpx - 9144f999037e3dd705d54a4b2265843801dd7987 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 07:14:52,285 - [INFO] - TravelAI - 9144f999037e3dd705d54a4b2265843801dd7987 - prompt: Beaches with ideal February weather and vibes., generated todo list: 
+- Collect more information about user preferences for the trip (e.g., budget, travel dates, activity interests).
+- Research beach destinations with ideal weather in February.
+- Evaluate the vibe and atmosphere of each potential beach destination.
+- Present initial destination options with weather and vibe summaries to the user.
+- Refine destination suggestions based on user feedback.
+- Research attractions and activities at the selected beach destination(s).
+- Draft a detailed itinerary.
+- Finalize itinerary document for user.
+2025-06-20 07:24:26,224 - [INFO] - httpx - 9144f999037e3dd705d54a4b2265843801dd7987 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 07:24:26,232 - [INFO] - TravelAI - 9144f999037e3dd705d54a4b2265843801dd7987 - prompt: Epic 5-day Iceland itinerary with adventure highlights., generated title: "Iceland Adventure"
+2025-06-20 07:24:27,330 - [INFO] - httpx - 9144f999037e3dd705d54a4b2265843801dd7987 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 07:24:27,335 - [INFO] - TravelAI - 9144f999037e3dd705d54a4b2265843801dd7987 - prompt: Epic 5-day Iceland itinerary with adventure highlights., extracted preferences: destination='Iceland' date='5 days' people=None preferences=['adventure']
+2025-06-20 07:24:29,779 - [INFO] - httpx - 9144f999037e3dd705d54a4b2265843801dd7987 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 07:24:29,782 - [INFO] - TravelAI - 9144f999037e3dd705d54a4b2265843801dd7987 - prompt: Epic 5-day Iceland itinerary with adventure highlights., generated todo list: 
+- Collect more information about user's specific interests and preferences for Iceland adventure activities.
+- Research popular adventure highlights and must-see attractions in Iceland suitable for a 5-day trip.
+- Identify optimal routes and travel logistics within Iceland to maximize adventure experiences.
+- Compile a list of adventure activities such as hiking, glacier tours, hot springs, and wildlife spotting.
+- Check the best times to visit each attraction and any seasonal considerations.
+- Present initial adventure itinerary ideas to the user for feedback.
+- Refine suggestions based on user input and preferences.
+- Draft a detailed itinerary.
+- Finalize itinerary document for user.
+2025-06-20 07:29:26,640 - [INFO] - httpx - 9144f999037e3dd705d54a4b2265843801dd7987 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 07:29:26,656 - [INFO] - TravelAI - 9144f999037e3dd705d54a4b2265843801dd7987 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated title: "Hidden Kyoto Gems"
+2025-06-20 07:29:28,262 - [INFO] - httpx - 9144f999037e3dd705d54a4b2265843801dd7987 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 07:29:28,268 - [INFO] - TravelAI - 9144f999037e3dd705d54a4b2265843801dd7987 - prompt: Find secret gardens and offbeat attractions in Kyoto., extracted preferences: destination='Kyoto' date=None people=None preferences=['offbeat', 'nature']
+2025-06-20 07:29:32,482 - [INFO] - httpx - 9144f999037e3dd705d54a4b2265843801dd7987 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 07:29:32,485 - [INFO] - TravelAI - 9144f999037e3dd705d54a4b2265843801dd7987 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated todo list: 
+- Collect more information about user preferences for gardens and attractions in Kyoto.
+- Research potential secret gardens and offbeat attractions in Kyoto.
+- Compile a list of unique gardens and lesser-known sites in Kyoto.
+- Present initial destination/attraction ideas to the user.
+- Refine suggestions based on user feedback.
+- Draft a detailed itinerary.
+- Finalize itinerary document for user.
+2025-06-20 07:29:34,106 - [INFO] - httpx - 9144f999037e3dd705d54a4b2265843801dd7987 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-20 07:29:34,109 - [INFO] - TravelAI - 9144f999037e3dd705d54a4b2265843801dd7987 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '8e1704ab-253f-45a0-9ff0-63fb1ef7f9df', 'user_input': 'Find secret gardens and offbeat attractions in Kyoto.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'current_todo_step': 'Current Step: 1. - Collect more information about user preferences for gardens and attractions in Kyoto.', 'history': 'user: Find secret gardens and offbeat attractions in Kyoto.'}, ai response: Hello! I'm excited to help plan your journey to Kyoto. To find the best secret gardens and offbeat attractions for you, it would be really helpful to know a bit more about your trip. Could you share your destination, travel date, number of travelers, and any specific travel preferences you might have?
+
+Alternatively, if you'd prefer, you can click the **Next button** below for some general city and scenic spot recommendations, or you can fill in the information by clicking **Your Preference** at the top right of the page. Feel free to share directly in our conversation as well!

@@ -1,6 +1,7 @@
 import redis
 from typing import Optional, List
 from app.models.session import SessionState, SlotData, ShortlistItem
+import json
 
 class RedisService:
   _instance = None
@@ -86,7 +87,7 @@ class RedisService:
     return None
 
   # Deal with conversation history, use redis list
-  def append_history(self, user_id: str, session_id: str, message: str) -> Optional[SessionState]:
+  def append_history(self, user_id: str, session_id: str, message: str, role: str) -> Optional[SessionState]:
     if not self._redis_client:
       return False
     
@@ -94,8 +95,12 @@ class RedisService:
     if not session_state:
       return False
     
+    history = {
+      "role": role,
+      "content": message
+    }
     try:
-      self._redis_client.rpush(session_state.history_key, message)
+      self._redis_client.rpush(session_state.history_key, json.dumps(history))
       return True
     except Exception as e:
       print(f"Error appending history for {user_id}/{session_id}: {e}")
@@ -109,8 +114,8 @@ class RedisService:
     if not session_state:
       return []
     
-    # TODO: should use redis list to realize pages, not get all conversations
-    return self._redis_client.lrange(session_state.history_key, 0, -1)
+    history = self._redis_client.lrange(session_state.history_key, 0, -1)
+    return [json.loads(msg) for msg in history]
 
   # Deal with shortlist
   def add_to_shortlist(self, user_id: str, session_id: str, item: ShortlistItem) -> Optional[SessionState]:
