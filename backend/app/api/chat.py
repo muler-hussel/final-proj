@@ -51,72 +51,68 @@ async def chat_with_ai(session_id: str = Path(...), data: ChatRequest = Body(...
   # update session history with user prompts
   redis_service.append_history(user_id, session_id, user_input, "user")
 
-  # slot extract
-  extracted_slots_from_input = await chat_service.extract_slots(user_input)
-  if extracted_slots_from_input:
-    session_state = redis_service.update_slots(user_id, session_id, extracted_slots_from_input)
-    if not session_state:
-      raise HTTPException(status_code=500, detail="Failed to update session slots.")
-
-  # Todo List
+  final_step = -1
   # first prompt
   is_first_user_input = 1
   if not session_state.todo:
+    # slot extract
+    extracted_slots_from_input = await chat_service.extract_slots(user_input)
+    if extracted_slots_from_input:
+      session_state = redis_service.update_slots(user_id, session_id, extracted_slots_from_input)
+      if not session_state:
+        raise HTTPException(status_code=500, detail="Failed to update session slots.")
+    # Todo List
     session_state.todo = await chat_service.generate_initial_todo_list(
       user_id, session_id, user_input
     )
     session_state.todo_step = 0
     redis_service.save_session_state(session_state)
-  # TODO: extract todo from prompts, adjust todolist, adjust todostep
+
+    # If in first prompt, user mentioned all preferences, ai try to recommend
+    if check_slots_complete:
+      for step in session_state.todo:
+        final_step += 1
+        if step.type == "PRESENT_IDEAS":
+          break
+  # not first prompt, should adjust todo list
   else:
-    is_first_user_input = 0
-    adjusted_todo = await chat_service.adjust_todo_list(
-      session_state.todo, user_input
-    )
-    if adjusted_todo != session_state.todo:
-      session_state.todo = adjusted_todo
-      redis_service.save_session_state(session_state)
+    final_step = await chat_service.orchestrate_planning_step(user_id, session_id, user_input)
 
   # When first prompt arrives or before create a trip, remind of completing slots
   missing_info_prompt = None
   if not check_slots_complete(session_state.slots):
     if is_first_user_input:
       missing_info_prompt = MISSING_SLOT_PROMPT_FIRST_INPUT
-    else:
-      generate_route_index = -2
-      try:
-        generate_route_index = session_state.todo.index("Draft a detailed itinerary")
-      except ValueError:
-        pass
-      if generate_route_index != -2 and session_state.todo_step >= generate_route_index - 1:
-        if not session_state.reminded:
-          missing_info_prompt = MISSING_SLOT_PROMPT_BEFORE_PLANNING.format(
-            destination=session_state.slots.destination or "Not provided",
-            date=session_state.slots.date or "Not provided",
-            people=session_state.slots.people or "Not provided",
-            preferences=", ".join(session_state.slots.preferences) if session_state.slots.preferences else "Not provided"
-          )
-        session_state.reminded = True
-        redis_service.save_session_state(session_state)
+    elif session_state.todo_step == -2 and not session_state.reminded:
+      missing_info_prompt = MISSING_SLOT_PROMPT_BEFORE_PLANNING.format(
+        destination=session_state.slots.destination or "Not provided",
+        date=session_state.slots.date or "Not provided",
+        people=session_state.slots.people or "Not provided",
+        preferences=", ".join(session_state.slots.preferences) if session_state.slots.preferences else "Not provided"
+      )
+    session_state.reminded = True
+    redis_service.save_session_state(session_state)
 
+  # One or several steps ai should go through
+  
+  current_step = session_state.todo_step
+  descriptions = [
+    session_state.todo[i].description
+    for i in range(current_step, final_step + 1)
+  ]
+  todo_prompt = "\n".join(descriptions) if final_step != -1 else None
+  
   # Ai response, update session history
   ai_response_text = await chat_service.get_ai_response(
-    session_state, user_input, missing_info_prompt
+    session_state, user_input, missing_info_prompt, todo_prompt
   )
   redis_service.append_history(user_id, session_id, ai_response_text, "ai")
 
   response = {
-    "user_id": user_id,
-    "session_id": session_id,
-    "ai_response": {
-      "role": "ai",
-      "content": ai_response_text,
-    },
-    "current_slots": session_state.slots.model_dump(),
-    "current_todo": session_state.todo,
-    "current_todo_step_index": session_state.todo_step,
-    "history": redis_service.get_history(user_id, session_id)
+    "role": "ai",
+    "content": ai_response_text,
   }
+  
   return response
 
 # TODO:shortlist

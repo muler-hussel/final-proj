@@ -64,7 +64,6 @@ class SessionState(BaseModel):
   title: str
   slots: SlotData = SlotData()
   reminded: bool = False
-  step: str = "init"
   todo: List[TodoItem] = []
   todo_step: int = 0
   short_term_profile: ShortTermProfile = ShortTermProfile()

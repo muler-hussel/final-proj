@@ -32,7 +32,7 @@ class RedisService:
   def _get_session_metadata_key(self, user_id: str, session_id: str) -> str:
     return f"user:{user_id}:session:{session_id}:metadata"
 
-  def load_session_state(self, user_id: str, session_id: str) -> Optional[SessionState]:
+  async def load_session_state(self, user_id: str, session_id: str) -> Optional[SessionState]:
     if not self._redis_client:
       return None
 
@@ -47,7 +47,7 @@ class RedisService:
     return None
 
   # TODO: set expire time; store data in mongodb; delete history and shortlist according to keys
-  def save_session_state(self, session_state: SessionState) -> bool:
+  async def save_session_state(self, session_state: SessionState) -> bool:
     if not self._redis_client:
       return False
 
@@ -60,34 +60,34 @@ class RedisService:
       print(f"Error saving session state for {session_state.user_id}/{session_state.session_id}: {e}")
       return False
 
-  def update_session_title(self, user_id: str, session_id: str, new_title: str) -> Optional[SessionState]:
+  async def update_session_title(self, user_id: str, session_id: str, new_title: str) -> Optional[SessionState]:
     session_state = self.load_session_state(user_id, session_id)
     if session_state:
       session_state.title = new_title
-      self.save_session_state(session_state)
+      await self.save_session_state(session_state)
       return session_state
     return None
 
-  def update_slots(self, user_id: str, session_id: str, new_slots: SlotData) -> Optional[SessionState]:
+  async def update_slots(self, user_id: str, session_id: str, new_slots: SlotData) -> Optional[SessionState]:
     session_state = self.load_session_state(user_id, session_id)
     if session_state:
       # new_slots.model_dump(exclude_unset=True) only update data provided
       session_state.slots = session_state.slots.model_copy(update=new_slots.model_dump(exclude_unset=True))
-      self.save_session_state(session_state)
+      await self.save_session_state(session_state)
       return session_state
     return None
 
   # Deal with metadata except from title and slot
-  def update_session_field(self, user_id: str, session_id: str, field_name: str, value: any) -> Optional[SessionState]:
+  async def update_session_field(self, user_id: str, session_id: str, field_name: str, value: any) -> Optional[SessionState]:
     session_state = self.load_session_state(user_id, session_id)
     if session_state and hasattr(session_state, field_name):
       setattr(session_state, field_name, value)
-      self.save_session_state(session_state)
+      await self.save_session_state(session_state)
       return session_state
     return None
 
   # Deal with conversation history, use redis list
-  def append_history(self, user_id: str, session_id: str, message: str, role: str) -> Optional[SessionState]:
+  async def append_history(self, user_id: str, session_id: str, message: str, role: str) -> Optional[SessionState]:
     if not self._redis_client:
       return False
     
@@ -106,7 +106,7 @@ class RedisService:
       print(f"Error appending history for {user_id}/{session_id}: {e}")
       return False
 
-  def get_history(self, user_id: str, session_id: str) -> List[str]:
+  async def get_history(self, user_id: str, session_id: str) -> List[str]:
     if not self._redis_client:
       return []
     
@@ -118,7 +118,7 @@ class RedisService:
     return [json.loads(msg) for msg in history]
 
   # Deal with shortlist
-  def add_to_shortlist(self, user_id: str, session_id: str, item: ShortlistItem) -> Optional[SessionState]:
+  async def add_to_shortlist(self, user_id: str, session_id: str, item: ShortlistItem) -> Optional[SessionState]:
     if not self._redis_client:
       return False
     
@@ -133,7 +133,7 @@ class RedisService:
     except Exception as e:
       print(f"Error adding to shortlist for {user_id}/{session_id}: {e}")
 
-  def get_shortlist(self, user_id: str, session_id: str) -> List[ShortlistItem]:
+  async def get_shortlist(self, user_id: str, session_id: str) -> List[ShortlistItem]:
     if not self._redis_client:
       return []
     
@@ -148,7 +148,7 @@ class RedisService:
       print(f"Error adding to shortlist for {user_id}/{session_id}: {e}")
       return []
 
-  def remove_from_shortlist(self, user_id: str, session_id: str, item_id: str) -> bool:
+  async def remove_from_shortlist(self, user_id: str, session_id: str, item_id: str) -> bool:
     if not self._redis_client:
       return False
     

@@ -77,7 +77,7 @@ GENERATE_TODO_PROMPT = ChatPromptTemplate([
 ])
 
 # Adjust todo list
-ADJUST_TODO_PROMPT = ChatPromptTemplate.from_messages([
+ADJUST_TODO_PROMPT = ChatPromptTemplate([
   ("system", """You are a highly intelligent AI planning assistant. Your core task is to dynamically manage a user's travel planning to-do list.
   Based on the current session state, any new user input, or explicit user actions, you must determine the optimal to-do list and the exact step the planning process should be on.
 
@@ -94,24 +94,24 @@ ADJUST_TODO_PROMPT = ChatPromptTemplate.from_messages([
   1.  **Always include:** "- Draft a detailed itinerary." and "- Finalize itinerary document for user." as the final steps.
   2.  **Research & Presentation:**
       * "Research potential destinations." and "Research attractions in [Destination]." are AI-driven, AI should automatically advance through these.
-      * "Present initial destination/attraction ideas to the user." is where AI makes an output.
+      * "Present initial destination/attraction ideas to the user." is where AI makes an output. This will typically be the final_step_index if an automated sequence ends here.
   3.  **Refinement Loop:**
-      * If the `user_input` is "LOAD_MORE_SUGGESTIONS_CLICKED", the process should STAY on "Refine suggestions based on user feedback." to provide more options.
+      * If the `intent` is "MORE_RECOMMENDATIONS", the process should STAY on "Refine suggestions based on user feedback." to provide more options. The final_step_index will also be this step.
   4.  **Generate Itinerary:**
-      * If the `user_input` is "GENERATE_ITINERARY_CLICKED", the process should immediately jump to "Draft a detailed itinerary.".
+      * If the `intent` is "ITINERARY_GENERATION", the process should immediately jump to "Draft a detailed itinerary.". This will be the final_step_index for that automation run.
   5.  **Mid-flow Changes/Interruptions:**
-      * If `user_input` indicates a *significant change* in planning (e.g., "Actually, I want to go to Italy instead of Japan", "Instead of December, I want to go in summer"), the entire `todo_list` might need to be regenerated from scratch, and the `current_step_index` reset appropriately (e.g., back to research for the new destination).
-      * If `user_input` asks a specific question (e.g., "What are the visa requirements for France?"), the `todo_list` might not change, but the `current_step_index` might need to be temporarily paused or maintained while the AI answers the question out-of-band.
+      * If `intent` is "MODIFY_PLAN", the entire `todo_list` might need to be regenerated from scratch, and the `current_step_index` reset appropriately (e.g., back to research for the new destination). The final_step_index will be the first user-facing step after the re-evaluation (e.g., "Present initial destination/attraction ideas to the user.").
+      * If `intent` is "GENERAL_QUERY", the `todo_list` might not change, but the `current_step_index` might need to be temporarily paused or maintained while the AI answers the question out-of-band. The final_step_index would simply be the current_step_index as no planning progression occurred.
 
-  Your output MUST be a JSON object with two keys:
+  Your output MUST be a JSON object with three keys:
   `new_todo_list`: An array of strings representing the re-evaluated ordered to-do list.
   `new_current_step_index`: An integer representing the 0-based index of the step that should be executed NEXT.
+  `final_step_index`: An integer representing the 0-based index of the last step the AI intends to complete during an automated execution phase before potentially waiting for user input or ending the session.
 
   Example JSON output:
   ```json
   {
     "new_todo_list": [
-      "- Collect more information about user preferences.",
       "- Research potential destinations.",
       "- Present initial destination/attraction ideas to the user.",
       "- Refine suggestions based on user feedback.",
@@ -119,6 +119,7 @@ ADJUST_TODO_PROMPT = ChatPromptTemplate.from_messages([
       "- Finalize itinerary document for user."
     ],
     "new_current_step_index": 0
+    "final_step_index": 1
   }
   ```
   """),
@@ -134,8 +135,8 @@ INTENT_CLASSIFIER_PROMPT = ChatPromptTemplate([
   - ADVANCE_STEP: User wants to move to the next logical step in the planning process, or confirms current step is complete.
   - MORE_RECOMMENDATIONS: User explicitly asks for more options or ideas (e.g., "show more", "load more").
   - ITINERARY_GENERATION: User explicitly asks to generate the final itinerary.
-  - GENERAL_QUERY: User asks a question that is not directly about advancing the planning flow or changing core plan details, but seeks general information.
-  - RESET_PLAN: User explicitly asks to start the entire planning process from scratch.
+  - GENERAL_QUERY: User asks a question that is not directly about advancing the planning flow or changing core plan details, but seeks general information (e.g., "What are the visa requirements for France?").
+  - MODIFY_PLAN: User has explicitly changed a fundamental planning detail (e.g., destination, dates, number of travelers, main travel type/season). This implies a potential reset or significant re-evaluation of the current plan.
   - OTHER: For any other intent not fitting above.
    
   Output your one or several intent types as a JSON object.

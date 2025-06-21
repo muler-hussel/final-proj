@@ -1,15 +1,16 @@
 import os
 from dotenv import load_dotenv
 from langchain_openai.chat_models.base import BaseChatOpenAI
-from langchain_core.output_parsers import StrOutputParser
+from langchain_core.output_parsers import StrOutputParser, JsonOutputParser
 from pydantic import BaseModel
 from typing import List, Optional
-from app.models.session import SessionState, SlotData
+from app.models.session import SessionState, SlotData, TodoItem
 from app.utils.prompts import GENERATE_SESSION_TITLE_PROMPT
 from app.utils.prompts import (
     SLOT_FILLING_PROMPT,
     GENERATE_TODO_PROMPT,
     ADJUST_TODO_PROMPT,
+    INTENT_CLASSIFIER_PROMPT,
     BASIC_PROMPT
 )
 from app.utils.logger import logger
@@ -65,6 +66,11 @@ class ChatService:
       | StrOutputParser()
     )
 
+    self.intent_classifier_chain = (
+       INTENT_CLASSIFIER_PROMPT
+       | self.language_model
+       | JsonOutputParser()
+    )
     self.primary_assistant_chain = (
       BASIC_PROMPT
       | self.language_model
@@ -82,14 +88,14 @@ class ChatService:
       return "New Trip"
   
   # Extract destination, time, people, preferences and others from conversation
-  async def extract_slots(self, conversation_history: str) -> SlotData:
+  async def extract_slots(self, conversation_history: str, cur_slot: SlotData) -> SlotData:
     try:
-      extractor_output = await self.slot_extraction_chain.ainvoke({"history": conversation_history})
-      logger.info(f"prompt: {conversation_history}, extracted preferences: {extractor_output}")
+      extractor_output = await self.slot_extraction_chain.ainvoke({"history": conversation_history}, {"slots": cur_slot})
+      logger.info(f"prompt: {conversation_history}{cur_slot}, extracted preferences: {extractor_output}")
       # None cannot be model_dump
       if extractor_output is None:
         return SlotData()
-      return SlotData(**extractor_output.model_dump(exclude_unset=True))
+      return SlotData(**extractor_output.model_dump)
     except Exception as e:
       print(f"Error extracting slots: {e}")
       return SlotData()
@@ -114,22 +120,58 @@ class ChatService:
     adjusted_todo_str = await self.todo_adjustment_chain.ainvoke(prompt_data)
     logger.info(f"prompt: {prompt_data}, adjusted todo list: {adjusted_todo_str}")
     return [step.strip() for step in adjusted_todo_str.split('\n') if step.strip()]
+  
+  # Processing prompt
+  async def orchestrate_planning_step(self, user_id: str, session_id: str, user_input: str) -> int:
+    session_state = await redis_service.load_session_state(user_id, session_id)
 
-  async def get_ai_response(self, session_state: SessionState, user_input: str, missing_info_prompt: Optional[str] = None) -> str:   
-    # TODO: maybe not forward step, maybe not recent 10
+    # Append input into conversation history
+    await redis_service.append_history(user_id, session_id, user_input, "user")
+
+    cur_slot = session_state.slots.model_dump_json()
+    # Intention recognition
+    classified_intent: List[str] = await self.intent_classifier_chain.ainvoke({
+      "user_input": user_input,
+      "existing_slots_json": cur_slot
+    })
+    logger.info(f"prompt: {user_input}, existing slots: {cur_slot}, intentions: {classified_intent}")
+
+    # Try to update slots
+    new_slots_data: SlotDataExtractor = await self.extract_slots(user_input, cur_slot)
+    redis_service.update_slots(user_id, session_id, new_slots_data)
+
+    # Ajust todo list according to intention
+    adjustment_output = await self.todo_adjustment_chain.ainvoke({
+      "user_id": user_id,
+      "session_id": session_id,
+      "slots": session_state.slots.model_dump_json(),
+      "current_todo_list": [item.model_dump() for item in session_state.todo],
+      "current_step_index": session_state.todo_step,
+      "user_input": user_input,
+      "classified_intent": classified_intent,
+    })
+    
+    session_state.todo = [TodoItem(**item) for item in adjustment_output.new_todo_list]
+    session_state.todo_step = adjustment_output.new_current_step_index
+    final_step = adjustment_output.final_step_index
+    logger.info(f"prompt: {user_input}, intent: {classified_intent}, new_todo_list: {session_state.todo}, todo_step:{session_state.todo_step}, final_step:{final_step}")
+    await redis_service.save_session_state(session_state)
+
+    return final_step
+
+  # Executing one or several steps
+  async def get_ai_response(self, session_state: SessionState, user_input: str, missing_info_prompt: Optional[str] = None, todo_prompt: Optional[str] = None) -> str:   
     user_id = session_state.user_id
     session_id = session_state.session_id
-    current_todo_step_str = f"Current Step: {session_state.todo_step + 1}. {session_state.todo[session_state.todo_step]}" if session_state.todo else "No active todo step."
     history = redis_service.get_history(user_id, session_id)[-10:] # recent 10 conversation
     history_str = "\n".join(f"{msg['role']}: {msg['content']}" for msg in history)
-
+    
     prompt_data = {
       "user_id": user_id,
       "session_id": session_id,
-      "user_input": user_input,
-      "missing_info_prompt": missing_info_prompt if missing_info_prompt else "",
-      "current_todo_step": current_todo_step_str,
       "history": history_str,
+      "missing_info_prompt": missing_info_prompt,
+      "todo_prompt": todo_prompt,
     }
 
     response = await self.primary_assistant_chain.ainvoke(prompt_data)
