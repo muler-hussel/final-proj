@@ -37,7 +37,7 @@ logging.basicConfig(
   format="%(asctime)s - [%(levelname)s] - %(name)s - %(commit)s - %(message)s",
   handlers=[
     log_file_handler,
-    logging.StreamHandler() 
+    # logging.StreamHandler() 
   ]
 )
 

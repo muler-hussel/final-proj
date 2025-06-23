@@ -43,7 +43,12 @@ export default defineComponent({
     const handleLogin = async () => {
       const res = await axios.post('/login', {userName: userName.value});
       auth.setToken(res.data);
-      router.push('/');
+      const redirect = router.currentRoute.value.query.redirect as string;
+      if (redirect) {
+        router.push(redirect);
+      } else {
+        router.push('/');
+      }
     };
 
     return {

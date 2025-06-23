@@ -61,7 +61,7 @@ class RedisService:
       return False
 
   async def update_session_title(self, user_id: str, session_id: str, new_title: str) -> Optional[SessionState]:
-    session_state = self.load_session_state(user_id, session_id)
+    session_state = await self.load_session_state(user_id, session_id)
     if session_state:
       session_state.title = new_title
       await self.save_session_state(session_state)
@@ -69,7 +69,7 @@ class RedisService:
     return None
 
   async def update_slots(self, user_id: str, session_id: str, new_slots: SlotData) -> Optional[SessionState]:
-    session_state = self.load_session_state(user_id, session_id)
+    session_state = await self.load_session_state(user_id, session_id)
     if session_state:
       # new_slots.model_dump(exclude_unset=True) only update data provided
       session_state.slots = session_state.slots.model_copy(update=new_slots.model_dump(exclude_unset=True))
@@ -79,7 +79,7 @@ class RedisService:
 
   # Deal with metadata except from title and slot
   async def update_session_field(self, user_id: str, session_id: str, field_name: str, value: any) -> Optional[SessionState]:
-    session_state = self.load_session_state(user_id, session_id)
+    session_state = await self.load_session_state(user_id, session_id)
     if session_state and hasattr(session_state, field_name):
       setattr(session_state, field_name, value)
       await self.save_session_state(session_state)
@@ -91,13 +91,13 @@ class RedisService:
     if not self._redis_client:
       return False
     
-    session_state = self.load_session_state(user_id, session_id)
+    session_state = await self.load_session_state(user_id, session_id)
     if not session_state:
       return False
     
     history = {
       "role": role,
-      "content": message
+      "message": message
     }
     try:
       self._redis_client.rpush(session_state.history_key, json.dumps(history))
@@ -110,7 +110,7 @@ class RedisService:
     if not self._redis_client:
       return []
     
-    session_state = self.load_session_state(user_id, session_id)
+    session_state = await self.load_session_state(user_id, session_id)
     if not session_state:
       return []
     
@@ -122,7 +122,7 @@ class RedisService:
     if not self._redis_client:
       return False
     
-    session_state = self.load_session_state(user_id, session_id)
+    session_state = await self.load_session_state(user_id, session_id)
     if not session_state:
       return False
     
@@ -137,7 +137,7 @@ class RedisService:
     if not self._redis_client:
       return []
     
-    session_state = self.load_session_state(user_id, session_id)
+    session_state = await self.load_session_state(user_id, session_id)
     if not session_state:
       return []
     
@@ -152,7 +152,7 @@ class RedisService:
     if not self._redis_client:
       return False
     
-    session_state = self.load_session_state(user_id, session_id)
+    session_state = await self.load_session_state(user_id, session_id)
     if not session_state:
       return False
     

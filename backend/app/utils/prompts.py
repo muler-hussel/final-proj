@@ -1,4 +1,4 @@
-from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.prompts import ChatPromptTemplate, PromptTemplate
 
 # TODO: maybe use xml tags
 # Automatically generate trip title
@@ -18,8 +18,9 @@ GENERATE_SESSION_TITLE_PROMPT = ChatPromptTemplate([
 
 # Examples and prompt for filling slot
 # In case user change or delete something, like changing from 'summer' to 'winter'
-SLOT_FILLING_PROMPT = ChatPromptTemplate([
-  ("system", """You are an expert travel assistant. Your task is to extract specific travel-related information from the user's conversation history.
+# TODO: sometimes fail。出现了之前prompt的slot记忆
+SLOT_FILLING_PROMPT = PromptTemplate.from_template(
+  template="""You are an expert travel assistant. Your task is to extract specific travel-related information from the user's conversation {{history}}.
   Extract the following details:
   - destination: The user's desired travel destination (e.g., 'Paris', 'Japan', 'a beach holiday').
   - date: The user's desired travel date or period (e.g., 'next summer', 'December', 'for 5 days').
@@ -28,13 +29,17 @@ SLOT_FILLING_PROMPT = ChatPromptTemplate([
   
   If a piece of information is not mentioned, leave it as null. Only extract what is explicitly stated or strongly implied.
   
-  **Crucially, if new information directly contradicts or replaces a previously known value({slots}) for a slot (e.g., a new destination, new dates, new season), you MUST provide the new value.  For preferences, generally append new ones unless they directly contradict previous ones.**
-  """),
-  ("human", "User: {history}")
-])
+  {% if cur_slot is not none %}
+  **Crucially, if new information directly contradicts or replaces a previously known value({{cur_slot}}) for a slot (e.g., a new destination, new dates, new season), you MUST provide the new value. For preferences, generally append new ones unless they directly contradict previous ones.**
+  {% endif %}
+  """,
+  template_format="jinja2"
+)
 
 # Initialize todo list at the beginning of session
 # First step is always manually set as MISSING_SLOT_PROMPT_FIRST_INPUT if missing slots exist
+# TODO: research后一定要PRESENT_IDEAS，不能直接DRAFT_ITINERARY
+# TODO: ai会自动找餐厅，自动规划其他旅程，比如在素食餐厅以外规划景点。应该DRAFT_ITINERARY是focus在用户要求上的
 GENERATE_TODO_PROMPT = ChatPromptTemplate([
   ("system", """You are a helpful AI assistant managing a user's travel planning session.
   Based on the current travel planning state(user_id:{user_id}, session_id:{session_id}, user_input:{user_input}), generate an initial, ordered to-do list.
@@ -51,32 +56,18 @@ GENERATE_TODO_PROMPT = ChatPromptTemplate([
   - OTHER: For any other general planning step not fitting above.
 
   **Important: The list MUST always include the final steps:**
-  - type: DRAFT_ITINERARY, description: "Draft a detailed itinerary."
-  - type: FINALIZE_DOCUMENT, description: "Finalize itinerary document for user."
+  - type: DRAFT_ITINERARY, description: Draft a detailed itinerary.
+  - type: FINALIZE_DOCUMENT, description: Finalize itinerary document for user.
     
   **Important: The list SHOULD NOT contain steps for gathering user preferences**
 
-  **Example Output Format:**
-  ```json
-  [
-    {"description": "Research vegetarian-friendly restaurants in Austin.", "type": "RESEARCH_SPECIFIC_ITEM"},
-    {"description": "Evaluate restaurants based on ambiance and user reviews.", "type": "OTHER"}, # Or a more specific 'EVALUATE_OPTIONS' type
-    {"description": "Compile a list of top vegetarian-friendly restaurants with great ambiance in Austin.", "type": "PRESENT_IDEAS"},
-    {"description": "Refine restaurant suggestions based on user feedback.", "type": "REFINE_SUGGESTIONS"},
-    {"description": "Research other attractions and activities in Austin to complement dining experiences.", "type": "RESEARCH_SPECIFIC_ITEM"},
-    {"description": "Present additional activity options to the user.", "type": "PRESENT_IDEAS"},
-    {"description": "Refine activity suggestions based on user feedback.", "type": "REFINE_SUGGESTIONS"},
-    {"description": "Draft a detailed itinerary.", "type": "DRAFT_ITINERARY"},
-    {"description": "Finalize itinerary document for user.", "type": "FINALIZE_DOCUMENT"}
-  ]
-  ```
-
-  Return the list as a JSON array as shown above.
+  Return the list as a JSON array.
   """),
   ("human", "Generate the initial to-do list.")
 ])
 
 # Adjust todo list
+# TODO: next step时自动加一，但有时候不需要。last step 不是最小值。有时格式转换失败，疑似输出格式不对
 ADJUST_TODO_PROMPT = ChatPromptTemplate([
   ("system", """You are a highly intelligent AI planning assistant. Your core task is to dynamically manage a user's travel planning to-do list.
   Based on the current session state, any new user input, or explicit user actions, you must determine the optimal to-do list and the exact step the planning process should be on.
@@ -104,23 +95,20 @@ ADJUST_TODO_PROMPT = ChatPromptTemplate([
       * If `intent` is "GENERAL_QUERY", the `todo_list` might not change, but the `current_step_index` might need to be temporarily paused or maintained while the AI answers the question out-of-band. The final_step_index would simply be the current_step_index as no planning progression occurred.
 
   Your output MUST be a JSON object with three keys:
-  `new_todo_list`: An array of strings representing the re-evaluated ordered to-do list.
-  `new_current_step_index`: An integer representing the 0-based index of the step that should be executed NEXT.
-  `final_step_index`: An integer representing the 0-based index of the last step the AI intends to complete during an automated execution phase before potentially waiting for user input or ending the session.
+  new_todo_list: An array of strings representing the re-evaluated ordered to-do list.
+  new_current_step_index: An integer representing the 0-based index of the step that should be executed NEXT.
+  final_step_index: An integer representing the 0-based index of the last step the AI intends to complete during an automated execution phase before potentially waiting for user input or ending the session.
 
   Example JSON output:
   ```json
-  {
+  {{
     "new_todo_list": [
-      "- Research potential destinations.",
-      "- Present initial destination/attraction ideas to the user.",
-      "- Refine suggestions based on user feedback.",
-      "- Draft a detailed itinerary.",
-      "- Finalize itinerary document for user."
+      {{"type": "DRAFT_ITINERARY", "description": "Draft a detailed itinerary."}},
+      {{"type": "FINALIZE_DOCUMENT", "description": "Finalize itinerary document for user."}}
     ],
     "new_current_step_index": 0
     "final_step_index": 1
-  }
+  }}
   ```
   """),
   ("human", "Evaluate the planning process based on new information.")
@@ -145,6 +133,7 @@ INTENT_CLASSIFIER_PROMPT = ChatPromptTemplate([
 ])
 
 # Remind of completing slots
+# TODO: 会不提醒or you can 里的内容。最好有格式
 MISSING_SLOT_PROMPT_FIRST_INPUT = """
 Hello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: 
 destination, travel date, number of travelers and your travel preferences.
@@ -174,8 +163,6 @@ BASIC_PROMPT = ChatPromptTemplate([
   Current Session Context:
   User ID: {user_id}
   Session ID: {session_id}
-  
-  Current To-Do Step: {current_todo_step}
   History: {history}
   
   **Instructions for your response:**
@@ -183,7 +170,8 @@ BASIC_PROMPT = ChatPromptTemplate([
   2.  **Integrate Missing Information Prompt (if provided):** If `missing_info_prompt` is not empty, incorporate it naturally into your response. This prompt tells the user what information is missing.
   3.  **To-Do Step Guidance:** If `missing_info_prompt` is empty, gently guide the user to the next step in the `todo` list or explain what you are doing next. If the current step is complete, indicate progress. If the user asks to skip, acknowledge it.
   4.  **Avoid Repetitive Questions:** Do NOT repeatedly ask for missing information if `missing_info_prompt` is NOT provided by the system.
-  5.  **Maintain a conversational and helpful tone.**
+  5.  **Follow steps:** If `todo_prompt` is not empty, complete steps in `todo_prompt`.
+  6.  **Maintain a conversational and helpful tone.**
   """),
-  ("human", "User Input: {user_input}\nMissing Information Prompt: {missing_info_prompt}")
+  ("human", "User Input: {user_input}\nMissing Information Prompt: {missing_info_prompt}\ntodo_prompt: {todo_prompt}")
 ])

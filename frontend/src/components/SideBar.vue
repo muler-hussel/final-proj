@@ -28,21 +28,26 @@
 import { defineComponent } from 'vue';
 import { useAuthStore } from '@/stores/auth.ts';
 import { useRouter } from 'vue-router';
+import { useSessionStore } from '@/stores/session';
 
 export default defineComponent({
   setup() {
     const auth = useAuthStore();
     const router = useRouter();
+    const session = useSessionStore();
     
     const toHomePage = () => {
+      session.clearSession();
       router.push('/');
     }
 
     const toChatPage = () => {
-      router.push('/chat');
+      session.clearSession();
+      router.push('/chat/new');
     }
 
     const handleLogout = () => {
+      session.clearSession();
       auth.clearToken();
       router.push('/');
     };

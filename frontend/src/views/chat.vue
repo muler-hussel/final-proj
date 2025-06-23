@@ -40,14 +40,17 @@
       <!-- scroll -->
       <a-scroll class="w-full flex flex-col items-center flex-grow overflow-y-auto">
         <div class="grid w-3/5 py-10 gap-y-7">
-          <template v-for="(message, idx) in chatHistory" :key="idx">
+          <template v-for="(content, idx) in chatHistory" :key="idx">
             <UserProm 
-              v-if="message.role === 'user'"
-              :content="message.content"
+              v-if="content.role === 'user'"
+              :message="content.message"
             />
             <AiRes
-              v-else-if="message.role === 'ai' && !isAiGenerating"
-              :content="message.content"
+              v-else-if="content.role === 'ai'"
+              :message="content.message"
+              @next="fetchAiRes('ADVANCE_STEP')"
+              @load-more="fetchAiRes('MORE_RECOMMENDATIONS')"
+              @generate="fetchAiRes('ITINERARY_GENERATION')"
             />
           </template>
           <a-spin v-if="isAiGenerating" />
@@ -60,7 +63,7 @@
             <PlusCircleOutlined style="color:#9370DB;" class="hover:cursor-pointer" />
           </template>
           <template #suffix>
-            <EnterOutlined style="color:#9370DB; font-size: smaller;" />
+            <EnterOutlined style="color:#9370DB; font-size: smaller;" @click="fetchAiRes(prompt)"/>
           </template>
         </a-input>
       </div>
@@ -80,6 +83,9 @@ import PreferenceDrawer from '@/components/PreferenceDrawer.vue';
 import { useAuthStore } from '@/stores/auth';
 import axios from "axios";
 import { useFirstPromStore } from '@/stores/firstPrompt';
+import { useSessionStore } from '@/stores/session';
+import { useRoute, useRouter } from 'vue-router';
+import { storeToRefs } from 'pinia';
 
 export default defineComponent({
   components: {
@@ -91,26 +97,27 @@ export default defineComponent({
   setup() {
     const auth = useAuthStore();
     const userId = auth.token;
-    const sessionId = ref<string>('');
+    const route = useRoute();
+    const router = useRouter();
+    const session = useSessionStore();
     const firstPrompt = ref<string>('');
     const isEasyPlan = ref<boolean>(false);
-    const chatHistory: any = ref([]);
-    const currentSlots = ref({});
-    const title = ref<string>('');
+    const { title, sessionId, chatHistory } = storeToRefs(session); 
     const drawer = useDrawerStore();
     const changeTitle = ref<Boolean>(false);
     const prompt = ref<string>('');
     const firstPromptStore = useFirstPromStore()
     const isAiGenerating = ref(false)
 
-    const fetchSessionState = async () => {
+    const fetchNewSession = async () => {
       try {
         const res = await axios.post("/chat/init", {
           user_id: userId,
           user_input: firstPrompt.value,
         })
-        title.value = res.data.title;
-        sessionId.value = res.data.session_id;
+        session.setTitle(res.data.title)
+        session.setSessionId(res.data.session_id)
+        router.push(`/chat/${sessionId.value}`)
       } catch (error) {
         console.error("Error start new session:", error);
       }
@@ -121,33 +128,39 @@ export default defineComponent({
       changeTitle.value = false;
     }
 
-    const fetchAiRes = async() => {
+    const fetchAiRes = async(userInput: string) => {
+      if (!userInput) return;
+      isAiGenerating.value = true;
+      session.appendHistory({
+        role: "user",
+        message: userInput,
+      });
       try {
         const res = await axios.post(`/chat/${sessionId.value}/res`,{
           user_id: userId,
-          user_input: firstPrompt.value,
+          user_input: userInput,
         })
-        isAiGenerating.value = false;
-        chatHistory.value.push(res.data.ai_response);
+        session.appendHistory(res.data);
       } catch {
         alert("Failed to answer you. Please try again.");
+      } finally {
+        isAiGenerating.value = false;
       }
     }
 
     onMounted(async () => {
-      firstPrompt.value = firstPromptStore.firstPromptData.user_input;
-      isEasyPlan.value = firstPromptStore.firstPromptData.isEasyPlan;
-      chatHistory.value.push({
-        role: "user",
-        content: firstPrompt.value,
-      });
-      title.value = 'New trip';
-      isAiGenerating.value = true;
-      await fetchSessionState();
-      
-      if (isEasyPlan.value) {
+      const sessionId = route.query.sessionId as string | undefined;
+      if (sessionId) {
+        await session.initializeSession(sessionId); 
       } else {
-        fetchAiRes();
+        session.clearSession();
+        firstPrompt.value = firstPromptStore.firstPromptData.user_input;
+        isEasyPlan.value = firstPromptStore.firstPromptData.isEasyPlan;
+        await fetchNewSession();
+        if (isEasyPlan.value) {
+        } else {
+          await fetchAiRes(firstPrompt.value);
+        }
       }
     });
 
@@ -160,6 +173,7 @@ export default defineComponent({
       prompt,
       isAiGenerating,
       chatHistory,
+      fetchAiRes,
     }
   }
 })

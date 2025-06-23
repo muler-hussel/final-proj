@@ -27,29 +27,35 @@ async def create_session(data: ChatRequest = Body(...)):
     if generated_title:
       session_title = generated_title
   session_state = SessionState(user_id=user_id, session_id=session_id, title=session_title)
-  redis_service.save_session_state(session_state)
+  await redis_service.save_session_state(session_state)
   return session_state
 
 # Get session when refresh or from history chats
 @router.get("/{session_id}", response_model=SessionState)
 async def get_session(session_id: str = Path(...), data: ChatRequest = Body()):
   user_id = data.user_id
-  session_state = redis_service.load_session_state(user_id, session_id)
+  session_state = await redis_service.load_session_state(user_id, session_id)
   if not session_state:
     raise HTTPException(status_code=404, detail="Session not found or expired")
-  return session_state
+  history = await redis_service.get_history(user_id, session_id)
+  response = {
+    "messages": history,
+    "slots": session_state.slots,
+    "title": session_state.title,
+  }
+  return response
 
 # Answer to user prompts, justify todo list, todo step, slots, update session info
 @router.post("/{session_id}/res", response_model=Dict[str, Any])
 async def chat_with_ai(session_id: str = Path(...), data: ChatRequest = Body(...)):
   user_id = data.user_id
-  session_state = redis_service.load_session_state(user_id, session_id)
+  session_state = await redis_service.load_session_state(user_id, session_id)
   if not session_state:
     raise HTTPException(status_code=404, detail="Session not found or expired. Please start a new session.")
 
   user_input = data.user_input
   # update session history with user prompts
-  redis_service.append_history(user_id, session_id, user_input, "user")
+  await redis_service.append_history(user_id, session_id, user_input, "user")
 
   final_step = -1
   # first prompt
@@ -58,7 +64,7 @@ async def chat_with_ai(session_id: str = Path(...), data: ChatRequest = Body(...
     # slot extract
     extracted_slots_from_input = await chat_service.extract_slots(user_input)
     if extracted_slots_from_input:
-      session_state = redis_service.update_slots(user_id, session_id, extracted_slots_from_input)
+      session_state = await redis_service.update_slots(user_id, session_id, extracted_slots_from_input)
       if not session_state:
         raise HTTPException(status_code=500, detail="Failed to update session slots.")
     # Todo List
@@ -66,10 +72,10 @@ async def chat_with_ai(session_id: str = Path(...), data: ChatRequest = Body(...
       user_id, session_id, user_input
     )
     session_state.todo_step = 0
-    redis_service.save_session_state(session_state)
+    await redis_service.save_session_state(session_state)
 
     # If in first prompt, user mentioned all preferences, ai try to recommend
-    if check_slots_complete:
+    if check_slots_complete(session_state.slots):
       for step in session_state.todo:
         final_step += 1
         if step.type == "PRESENT_IDEAS":
@@ -77,6 +83,7 @@ async def chat_with_ai(session_id: str = Path(...), data: ChatRequest = Body(...
   # not first prompt, should adjust todo list
   else:
     final_step = await chat_service.orchestrate_planning_step(user_id, session_id, user_input)
+    is_first_user_input = 0
 
   # When first prompt arrives or before create a trip, remind of completing slots
   missing_info_prompt = None
@@ -91,7 +98,7 @@ async def chat_with_ai(session_id: str = Path(...), data: ChatRequest = Body(...
         preferences=", ".join(session_state.slots.preferences) if session_state.slots.preferences else "Not provided"
       )
     session_state.reminded = True
-    redis_service.save_session_state(session_state)
+    await redis_service.save_session_state(session_state)
 
   # One or several steps ai should go through
   
@@ -106,11 +113,11 @@ async def chat_with_ai(session_id: str = Path(...), data: ChatRequest = Body(...
   ai_response_text = await chat_service.get_ai_response(
     session_state, user_input, missing_info_prompt, todo_prompt
   )
-  redis_service.append_history(user_id, session_id, ai_response_text, "ai")
+  await redis_service.append_history(user_id, session_id, ai_response_text, "ai")
 
   response = {
     "role": "ai",
-    "content": ai_response_text,
+    "message": ai_response_text,
   }
   
   return response

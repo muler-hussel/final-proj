@@ -52,10 +52,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, onMounted, ref } from 'vue';
 import SideBar from '@/components/SideBar.vue';
 import { useRouter } from 'vue-router';
 import { useFirstPromStore } from '@/stores/firstPrompt';
+import { useAuthStore } from '@/stores/auth';
 
 export default defineComponent({
   components: {
@@ -92,6 +93,7 @@ export default defineComponent({
       }
     ]
     const firstPromptStore = useFirstPromStore()
+    const auth = useAuthStore();
     
     const submitPrompt = async () => {
       router.push("/chat/new");
@@ -100,7 +102,11 @@ export default defineComponent({
         user_input: prompt.value
       }
     };
-
+    
+    onMounted(() => {
+      auth.initialize();
+    });
+    
     return {
       easyPlan,
       cardData,
