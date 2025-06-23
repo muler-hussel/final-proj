@@ -1,0 +1,980 @@
+Could you share your destination, travel dates, number of travelers, and any specific preferences you have in mind? If you prefer, you can also click the **Next button** to let me suggest some cities and scenic spots for you first. Just let me know how you’d like to proceed!
+2025-06-23 00:29:48,190 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 00:29:48,198 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: None, extracted preferences: destination='a beach holiday' date=None people='just me' preferences=['relaxing']
+2025-06-23 00:29:50,656 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 00:29:50,659 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated title: "Hidden Kyoto Gems"
+2025-06-23 00:29:53,364 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 00:29:53,367 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: , generated todo list:
+description='Research potential travel destinations based on current trends and general popularity.' type='RESEARCH_DESTINATIONS'
+description='Research top attractions and points of interest within the selected destination.' type='RESEARCH_ATTRACTIONS'
+description='Research accommodation options such as hotels and rental properties in the destination.' type='RESEARCH_SPECIFIC_ITEM'
+description='Research available local transportation options within the destination.' type='RESEARCH_SPECIFIC_ITEM'
+description='Present compiled travel destination and attraction ideas to the user for review.' type='PRESENT_IDEAS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-23 00:29:54,466 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 00:29:54,469 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto.None, extracted preferences: None
+2025-06-23 00:29:55,192 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 00:29:55,194 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '8027eb9c-44f1-49a1-9798-8922b7e30486', 'history': 'user: ', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': None, 'user_input': ''}, ai response: Hello! It’s great to be helping you plan your trip. To get started, could you please provide me with some basic information? Specifically, I need to know your destination, travel date, the number of travelers, and any travel preferences you may have.
+
+If you'd like, you can also click the **Next button** below for some recommendations on cities and scenic spots, or fill in the form by clicking **Your Preference** at the top right of the page. Just let me know what works best for you!
+2025-06-23 00:29:59,528 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 00:29:59,537 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated todo list:
+description='Research secret gardens in Kyoto, including lesser-known spots and hidden gems.' type='RESEARCH_ATTRACTIONS'
+description='Look into offbeat attractions in Kyoto that are not commonly visited by tourists.' type='RESEARCH_ATTRACTIONS'
+description="Compile a list of unique experiences or activities available in Kyoto's secret gardens and offbeat attractions." type='PRESENT_IDEAS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-23 00:30:01,504 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 00:30:01,505 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': 'fb3283a7-ae26-4bb2-889a-c7a746c69497', 'history': 'user: Find secret gardens and offbeat attractions in Kyoto.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': None, 'user_input': 'Find secret gardens and offbeat attractions in Kyoto.'}, ai response: Hello! I'm excited to help you plan your trip to Kyoto! To provide you with the best recommendations for secret gardens and offbeat attractions, could you please share a bit more information? Specifically, I'd like to know your travel dates, the number of travelers, and any specific preferences you might have for your trip.
+
+If you'd rather, you can also click the **Next button** below to get some general suggestions for cities and scenic spots, or use the **Your Preference** option at the top right to fill out the form later. Just let me know how you’d like to proceed!
+2025-06-23 00:31:04,019 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 00:31:04,022 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Best cities in Italy for history, landscapes, and food., generated title: "Historic Italian Cities"
+2025-06-23 00:31:08,018 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 00:31:08,023 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Best cities in Italy for history, landscapes, and food.None, extracted preferences: None
+2025-06-23 00:31:13,922 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 00:31:13,934 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Best cities in Italy for history, landscapes, and food., generated todo list:
+description='Research historical cities in Italy known for their rich history, landscapes, and culinary offerings.' type='RESEARCH_DESTINATIONS'
+description='Look into specific attractions in cities like Rome, Florence, and Venice that highlight historical sites and landscapes.' type='RESEARCH_ATTRACTIONS'
+description='Find top-rated restaurants in the selected cities that showcase local cuisine and specialties.' type='RESEARCH_SPECIFIC_ITEM'
+description='Compile a list of the best cities in Italy based on history, landscapes, and food.' type='PRESENT_IDEAS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-23 00:31:24,076 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 00:31:24,081 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': 'd6232675-0f17-425a-aac0-99004b6f34f9', 'history': 'user: Best cities in Italy for history, landscapes, and food.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': None, 'user_input': 'Best cities in Italy for history, landscapes, and food.'}, ai response: Hello! It's a pleasure to help you plan your journey through Italy. Here are some of the best cities that offer rich history, stunning landscapes, and delicious food:
+
+1. **Rome**: The capital city is a treasure trove of history, with landmarks like the Colosseum, the Roman Forum, and Vatican City. The food scene is vibrant, with traditional dishes like pasta carbonara and Roman-style pizza.
+
+2. **Florence**: Known as the cradle of the Renaissance, Florence boasts incredible art and architecture, including the Duomo and the Uffizi Gallery. The Tuscan landscape surrounding the city is breathtaking, and you can enjoy local delicacies such as ribollita and Florentine steak.
+
+3. **Venice**: Famous for its canals and stunning architecture, Venice is a unique city with a rich history. Enjoy fresh seafood and traditional Venetian dishes like risotto al nero di seppia (squid ink risotto) while taking in the picturesque views.
+
+4. **Naples**: The birthplace of pizza, Naples is known for its culinary delights. The city is also close to historical sites like Pompeii and Herculaneum. The nearby Amalfi Coast offers stunning landscapes.
+
+5. **Bologna**: Often overlooked, Bologna is known for its medieval architecture and is considered the food capital of Italy. Don't miss trying tagliatelle al ragù (Bolognese sauce) and mortadella.
+
+6. **Siena**: This medieval city in Tuscany is famous for its beautiful piazzas and historic buildings. The surrounding countryside is picturesque, and the local cuisine includes pici pasta and panforte.
+
+If you'd like to share more about your travel plans, such as your destination, travel dates, and preferences, I can provide more tailored recommendations. Alternatively, feel free to click the **Next button** below for more suggestions!
+2025-06-23 00:32:49,781 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 00:32:49,795 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: 4-day Paris trip: mix of landmarks, hidden gems, and food., generated title: "4-Day Paris Adventure"
+2025-06-23 00:32:51,160 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 00:32:51,166 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: 4-day Paris trip: mix of landmarks, hidden gems, and food.None, extracted preferences: destination='Paris' date='4-day trip' people=None preferences=['landmarks', 'hidden gems', 'food']
+2025-06-23 00:32:54,987 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 00:32:54,990 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: 4-day Paris trip: mix of landmarks, hidden gems, and food., generated todo list:
+description='Research popular landmarks in Paris to include in the itinerary.' type='RESEARCH_ATTRACTIONS'
+description='Identify hidden gems and lesser-known attractions in Paris.' type='RESEARCH_ATTRACTIONS'
+description='Research top-rated restaurants and food experiences in Paris.' type='RESEARCH_SPECIFIC_ITEM'
+description='Compile and present a list of landmarks, hidden gems, and food options for the 4-day Paris trip.' type='PRESENT_IDEAS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-23 00:32:58,102 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 00:32:58,105 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': 'f89198af-0eb9-4f63-b8f4-f4fe96f97785', 'history': 'user: 4-day Paris trip: mix of landmarks, hidden gems, and food.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': None, 'user_input': '4-day Paris trip: mix of landmarks, hidden gems, and food.'}, ai response: Hello! I'd love to help you plan your 4-day trip to Paris with a mix of landmarks, hidden gems, and delicious food experiences. To get started and tailor the plan perfectly for you, could you please share a bit more about your travel dates, how many people are traveling, and any specific preferences you have? You can also let me know if you'd prefer I recommend some must-see spots and hidden gems first. Looking forward to creating a wonderful itinerary together!
+2025-06-23 01:09:48,919 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 01:09:48,922 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: None, extracted preferences: None
+2025-06-23 01:09:52,001 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 01:09:52,009 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: , generated todo list:
+description='Research potential travel destinations based on popular travel trends.' type='RESEARCH_DESTINATIONS'
+description='Compile a list of attractions at the shortlisted destinations.' type='RESEARCH_ATTRACTIONS'
+description='Look for suitable accommodation options at chosen destinations.' type='RESEARCH_SPECIFIC_ITEM'
+description='Examine transportation options for getting around at the selected locations.' type='RESEARCH_SPECIFIC_ITEM'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-23 01:09:57,129 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 01:09:57,132 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '79df9b09-f8ba-4ebc-aa5d-948eb34a2259', 'history': 'user: ', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': None, 'user_input': ''}, ai response: Hello! It's a pleasure to assist you in planning your journey. To get started, could you please provide me with some basic information? Specifically, I need to know:
+
+- Your destination
+- Travel date
+- Number of travelers
+- Your travel preferences
+
+Once I have this information, I can help you better! Alternatively, if you prefer, you can click the **Next button** below for recommendations on cities and scenic spots, or you can fill in your preferences by clicking **Your Preference** at the top right of the page. Feel free to share any details directly in our conversation as well!
+2025-06-23 01:09:58,068 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 01:09:58,072 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: None, extracted preferences: destination='Paris' date=None people='2 adults' preferences=['foodie', 'history']
+2025-06-23 01:10:01,009 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 01:10:01,020 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: , generated todo list:
+description='Research potential travel destinations based on popular trends and seasonal factors.' type='RESEARCH_DESTINATIONS'
+description='Identify key attractions and landmarks in the selected destination.' type='RESEARCH_ATTRACTIONS'
+description='Look into various accommodation options such as hotels, hostels, or vacation rentals.' type='RESEARCH_SPECIFIC_ITEM'
+description='Gather information about local transportation methods available at the destination.' type='RESEARCH_SPECIFIC_ITEM'
+description='Compile a list of recommended restaurants and dining options.' type='RESEARCH_SPECIFIC_ITEM'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-23 01:10:06,143 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 01:10:06,146 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': 'a4883db5-145c-4e05-928d-c1b441cca319', 'history': 'user: ', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': None, 'user_input': ''}, ai response: Hello! It's a pleasure to help you plan your journey. To get started, could you please provide me with some basic information? I need to know your destination, travel date, number of travelers, and your travel preferences. 
+
+Alternatively, you can click the **Next button** below for recommendations on cities and scenic spots, or click **Your Preference** at the top right of the page to fill in the form. Feel free to share the details directly in our conversation as well!
+2025-06-23 08:15:21,517 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:15:21,532 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated title: "Hidden Kyoto Gems"
+2025-06-23 08:16:55,316 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:16:55,321 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated title: "Hidden Kyoto Gems"
+2025-06-23 08:17:10,088 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:17:10,092 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated title: "Hidden Kyoto Gems"
+2025-06-23 08:17:51,002 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:17:51,005 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated title: "Hidden Kyoto Gems"
+2025-06-23 08:19:27,194 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:19:27,198 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated title: "Hidden Kyoto Gems"
+2025-06-23 08:19:31,218 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:19:31,223 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto.None, extracted preferences: None
+2025-06-23 08:19:35,832 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:19:35,847 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated todo list:
+description='Research secret gardens in Kyoto to identify unique and lesser-known locations.' type='RESEARCH_DESTINATIONS'
+description='Look into offbeat attractions in Kyoto that are not typically highlighted in travel guides.' type='RESEARCH_ATTRACTIONS'
+description="Compile a list of hidden gems and local favorites in Kyoto's gardens and attractions." type='PRESENT_IDEAS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-23 08:19:37,976 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:19:37,980 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '1fbe969f-fe17-4144-86e6-91f7b5e82271', 'history': 'user: Find secret gardens and offbeat attractions in Kyoto.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': None, 'user_input': 'Find secret gardens and offbeat attractions in Kyoto.'}, ai response: Hello! It’s great to help you plan your trip to Kyoto. To tailor my recommendations for secret gardens and offbeat attractions, I’d love to know a bit more about your travel plans. Could you please provide your destination, travel dates, number of travelers, and any specific preferences you have? 
+
+Alternatively, if you'd like, you can click the **Next button** below for more general recommendations, or you can fill in your preferences by clicking **Your Preference** at the top right of the page. Let me know what works best for you!
+2025-06-23 08:19:51,659 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:19:51,664 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated title: Kyoto Hidden Gems
+2025-06-23 08:19:53,665 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:19:53,670 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto.None, extracted preferences: destination='Kyoto' date=None people=None preferences=['offbeat attractions', 'secret gardens']
+2025-06-23 08:19:56,081 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:19:56,094 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated todo list:
+description='Research secret gardens in Kyoto that are lesser-known and have unique features.' type='RESEARCH_ATTRACTIONS'
+description='Look for offbeat attractions in Kyoto that are not typical tourist spots.' type='RESEARCH_ATTRACTIONS'
+description='Compile a list of suggested secret gardens and offbeat attractions in Kyoto.' type='PRESENT_IDEAS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-23 08:19:59,272 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:19:59,275 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': 'f40cbbb9-6786-4f8c-ac30-7fdbfab8c72e', 'history': 'user: Find secret gardens and offbeat attractions in Kyoto.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': None, 'user_input': 'Find secret gardens and offbeat attractions in Kyoto.'}, ai response: Kyoto is a fantastic choice for uncovering secret gardens and offbeat attractions! To tailor the best recommendations for you, could you please share a bit more about your trip? Specifically, your travel dates, how many people are traveling with you, and any particular interests or preferences you have. If you'd like, I can also start by suggesting some lesser-known spots in Kyoto first—just let me know how you'd like to proceed!
+2025-06-23 08:21:13,450 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:21:13,452 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated title: "Hidden Kyoto Gems"
+2025-06-23 08:21:14,949 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:21:14,953 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto.None, extracted preferences: destination='Kyoto' date=None people=None preferences=None
+2025-06-23 08:21:23,932 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:21:23,935 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated todo list:
+description='Research secret gardens in Kyoto, focusing on lesser-known or offbeat locations.' type='RESEARCH_ATTRACTIONS'
+description='Identify unique and offbeat attractions in Kyoto beyond the typical tourist spots.' type='RESEARCH_ATTRACTIONS'
+description='Compile and present a curated list of secret gardens and offbeat attractions in Kyoto to the user.' type='PRESENT_IDEAS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-23 08:21:26,023 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:21:26,025 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': 'a514f980-a87e-4138-abf2-19cde990f8ab', 'history': 'user: Find secret gardens and offbeat attractions in Kyoto.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': None, 'user_input': 'Find secret gardens and offbeat attractions in Kyoto.'}, ai response: Hello! I'm excited to help you find secret gardens and offbeat attractions in Kyoto! To assist you better, could you please provide me with a bit of basic information? Specifically, I’d love to know your destination, travel date, number of travelers, and your travel preferences.
+
+Alternatively, you can click the **Next button** below for some city and scenic spot recommendations, or use the option at the top right to fill in your preferences. Feel free to share any details directly in our conversation as well!
+2025-06-23 08:21:32,339 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:21:32,339 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated title: "Hidden Kyoto Gems"
+2025-06-23 08:21:35,841 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:21:35,843 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto.None, extracted preferences: None
+2025-06-23 08:21:40,175 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:21:40,175 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated todo list:
+description='Research secret gardens in Kyoto, focusing on lesser-known and offbeat locations.' type='RESEARCH_ATTRACTIONS'
+description='Identify offbeat attractions in Kyoto that are unique and not commonly visited by tourists.' type='RESEARCH_ATTRACTIONS'
+description='Compile and present a curated list of secret gardens and offbeat attractions in Kyoto to the user.' type='PRESENT_IDEAS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-23 08:21:45,120 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:21:45,120 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '90ae7e91-54bd-4637-97fa-cfb50d006a71', 'history': 'user: Find secret gardens and offbeat attractions in Kyoto.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': None, 'user_input': 'Find secret gardens and offbeat attractions in Kyoto.'}, ai response: Kyoto is a fantastic choice for finding secret gardens and offbeat attractions! To tailor my recommendations perfectly for you, could you please share a bit more about your trip? For example, when you’re planning to travel, how many people are in your group, and any particular travel preferences you have. 
+
+If you'd prefer, I can start by suggesting some unique spots in Kyoto first and then refine the list as we go. Just let me know how you'd like to proceed!
+2025-06-23 08:28:21,813 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:28:21,813 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated title: "Hidden Kyoto Gems"
+2025-06-23 08:28:25,030 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:28:25,034 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto.None, extracted preferences: None
+2025-06-23 08:28:32,322 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:28:32,332 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated todo list:
+description="Explore Kyoto's lesser-known areas that may contain secret gardens and offbeat attractions." type='RESEARCH_DESTINATIONS'
+description='Identify specific secret gardens and unique attractions in Kyoto that are not widely known.' type='RESEARCH_ATTRACTIONS'
+description='Compile a list of the most interesting secret gardens and offbeat attractions found in the research.' type='PRESENT_IDEAS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-23 08:28:34,296 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:28:34,296 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '875b1c02-823f-4ba2-9ebd-6f4a43ced66f', 'history': 'user: Find secret gardens and offbeat attractions in Kyoto.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': None, 'user_input': 'Find secret gardens and offbeat attractions in Kyoto.'}, ai response: Hello! I'm excited to help you plan your trip to Kyoto. To find the best secret gardens and offbeat attractions, could you please share a bit more about your travel plans? Specifically, I need to know your destination, travel dates, number of travelers, and any travel preferences you have. 
+
+If you prefer, you can also click the **Next button** below for recommendations on cities and scenic spots, or fill in your preferences by clicking **Your Preference** at the top right. 
+
+Feel free to share any information directly here as well!
+2025-06-23 08:28:43,053 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:28:43,056 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated title: "Hidden Kyoto Gems"
+2025-06-23 08:28:45,158 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:28:45,161 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto.None, extracted preferences: destination='Kyoto' date=None people=None preferences=['secret gardens', 'offbeat attractions']
+2025-06-23 08:28:49,900 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:28:49,908 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated todo list:
+description='Research the overall attractions and secret gardens in Kyoto.' type='RESEARCH_DESTINATIONS'
+description='Look for specific offbeat attractions and hidden gardens in Kyoto.' type='RESEARCH_ATTRACTIONS'
+description='Compile a list of unique and lesser-known gardens and attractions to present.' type='PRESENT_IDEAS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-23 08:28:52,133 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:28:52,137 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': 'c2ce2a03-a5ad-4762-adea-155e6d8de457', 'history': 'user: Find secret gardens and offbeat attractions in Kyoto.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': None, 'user_input': 'Find secret gardens and offbeat attractions in Kyoto.'}, ai response: Hello! I'm excited to help you plan your journey to Kyoto. To find the secret gardens and offbeat attractions tailored just for you, could you please provide a bit of basic information? Specifically, I need to know your travel dates, the number of travelers, and any travel preferences you might have.
+
+Alternatively, you can click the **Next button** below to receive recommendations for cities and scenic spots first, or click **Your Preference** at the top right to fill out the form whenever you're ready. Feel free to share any other details directly in our conversation as well!
+2025-06-23 08:34:20,703 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:34:20,716 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Best cities in Italy for history, landscapes, and food., generated title: "Explore Italy's Treasures"
+2025-06-23 08:34:22,294 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:34:22,300 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Best cities in Italy for history, landscapes, and food.None, extracted preferences: destination='Italy' date=None people=None preferences=['history', 'landscapes', 'food']
+2025-06-23 08:34:26,733 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:34:26,739 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Best cities in Italy for history, landscapes, and food., generated todo list:
+description='Research top cities in Italy renowned for history, landscapes, and food.' type='RESEARCH_DESTINATIONS'
+description='Identify key historical sites, natural landscapes, and culinary highlights in each city.' type='RESEARCH_ATTRACTIONS'
+description='Compile and present a list of the best Italian cities meeting the criteria of history, landscapes, and food.' type='PRESENT_IDEAS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-23 08:34:28,696 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:34:28,700 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '6ae46972-5cb7-4437-9002-5415f908ad47', 'history': 'user: Best cities in Italy for history, landscapes, and food.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': None, 'user_input': 'Best cities in Italy for history, landscapes, and food.'}, ai response: Hello! I'm excited to help you plan your trip to Italy! To provide you with the best recommendations for cities that highlight history, landscapes, and food, it would be great to know a bit more about your travel plans.
+
+Can you share your destination, travel dates, number of travelers, and any other specific preferences you might have? Alternatively, if you'd like, I can recommend some cities and scenic spots right away; just let me know what you'd prefer!
+2025-06-23 08:36:53,971 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:36:53,974 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Best cities in Italy for history, landscapes, and food., generated title: "Explore Italy"
+2025-06-23 08:36:57,513 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:36:57,517 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Best cities in Italy for history, landscapes, and food.None, extracted preferences: None
+2025-06-23 08:37:00,478 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:37:00,497 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Best cities in Italy for history, landscapes, and food., generated todo list:
+description='Identify the best cities in Italy that are known for their history, landscapes, and food.' type='RESEARCH_DESTINATIONS'
+description='Find historical sites, scenic landscapes, and renowned restaurants in the identified cities.' type='RESEARCH_ATTRACTIONS'
+description='Look into local cuisines and popular dishes unique to each city.' type='RESEARCH_SPECIFIC_ITEM'
+description='Compile and present a list of recommended cities and their highlights based on research.' type='PRESENT_IDEAS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-23 08:37:02,838 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:37:02,842 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '77c4f92a-65d4-479b-9375-2db3ee789b34', 'history': 'user: Best cities in Italy for history, landscapes, and food.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': None, 'user_input': 'Best cities in Italy for history, landscapes, and food.'}, ai response: Hello! It's a pleasure to assist you in planning your trip to Italy! To recommend the best cities focusing on history, landscapes, and food, it would be helpful to know a bit more information such as your travel dates, number of travelers, and any specific preferences you have. 
+
+Alternatively, if you'd like, I can start by recommending a few incredible cities for you, and we can refine your plans from there! Let me know what you'd prefer to do.
+2025-06-23 08:37:22,163 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:37:22,166 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: next step, existing slots: {"destination":null,"date":null,"people":null,"preferences":null}, intentions: {'intent': 'ADVANCE_STEP'}
+2025-06-23 08:37:23,923 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:37:23,926 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: next step{"destination":null,"date":null,"people":null,"preferences":null}, extracted preferences: destination=None date=None people=None preferences=None
+2025-06-23 08:49:29,259 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:49:29,272 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: 4-day Paris trip: mix of landmarks, hidden gems, and food., generated title: Paris Highlights Trip
+2025-06-23 08:49:30,830 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:49:30,836 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: 4-day Paris trip: mix of landmarks, hidden gems, and food.None, extracted preferences: destination='Paris' date='4-day' people=None preferences=['landmarks', 'hidden gems', 'food']
+2025-06-23 08:49:33,452 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:49:33,474 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: 4-day Paris trip: mix of landmarks, hidden gems, and food., generated todo list:
+description='Explore general information about Paris and its various districts.' type='RESEARCH_DESTINATIONS'
+description='Identify key landmarks in Paris such as the Eiffel Tower, Notre-Dame, and the Louvre.' type='RESEARCH_ATTRACTIONS'
+description='Find hidden gem attractions that are less touristy but worthwhile.' type='RESEARCH_ATTRACTIONS'
+description='Research local food options, focusing on restaurants and cafes with authentic Parisian cuisine.' type='RESEARCH_SPECIFIC_ITEM'
+description='Compile a list of suggested landmarks, hidden gems, and restaurants to visit in Paris.' type='PRESENT_IDEAS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-23 08:49:37,446 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:49:37,450 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '3b11bc59-fe57-4aee-a9dc-02887b356496', 'history': 'user: 4-day Paris trip: mix of landmarks, hidden gems, and food.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': None, 'user_input': '4-day Paris trip: mix of landmarks, hidden gems, and food.'}, ai response: Hello! I'm excited to help you plan your 4-day trip to Paris! To create the best itinerary for you, could you please provide a bit more information? Specifically, I need to know:
+
+- Your travel dates
+- The number of travelers
+- Any specific travel preferences you have (e.g., interests, budget, etc.)
+
+Feel free to share this information directly, or if you prefer, you can click the **Next button** below for some recommendations on cities and scenic spots first. Let me know how you'd like to proceed!
+2025-06-23 08:50:36,607 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:50:36,612 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: next step, existing slots: {"destination":null,"date":null,"people":null,"preferences":null}, intentions: {'intent': 'ADVANCE_STEP'}
+2025-06-23 08:50:38,170 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:50:38,175 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: next step{"destination":null,"date":null,"people":null,"preferences":null}, extracted preferences: destination=None date=None people=None preferences=None
+2025-06-23 08:53:27,355 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:53:27,364 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Vegetarian-friendly restaurants in Austin with great ambiance., generated title: "Veggie Eats in Austin"
+2025-06-23 08:53:28,985 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:53:28,990 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Vegetarian-friendly restaurants in Austin with great ambiance.None, extracted preferences: destination='Austin' date=None people=None preferences=['Vegetarian-friendly', 'great ambiance']
+2025-06-23 08:53:33,545 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:53:33,550 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Vegetarian-friendly restaurants in Austin with great ambiance., generated todo list:
+description='Research vegetarian-friendly restaurants in Austin.' type='RESEARCH_SPECIFIC_ITEM'
+description='Identify restaurants in Austin with great ambiance.' type='RESEARCH_SPECIFIC_ITEM'
+description='Compile a list of vegetarian-friendly restaurants in Austin known for their ambiance.' type='PRESENT_IDEAS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-23 08:53:36,711 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:53:36,715 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '5f958572-dd91-440c-be2b-8891b293fd39', 'history': 'user: Vegetarian-friendly restaurants in Austin with great ambiance.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': None, 'user_input': 'Vegetarian-friendly restaurants in Austin with great ambiance.'}, ai response: Austin is a fantastic city for vegetarian-friendly dining with a great ambiance! Before I dive into specific restaurant recommendations, could you please share a bit more about your travel plans? Knowing your travel dates, number of travelers, and any particular preferences will help me tailor suggestions just for you. Or, if you'd like, I can start by recommending some popular spots in Austin right away—just let me know what works best!
+2025-06-23 08:54:55,770 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:54:55,775 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: next step, existing slots: {"destination":null,"date":null,"people":null,"preferences":null}, intentions: {'intent': 'ADVANCE_STEP'}
+2025-06-23 08:54:57,309 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:54:57,315 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: next step{"destination":null,"date":null,"people":null,"preferences":null}, extracted preferences: destination=None date=None people=None preferences=None
+2025-06-23 08:57:16,075 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:57:16,085 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: next step, existing slots: {"destination":null,"date":null,"people":null,"preferences":null}, intentions: {'intent': 'ADVANCE_STEP'}
+2025-06-23 08:57:19,201 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 08:57:19,204 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: next step{"destination":null,"date":null,"people":null,"preferences":null}, extracted preferences: None
+2025-06-23 09:00:19,219 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:00:19,226 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: next step, existing slots: {"destination":null,"date":null,"people":null,"preferences":null}, intentions: {'intent': 'ADVANCE_STEP'}
+2025-06-23 09:00:22,525 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:00:22,528 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: next step{"destination":null,"date":null,"people":null,"preferences":null}, extracted preferences: None
+2025-06-23 09:00:26,007 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:03:19,558 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:03:19,565 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: next step, existing slots: {"destination":null,"date":null,"people":null,"preferences":null}, intentions: {'intent': 'ADVANCE_STEP'}
+2025-06-23 09:03:21,026 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:03:21,030 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: next step{"destination":null,"date":null,"people":null,"preferences":null}, extracted preferences: destination=None date=None people=None preferences=None
+2025-06-23 09:03:24,772 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:06:39,385 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:06:39,394 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: next step, existing slots: {"destination":null,"date":null,"people":null,"preferences":null}, intentions: {'intent': 'ADVANCE_STEP'}
+2025-06-23 09:06:40,987 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:06:40,991 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: next step{"destination":null,"date":null,"people":null,"preferences":null}, extracted preferences: destination='Paris' date=None people='2 adults' preferences=['foodie', 'history']
+2025-06-23 09:06:43,938 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:09:59,642 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:09:59,651 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: next step, existing slots: {"destination":null,"date":null,"people":null,"preferences":null}, intentions: {'intent': 'ADVANCE_STEP'}
+2025-06-23 09:10:02,940 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:10:02,943 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: next step{"destination":null,"date":null,"people":null,"preferences":null}, extracted preferences: None
+2025-06-23 09:10:51,299 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:10:51,306 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: next step, existing slots: {"destination":null,"date":null,"people":null,"preferences":null}, intentions: {'intent': 'ADVANCE_STEP'}
+2025-06-23 09:10:52,815 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:10:52,819 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: next step{"destination":null,"date":null,"people":null,"preferences":null}, extracted preferences: destination=None date=None people=None preferences=None
+2025-06-23 09:10:55,388 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:11:49,370 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:11:49,379 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: next step, existing slots: {"destination":null,"date":null,"people":null,"preferences":null}, intentions: {'intent': 'ADVANCE_STEP'}
+2025-06-23 09:11:53,249 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:11:53,253 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: next step{"destination":null,"date":null,"people":null,"preferences":null}, extracted preferences: destination=None date=None people=None preferences=None
+2025-06-23 09:11:58,468 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:12:57,715 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:12:57,725 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: next step, existing slots: {"destination":null,"date":null,"people":null,"preferences":null}, intentions: {'intent': 'ADVANCE_STEP'}
+2025-06-23 09:12:59,190 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:12:59,192 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: next step{"destination":null,"date":null,"people":null,"preferences":null}, extracted preferences: destination=None date=None people=None preferences=None
+2025-06-23 09:13:05,575 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:13:05,584 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: next step, intent: {'intent': 'ADVANCE_STEP'}, new_todo_list: 
+[TodoItem(description='Research vegetarian-friendly restaurants in Austin.', type='RESEARCH_SPECIFIC_ITEM'), 
+TodoItem(description='Identify restaurants in Austin with great ambiance.', type='RESEARCH_SPECIFIC_ITEM'), 
+TodoItem(description='Compile a list of vegetarian-friendly restaurants in Austin known for their ambiance.', type='PRESENT_IDEAS'), 
+TodoItem(description='Draft a detailed itinerary.', type='DRAFT_ITINERARY'), 
+TodoItem(description='Finalize itinerary document for user.', type='FINALIZE_DOCUMENT')], todo_step:1, final_step:4
+2025-06-23 09:13:07,299 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:13:07,302 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '5f958572-dd91-440c-be2b-8891b293fd39', 'history': 'user: next step\nuser: next step\nuser: next step\nuser: next step\nuser: next step\nuser: next step\nuser: next step\nuser: next step\nuser: next step\nuser: next step', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': 'Research vegetarian-friendly restaurants in Austin.\nIdentify restaurants in Austin with great ambiance.\nCompile a list of vegetarian-friendly restaurants in Austin known for their ambiance.\nDraft a detailed itinerary.\nFinalize itinerary document for user.', 'user_input': 'next step'}, ai response: It seems we're at the point where I need a bit more information to assist you effectively. Could you please provide the following details? 
+
+- Destination 
+- Travel date 
+- Number of travelers 
+- Your travel preferences
+
+Alternatively, if you'd prefer, I can suggest cities and scenic spots for your trip. Would you like to proceed with that?
+2025-06-23 09:24:29,015 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:24:29,024 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: next step, existing slots: {"destination":null,"date":null,"people":null,"preferences":null}, intentions: {'intent': 'ADVANCE_STEP'}
+2025-06-23 09:24:31,125 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:24:31,130 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: next step{"destination":null,"date":null,"people":null,"preferences":null}, extracted preferences: destination=None date=None people=None preferences=None
+2025-06-23 09:24:33,194 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:24:33,202 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: next step, intent: {'intent': 'ADVANCE_STEP'}, new_todo_list: [
+TodoItem(description='Research vegetarian-friendly restaurants in Austin.', type='RESEARCH_SPECIFIC_ITEM'), 
+TodoItem(description='Identify restaurants in Austin with great ambiance.', type='RESEARCH_SPECIFIC_ITEM'), 
+TodoItem(description='Compile a list of vegetarian-friendly restaurants in Austin known for their ambiance.', type='PRESENT_IDEAS'), 
+TodoItem(description='Draft a detailed itinerary.', type='DRAFT_ITINERARY'), 
+TodoItem(description='Finalize itinerary document for user.', type='FINALIZE_DOCUMENT')], todo_step:0, final_step:3
+2025-06-23 09:24:42,505 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:24:42,508 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '5f958572-dd91-440c-be2b-8891b293fd39', 
+'history': "user: next step\nuser: next step\nuser: next step\nuser: next step\nuser: next step\nuser: next step\nuser: next step\n
+ai: It seems we're at the point where I need a bit more information to assist you effectively. Could you please provide the following details? \n\n- Destination \n- Travel date \n- Number of travelers \n- Your travel preferences\n\nAlternatively, if you'd prefer, I can suggest cities and scenic spots for your trip. Would you like to proceed with that?\nuser: next step\nuser: next step", 
+'missing_info_prompt': None, 
+'todo_prompt': 'Research vegetarian-friendly restaurants in Austin.\nIdentify restaurants in Austin with great ambiance.\nCompile a list of vegetarian-friendly restaurants in Austin known for their ambiance.\nDraft a detailed itinerary.', 'user_input': 'next step'}, 
+ai response: Great! Let's move forward with researching vegetarian-friendly restaurants in Austin that are known for their ambiance. Here’s a list of some popular options:
+
+### Vegetarian-Friendly Restaurants in Austin with Great Ambiance
+
+1. **Bouldin Creek Cafe**
+   - **Description:** A quirky, colorful cafe with a laid-back vibe, known for its extensive vegetarian and vegan menu.
+   - **Ambiance:** Relaxed and artsy, with outdoor seating and local artwork.
+
+2. **Flower Child**
+   - **Description:** Focuses on healthy, fresh ingredients with a variety of vegetarian and vegan options.
+   - **Ambiance:** Bright and cheerful, featuring a modern decor that promotes a healthy lifestyle.
+
+3. **The Beer Plant**
+   - **Description:** A gastropub that offers a great selection of craft beers and a fully vegetarian menu.
+   - **Ambiance:** Rustic and cozy, with a warm atmosphere perfect for casual dining.
+
+4. **Casa de Luz**
+   - **Description:** A unique dining experience offering organic, plant-based meals in a communal setting.
+   - **Ambiance:** Peaceful and serene, with a focus on community and wellness.
+
+5. **Plow Burger**
+   - **Description:** A popular spot for vegan comfort food, including burgers and fries.
+   - **Ambiance:** Casual and fun, with a retro vibe and friendly service.
+
+6. **Vinaigrette**
+   - **Description:** A salad bistro that focuses on fresh, local ingredients, offering a variety of vegetarian options.
+   - **Ambiance:** Bright and airy, with a garden-like setting.
+
+### Next Steps
+Now that we have a list of vegetarian-friendly restaurants, the next step is to draft a detailed itinerary for your trip. This will include your dining plans, along with any other activities or sights you’d like to see in Austin.
+
+If you have specific dates, activities, or places you want to include in your itinerary, please let me know! Otherwise, I can suggest some popular attractions to complement your dining experience.
+2025-06-23 09:25:55,929 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:25:55,937 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: more recommendations, existing slots: {"destination":null,"date":null,"people":null,"preferences":null}, intentions: {'intent': 'MORE_RECOMMENDATIONS'}
+2025-06-23 09:25:57,758 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:25:57,762 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: more recommendations{"destination":null,"date":null,"people":null,"preferences":null}, extracted preferences: destination=None date=None people=None preferences=None
+2025-06-23 09:26:00,254 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:26:00,263 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: more recommendations, intent: {'intent': 'MORE_RECOMMENDATIONS'}, new_todo_list: [TodoItem(description='Research vegetarian-friendly restaurants in Austin.', type='RESEARCH_SPECIFIC_ITEM'), TodoItem(description='Identify restaurants in Austin with great ambiance.', type='RESEARCH_SPECIFIC_ITEM'), TodoItem(description='Compile a list of vegetarian-friendly restaurants in Austin known for their ambiance.', type='PRESENT_IDEAS'), TodoItem(description='Draft a detailed itinerary.', type='DRAFT_ITINERARY'), TodoItem(description='Finalize itinerary document for user.', type='FINALIZE_DOCUMENT')], todo_step:0, final_step:2
+2025-06-23 09:26:08,950 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:26:08,950 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '5f958572-dd91-440c-be2b-8891b293fd39', 'history': "user: next step\nuser: next step\nuser: next step\nuser: next step\nai: It seems we're at the point where I need a bit more information to assist you effectively. Could you please provide the following details? \n\n- Destination \n- Travel date \n- Number of travelers \n- Your travel preferences\n\nAlternatively, if you'd prefer, I can suggest cities and scenic spots for your trip. Would you like to proceed with that?\nuser: next step\nuser: next step\nai: Great! Let's move forward with researching vegetarian-friendly restaurants in Austin that are known for their ambiance. Here’s a list of some popular options:\n\n### Vegetarian-Friendly Restaurants in Austin with Great Ambiance\n\n1. **Bouldin Creek Cafe**\n   - **Description:** A quirky, colorful cafe with a laid-back vibe, known for its extensive vegetarian and vegan menu.\n   - **Ambiance:** Relaxed and artsy, with outdoor seating and local artwork.\n\n2. **Flower Child**\n   - **Description:** Focuses on healthy, fresh ingredients with a variety of vegetarian and vegan options.\n   - **Ambiance:** Bright and cheerful, featuring a modern decor that promotes a healthy lifestyle.\n\n3. **The Beer Plant**\n   - **Description:** A gastropub that offers a great selection of craft beers and a fully vegetarian menu.\n   - **Ambiance:** Rustic and cozy, with a warm atmosphere perfect for casual dining.\n\n4. **Casa de Luz**\n   - **Description:** A unique dining experience offering organic, plant-based meals in a communal setting.\n   - **Ambiance:** Peaceful and serene, with a focus on community and wellness.\n\n5. **Plow Burger**\n   - **Description:** A popular spot for vegan comfort food, including burgers and fries.\n   - **Ambiance:** Casual and fun, with a retro vibe and friendly service.\n\n6. **Vinaigrette**\n   - **Description:** A salad bistro that focuses on fresh, local ingredients, offering a variety of vegetarian options.\n   - **Ambiance:** Bright and airy, with a garden-like setting.\n\n### Next Steps\nNow that we have a list of vegetarian-friendly restaurants, the next step is to draft a detailed itinerary for your trip. This will include your dining plans, along with any other activities or sights you’d like to see in Austin.\n\nIf you have specific dates, activities, or places you want to include in your itinerary, please let me know! Otherwise, I can suggest some popular attractions to complement your dining experience.\nuser: more recommendations\nuser: more recommendations", 'missing_info_prompt': None, 'todo_prompt': 'Research vegetarian-friendly restaurants in Austin.\nIdentify restaurants in Austin with great ambiance.\nCompile a list of vegetarian-friendly restaurants in Austin known for their ambiance.', 'user_input': 'more recommendations'}, ai response: Here are some more vegetarian-friendly restaurants in Austin that are known for their great ambiance:
+
+### Additional Vegetarian-Friendly Restaurants in Austin
+
+7. **Counter Culture**
+   - **Description:** A vegan eatery that serves delicious comfort food, including burgers, tacos, and smoothies.
+   - **Ambiance:** A cozy and welcoming atmosphere with a focus on sustainability and community.
+
+8. **Sweet Ritual**
+   - **Description:** An ice cream shop that offers a variety of vegan and vegetarian ice cream options, along with toppings galore.
+   - **Ambiance:** Fun and vibrant, with a retro feel and colorful decor that appeals to all ages.
+
+9. **The Beer Garden**
+   - **Description:** A casual spot offering a range of vegetarian options, including pizzas and salads, alongside a great selection of drinks.
+   - **Ambiance:** Outdoor seating with a relaxed, garden-like setting perfect for enjoying good food and drinks.
+
+10. **Luv Fats**
+    - **Description:** A plant-based eatery that focuses on healthy, hearty meals with an emphasis on whole foods.
+    - **Ambiance:** Bright and cheerful, with a modern aesthetic and a friendly vibe.
+
+11. **Sustainable Food Center’s Farmers' Market**
+    - **Description:** While not a restaurant, the market features various vendors offering delicious vegetarian and vegan options.
+    - **Ambiance:** Lively and community-oriented, with local music and a vibrant atmosphere.
+
+12. **Zucchini Kill**
+    - **Description:** A punk rock-themed vegan restaurant that serves comfort food with a twist, including burgers and nachos.
+    - **Ambiance:** Edgy and eclectic, with a unique decor that reflects its punk rock theme.
+
+### Next Steps
+With this expanded list, you now have a variety of vegetarian-friendly dining options in Austin, each with its own unique ambiance. If you’d like, we can start planning your itinerary by selecting specific restaurants to visit on certain days, or we can explore other activities and attractions in Austin to complement your dining experiences. Let me know how you’d like to proceed!
+2025-06-23 09:29:15,873 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:29:15,877 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: give me a final planning, existing slots: {"destination":null,"date":null,"people":null,"preferences":null}, intentions: {'intent': 'ITINERARY_GENERATION'}
+2025-06-23 09:29:17,056 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:29:17,062 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: give me a final planning{"destination":null,"date":null,"people":null,"preferences":null}, extracted preferences: destination=None date=None people=None preferences=None
+2025-06-23 09:29:18,723 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:31:08,846 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:31:08,856 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: give me a final planning, existing slots: {"destination":null,"date":null,"people":null,"preferences":null}, intentions: {'intent': 'ITINERARY_GENERATION'}
+2025-06-23 09:31:11,371 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:31:11,376 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: give me a final planning{"destination":null,"date":null,"people":null,"preferences":null}, extracted preferences: destination=None date=None people=None preferences=None
+2025-06-23 09:31:14,671 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:31:14,674 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: give me a final planning, intent: {'intent': 'ITINERARY_GENERATION'}, new_todo_list: [TodoItem(description='Research vegetarian-friendly restaurants in Austin.', type='RESEARCH_SPECIFIC_ITEM'), TodoItem(description='Identify restaurants in Austin with great ambiance.', type='RESEARCH_SPECIFIC_ITEM'), TodoItem(description='Compile a list of vegetarian-friendly restaurants in Austin known for their ambiance.', type='PRESENT_IDEAS'), TodoItem(description='Draft a detailed itinerary.', type='DRAFT_ITINERARY'), TodoItem(description='Finalize itinerary document for user.', type='FINALIZE_DOCUMENT')], todo_step:3, final_step:4
+2025-06-23 09:31:19,388 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:31:19,388 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '5f958572-dd91-440c-be2b-8891b293fd39', 'history': "user: next step\nuser: next step\nai: Great! Let's move forward with researching vegetarian-friendly restaurants in Austin that are known for their ambiance. Here’s a list of some popular options:\n\n### Vegetarian-Friendly Restaurants in Austin with Great Ambiance\n\n1. **Bouldin Creek Cafe**\n   - **Description:** A quirky, colorful cafe with a laid-back vibe, known for its extensive vegetarian and vegan menu.\n   - **Ambiance:** Relaxed and artsy, with outdoor seating and local artwork.\n\n2. **Flower Child**\n   - **Description:** Focuses on healthy, fresh ingredients with a variety of vegetarian and vegan options.\n   - **Ambiance:** Bright and cheerful, featuring a modern decor that promotes a healthy lifestyle.\n\n3. **The Beer Plant**\n   - **Description:** A gastropub that offers a great selection of craft beers and a fully vegetarian menu.\n   - **Ambiance:** Rustic and cozy, with a warm atmosphere perfect for casual dining.\n\n4. **Casa de Luz**\n   - **Description:** A unique dining experience offering organic, plant-based meals in a communal setting.\n   - **Ambiance:** Peaceful and serene, with a focus on community and wellness.\n\n5. **Plow Burger**\n   - **Description:** A popular spot for vegan comfort food, including burgers and fries.\n   - **Ambiance:** Casual and fun, with a retro vibe and friendly service.\n\n6. **Vinaigrette**\n   - **Description:** A salad bistro that focuses on fresh, local ingredients, offering a variety of vegetarian options.\n   - **Ambiance:** Bright and airy, with a garden-like setting.\n\n### Next Steps\nNow that we have a list of vegetarian-friendly restaurants, the next step is to draft a detailed itinerary for your trip. This will include your dining plans, along with any other activities or sights you’d like to see in Austin.\n\nIf you have specific dates, activities, or places you want to include in your itinerary, please let me know! Otherwise, I can suggest some popular attractions to complement your dining experience.\nuser: more recommendations\nuser: more recommendations\nai: Here are some more vegetarian-friendly restaurants in Austin that are known for their great ambiance:\n\n### Additional Vegetarian-Friendly Restaurants in Austin\n\n7. **Counter Culture**\n   - **Description:** A vegan eatery that serves delicious comfort food, including burgers, tacos, and smoothies.\n   - **Ambiance:** A cozy and welcoming atmosphere with a focus on sustainability and community.\n\n8. **Sweet Ritual**\n   - **Description:** An ice cream shop that offers a variety of vegan and vegetarian ice cream options, along with toppings galore.\n   - **Ambiance:** Fun and vibrant, with a retro feel and colorful decor that appeals to all ages.\n\n9. **The Beer Garden**\n   - **Description:** A casual spot offering a range of vegetarian options, including pizzas and salads, alongside a great selection of drinks.\n   - **Ambiance:** Outdoor seating with a relaxed, garden-like setting perfect for enjoying good food and drinks.\n\n10. **Luv Fats**\n    - **Description:** A plant-based eatery that focuses on healthy, hearty meals with an emphasis on whole foods.\n    - **Ambiance:** Bright and cheerful, with a modern aesthetic and a friendly vibe.\n\n11. **Sustainable Food Center’s Farmers' Market**\n    - **Description:** While not a restaurant, the market features various vendors offering delicious vegetarian and vegan options.\n    - **Ambiance:** Lively and community-oriented, with local music and a vibrant atmosphere.\n\n12. **Zucchini Kill**\n    - **Description:** A punk rock-themed vegan restaurant that serves comfort food with a twist, including burgers and nachos.\n    - **Ambiance:** Edgy and eclectic, with a unique decor that reflects its punk rock theme.\n\n### Next Steps\nWith this expanded list, you now have a variety of vegetarian-friendly dining options in Austin, each with its own unique ambiance. If you’d like, we can start planning your itinerary by selecting specific restaurants to visit on certain days, or we can explore other activities and attractions in Austin to complement your dining experiences. Let me know how you’d like to proceed!\nuser: give me a final planning\nuser: give me a final planning\nuser: give me a final planning\nuser: give me a final planning", 'missing_info_prompt': None, 'todo_prompt': 'Research vegetarian-friendly restaurants in Austin.\nIdentify restaurants in Austin with great ambiance.\nCompile a list of vegetarian-friendly restaurants in Austin known for their ambiance.\nDraft a detailed itinerary.\nFinalize itinerary document for user.', 'user_input': 'give me a final planning'}, ai response: Sure! Here’s a final itinerary for your trip to Austin, focusing on vegetarian-friendly restaurants with great ambiance.
+
+### Trip Itinerary: Austin, TX
+
+#### **Day 1: Arrival and Relaxation**
+- **Lunch:**  
+  **Counter Culture**  
+  A cozy vegan eatery perfect for a relaxed start to your trip. Try their tasty burgers or tacos!  
+- **Afternoon Activity:**  
+  Explore **Lady Bird Lake** for a scenic walk.  
+- **Dinner:**  
+  **Bouldin Creek Cafe**  
+  Enjoy the artsy vibe and local artwork while savoring delicious vegetarian dishes.
+
+---
+
+#### **Day 2: Exploring & Dining Fun**
+- **Breakfast:**  
+  **Flower Child**  
+  Start your day bright with fresh ingredients and delightful smoothies.  
+- **Morning Activity:**  
+  Visit the **Texas State Capitol** for a historical tour.  
+- **Lunch:**  
+  **The Beer Plant**  
+  Enjoy craft beer and a fully vegetarian menu in a cozy atmosphere.  
+- **Afternoon Activity:**  
+  Browse the **South Congress Avenue**, known for its shopping and street art.  
+- **Dinner:**  
+  **Casa de Luz**  
+  Experience a unique communal dining setting with organic plant-based meals.
+
+---
+
+#### **Day 3: Adventure and Sweet Treats**
+- **Brunch:**  
+  **Vinaigrette**  
+  Treat yourself to a fresh salad in a garden-like setting.  
+- **Morning Activity:**  
+  Explore **Zilker Park**, enjoy the outdoors and possibly rent a kayak on Lady Bird Lake.  
+- **Lunch:**  
+  **Plow Burger**  
+  Enjoy vegan comfort food in a fun casual environment.  
+- **Afternoon Activity:**  
+  Visit the **Barton Springs Pool** for a refreshing swim.  
+- **Dessert:**  
+  **Sweet Ritual**  
+  Indulge in some delicious vegan ice cream to cool down!
+
+---
+
+#### **Day 4: Markets and Final Dining Experience**
+- **Breakfast:**  
+  Hit a local café or enjoy leftovers at your accommodation.  
+- **Morning Activity:**  
+  Visit **Sustainable Food Center’s Farmers' Market** (if it's the right day) to taste and shop local produce.  
+- **Lunch:**  
+  **The Beer Garden**  
+  Casual dining with a menu that will satisfy your vegetarian cravings.  
+- **Afternoon Activity:**  
+  Relax or revisit any favorite spots.  
+- **Dinner:**  
+  **Zucchini Kill**  
+  End your trip with some comfort food at this punk rock-themed restaurant.
+
+---
+
+### Important Notes:
+- Be sure to check the opening hours of each restaurant and potentially make reservations where needed.
+- Any specific dates or further adjustments can be made based on your preferences.
+
+Let me know if you'd like any more changes or additional suggestions! Enjoy your trip to Austin!
+2025-06-23 09:38:17,069 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:38:17,076 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Vegetarian-friendly restaurants in Austin with great ambiance., generated title: "Veggie Dining in Austin"
+2025-06-23 09:38:18,935 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:38:18,940 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Vegetarian-friendly restaurants in Austin with great ambiance.None, extracted preferences: destination='Austin' date=None people=None preferences=['vegetarian-friendly restaurants', 'great ambiance']
+2025-06-23 09:38:20,843 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:38:20,849 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Vegetarian-friendly restaurants in Austin with great ambiance., generated todo list:
+description='Research vegetarian-friendly restaurants in Austin known for their great ambiance.' type='RESEARCH_SPECIFIC_ITEM'
+description='Compile and present a list of top vegetarian-friendly restaurants in Austin with great ambiance.' type='PRESENT_IDEAS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-23 09:38:24,346 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:38:24,349 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '7b871659-0431-41ba-9d80-a4d677c50a86', 'history': 'user: Vegetarian-friendly restaurants in Austin with great ambiance.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': None, 'user_input': 'Vegetarian-friendly restaurants in Austin with great ambiance.'}, ai response: Austin is a fantastic city for vegetarian-friendly dining with great ambiance! To help you find the best spots, could you please share a bit more about your travel plans? For example, when you’ll be visiting Austin, how many people are traveling with you, and any specific preferences you might have for your dining experience. If you'd prefer, I can also start by recommending some popular city attractions and scenic spots first. Just let me know how you'd like to proceed!
+2025-06-23 09:38:38,428 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:38:38,433 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: next, existing slots: {"destination":null,"date":null,"people":null,"preferences":null}, intentions: {'intent': 'ADVANCE_STEP'}
+2025-06-23 09:38:39,633 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:38:39,637 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: next{"destination":null,"date":null,"people":null,"preferences":null}, extracted preferences: destination=None date=None people=None preferences=None
+2025-06-23 09:38:41,566 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:38:41,576 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: next, intent: {'intent': 'ADVANCE_STEP'}, new_todo_list: [TodoItem(description='Research vegetarian-friendly restaurants in Austin known for their great ambiance.', type='RESEARCH_SPECIFIC_ITEM'), TodoItem(description='Compile and present a list of top vegetarian-friendly restaurants in Austin with great ambiance.', type='PRESENT_IDEAS'), TodoItem(description='Draft a detailed itinerary.', type='DRAFT_ITINERARY'), TodoItem(description='Finalize itinerary document for user.', type='FINALIZE_DOCUMENT')], todo_step:0, final_step:1
+2025-06-23 09:38:45,080 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:38:45,082 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '7b871659-0431-41ba-9d80-a4d677c50a86', 'history': "user: Vegetarian-friendly restaurants in Austin with great ambiance.\nai: Austin is a fantastic city for vegetarian-friendly dining with great ambiance! To help you find the best spots, could you please share a bit more about your travel plans? For example, when you’ll be visiting Austin, how many people are traveling with you, and any specific preferences you might have for your dining experience. If you'd prefer, I can also start by recommending some popular city attractions and scenic spots first. Just let me know how you'd like to proceed!\nuser: next\nuser: next", 'missing_info_prompt': None, 'todo_prompt': 'Research vegetarian-friendly restaurants in Austin known for their great ambiance.\nCompile and present a list of top vegetarian-friendly restaurants in Austin with great ambiance.', 'user_input': 'next'}, ai response: Here’s a curated list of top vegetarian-friendly restaurants in Austin that are known for their great ambiance:
+
+1. **Bouldin Creek Cafe**  
+   - **Description:** A cozy favorite among locals, this cafe offers a vibrant and eclectic atmosphere. They have a vast menu featuring creative vegetarian and vegan options. The outdoor seating is lovely, especially in nice weather.
+  
+2. **True Food Kitchen**  
+   - **Description:** Known for its health-conscious approach, True Food Kitchen provides a modern and energetic vibe. The menu features plenty of vegetarian dishes made with seasonal ingredients, and the decor is fresh and inviting.
+
+3. **The Beer Plant**  
+   - **Description:** Located in a charming historic building, The Beer Plant is known for its craft brews and delicious vegetarian options. The ambiance is laid-back with a rustic touch, perfect for a relaxed meal.
+
+4. **Casa de Luz**  
+   - **Description:** This holistic restaurant emphasizes organic and vegetarian offerings. The communal dining style and peaceful environment contribute to a unique and tranquil dining experience.
+
+5. **Plum Cafe**  
+   - **Description:** An upscale café with a relaxed ambiance, Plum Cafe offers a delightful selection of vegetarian and vegan dishes. The decor is warm and welcoming, making it a great spot for a leisurely meal.
+
+6. **Veggie Heaven**  
+   - **Description:** This colorful spot provides a fun and quirky dining experience with an array of vegetarian and vegan options. The ambiance is lively, and the artwork adds to its charm.
+
+7. **Green Vegetarian Cuisine**  
+   - **Description:** Known for its extensive menu that caters to both vegetarian and vegan diets, Green Vegetarian Cuisine has a casual yet inviting atmosphere, making it great for families and groups.
+
+Feel free to check out any of these restaurants for a delightful dining experience while in Austin! If you have any other questions or need further assistance with your trip planning, just let me know!
+2025-06-23 09:39:08,659 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:39:08,664 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: load more, existing slots: {"destination":null,"date":null,"people":null,"preferences":null}, intentions: {'intent': 'MORE_RECOMMENDATIONS'}
+2025-06-23 09:39:10,516 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:39:10,520 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: load more{"destination":null,"date":null,"people":null,"preferences":null}, extracted preferences: destination=None date=None people=None preferences=None
+2025-06-23 09:39:12,208 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:39:23,291 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:39:23,293 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: load more, existing slots: {"destination":null,"date":null,"people":null,"preferences":null}, intentions: {'intent': 'MORE_RECOMMENDATIONS'}
+2025-06-23 09:39:24,503 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:39:24,508 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: load more{"destination":null,"date":null,"people":null,"preferences":null}, extracted preferences: destination='beach holiday' date=None people='a family of four' preferences=['relaxing', 'nature']
+2025-06-23 09:39:28,268 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:39:28,274 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: load more, intent: {'intent': 'MORE_RECOMMENDATIONS'}, new_todo_list: [TodoItem(description='Research vegetarian-friendly restaurants in Austin known for their great ambiance.', type='RESEARCH_SPECIFIC_ITEM'), TodoItem(description='Compile and present a list of top vegetarian-friendly restaurants in Austin with great ambiance.', type='PRESENT_IDEAS'), TodoItem(description='Draft a detailed itinerary.', type='DRAFT_ITINERARY'), TodoItem(description='Finalize itinerary document for user.', type='FINALIZE_DOCUMENT')], todo_step:0, final_step:1
+2025-06-23 09:39:39,811 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:39:39,811 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '7b871659-0431-41ba-9d80-a4d677c50a86', 'history': "user: Vegetarian-friendly restaurants in Austin with great ambiance.\nai: Austin is a fantastic city for vegetarian-friendly dining with great ambiance! To help you find the best spots, could you please share a bit more about your travel plans? For example, when you’ll be visiting Austin, how many people are traveling with you, and any specific preferences you might have for your dining experience. If you'd prefer, I can also start by recommending some popular city attractions and scenic spots first. Just let me know how you'd like to proceed!\nuser: next\nuser: next\nai: Here’s a curated list of top vegetarian-friendly restaurants in Austin that are known for their great ambiance:\n\n1. **Bouldin Creek Cafe**  \n   - **Description:** A cozy favorite among locals, this cafe offers a vibrant and eclectic atmosphere. They have a vast menu featuring creative vegetarian and vegan options. The outdoor seating is lovely, especially in nice weather.\n  \n2. **True Food Kitchen**  \n   - **Description:** Known for its health-conscious approach, True Food Kitchen provides a modern and energetic vibe. The menu features plenty of vegetarian dishes made with seasonal ingredients, and the decor is fresh and inviting.\n\n3. **The Beer Plant**  \n   - **Description:** Located in a charming historic building, The Beer Plant is known for its craft brews and delicious vegetarian options. The ambiance is laid-back with a rustic touch, perfect for a relaxed meal.\n\n4. **Casa de Luz**  \n   - **Description:** This holistic restaurant emphasizes organic and vegetarian offerings. The communal dining style and peaceful environment contribute to a unique and tranquil dining experience.\n\n5. **Plum Cafe**  \n   - **Description:** An upscale café with a relaxed ambiance, Plum Cafe offers a delightful selection of vegetarian and vegan dishes. The decor is warm and welcoming, making it a great spot for a leisurely meal.\n\n6. **Veggie Heaven**  \n   - **Description:** This colorful spot provides a fun and quirky dining experience with an array of vegetarian and vegan options. The ambiance is lively, and the artwork adds to its charm.\n\n7. **Green Vegetarian Cuisine**  \n   - **Description:** Known for its extensive menu that caters to both vegetarian and vegan diets, Green Vegetarian Cuisine has a casual yet inviting atmosphere, making it great for families and groups.\n\nFeel free to check out any of these restaurants for a delightful dining experience while in Austin! If you have any other questions or need further assistance with your trip planning, just let me know!\nuser: load more\nuser: load more\nuser: load more\nuser: load more", 'missing_info_prompt': None, 'todo_prompt': 'Research vegetarian-friendly restaurants in Austin known for their great ambiance.\nCompile and present a list of top vegetarian-friendly restaurants in Austin with great ambiance.', 'user_input': 'load more'}, ai response: Here are some additional vegetarian-friendly restaurants in Austin that are celebrated for their great ambiance:
+
+8. **Counter Culture**  
+   - **Description:** This casual eatery focuses on organic, locally sourced ingredients and offers a range of vegetarian and vegan dishes. The ambiance is bright and welcoming, making it a great spot for lunch or brunch.
+
+9. **The Beer Garden**  
+   - **Description:** With a lovely outdoor seating area, The Beer Garden offers a relaxed atmosphere and a variety of vegetarian options. It’s a great place to unwind with friends over good food and drinks.
+
+10. **Sweet Ritual**  
+    - **Description:** A unique ice cream shop that offers a variety of vegan and vegetarian ice cream flavors. The colorful decor and playful vibe make it a fun stop for dessert lovers.
+
+11. **Sustainable Food Center Farmers' Market**  
+    - **Description:** While not a restaurant, this market features various vendors offering vegetarian-friendly food options. The lively atmosphere and community spirit make it a great place to enjoy local flavors.
+
+12. **Luv Fats**  
+    - **Description:** A plant-based eatery known for its creative dishes and a cozy ambiance. The focus is on healthy fats and wholesome ingredients, making it a nutritious choice.
+
+13. **Arlo's**  
+    - **Description:** A food truck offering delicious vegan comfort food, including burgers and tacos. The casual outdoor setting is perfect for a laid-back meal.
+
+14. **Flower Child**  
+    - **Description:** This restaurant emphasizes fresh, wholesome food with a variety of vegetarian options. The bright and airy decor creates an uplifting dining experience.
+
+15. **Chloe's Diner**  
+    - **Description:** A retro-style diner that serves a variety of vegetarian comfort foods. The nostalgic ambiance and friendly service make it a charming spot for a casual meal.
+
+These restaurants should give you a variety of options to choose from while enjoying the vibrant dining scene in Austin. If you need more information about any specific restaurant or have other questions regarding your trip, feel free to ask!
+2025-06-23 09:40:13,823 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:40:13,827 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: create a 3 day trip, existing slots: {"destination":null,"date":null,"people":null,"preferences":null}, intentions: {'ADVANCE_STEP': True}
+2025-06-23 09:40:15,033 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:40:15,037 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: create a 3 day trip{"destination":null,"date":null,"people":null,"preferences":null}, extracted preferences: destination='Italy' date=None people='2 adults' preferences=['foodie', 'history']
+2025-06-23 09:40:16,824 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:40:16,836 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: create a 3 day trip, intent: {'ADVANCE_STEP': True}, new_todo_list: [TodoItem(description='Research vegetarian-friendly restaurants in Austin known for their great ambiance.', type='RESEARCH_SPECIFIC_ITEM'), TodoItem(description='Compile and present a list of top vegetarian-friendly restaurants in Austin with great ambiance.', type='PRESENT_IDEAS'), TodoItem(description='Draft a detailed itinerary.', type='DRAFT_ITINERARY'), TodoItem(description='Finalize itinerary document for user.', type='FINALIZE_DOCUMENT')], todo_step:0, final_step:1
+2025-06-23 09:40:27,782 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:40:27,782 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '7b871659-0431-41ba-9d80-a4d677c50a86', 'history': "user: next\nuser: next\nai: Here’s a curated list of top vegetarian-friendly restaurants in Austin that are known for their great ambiance:\n\n1. **Bouldin Creek Cafe**  \n   - **Description:** A cozy favorite among locals, this cafe offers a vibrant and eclectic atmosphere. They have a vast menu featuring creative vegetarian and vegan options. The outdoor seating is lovely, especially in nice weather.\n  \n2. **True Food Kitchen**  \n   - **Description:** Known for its health-conscious approach, True Food Kitchen provides a modern and energetic vibe. The menu features plenty of vegetarian dishes made with seasonal ingredients, and the decor is fresh and inviting.\n\n3. **The Beer Plant**  \n   - **Description:** Located in a charming historic building, The Beer Plant is known for its craft brews and delicious vegetarian options. The ambiance is laid-back with a rustic touch, perfect for a relaxed meal.\n\n4. **Casa de Luz**  \n   - **Description:** This holistic restaurant emphasizes organic and vegetarian offerings. The communal dining style and peaceful environment contribute to a unique and tranquil dining experience.\n\n5. **Plum Cafe**  \n   - **Description:** An upscale café with a relaxed ambiance, Plum Cafe offers a delightful selection of vegetarian and vegan dishes. The decor is warm and welcoming, making it a great spot for a leisurely meal.\n\n6. **Veggie Heaven**  \n   - **Description:** This colorful spot provides a fun and quirky dining experience with an array of vegetarian and vegan options. The ambiance is lively, and the artwork adds to its charm.\n\n7. **Green Vegetarian Cuisine**  \n   - **Description:** Known for its extensive menu that caters to both vegetarian and vegan diets, Green Vegetarian Cuisine has a casual yet inviting atmosphere, making it great for families and groups.\n\nFeel free to check out any of these restaurants for a delightful dining experience while in Austin! If you have any other questions or need further assistance with your trip planning, just let me know!\nuser: load more\nuser: load more\nuser: load more\nuser: load more\nai: Here are some additional vegetarian-friendly restaurants in Austin that are celebrated for their great ambiance:\n\n8. **Counter Culture**  \n   - **Description:** This casual eatery focuses on organic, locally sourced ingredients and offers a range of vegetarian and vegan dishes. The ambiance is bright and welcoming, making it a great spot for lunch or brunch.\n\n9. **The Beer Garden**  \n   - **Description:** With a lovely outdoor seating area, The Beer Garden offers a relaxed atmosphere and a variety of vegetarian options. It’s a great place to unwind with friends over good food and drinks.\n\n10. **Sweet Ritual**  \n    - **Description:** A unique ice cream shop that offers a variety of vegan and vegetarian ice cream flavors. The colorful decor and playful vibe make it a fun stop for dessert lovers.\n\n11. **Sustainable Food Center Farmers' Market**  \n    - **Description:** While not a restaurant, this market features various vendors offering vegetarian-friendly food options. The lively atmosphere and community spirit make it a great place to enjoy local flavors.\n\n12. **Luv Fats**  \n    - **Description:** A plant-based eatery known for its creative dishes and a cozy ambiance. The focus is on healthy fats and wholesome ingredients, making it a nutritious choice.\n\n13. **Arlo's**  \n    - **Description:** A food truck offering delicious vegan comfort food, including burgers and tacos. The casual outdoor setting is perfect for a laid-back meal.\n\n14. **Flower Child**  \n    - **Description:** This restaurant emphasizes fresh, wholesome food with a variety of vegetarian options. The bright and airy decor creates an uplifting dining experience.\n\n15. **Chloe's Diner**  \n    - **Description:** A retro-style diner that serves a variety of vegetarian comfort foods. The nostalgic ambiance and friendly service make it a charming spot for a casual meal.\n\nThese restaurants should give you a variety of options to choose from while enjoying the vibrant dining scene in Austin. If you need more information about any specific restaurant or have other questions regarding your trip, feel free to ask!\nuser: create a 3 day trip\nuser: create a 3 day trip", 'missing_info_prompt': None, 'todo_prompt': 'Research vegetarian-friendly restaurants in Austin known for their great ambiance.\nCompile and present a list of top vegetarian-friendly restaurants in Austin with great ambiance.', 'user_input': 'create a 3 day trip'}, ai response: Great! I’ve already gathered a curated list of top vegetarian-friendly restaurants in Austin with wonderful ambiance, which will be perfect dining spots for your 3-day trip. Now, let me create a balanced itinerary that incorporates these restaurants along with some popular Austin attractions and activities.
+
+Here’s a 3-day vegetarian-friendly trip plan for Austin:
+
+---
+
+### Day 1: Explore Downtown & Local Eats  
+- **Morning:** Start with a stroll along Lady Bird Lake Hike and Bike Trail for some fresh air and scenic views.  
+- **Lunch:** Head to **Bouldin Creek Cafe** for a cozy and vibrant vegetarian meal.  
+- **Afternoon:** Visit the Texas State Capitol and the nearby Bullock Texas State History Museum.  
+- **Dinner:** Dine at **True Food Kitchen** for a health-conscious, fresh seasonal meal with a modern vibe.  
+- **Evening:** Experience the lively nightlife on Sixth Street or catch some live music at a nearby venue.
+
+---
+
+### Day 2: Art, Shopping & More Great Food  
+- **Morning:** Visit the Blanton Museum of Art and explore South Congress Avenue for quirky shops and local boutiques.  
+- **Lunch:** Grab a bite at **Plum Cafe**, offering an upscale yet relaxed atmosphere.  
+- **Afternoon:** Check out the HOPE Outdoor Gallery for some street art and murals.  
+- **Dinner:** Enjoy a laid-back meal at **The Beer Plant**, known for its rustic ambiance and craft brews.  
+- **Evening:** Take a sunset bat-watching kayak tour on Lady Bird Lake (optional).
+
+---
+
+### Day 3: Markets, Relaxation & Comfort Food  
+- **Morning:** Stroll through the Sustainable Food Center Farmers' Market to experience local flavors and pick up some fresh produce or snacks.  
+- **Lunch:** Visit **Flower Child** for fresh, wholesome vegetarian dishes in a bright and airy setting.  
+- **Afternoon:** Relax at Zilker Park or visit Barton Springs Pool for some downtime.  
+- **Dinner:** End your trip with comfort food at **Chloe’s Diner**, soaking in the retro vibe.  
+- **Evening:** Treat yourself to vegan ice cream at **Sweet Ritual** for a fun and colorful dessert stop.
+
+---
+
+Would you like me to customize this further based on your interests or suggest some activities and sights beyond dining? Let me know!
+2025-06-23 09:43:05,211 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:43:05,217 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: I don't need any attractions, only resturants, existing slots: {"destination":null,"date":null,"people":null,"preferences":null}, intentions: {'intent': 'MODIFY_PLAN'}
+2025-06-23 09:43:07,210 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:43:07,216 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: I don't need any attractions, only resturants{"destination":null,"date":null,"people":null,"preferences":null}, extracted preferences: destination=None date=None people=None preferences=['restaurants']
+2025-06-23 09:43:11,366 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:43:11,404 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: I don't need any attractions, only resturants, intent: {'intent': 'MODIFY_PLAN'}, new_todo_list: [
+TodoItem(description='Research vegetarian-friendly restaurants in Austin known for their great ambiance.', type='RESEARCH_SPECIFIC_ITEM'), 
+TodoItem(description='Compile and present a list of top vegetarian-friendly restaurants in Austin with great ambiance.', type='PRESENT_IDEAS'), 
+TodoItem(description='Draft a detailed itinerary.', type='DRAFT_ITINERARY'), 
+TodoItem(description='Finalize itinerary document for user.', type='FINALIZE_DOCUMENT')], todo_step:0, final_step:3
+2025-06-23 09:43:14,541 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 09:43:14,546 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '7b871659-0431-41ba-9d80-a4d677c50a86', 'history': "user: load more\nuser: load more\nuser: load more\nuser: load more\nai: Here are some additional vegetarian-friendly restaurants in Austin that are celebrated for their great ambiance:\n\n8. **Counter Culture**  \n   - **Description:** This casual eatery focuses on organic, locally sourced ingredients and offers a range of vegetarian and vegan dishes. The ambiance is bright and welcoming, making it a great spot for lunch or brunch.\n\n9. **The Beer Garden**  \n   - **Description:** With a lovely outdoor seating area, The Beer Garden offers a relaxed atmosphere and a variety of vegetarian options. It’s a great place to unwind with friends over good food and drinks.\n\n10. **Sweet Ritual**  \n    - **Description:** A unique ice cream shop that offers a variety of vegan and vegetarian ice cream flavors. The colorful decor and playful vibe make it a fun stop for dessert lovers.\n\n11. **Sustainable Food Center Farmers' Market**  \n    - **Description:** While not a restaurant, this market features various vendors offering vegetarian-friendly food options. The lively atmosphere and community spirit make it a great place to enjoy local flavors.\n\n12. **Luv Fats**  \n    - **Description:** A plant-based eatery known for its creative dishes and a cozy ambiance. The focus is on healthy fats and wholesome ingredients, making it a nutritious choice.\n\n13. **Arlo's**  \n    - **Description:** A food truck offering delicious vegan comfort food, including burgers and tacos. The casual outdoor setting is perfect for a laid-back meal.\n\n14. **Flower Child**  \n    - **Description:** This restaurant emphasizes fresh, wholesome food with a variety of vegetarian options. The bright and airy decor creates an uplifting dining experience.\n\n15. **Chloe's Diner**  \n    - **Description:** A retro-style diner that serves a variety of vegetarian comfort foods. The nostalgic ambiance and friendly service make it a charming spot for a casual meal.\n\nThese restaurants should give you a variety of options to choose from while enjoying the vibrant dining scene in Austin. If you need more information about any specific restaurant or have other questions regarding your trip, feel free to ask!\nuser: create a 3 day trip\nuser: create a 3 day trip\nai: Great! I’ve already gathered a curated list of top vegetarian-friendly restaurants in Austin with wonderful ambiance, which will be perfect dining spots for your 3-day trip. Now, let me create a balanced itinerary that incorporates these restaurants along with some popular Austin attractions and activities.\n\nHere’s a 3-day vegetarian-friendly trip plan for Austin:\n\n---\n\n### Day 1: Explore Downtown & Local Eats  \n- **Morning:** Start with a stroll along Lady Bird Lake Hike and Bike Trail for some fresh air and scenic views.  \n- **Lunch:** Head to **Bouldin Creek Cafe** for a cozy and vibrant vegetarian meal.  \n- **Afternoon:** Visit the Texas State Capitol and the nearby Bullock Texas State History Museum.  \n- **Dinner:** Dine at **True Food Kitchen** for a health-conscious, fresh seasonal meal with a modern vibe.  \n- **Evening:** Experience the lively nightlife on Sixth Street or catch some live music at a nearby venue.\n\n---\n\n### Day 2: Art, Shopping & More Great Food  \n- **Morning:** Visit the Blanton Museum of Art and explore South Congress Avenue for quirky shops and local boutiques.  \n- **Lunch:** Grab a bite at **Plum Cafe**, offering an upscale yet relaxed atmosphere.  \n- **Afternoon:** Check out the HOPE Outdoor Gallery for some street art and murals.  \n- **Dinner:** Enjoy a laid-back meal at **The Beer Plant**, known for its rustic ambiance and craft brews.  \n- **Evening:** Take a sunset bat-watching kayak tour on Lady Bird Lake (optional).\n\n---\n\n### Day 3: Markets, Relaxation & Comfort Food  \n- **Morning:** Stroll through the Sustainable Food Center Farmers' Market to experience local flavors and pick up some fresh produce or snacks.  \n- **Lunch:** Visit **Flower Child** for fresh, wholesome vegetarian dishes in a bright and airy setting.  \n- **Afternoon:** Relax at Zilker Park or visit Barton Springs Pool for some downtime.  \n- **Dinner:** End your trip with comfort food at **Chloe’s Diner**, soaking in the retro vibe.  \n- **Evening:** Treat yourself to vegan ice cream at **Sweet Ritual** for a fun and colorful dessert stop.\n\n---\n\nWould you like me to customize this further based on your interests or suggest some activities and sights beyond dining? Let me know!\nuser: I don't need any attractions, only resturants\nuser: I don't need any attractions, only resturants", 'missing_info_prompt': None, 'todo_prompt': 'Research vegetarian-friendly restaurants in Austin known for their great ambiance.\nCompile and present a list of top vegetarian-friendly restaurants in Austin with great ambiance.\nDraft a detailed itinerary.\nFinalize itinerary document for user.', 'user_input': "I don't need any attractions, only resturants"}, ai response: Got it! Let’s focus solely on the restaurant aspect for your 3-day trip in Austin. Here’s a detailed itinerary featuring top vegetarian-friendly restaurants known for their great ambiance:
+
+---
+
+### Day 1:  
+- **Lunch:** **Bouldin Creek Cafe**  
+  - *Description:* A cozy spot with a relaxed vibe serving an extensive vegetarian menu.
+
+- **Dinner:** **True Food Kitchen**  
+  - *Description:* A health-conscious restaurant that offers a variety of fresh and seasonal vegetarian dishes in a modern and inviting setting.
+
+---
+
+### Day 2:  
+- **Lunch:** **Plum Cafe**  
+  - *Description:* Upscale yet relaxed restaurant known for its creative vegetarian dishes and lovely ambiance.
+
+- **Dinner:** **The Beer Plant**  
+  - *Description:* A rustic spot with a warm atmosphere that serves a creative vegetarian menu alongside craft beers.
+
+---
+
+### Day 3:  
+- **Lunch:** **Flower Child**  
+  - *Description:* Bright and airy setting, focusing on fresh and wholesome vegetarian dishes.
+
+- **Dinner:** **Chloe’s Diner**  
+  - *Description:* A retro-style diner perfect for enjoying comforting vegetarian meals in a nostalgic atmosphere.
+
+- **Dessert:** **Sweet Ritual**  
+  - *Description:* A fun ice cream shop offering a variety of vegan and vegetarian ice cream flavors in a playful setting.
+
+---
+
+This itinerary keeps things focused entirely on your dining experiences. If you'd like to make any adjustments or need more information about any specific place, just let me know! Otherwise, I’ll finalize this itinerary for you.
+2025-06-23 20:52:41,193 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 20:52:41,206 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated title: Kyoto Hidden Gems
+2025-06-23 20:52:45,444 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 20:52:45,456 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto.None, extracted preferences: None
+2025-06-23 20:52:48,166 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 20:52:48,178 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated todo list:
+description='Research secret gardens in Kyoto.' type='RESEARCH_ATTRACTIONS'
+description='Look for offbeat attractions in Kyoto that are not widely known.' type='RESEARCH_ATTRACTIONS'
+description='Compile unique and lesser-known locations to visit in Kyoto.' type='PRESENT_IDEAS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-23 20:52:51,323 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 20:52:51,326 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '2e7d2175-833e-4f89-84c0-d63c3ea3e9f9', 'history': 'user: Find secret gardens and offbeat attractions in Kyoto.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': None, 'user_input': 'Find secret gardens and offbeat attractions in Kyoto.'}, ai response: Kyoto is a wonderful city full of hidden gems and secret gardens! To tailor the recommendations perfectly for you, could you please share a bit more about your travel plans? For example, when do you plan to visit, how many travelers will be with you, and any particular interests or preferences you have? This will help me suggest the most offbeat and charming spots just for you. If you'd prefer, I can also start by recommending some popular secret gardens and unique attractions right away! Just let me know how you'd like to proceed.
+2025-06-23 20:54:08,165 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 20:54:08,182 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: recomment attractions , existing slots: {"destination":null,"date":null,"people":null,"preferences":null}, intentions: {'intent': 'MORE_RECOMMENDATIONS'}
+2025-06-23 20:54:11,897 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 20:54:11,901 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: recomment attractions {"destination":null,"date":null,"people":null,"preferences":null}, extracted preferences: None
+2025-06-23 20:54:14,699 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 20:54:14,711 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: recomment attractions , intent: {'intent': 'MORE_RECOMMENDATIONS'}, new_todo_list: [TodoItem(description='Research secret gardens in Kyoto.', type='RESEARCH_ATTRACTIONS'), TodoItem(description='Look for offbeat attractions in Kyoto that are not widely known.', type='RESEARCH_ATTRACTIONS'), TodoItem(description='Compile unique and lesser-known locations to visit in Kyoto.', type='PRESENT_IDEAS'), TodoItem(description='Draft a detailed itinerary.', type='DRAFT_ITINERARY'), TodoItem(description='Finalize itinerary document for user.', type='FINALIZE_DOCUMENT')], todo_step:0, final_step:2
+2025-06-23 20:54:19,353 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 20:54:19,357 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '2e7d2175-833e-4f89-84c0-d63c3ea3e9f9', 'history': "user: Find secret gardens and offbeat attractions in Kyoto.\nai: Kyoto is a wonderful city full of hidden gems and secret gardens! To tailor the recommendations perfectly for you, could you please share a bit more about your travel plans? For example, when do you plan to visit, how many travelers will be with you, and any particular interests or preferences you have? This will help me suggest the most offbeat and charming spots just for you. If you'd prefer, I can also start by recommending some popular secret gardens and unique attractions right away! Just let me know how you'd like to proceed.\nuser: recomment attractions \nuser: recomment attractions ", 'missing_info_prompt': None, 'todo_prompt': 'Research secret gardens in Kyoto.\nLook for offbeat attractions in Kyoto that are not widely known.\nCompile unique and lesser-known locations to visit in Kyoto.', 'user_input': 'recomment attractions '}, ai response: Sure! Here are some secret gardens and offbeat attractions in Kyoto that you might find enchanting:
+
+### Secret Gardens:
+1. **Shisen-do**: This tranquil villa and garden, set in the hills north of Kyoto, features beautiful landscapes and a serene atmosphere. It's often less crowded compared to other gardens.
+
+2. **Daitoku-ji Daisen-in**: A part of the Daitoku-ji temple complex, this garden is an excellent example of Zen landscapes with its carefully arranged rocks and vibrant foliage. It’s a peaceful retreat.
+
+3. **Kodaiji Temple Zen Garden**: While Kodaiji is known, its Zen garden offers a quiet space for contemplation and offers beautiful views, especially during the cherry blossom and fall foliage seasons.
+
+### Offbeat Attractions:
+1. **Kyoto’s Pontocho Alley**: While it’s somewhat known, wandering through this narrow alley lined with traditional wooden teahouses gives you a unique glimpse into Kyoto’s nightlife without the tourist crowds.
+
+2. **Honen-in Temple**: Nestled in the wooded hills, this temple is often skipped by tourists. The approach to the temple is particularly beautiful and creates a quiet atmosphere that feels like stepping back in time.
+
+3. **Higashi-yama District**: This area is filled with traditional houses and shops. Exploring the narrow, less-traveled lanes can lead to delightful surprises, including quaint tea houses and artisan shops.
+
+4. **Fushimi Sake District**: Although Fushimi Inari is famous, the surrounding sake district is less visited. You can find charming sake breweries and taste local brews in a picturesque setting.
+
+These locations are perfect for immersing yourself in Kyoto’s beauty while avoiding the hustle and bustle of the more popular spots. Let me know if you’d like more details about any of these places or help with something else regarding your trip!
+2025-06-23 20:58:25,005 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 20:58:25,009 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: recomment more , existing slots: {"destination":null,"date":null,"people":null,"preferences":null}, intentions: {'intent': 'MORE_RECOMMENDATIONS'}
+2025-06-23 20:58:26,208 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 20:58:26,213 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: recomment more {"destination":null,"date":null,"people":null,"preferences":null}, extracted preferences: destination=None date=None people=None preferences=None
+2025-06-23 20:58:28,477 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 20:58:28,489 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: recomment more , intent: {'intent': 'MORE_RECOMMENDATIONS'}, new_todo_list: [TodoItem(description='Research secret gardens in Kyoto.', type='RESEARCH_ATTRACTIONS'), TodoItem(description='Look for offbeat attractions in Kyoto that are not widely known.', type='RESEARCH_ATTRACTIONS'), TodoItem(description='Compile unique and lesser-known locations to visit in Kyoto.', type='PRESENT_IDEAS'), TodoItem(description='Draft a detailed itinerary.', type='DRAFT_ITINERARY'), TodoItem(description='Finalize itinerary document for user.', type='FINALIZE_DOCUMENT')], todo_step:0, final_step:2
+2025-06-23 20:58:32,691 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 20:58:32,695 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '2e7d2175-833e-4f89-84c0-d63c3ea3e9f9', 'history': "user: Find secret gardens and offbeat attractions in Kyoto.\nai: Kyoto is a wonderful city full of hidden gems and secret gardens! To tailor the recommendations perfectly for you, could you please share a bit more about your travel plans? For example, when do you plan to visit, how many travelers will be with you, and any particular interests or preferences you have? This will help me suggest the most offbeat and charming spots just for you. If you'd prefer, I can also start by recommending some popular secret gardens and unique attractions right away! Just let me know how you'd like to proceed.\nuser: recomment attractions \nuser: recomment attractions \nai: Sure! Here are some secret gardens and offbeat attractions in Kyoto that you might find enchanting:\n\n### Secret Gardens:\n1. **Shisen-do**: This tranquil villa and garden, set in the hills north of Kyoto, features beautiful landscapes and a serene atmosphere. It's often less crowded compared to other gardens.\n\n2. **Daitoku-ji Daisen-in**: A part of the Daitoku-ji temple complex, this garden is an excellent example of Zen landscapes with its carefully arranged rocks and vibrant foliage. It’s a peaceful retreat.\n\n3. **Kodaiji Temple Zen Garden**: While Kodaiji is known, its Zen garden offers a quiet space for contemplation and offers beautiful views, especially during the cherry blossom and fall foliage seasons.\n\n### Offbeat Attractions:\n1. **Kyoto’s Pontocho Alley**: While it’s somewhat known, wandering through this narrow alley lined with traditional wooden teahouses gives you a unique glimpse into Kyoto’s nightlife without the tourist crowds.\n\n2. **Honen-in Temple**: Nestled in the wooded hills, this temple is often skipped by tourists. The approach to the temple is particularly beautiful and creates a quiet atmosphere that feels like stepping back in time.\n\n3. **Higashi-yama District**: This area is filled with traditional houses and shops. Exploring the narrow, less-traveled lanes can lead to delightful surprises, including quaint tea houses and artisan shops.\n\n4. **Fushimi Sake District**: Although Fushimi Inari is famous, the surrounding sake district is less visited. You can find charming sake breweries and taste local brews in a picturesque setting.\n\nThese locations are perfect for immersing yourself in Kyoto’s beauty while avoiding the hustle and bustle of the more popular spots. Let me know if you’d like more details about any of these places or help with something else regarding your trip!\nuser: recomment more \nuser: recomment more ", 'missing_info_prompt': None, 'todo_prompt': 'Research secret gardens in Kyoto.\nLook for offbeat attractions in Kyoto that are not widely known.\nCompile unique and lesser-known locations to visit in Kyoto.', 'user_input': 'recomment more '}, ai response: Absolutely! Here are some additional secret gardens and offbeat attractions in Kyoto to enrich your experience:
+
+### More Secret Gardens:
+4. **Nanzen-ji Tenju-an**: This hidden gem is part of the larger Nanzen-ji temple complex and features a lovely garden with beautiful koi ponds and seasonal blooms, providing a peaceful escape.
+
+5. **Sanjusangendo Temple Garden**: While the temple is famous for its statues, the surrounding gardens are often overlooked. You can enjoy a lovely stroll amidst the greenery and calm atmosphere.
+
+6. **Enkou-ji Temple**: Located in northern Kyoto, this temple's gardens are breathtaking, especially during the fall when the maple leaves change colors. It promises an idyllic experience away from the crowds.
+
+### More Offbeat Attractions:
+5. **Tofuku-ji Temple**: Known primarily for its Zen gardens, Tofuku-ji is less visited compared to others but offers stunning scenery and intricate rock gardens that are truly meditative.
+
+6. **Kurama and Kibune**: Just a short train ride from central Kyoto, these two villages in the mountains provide wonderful walking trails, hot springs, and a chance to experience rural Kyoto life. It’s an excellent day trip from the city.
+
+7. **Kyoto National Museum**: While it may not be completely off the radar, the museum often has fewer visitors than expected, allowing for a more relaxed experience with insightful exhibits on Japanese history and culture.
+
+8. **Iwatayama Monkey Park**: Situated on the outskirts, this park allows you to hike and interact with monkeys while enjoying great views of Kyoto. It’s a fun and less conventional outing.
+
+These spots should help you find more unique experiences in Kyoto! If you need help with more specific aspects of your trip, like accommodation or transportation, feel free to ask!
+2025-06-23 21:13:49,567 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 21:13:49,577 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Best cities in Italy for history, landscapes, and food., generated title: "Historic Italian Cities"
+2025-06-23 21:13:54,483 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 21:13:54,490 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Best cities in Italy for history, landscapes, and food., generated todo list:
+description='Research the best cities in Italy known for their history, landscapes, and food.' type='RESEARCH_DESTINATIONS'
+description='Look into historical sites, natural landscapes, and culinary experiences in the selected cities.' type='RESEARCH_ATTRACTIONS'
+description='Find top-rated restaurants in each of the selected cities.' type='RESEARCH_SPECIFIC_ITEM'
+description='Compile and present options for cities and attractions to the user.' type='PRESENT_IDEAS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-23 21:13:56,437 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 21:13:56,439 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '950955bc-2b39-4cf2-b5a6-1c6bf9126ef1', 'history': 'user: Best cities in Italy for history, landscapes, and food.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': None, 'user_input': 'Best cities in Italy for history, landscapes, and food.'}, ai response: Hello! It's great to help you plan your trip to Italy. To get started on recommending the best cities based on your interests in history, landscapes, and food, could you please share a few details? Specifically, I need to know your destination, travel date, number of travelers, and any travel preferences you might have.
+
+If you prefer, you can also click the **Next button** below for some initial recommendations!
+2025-06-23 21:16:30,945 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 21:16:30,958 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: 4-day Paris trip: mix of landmarks, hidden gems, and food., generated title: "Paris Adventure"
+2025-06-23 21:16:33,105 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 21:16:40,677 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 21:16:40,690 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: 4-day Paris trip: mix of landmarks, hidden gems, and food., generated todo list:
+description='Research popular neighborhoods in Paris to explore, including Montmartre, Le Marais, and Latin Quarter.' type='RESEARCH_DESTINATIONS'
+description='Identify key landmarks to visit, such as the Eiffel Tower, Louvre Museum, and Notre-Dame Cathedral.' type='RESEARCH_ATTRACTIONS'
+description='Look for hidden gems in Paris, such as unique art galleries, lesser-known parks, and quaint streets.' type='RESEARCH_ATTRACTIONS'
+description='Compile a list of recommended restaurants, including local bistros and cafes known for their cuisine.' type='RESEARCH_SPECIFIC_ITEM'
+description='Present options for a mix of popular attractions and hidden gems to the user.' type='PRESENT_IDEAS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-23 21:16:45,935 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 21:16:45,938 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '564730a0-0a8f-426a-b7e0-8e41acacacbc', 'history': 'user: 4-day Paris trip: mix of landmarks, hidden gems, and food.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': None, 'user_input': '4-day Paris trip: mix of landmarks, hidden gems, and food.'}, ai response: Hello! I'm excited to help you plan your 4-day trip to Paris, focusing on a mix of landmarks, hidden gems, and delicious food. To tailor the itinerary to your preferences, could you please provide a bit more information? Specifically, I need to know:
+
+1. Your travel dates
+2. The number of travelers
+3. Any specific travel preferences or interests you have (e.g., types of food, activities you enjoy)
+
+Once I have this information, I can create a fantastic itinerary for you! If you prefer, you can also click the **Next button** below to explore some recommendations first.
+2025-06-23 22:43:07,495 - [INFO] - httpx - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 22:43:07,500 - [INFO] - TravelAI - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated title: "Hidden Kyoto Gems"
+2025-06-23 22:43:09,007 - [INFO] - httpx - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 22:43:11,276 - [INFO] - httpx - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 22:43:11,291 - [INFO] - TravelAI - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated todo list:
+description='Research secret gardens in Kyoto, including lesser-known spots and their histories.' type='RESEARCH_ATTRACTIONS'
+description='Look for offbeat attractions in Kyoto, such as quirky museums or unique cultural experiences.' type='RESEARCH_ATTRACTIONS'
+description='Compile a list of user-friendly resources or guides that feature hidden gems in Kyoto.' type='RESEARCH_DESTINATIONS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-23 22:43:13,155 - [INFO] - httpx - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 22:43:13,158 - [INFO] - TravelAI - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': 'ae7c5cc0-9a6c-42e6-8bad-3b3f7fa82855', 'history': 'user: Find secret gardens and offbeat attractions in Kyoto.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': None, 'user_input': 'Find secret gardens and offbeat attractions in Kyoto.'}, ai response: Hello! It's great to help you plan your trip to Kyoto. To provide you with the best suggestions for secret gardens and offbeat attractions, could you share a bit more information? Specifically, I'd love to know your travel dates, how many travelers will be joining you, and any particular preferences you have for the trip. 
+
+Feel free to share that information, or if you'd prefer, I can also recommend some general cities and scenic spots for you first! Just let me know how you'd like to proceed.
+2025-06-23 22:52:57,020 - [INFO] - httpx - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 22:52:57,034 - [INFO] - TravelAI - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - prompt: Best cities in Italy for history, landscapes, and food., generated title: "Historic Italian Cities"
+2025-06-23 22:52:58,537 - [INFO] - httpx - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 22:52:58,544 - [INFO] - TravelAI - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - prompt: Best cities in Italy for history, landscapes, and food.None, extracted preferences: {'destination': ['Italy'], 'date': None, 'people': None, 'preferences': ['history', 'landscapes', 'food']}
+2025-06-23 22:53:04,026 - [INFO] - httpx - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 22:53:04,035 - [INFO] - TravelAI - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - prompt: Best cities in Italy for history, landscapes, and food., generated todo list:
+description='Research the best cities in Italy known for their historical significance, beautiful landscapes, and renowned cuisine.' type='RESEARCH_DESTINATIONS'
+description='Identify key historical sites, natural landscapes, and food experiences in the selected cities.' type='RESEARCH_ATTRACTIONS'
+description='Look into popular restaurants and local cuisine specialties in the chosen cities.' type='RESEARCH_SPECIFIC_ITEM'
+description='Compile a list of potential cities with highlights on history, landscapes, and food.' type='PRESENT_IDEAS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-23 22:53:09,614 - [INFO] - httpx - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 22:53:09,617 - [INFO] - TravelAI - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '1dd72cdf-afba-4648-a68a-eb524155b901', 'history': 'user: Best cities in Italy for history, landscapes, and food.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly in the conversation **at any time**!\n", 'todo_prompt': None, 'user_input': 'Best cities in Italy for history, landscapes, and food.'}, ai response: Hello! It's a pleasure to help you plan your trip to Italy. To provide you with the best recommendations for cities that offer rich history, stunning landscapes, and delicious food, I would love to know a bit more about your travel plans. Could you please share the following details?
+
+- Your destination(s) in Italy
+- Travel dates
+- Number of travelers
+- Any specific travel preferences you might have
+
+Alternatively, if you'd like, you can click the **Next button** below, and I can recommend some cities and scenic spots for you right away. You can also click **Your Preference** at the top right of the page to fill in the form or just tell me directly in the conversation!
+2025-06-23 22:54:24,945 - [INFO] - httpx - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 22:54:24,947 - [INFO] - TravelAI - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - prompt: next, existing slots: {"destination":["Italy"],"date":null,"people":null,"preferences":["history","landscapes","food"]}, intentions: {'intent': 'ADVANCE_STEP'}
+2025-06-23 22:54:26,147 - [INFO] - httpx - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 22:54:28,630 - [INFO] - httpx - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 22:54:28,650 - [INFO] - TravelAI - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - prompt: next, intent: {'intent': 'ADVANCE_STEP'}, new_todo_list: [
+TodoItem(description='Research the best cities in Italy known for their historical significance, beautiful landscapes, and renowned cuisine.', type='RESEARCH_DESTINATIONS'), 
+TodoItem(description='Identify key historical sites, natural landscapes, and food experiences in the selected cities.', type='RESEARCH_ATTRACTIONS'), 
+TodoItem(description='Look into popular restaurants and local cuisine specialties in the chosen cities.', type='RESEARCH_SPECIFIC_ITEM'), 
+TodoItem(description='Compile a list of potential cities with highlights on history, landscapes, and food.', type='PRESENT_IDEAS'), 
+TodoItem(description='Draft a detailed itinerary.', type='DRAFT_ITINERARY'), 
+TodoItem(description='Finalize itinerary document for user.', type='FINALIZE_DOCUMENT')], todo_step:1, final_step:4
+2025-06-23 22:54:44,631 - [INFO] - httpx - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 22:54:44,639 - [INFO] - TravelAI - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '1dd72cdf-afba-4648-a68a-eb524155b901', 'history': "user: Best cities in Italy for history, landscapes, and food.\nai: Hello! It's a pleasure to help you plan your trip to Italy. To provide you with the best recommendations for cities that offer rich history, stunning landscapes, and delicious food, I would love to know a bit more about your travel plans. Could you please share the following details?\n\n- Your destination(s) in Italy\n- Travel dates\n- Number of travelers\n- Any specific travel preferences you might have\n\nAlternatively, if you'd like, you can click the **Next button** below, and I can recommend some cities and scenic spots for you right away. You can also click **Your Preference** at the top right of the page to fill in the form or just tell me directly in the conversation!\nuser: next\nuser: next", 'missing_info_prompt': None, 'todo_prompt': 'Research the best cities in Italy known for their historical significance, beautiful landscapes, and renowned cuisine.\nIdentify key historical sites, natural landscapes, and food experiences in the selected cities.\nLook into popular restaurants and local cuisine specialties in the chosen cities.\nCompile a list of potential cities with highlights on history, landscapes, and food.\nDraft a detailed itinerary.', 'user_input': 'next'}, ai response: Great! Let’s dive into some of the best cities in Italy that are renowned for their rich history, stunning landscapes, and delicious cuisine. Here’s a list of potential cities along with highlights on what you can expect in each:
+
+### 1. **Rome**
+   - **Historical Significance:** The Colosseum, Roman Forum, and Vatican City (St. Peter's Basilica and the Sistine Chapel) are must-visit sites.
+   - **Landscapes:** Explore the beautiful parks like Villa Borghese and the scenic views from the Pincio Hill.
+   - **Food Experiences:** Try authentic Roman dishes such as Carbonara, Cacio e Pepe, and Roman-style pizza. Popular restaurants include Da Enzo al 29 and Trattoria Da Teo.
+
+### 2. **Florence**
+   - **Historical Significance:** Home to the Uffizi Gallery, Florence Cathedral (Duomo), and Ponte Vecchio, showcasing Renaissance art and architecture.
+   - **Landscapes:** The Tuscan hills surrounding Florence offer breathtaking views and vineyards.
+   - **Food Experiences:** Enjoy Florentine steak, ribollita, and gelato. Recommended eateries include Trattoria Mario and Osteria Vini e Vecchi Sapori.
+
+### 3. **Venice**
+   - **Historical Significance:** The Doge's Palace, St. Mark's Basilica, and the Grand Canal are iconic landmarks.
+   - **Landscapes:** The unique canals and bridges, along with the picturesque islands of Murano and Burano, provide stunning views.
+   - **Food Experiences:** Savor cicchetti (Venetian tapas), risotto al nero di seppia (squid ink risotto), and fresh seafood. Notable places to eat include Osteria alle Testiere and Antiche Carampane.
+
+### 4. **Naples**
+   - **Historical Significance:** Explore the historic center, a UNESCO World Heritage site, and visit the nearby ruins of Pompeii and Herculaneum.
+   - **Landscapes:** The stunning views of Mount Vesuvius and the Amalfi Coast.
+   - **Food Experiences:** Known as the birthplace of pizza, try authentic Neapolitan pizza at places like Sorbillo and Da Michele. Don’t miss the sfogliatella pastry!
+
+### 5. **Bologna**
+   - **Historical Significance:** Home to the oldest university in the world and beautiful medieval architecture, including the Two Towers (Due Torri).
+   - **Landscapes:** The surrounding hills and the famous porticoes create a unique atmosphere.
+   - **Food Experiences:** Renowned for its rich culinary tradition, enjoy tagliatelle al ragù (Bolognese sauce) and tortellini. Recommended spots include Trattoria da Gianni and Osteria dell'Orsa.
+
+### 6. **Siena**
+   - **Historical Significance:** The Piazza del Campo and the Siena Cathedral are highlights of this medieval city.
+   - **Landscapes:** The rolling hills of Tuscany surrounding the city offer picturesque views.
+   - **Food Experiences:** Try pici pasta and panforte (a traditional cake). For dining, check out Osteria Le Logge and La Taverna di San Giuseppe.
+
+### Draft Itinerary Suggestion
+- **Day 1-3:** Rome – Explore historical sites and enjoy local cuisine.
+- **Day 4-5:** Florence – Visit art galleries and indulge in Tuscan dishes.
+- **Day 6-7:** Venice – Discover the canals and savor seafood.
+- **Day 8-9:** Naples – Experience history and pizza.
+- **Day 10-11:** Bologna – Enjoy the culinary scene and visit historical landmarks.
+- **Day 12:** Siena – Relax in the beautiful landscapes and enjoy local food.
+
+This itinerary provides a blend of history, landscapes, and culinary delights across some of Italy's most iconic cities. If you have any specific interests or preferences, feel free to let me know, and I can refine the recommendations further!
+2025-06-23 23:02:48,807 - [INFO] - httpx - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 23:02:48,819 - [INFO] - TravelAI - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - prompt: 4-day Paris trip: mix of landmarks, hidden gems, and food., generated title: "4-Day Paris Getaway"
+2025-06-23 23:02:51,145 - [INFO] - httpx - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 23:02:51,151 - [INFO] - TravelAI - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - prompt: 4-day Paris trip: mix of landmarks, hidden gems, and food.None, extracted preferences: {'destination': ['Paris'], 'date': None, 'people': None, 'preferences': ['landmarks', 'hidden gems', 'foodie']}
+2025-06-23 23:02:53,860 - [INFO] - httpx - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 23:02:53,877 - [INFO] - TravelAI - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - prompt: 4-day Paris trip: mix of landmarks, hidden gems, and food., generated todo list:
+description='Research popular landmarks to include in the Paris trip itinerary.' type='RESEARCH_ATTRACTIONS'
+description='Look into hidden gems and less-known spots in Paris for a unique experience.' type='RESEARCH_ATTRACTIONS'
+description='Find recommendations for local restaurants and food experiences in Paris.' type='RESEARCH_SPECIFIC_ITEM'
+description='Compile a list of top food markets and street food vendors to consider visiting.' type='RESEARCH_ATTRACTIONS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-23 23:02:56,282 - [INFO] - httpx - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 23:02:56,288 - [INFO] - TravelAI - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '28482355-6afc-440c-85da-fb158f06dc60', 'history': 'user: 4-day Paris trip: mix of landmarks, hidden gems, and food.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly in the conversation **at any time**!\n", 'todo_prompt': None, 'user_input': '4-day Paris trip: mix of landmarks, hidden gems, and food.'}, ai response: Hello! I'm excited to help you plan your 4-day trip to Paris, focusing on a mix of landmarks, hidden gems, and delicious food. To assist you better, could you please provide some basic information? Here’s what I need to know:
+
+- Your travel destination (which you’ve already indicated is Paris)
+- Travel dates
+- Number of travelers
+- Any specific preferences you have for your trip (like accommodation style, activities, etc.)
+
+Alternatively, you can also click the **Next button** below for city and scenic spot recommendations or access **Your Preference** at the top right of the page to fill out the form. Feel free to share the details here whenever you're ready!
+2025-06-23 23:03:45,564 - [INFO] - httpx - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 23:03:45,568 - [INFO] - TravelAI - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - prompt: next, existing slots: {"destination":["Paris"],"date":null,"people":null,"preferences":["landmarks","hidden gems","foodie"]}, intentions: {'intent': 'ADVANCE_STEP'}
+2025-06-23 23:03:47,755 - [INFO] - httpx - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 23:03:47,759 - [INFO] - TravelAI - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - prompt: next{"destination":["Paris"],"date":null,"people":null,"preferences":["landmarks","hidden gems","foodie"]}, extracted preferences: {'destination': None, 'date': None, 'people': None, 'preferences': None}
+2025-06-23 23:03:53,464 - [INFO] - httpx - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 23:03:53,480 - [INFO] - TravelAI - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - prompt: next, intent: {'intent': 'ADVANCE_STEP'}, new_todo_list: [
+TodoItem(description='Research popular landmarks to include in the Paris trip itinerary.', type='RESEARCH_ATTRACTIONS'),
+TodoItem(description='Look into hidden gems and less-known spots in Paris for a unique experience.', type='RESEARCH_ATTRACTIONS'), 
+TodoItem(description='Find recommendations for local restaurants and food experiences in Paris.', type='RESEARCH_SPECIFIC_ITEM'), 
+TodoItem(description='Compile a list of top food markets and street food vendors to consider visiting.', type='RESEARCH_ATTRACTIONS'), 
+TodoItem(description='Draft a detailed itinerary.', type='DRAFT_ITINERARY'), 
+TodoItem(description='Finalize itinerary document for user.', type='FINALIZE_DOCUMENT')], todo_step:0, final_step:5
+2025-06-23 23:04:00,576 - [INFO] - httpx - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 23:04:00,581 - [INFO] - TravelAI - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '28482355-6afc-440c-85da-fb158f06dc60', 'history': "user: 4-day Paris trip: mix of landmarks, hidden gems, and food.\nai: Hello! I'm excited to help you plan your 4-day trip to Paris, focusing on a mix of landmarks, hidden gems, and delicious food. To assist you better, could you please provide some basic information? Here’s what I need to know:\n\n- Your travel destination (which you’ve already indicated is Paris)\n- Travel dates\n- Number of travelers\n- Any specific preferences you have for your trip (like accommodation style, activities, etc.)\n\nAlternatively, you can also click the **Next button** below for city and scenic spot recommendations or access **Your Preference** at the top right of the page to fill out the form. Feel free to share the details here whenever you're ready!\nuser: next\nuser: next", 'missing_info_prompt': None, 'todo_prompt': 'Research popular landmarks to include in the Paris trip itinerary.\nLook into hidden gems and less-known spots in Paris for a unique experience.\nFind recommendations for local restaurants and food experiences in Paris.\nCompile a list of top food markets and street food vendors to consider visiting.\nDraft a detailed itinerary.\nFinalize itinerary document for user.', 'user_input': 'next'}, ai response: Great! Let’s dive into planning your unforgettable trip to Paris. Here’s what I’ve found for your itinerary:
+
+### Popular Landmarks
+1. **Eiffel Tower** - No trip to Paris is complete without visiting this iconic landmark. Consider booking tickets for a guided tour to skip the line.
+2. **Louvre Museum** - Home to thousands of artworks, including the Mona Lisa. Don’t forget to explore the surrounding Tuileries Garden.
+3. **Notre-Dame Cathedral** - Although currently under restoration, the façade is still stunning to admire.
+4. **Montmartre and the Basilica of Sacré-Cœur** - Wander the charming streets and enjoy stunning views of the city from the basilica.
+5. **Champs-Élysées and Arc de Triomphe** - Stroll down this famous avenue and climb the Arc de Triomphe for beautiful city views.
+
+### Hidden Gems
+1. **Le Marais** - This historic district is full of trendy shops, art galleries, and cobblestone streets.
+2. **The Albert Kahn Museum** - A lesser-known museum featuring beautiful gardens and photographic collections.
+3. **Rue Cremieux** - A picturesque, colorful street perfect for a quiet stroll and great photo opportunities.
+4. **Square des Peupliers** - A charming park that feels like a hidden oasis in the city.
+5. **Sèvre-Nantes Canal** - A serene walking path with scenic canals, perfect for a peaceful afternoon.
+
+### Local Restaurants & Food Experiences
+1. **L’As du Fallafel** - Famous for its delicious falafels in the heart of the Marais.
+2. **Le Comptoir de la Gastronomie** - A bistro known for amazing traditional French dishes.
+3. **Chez Janou** - A lovely Provencal restaurant with a charming courtyard.
+4. **L’Atelier de Joël Robuchon** - For a fine dining experience, indulge in a meal prepared by one of the world’s renowned chefs.
+
+### Food Markets and Street Food Vendors
+1. **Marché des Enfants Rouges** - The oldest covered market in Paris filled with vibrant food stalls.
+2. **Rue Cler Market** - A beautiful street market offering an array of fresh produce and local products.
+3. **Les Halles** - A large shopping center with a fantastic food court.
+4. **Street vendors near the Eiffel Tower** - Grab crepes, baguette sandwiches, or freshly made pastries while enjoying the view.
+
+### Sample Itinerary
+**Day 1:**
+- Morning: Eiffel Tower visit
+- Afternoon: Explore Tuileries Garden and Louvre Museum
+- Evening: Dinner at L’As du Fallafel in Le Marais
+
+**Day 2:**
+- Morning: Visit Montmartre and Sacré-Cœur
+- Afternoon: Discover Le Marais
+- Evening: Dinner at Chez Janou
+
+**Day 3:**
+- Morning: Notre-Dame Cathedral (exterior) and nearby Île de la Cité
+- Afternoon: Discover hidden gems like Rue Cremieux
+- Evening: Dinner at Le Comptoir de la Gastronomie
+
+**Day 4:**
+- Morning: Explore food markets
+- Afternoon: Stroll along Sèvre-Nantes Canal
+- Evening: Fine dining at L’Atelier de Joël Robuchon
+
+I'll finalize this itinerary for you and create a document for your travel. If you have any tweaks or additions in mind, feel free to let me know!
+2025-06-23 23:06:04,066 - [INFO] - httpx - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 23:06:04,075 - [INFO] - TravelAI - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - prompt: Vegetarian-friendly restaurants in Austin with great ambiance., generated title: "Austin Veg Eats"
+2025-06-23 23:06:07,469 - [INFO] - httpx - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 23:06:07,474 - [INFO] - TravelAI - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - prompt: Vegetarian-friendly restaurants in Austin with great ambiance.None, extracted preferences: {'destination': 'Austin', 'date': None, 'people': None, 'preferences': ['vegetarian-friendly', 'great ambiance']}
+2025-06-23 23:06:10,745 - [INFO] - httpx - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 23:06:10,749 - [INFO] - TravelAI - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - prompt: Vegetarian-friendly restaurants in Austin with great ambiance., generated todo list:
+description='Research vegetarian-friendly restaurants in Austin.' type='RESEARCH_SPECIFIC_ITEM'
+description='Research restaurants in Austin known for having great ambiance.' type='RESEARCH_SPECIFIC_ITEM'
+description='Compile and present a list of vegetarian-friendly restaurants in Austin with great ambiance.' type='PRESENT_IDEAS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-23 23:06:14,016 - [INFO] - httpx - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 23:06:14,019 - [INFO] - TravelAI - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': 'd76b78e7-ece6-45f8-9cba-c39a54565bda', 'history': 'user: Vegetarian-friendly restaurants in Austin with great ambiance.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly in the conversation **at any time**!\n", 'todo_prompt': None, 'user_input': 'Vegetarian-friendly restaurants in Austin with great ambiance.'}, ai response: Hello! I'm happy to help you find vegetarian-friendly restaurants in Austin with great ambiance. To make sure I tailor the recommendations perfectly to your needs, could you please share a bit more about your plans? Specifically, the travel date, number of travelers, and any other travel preferences you have. 
+
+If you'd prefer, you can also click the Next button to explore some city and scenic spot recommendations first, or fill in your preferences using the Your Preference button at the top right of the page anytime. Or just let me know directly here whenever you're ready!
+2025-06-23 23:07:26,910 - [INFO] - httpx - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 23:07:26,913 - [INFO] - TravelAI - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - prompt: generate trip, existing slots: {"destination":null,"date":null,"people":null,"preferences":null}, intentions: {'intent': 'ITINERARY_GENERATION'}
+2025-06-23 23:07:28,178 - [INFO] - httpx - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 23:07:29,858 - [INFO] - httpx - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 23:07:29,861 - [INFO] - TravelAI - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - prompt: generate trip, intent: {'intent': 'ITINERARY_GENERATION'}, new_todo_list: [
+TodoItem(description='Draft a detailed itinerary.', type='DRAFT_ITINERARY'), 
+TodoItem(description='Finalize itinerary document for user.', type='FINALIZE_DOCUMENT')], todo_step:0, final_step:0
+2025-06-23 23:07:32,991 - [INFO] - httpx - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-23 23:07:32,994 - [INFO] - TravelAI - 35b2ca83da2900e2e3c002c825f3b7b1d1451508 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': 'd76b78e7-ece6-45f8-9cba-c39a54565bda', 'history': "user: Vegetarian-friendly restaurants in Austin with great ambiance.\nai: Hello! I'm happy to help you find vegetarian-friendly restaurants in Austin with great ambiance. To make sure I tailor the recommendations perfectly to your needs, could you please share a bit more about your plans? Specifically, the travel date, number of travelers, and any other travel preferences you have. \n\nIf you'd prefer, you can also click the Next button to explore some city and scenic spot recommendations first, or fill in your preferences using the Your Preference button at the top right of the page anytime. Or just let me know directly here whenever you're ready!\nuser: generate trip\nuser: generate trip", 'missing_info_prompt': None, 'todo_prompt': 'Research vegetarian-friendly restaurants in Austin.', 'user_input': 'generate trip'}, ai response: Great! Let's start by exploring some wonderful vegetarian-friendly restaurants in Austin that also have a great ambiance. Here are a few recommendations for you:
+
+1. **Bouldin Creek Cafe** - A local favorite known for its eclectic decor and laid-back vibe, Bouldin Creek offers a fantastic variety of vegetarian and vegan dishes, along with amazing coffee.
+
+2. **Flower Child** - This restaurant emphasizes fresh, healthy ingredients and has a bright, cheerful atmosphere. It offers various vegetarian options, including salads, bowls, and delicious sides.
+
+3. **The Beer Plant** - Known for its craft beer selection, The Beer Plant also serves an impressive vegetarian menu that features innovative dishes and a cozy, rustic ambiance.
+
+4. **Casa de Luz** - A unique space that combines healthy vegetarian meals with a holistic atmosphere. Enjoy communal dining and a calming environment at Casa de Luz.
+
+5. **Sweet Ritual** - If you’re looking for dessert, this vegan ice cream shop has a fun, vibrant ambiance and a wide range of options for sweet treats.
+
+Would you like more details about any of these restaurants, or would you like assistance with another aspect of your trip? Let me know how you'd like to proceed!

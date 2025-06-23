@@ -41,8 +41,8 @@ class ShortTermProfile(BaseModel):
 
 # Infomation not mandatory
 class SlotData(BaseModel):
-  destination: Optional[str] = None
-  date: Optional[str] = None
+  destination: Optional[List[str]] = None
+  date: Optional[List[str]] = None
   people: Optional[str] = None
   preferences: Optional[List[str]] = None
 

@@ -50,14 +50,15 @@ async def get_session(session_id: str = Path(...), data: ChatRequest = Body()):
 async def chat_with_ai(session_id: str = Path(...), data: ChatRequest = Body(...)):
   user_id = data.user_id
   session_state = await redis_service.load_session_state(user_id, session_id)
+  print(f"1",session_state.todo)
   if not session_state:
     raise HTTPException(status_code=404, detail="Session not found or expired. Please start a new session.")
 
   user_input = data.user_input
   # update session history with user prompts
-  await redis_service.append_history(user_id, session_id, user_input, "user")
+  await redis_service.append_history(session_state, user_input, "user")
 
-  final_step = -1
+  todo_prompt = None # One or several steps ai should go through
   # first prompt
   is_first_user_input = 1
   if not session_state.todo:
@@ -75,16 +76,22 @@ async def chat_with_ai(session_id: str = Path(...), data: ChatRequest = Body(...
     await redis_service.save_session_state(session_state)
 
     # If in first prompt, user mentioned all preferences, ai try to recommend
+    final_step = -1
     if check_slots_complete(session_state.slots):
       for step in session_state.todo:
         final_step += 1
         if step.type == "PRESENT_IDEAS":
           break
+      descriptions = [
+        session_state.todo[i].description
+        for i in range(0, final_step + 1)
+      ]
+      todo_prompt = "\n".join(descriptions)
   # not first prompt, should adjust todo list
   else:
-    final_step = await chat_service.orchestrate_planning_step(user_id, session_id, user_input)
+    todo_prompt, session_state = await chat_service.orchestrate_planning_step(session_state, user_input)
     is_first_user_input = 0
-
+  print(f"2",session_state.todo)
   # When first prompt arrives or before create a trip, remind of completing slots
   missing_info_prompt = None
   if not check_slots_complete(session_state.slots):
@@ -99,21 +106,11 @@ async def chat_with_ai(session_id: str = Path(...), data: ChatRequest = Body(...
       )
     session_state.reminded = True
     await redis_service.save_session_state(session_state)
-
-  # One or several steps ai should go through
-  
-  current_step = session_state.todo_step
-  descriptions = [
-    session_state.todo[i].description
-    for i in range(current_step, final_step + 1)
-  ]
-  todo_prompt = "\n".join(descriptions) if final_step != -1 else None
-  
   # Ai response, update session history
   ai_response_text = await chat_service.get_ai_response(
     session_state, user_input, missing_info_prompt, todo_prompt
   )
-  await redis_service.append_history(user_id, session_id, ai_response_text, "ai")
+  await redis_service.append_history(session_state, ai_response_text, "ai")
 
   response = {
     "role": "ai",

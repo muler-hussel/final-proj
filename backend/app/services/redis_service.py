@@ -72,7 +72,7 @@ class RedisService:
     session_state = await self.load_session_state(user_id, session_id)
     if session_state:
       # new_slots.model_dump(exclude_unset=True) only update data provided
-      session_state.slots = session_state.slots.model_copy(update=new_slots.model_dump(exclude_unset=True))
+      session_state.slots = new_slots
       await self.save_session_state(session_state)
       return session_state
     return None
@@ -87,11 +87,10 @@ class RedisService:
     return None
 
   # Deal with conversation history, use redis list
-  async def append_history(self, user_id: str, session_id: str, message: str, role: str) -> Optional[SessionState]:
+  async def append_history(self, session_state: SessionState, message: str, role: str) -> Optional[SessionState]:
     if not self._redis_client:
       return False
     
-    session_state = await self.load_session_state(user_id, session_id)
     if not session_state:
       return False
     
@@ -103,7 +102,7 @@ class RedisService:
       self._redis_client.rpush(session_state.history_key, json.dumps(history))
       return True
     except Exception as e:
-      print(f"Error appending history for {user_id}/{session_id}: {e}")
+      print(f"Error appending history for {session_state.user_id}/{session_state.session_id}: {e}")
       return False
 
   async def get_history(self, user_id: str, session_id: str) -> List[str]:

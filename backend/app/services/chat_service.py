@@ -82,7 +82,7 @@ class ChatService:
   async def generate_session_title(self, prompt: str) -> str:
     try:
       generated_title = await self.title_generation_chain.ainvoke({"prompt": prompt})
-      logger.info(f"prompt: {prompt}, generated title: {generated_title}")
+      # logger.info(f"prompt: {prompt}, generated title: {generated_title}")
       return generated_title.strip('"').strip()
     except Exception as e:
       print(f"Error generating session title: {e}")
@@ -95,7 +95,7 @@ class ChatService:
         "history": conversation_history,
         "cur_slot": cur_slot
       })
-      logger.info(f"prompt: {conversation_history}{cur_slot}, extracted preferences: {extractor_output}")
+      # logger.info(f"prompt: {conversation_history}{cur_slot}, extracted preferences: {extractor_output}")
       # None cannot be model_dump
       if extractor_output is None:
         return SlotData()
@@ -119,15 +119,15 @@ class ChatService:
       todo_list = []
     
     todo_list_str = "\n".join(str(item) for item in todo_list)
-    logger.info(f"prompt: {user_input}, generated todo list:\n{todo_list_str}")
+    # logger.info(f"prompt: {user_input}, generated todo list:\n{todo_list_str}")
     return todo_list
   
   # Processing prompt
-  async def orchestrate_planning_step(self, user_id: str, session_id: str, user_input: str) -> int:
-    session_state = await redis_service.load_session_state(user_id, session_id)
-
+  async def orchestrate_planning_step(self, session_state: SessionState, user_input: str) -> int:
+    user_id = session_state.user_id
+    session_id = session_state.session_id
     # Append input into conversation history
-    await redis_service.append_history(user_id, session_id, user_input, "user")
+    await redis_service.append_history(session_state, user_input, "user")
 
     cur_slot = session_state.slots.model_dump_json()
     # Intention recognition
@@ -135,11 +135,13 @@ class ChatService:
       "user_input": user_input,
       "existing_slots_json": cur_slot
     })
-    logger.info(f"prompt: {user_input}, existing slots: {cur_slot}, intentions: {classified_intent}")
+    # logger.info(f"prompt: {user_input}, existing slots: {cur_slot}, intentions: {classified_intent}")
+    print(classified_intent)
 
     # Try to update slots
     new_slots_data: SlotData = await self.extract_slots(user_input, cur_slot)
-    await redis_service.update_slots(user_id, session_id, new_slots_data)
+    session_state = await redis_service.update_slots(user_id, session_id, new_slots_data)
+
 
     # Ajust todo list according to intention
     adjustment_output = await self.todo_adjustment_chain.ainvoke({
@@ -152,12 +154,17 @@ class ChatService:
       "intent": classified_intent,
     })
     session_state.todo = [TodoItem(**item) for item in adjustment_output["new_todo_list"]]
-    session_state.todo_step = adjustment_output["new_current_step_index"]
+    cur_step = adjustment_output["new_current_step_index"]
     final_step = adjustment_output["final_step_index"]
-    logger.info(f"prompt: {user_input}, intent: {classified_intent}, new_todo_list: {session_state.todo}, todo_step:{session_state.todo_step}, final_step:{final_step}")
+    # logger.info(f"prompt: {user_input}, intent: {classified_intent}, new_todo_list: {session_state.todo}, todo_step:{session_state.todo_step}, final_step:{final_step}")
+    descriptions = [
+        session_state.todo[i].description
+        for i in range(cur_step, final_step + 1)
+      ]
+    todo_prompt = "\n".join(descriptions)
+    session_state.todo_step = final_step + 1
     await redis_service.save_session_state(session_state)
-
-    return final_step
+    return todo_prompt, session_state
 
   # Executing one or several steps
   async def get_ai_response(self, session_state: SessionState, user_input: str, missing_info_prompt: Optional[str] = None, todo_prompt: Optional[str] = None) -> str:   
@@ -176,7 +183,7 @@ class ChatService:
     }
 
     response = await self.primary_assistant_chain.ainvoke(prompt_data)
-    logger.info(f"prompt: {prompt_data}, ai response: {response}")
+    # logger.info(f"prompt: {prompt_data}, ai response: {response}")
     return response
 
 chat_service = ChatService()

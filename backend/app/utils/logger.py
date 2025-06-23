@@ -26,7 +26,7 @@ class CommitFilter(logging.Filter):
 
 log_file_handler = TimedRotatingFileHandler(
   filename=f"{LOG_DIR}/app.log",
-  when="D",
+  when="midnight",
   interval=1, # Every day
   encoding="utf-8"
 )

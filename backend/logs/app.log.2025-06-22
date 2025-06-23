@@ -1,0 +1,380 @@
+2025-06-22 21:10:41,641 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 21:10:41,654 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated title: "Hidden Kyoto Gems"
+2025-06-22 21:12:59,517 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 21:12:59,529 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated title: "Hidden Kyoto Gems"
+2025-06-22 21:14:05,610 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 21:14:05,624 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated title: "Hidden Kyoto Gems"
+2025-06-22 21:14:34,958 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 21:14:34,962 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated title: Kyoto Hidden Gems
+2025-06-22 21:16:59,551 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 21:16:59,566 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated title: "Hidden Gems in Kyoto"
+2025-06-22 21:18:50,120 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 21:18:50,128 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated title: "Hidden Kyoto Gems"
+2025-06-22 21:25:30,946 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 21:25:30,959 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Best cities in Italy for history, landscapes, and food., generated title: Italy History & Food Tour
+2025-06-22 21:28:27,169 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 21:28:27,183 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Best cities in Italy for history, landscapes, and food., generated title: "Historic Italian Cities"
+2025-06-22 21:28:32,491 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 21:28:32,505 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Best cities in Italy for history, landscapes, and food., generated todo list: ```json
+[
+    {
+        "type": "RESEARCH_DESTINATIONS",
+        "description": "Research the best cities in Italy that are known for their historical significance, beautiful landscapes, and culinary delights."
+    },
+    {
+        "type": "PRESENT_IDEAS",
+        "description": "Compile a list of recommended cities based on the research, focusing on history, landscapes, and food."
+    },
+    {
+        "type": "RESEARCH_ATTRACTIONS",
+        "description": "Identify key historical sites, natural landscapes, and popular restaurants in the recommended cities."
+    },
+    {
+        "type": "RESEARCH_SPECIFIC_ITEM",
+        "description": "Look for top-rated restaurants in each of the selected cities to enhance the culinary experience."
+    },
+    {
+        "type": "DRAFT_ITINERARY",
+        "description": "Draft a detailed itinerary."
+    },
+    {
+        "type": "FINALIZE_DOCUMENT",
+        "description": "Finalize itinerary document for user."
+    }
+]
+```
+2025-06-22 21:38:46,168 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 21:38:46,175 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: 4-day Paris trip: mix of landmarks, hidden gems, and food., generated title: "Paris in 4 Days"
+2025-06-22 21:38:51,440 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 21:38:51,445 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: 4-day Paris trip: mix of landmarks, hidden gems, and food., generated todo list: [{'description': 'Research popular landmarks in Paris that are must-see for a 4-day trip.', 'type': 'RESEARCH_ATTRACTIONS'}, {'description': 'Identify lesser-known hidden gems in Paris to include unique experiences.', 'type': 'RESEARCH_ATTRACTIONS'}, {'description': 'Research notable food spots in Paris, including cafes, bistros, and markets.', 'type': 'RESEARCH_SPECIFIC_ITEM'}, {'description': 'Compile a balanced list of landmarks, hidden gems, and food experiences suitable for a 4-day itinerary.', 'type': 'PRESENT_IDEAS'}, {'description': 'Draft a detailed itinerary combining landmarks, hidden gems, and food experiences across 4 days.', 'type': 'DRAFT_ITINERARY'}, {'description': 'Finalize itinerary document for user.', 'type': 'FINALIZE_DOCUMENT'}]
+2025-06-22 21:57:27,759 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 21:57:27,771 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Vegetarian-friendly restaurants in Austin with great ambiance., generated title: "Veggie Eats in Austin"
+2025-06-22 21:57:29,927 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 21:57:29,937 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Vegetarian-friendly restaurants in Austin with great ambiance., generated todo list:
+{'description': 'Research vegetarian-friendly restaurants in Austin.', 'type': 'RESEARCH_SPECIFIC_ITEM'}
+{'description': 'Look for top-rated restaurants with great ambiance.', 'type': 'RESEARCH_ATTRACTIONS'}
+{'description': 'Compile a list of options based on ambiance and vegetarian offerings.', 'type': 'PRESENT_IDEAS'}
+{'description': 'Draft a detailed itinerary.', 'type': 'DRAFT_ITINERARY'}
+{'description': 'Finalize itinerary document for user.', 'type': 'FINALIZE_DOCUMENT'}
+2025-06-22 22:05:02,105 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 22:05:02,113 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Beaches with ideal February weather and vibes., generated title: "February Beach Escape"
+2025-06-22 22:05:05,922 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 22:21:37,151 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 22:21:37,166 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Beaches with ideal February weather and vibes., generated title: "February Beach Getaway"
+2025-06-22 22:21:41,466 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 22:27:46,564 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 22:27:46,577 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Beaches with ideal February weather and vibes., generated title: "February Beach Getaway"
+2025-06-22 22:27:50,371 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 22:27:50,376 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Beaches with ideal February weather and vibes., generated todo list:
+description='Research beach destinations known for ideal weather and atmosphere in February.' type='RESEARCH_DESTINATIONS'
+description='Compile and present a list of February beach destinations with ideal weather and vibes to the user.' type='PRESENT_IDEAS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-22 22:32:24,279 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 22:32:24,294 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Epic 5-day Iceland itinerary with adventure highlights., generated title: "Iceland Adventure"
+2025-06-22 22:32:26,801 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 22:32:26,824 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Epic 5-day Iceland itinerary with adventure highlights., generated todo list:
+description='Research the top adventure activities available in Iceland.' type='RESEARCH_ATTRACTIONS'
+description='Look into the best destinations to visit in Iceland over 5 days.' type='RESEARCH_DESTINATIONS'
+description='Find accommodations that are centrally located for easy access to adventure spots.' type='RESEARCH_SPECIFIC_ITEM'
+description='Explore iconic landmarks and natural wonders to include in the itinerary.' type='RESEARCH_ATTRACTIONS'
+description='Compile options for transportation within Iceland, including car rentals and public transport.' type='RESEARCH_SPECIFIC_ITEM'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-22 22:42:08,472 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 22:42:08,486 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Vegetarian-friendly restaurants in Austin with great ambiance., generated title: "Veggie Dining in Austin"
+2025-06-22 22:42:12,295 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 22:42:12,307 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Vegetarian-friendly restaurants in Austin with great ambiance., generated todo list:
+description='Research vegetarian-friendly restaurants in Austin with great ambiance.' type='RESEARCH_SPECIFIC_ITEM'
+description='Compile a list of the top-rated vegetarian restaurants in Austin.' type='PRESENT_IDEAS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-22 22:42:14,861 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 22:42:14,865 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '538ecc06-e4db-4891-9a30-e16fc8f3251d', 'history': 'user: Vegetarian-friendly restaurants in Austin with great ambiance.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': 'Research vegetarian-friendly restaurants in Austin with great ambiance.\nCompile a list of the top-rated vegetarian restaurants in Austin.', 'user_input': 'Vegetarian-friendly restaurants in Austin with great ambiance.'}, ai response: It’s wonderful to help you explore vegetarian-friendly restaurants in Austin! Here are some top-rated places known for their great ambiance:
+
+1. **Bouldin Creek Cafe** - A relaxed cafe with a spacious outdoor patio, known for its delicious vegetarian options and locally-sourced ingredients.
+
+2. **The Beer Plant** - This gastropub offers an extensive vegetarian menu and a cozy atmosphere perfect for casual dining.
+
+3. **Casa de Luz** - A unique experience with community dining and organic meals, surrounded by a peaceful environment.
+
+4. **Flower Child** - Featuring bright decor and a vibrant atmosphere, Flower Child offers a range of healthy vegetarian dishes.
+
+5. **Luv Fats** - A trendy spot known for its plant-based comfort food and vibrant setting, perfect for a laid-back meal.
+
+That covers some great options! If you have any more preferences or details about your trip—like travel dates or the number of travelers—please let me know, and I’d be happy to assist further. Alternatively, if you'd like to explore other cities or scenic spots first, feel free to click the **Next button**!
+2025-06-22 22:45:38,616 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 22:45:38,631 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Beaches with ideal February weather and vibes., generated title: February Beach Getaway
+2025-06-22 22:45:41,179 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 22:45:41,204 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Beaches with ideal February weather and vibes., generated todo list:
+description='Research beach destinations with ideal weather in February.' type='RESEARCH_DESTINATIONS'
+description='Compile a list of popular beaches based on February vibes.' type='PRESENT_IDEAS'
+description='Research accommodations near the selected beaches.' type='RESEARCH_SPECIFIC_ITEM'
+description='Look for local attractions and activities available in the chosen beach destinations.' type='RESEARCH_ATTRACTIONS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-22 22:45:43,906 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 22:45:43,910 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': 'b8bf7ff1-c8d1-4efd-84d5-cfc4116a411e', 'history': 'user: Beaches with ideal February weather and vibes.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': 'Research beach destinations with ideal weather in February.\nCompile a list of popular beaches based on February vibes.', 'user_input': 'Beaches with ideal February weather and vibes.'}, ai response: Hello! It's a pleasure to help you plan your trip to the beach. To get started, I can recommend some popular beach destinations that have ideal weather and great vibes in February:
+
+1. **Cancun, Mexico** - Known for its stunning beaches and vibrant nightlife, Cancun offers warm temperatures and sunny skies in February.
+   
+2. **Miami, Florida** - With its beautiful beaches and lively atmosphere, Miami is perfect for a February getaway, featuring pleasant weather and plenty of activities.
+
+3. **Phuket, Thailand** - This tropical paradise is famous for its breathtaking beaches and lovely weather. February is part of the dry season here, making it a great time to visit.
+
+4. **Barbados** - Enjoy the pristine beaches and warm temperatures while exploring the island's rich culture. February is one of the best months to visit.
+
+5. **Gold Coast, Australia** - Experience the surf and sun in this iconic Australian destination, which boasts warm weather in February.
+
+These destinations each have their unique charm and offer plenty of opportunities for relaxation or adventure. 
+
+If you’d like to narrow it down or need further assistance, please share details such as your preferred destination, travel dates, number of travelers, and any specific travel preferences you might have. However, if you prefer, we can move on to exploring activities or accommodations in these areas. Just let me know!
+2025-06-22 22:49:20,063 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 22:49:20,068 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: 4-day Paris trip: mix of landmarks, hidden gems, and food., generated title: "4-Day Paris Adventure"
+2025-06-22 22:49:25,260 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 22:49:25,275 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: 4-day Paris trip: mix of landmarks, hidden gems, and food., generated todo list:
+description='Research popular neighborhoods in Paris to find a mix of landmarks and hidden gems.' type='RESEARCH_DESTINATIONS'
+description='Identify key landmarks to visit, such as the Eiffel Tower, Louvre Museum, and Notre-Dame Cathedral.' type='RESEARCH_ATTRACTIONS'
+description='Look for hidden gems in Paris, such as lesser-known museums, parks, and local shops.' type='RESEARCH_ATTRACTIONS'
+description='Find highly-rated restaurants and food markets to experience local cuisine.' type='RESEARCH_SPECIFIC_ITEM'
+description='Compile a list of suggested attractions, neighborhoods, and restaurants for the trip.' type='PRESENT_IDEAS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-22 22:49:34,995 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 22:49:34,998 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': 'a7dd9157-db44-4eeb-ac34-4e56009a1330', 'history': 'user: 4-day Paris trip: mix of landmarks, hidden gems, and food.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': 'Research popular neighborhoods in Paris to find a mix of landmarks and hidden gems.\nIdentify key landmarks to visit, such as the Eiffel Tower, Louvre Museum, and Notre-Dame Cathedral.\nLook for hidden gems in Paris, such as lesser-known museums, parks, and local shops.\nFind highly-rated restaurants and food markets to experience local cuisine.\nCompile a list of suggested attractions, neighborhoods, and restaurants for the trip.', 'user_input': '4-day Paris trip: mix of landmarks, hidden gems, and food.'}, ai response: Hello! I'm excited to help you plan your 4-day trip to Paris, focusing on a mix of landmarks, hidden gems, and delicious food. To get started, I need a bit of information from you:
+
+1. **Destination**: Are you planning to stay in Paris, or are there other cities you're considering?
+2. **Travel Dates**: When do you plan to visit?
+3. **Number of Travelers**: How many people will be traveling with you?
+4. **Travel Preferences**: Any specific interests or activities you'd like to prioritize?
+
+Alternatively, you can click the **Next button** below for some recommendations on cities and scenic spots, or fill out your preferences by clicking **Your Preference** at the top right of the page.
+
+In the meantime, I’ll start researching popular neighborhoods in Paris and key landmarks to visit, including hidden gems and great places to eat. Here’s what I’ve found so far:
+
+### Key Landmarks to Visit:
+1. **Eiffel Tower**: A must-see iconic structure with stunning views of the city.
+2. **Louvre Museum**: Home to thousands of works of art, including the Mona Lisa.
+3. **Notre-Dame Cathedral**: A beautiful example of French Gothic architecture.
+
+### Hidden Gems:
+1. **Musée de l'Orangerie**: Lesser-known museum featuring Monet’s Water Lilies.
+2. **Parc des Buttes-Chaumont**: A picturesque park with a temple and waterfalls.
+3. **Le Marais**: A historic district with charming boutiques and cafes.
+
+### Highly-Rated Restaurants and Food Markets:
+1. **Le Comptoir de la Gastronomie**: Great for traditional French cuisine.
+2. **Rue Cler Market**: A vibrant market for fresh produce and local delicacies.
+3. **L'As du Fallafel**: Famous for its delicious falafel in the Marais district.
+
+Once I have your travel details, I can tailor this list further to suit your preferences. Let me know how you’d like to proceed!
+2025-06-22 22:57:53,582 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 22:57:53,590 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Best cities in Italy for history, landscapes, and food., generated title: Italy History Tour
+2025-06-22 22:57:55,798 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 22:57:55,808 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Best cities in Italy for history, landscapes, and food., generated todo list:
+description='Research the best cities in Italy known for their historical significance, beautiful landscapes, and culinary offerings.' type='RESEARCH_DESTINATIONS'
+description='Compile a list of historical attractions in major Italian cities that showcase their rich heritage.' type='RESEARCH_ATTRACTIONS'
+description='Look for popular local restaurants and food experiences in the selected cities.' type='RESEARCH_SPECIFIC_ITEM'
+description='Present a variety of city options that highlight history, landscapes, and food.' type='PRESENT_IDEAS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-22 22:57:59,464 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 22:57:59,466 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': 'c4df25a1-bcdb-476a-a446-76de18528977', 'history': 'user: Best cities in Italy for history, landscapes, and food.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': 'Research the best cities in Italy known for their historical significance, beautiful landscapes, and culinary offerings.\nCompile a list of historical attractions in major Italian cities that showcase their rich heritage.\nLook for popular local restaurants and food experiences in the selected cities.\nPresent a variety of city options that highlight history, landscapes, and food.', 'user_input': 'Best cities in Italy for history, landscapes, and food.'}, ai response: Hello! I'm excited to help you plan your trip to Italy. While I can go ahead and research the best cities known for their history, beautiful landscapes, and delicious food, it would be helpful to know a bit more about your travel preferences. Specifically, if you could share your destination, travel dates, number of travelers, and any specific preferences, that would enhance my recommendations.
+
+In the meantime, I'll start compiling a list of cities that fit your criteria. Here are some fantastic cities in Italy renowned for their historical significance, stunning landscapes, and culinary delights:
+
+1. **Rome**: The eternal city is bursting with historical attractions like the Colosseum, the Vatican, and Pantheon. Plus, the local cuisine, including pasta dishes and gelato, is a must-try.
+
+2. **Florence**: Known as the cradle of the Renaissance, Florence is home to incredible art and architecture, such as the Uffizi Gallery and the Duomo. The Tuscan landscape surrounding the city adds to its charm, and don’t miss the local cuisine, including Florentine steak.
+
+3. **Venice**: This unique city with its winding canals is steeped in history. You can explore St. Mark's Basilica and the Doge's Palace. Venetian cuisine, especially seafood, is also a highlight.
+
+4. **Naples**: Renowned for its rich history, from ancient ruins to stunning architecture, Naples is also the birthplace of pizza. Be sure to try authentic Neapolitan pizza there!
+
+5. **Bologna**: Known for its rich culinary scene, Bologna offers a vibrant food culture with pasta dishes like tagliatelle al ragù. The city is also famous for its medieval towers and universities.
+
+6. **Siena**: With its medieval architecture and beautiful landscapes of Tuscany, Siena offers a charming atmosphere. The local cuisine, particularly the panforte dessert, is delightful.
+
+If you'd like, I can provide further details on historical attractions and popular local restaurants for any of these cities. Just let me know how you’d like to proceed!
+2025-06-22 23:00:45,036 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 23:00:45,051 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Beaches with ideal February weather and vibes., generated title: February Beach Getaway
+2025-06-22 23:00:47,222 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 23:00:47,240 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Beaches with ideal February weather and vibes., generated todo list:
+description='Research beaches with ideal weather and vibes in February.' type='RESEARCH_DESTINATIONS'
+description='Compile a list of potential beach destinations based on February weather.' type='PRESENT_IDEAS'
+description='Look into attractions and activities available at the selected beach destinations.' type='RESEARCH_ATTRACTIONS'
+description='Research accommodation options in the chosen destinations.' type='RESEARCH_SPECIFIC_ITEM'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-22 23:00:54,996 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 23:00:55,000 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': 'b36de209-9d1b-44a3-8933-3d0cc463d818', 'history': 'user: Beaches with ideal February weather and vibes.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': 'Research beaches with ideal weather and vibes in February.\nCompile a list of potential beach destinations based on February weather.', 'user_input': 'Beaches with ideal February weather and vibes.'}, ai response: Hello! I'm excited to help you find the perfect beach destination for February. While I gather some options for you, it would be great to know a bit more about your preferences, such as your desired destination, travel dates, number of travelers, and any specific activities or vibes you're looking for.
+
+In the meantime, here’s a list of some popular beach destinations that typically have ideal weather and great vibes in February:
+
+1. **Maui, Hawaii**: Known for its beautiful beaches and warm temperatures, Maui offers plenty of sunshine and activities like snorkeling and hiking.
+
+2. **Cancún, Mexico**: With its stunning beaches and vibrant nightlife, Cancún is a popular choice for those looking for both relaxation and entertainment.
+
+3. **Phuket, Thailand**: February is part of the dry season in Phuket, making it perfect for enjoying the beaches and exploring the local culture.
+
+4. **Barbados**: This Caribbean island boasts beautiful beaches, warm weather, and a lively atmosphere, perfect for a relaxing getaway.
+
+5. **Gold Coast, Australia**: With its stunning beaches and surfing culture, the Gold Coast is a great destination for beach lovers.
+
+6. **Miami Beach, Florida**: Known for its vibrant nightlife and beautiful beaches, Miami Beach is a great spot for those looking for sun and fun.
+
+If any of these destinations interest you or if you have specific preferences, let me know! Otherwise, feel free to click the **Next button** for more recommendations or fill out your preferences at the top right of the page.
+2025-06-22 23:10:04,704 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 23:10:04,720 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated title: "Secret Kyoto Gems"
+2025-06-22 23:10:06,698 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 23:10:06,713 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Find secret gardens and offbeat attractions in Kyoto., generated todo list:
+description='Research secret gardens in Kyoto.' type='RESEARCH_ATTRACTIONS'
+description='Find offbeat attractions in Kyoto that are less commonly visited.' type='RESEARCH_ATTRACTIONS'
+description='Compile a list of unique experiences or hidden gems in Kyoto.' type='PRESENT_IDEAS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-22 23:10:10,634 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 23:10:10,637 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '4eebec35-ddc2-4cdb-8cdd-4b1a826e2e0d', 'history': 'user: Find secret gardens and offbeat attractions in Kyoto.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': 'Research secret gardens in Kyoto.\nFind offbeat attractions in Kyoto that are less commonly visited.\nCompile a list of unique experiences or hidden gems in Kyoto.', 'user_input': 'Find secret gardens and offbeat attractions in Kyoto.'}, ai response: It's great to assist you with your trip planning to Kyoto! To find those secret gardens and offbeat attractions, it would be really helpful if you could share a bit more information. Specifically, could you let me know your travel dates, the number of travelers, and any travel preferences you might have? 
+
+In the meantime, I'll start researching some secret gardens and offbeat attractions in Kyoto for you. 
+
+Here are a few secret gardens and offbeat attractions to consider:
+
+### Secret Gardens:
+1. **Shisendo Temple** - A hidden gem, this temple has a beautiful garden with serene paths and a tranquil atmosphere.
+2. **Nanzen-ji Temple's Hojo Garden** - Often overlooked, this garden has a picturesque landscape that many tourists miss.
+3. **Entoku-in** - Located in the Nanzen-ji district, this small temple features a lovely garden that is peaceful and not crowded.
+
+### Offbeat Attractions:
+1. **Kyoto Railway Museum** - A fascinating place for train enthusiasts, showcasing the history of trains in Japan.
+2. **Kifune Shrine** - Situated in the mountains, this shrine is less frequented and offers stunning views and beautiful nature trails.
+3. **Higashiyama's Gion neighborhood at night** - While Gion can be touristy, exploring it at night allows you to experience a quieter, mystical side of Kyoto.
+
+### Unique Experiences:
+- **Kokedera (Moss Temple)**: This temple requires reservations and is often missed by travelers, featuring stunning moss-covered landscapes.
+- **Kyoto’s Hidden Sake Breweries**: Take a tour of lesser-known sake breweries for a unique cultural experience.
+
+If you would like more recommendations or details about these places, just let me know! And feel free to share that missing information whenever it's convenient for you.
+2025-06-22 23:12:45,327 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 23:12:45,334 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Best cities in Italy for history, landscapes, and food., generated title: Italy: History & Food Tour
+2025-06-22 23:12:51,538 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 23:12:51,545 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Best cities in Italy for history, landscapes, and food., generated todo list:
+description='Research the best cities in Italy known for their historical significance, beautiful landscapes, and culinary offerings.' type='RESEARCH_DESTINATIONS'
+description='Compile a list of recommended cities in Italy based on history, landscapes, and food.' type='PRESENT_IDEAS'
+description='Look into specific historical sites, natural landscapes, and top-rated restaurants in the suggested cities.' type='RESEARCH_ATTRACTIONS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-22 23:13:00,732 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 23:13:00,736 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': 'cad6a31d-f5ac-4854-ab2f-4ca026a43a3e', 'history': 'user: Best cities in Italy for history, landscapes, and food.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': 'Research the best cities in Italy known for their historical significance, beautiful landscapes, and culinary offerings.\nCompile a list of recommended cities in Italy based on history, landscapes, and food.', 'user_input': 'Best cities in Italy for history, landscapes, and food.'}, ai response: Italy is a fantastic destination with a rich tapestry of history, stunning landscapes, and exquisite food. Here are some of the best cities that embody these qualities:
+
+1. **Rome**: The capital city is a treasure trove of history, with landmarks like the Colosseum, the Roman Forum, and the Vatican. The city's vibrant street life and incredible cuisine, including Roman specialties like pasta alla carbonara and supplì, make it a must-visit.
+
+2. **Florence**: Known as the birthplace of the Renaissance, Florence is home to iconic art and architecture, including the Uffizi Gallery and the Duomo. The Tuscan countryside surrounding the city offers breathtaking landscapes, and the local cuisine features dishes like ribollita and Florentine steak.
+
+3. **Venice**: Famous for its canals and historic architecture, Venice is a unique city steeped in history. Enjoy fresh seafood and traditional Venetian dishes like cicchetti while taking in the stunning views of the Grand Canal and St. Mark's Basilica.
+
+4. **Naples**: This city is the birthplace of pizza and offers a rich culinary scene. Beyond its food, Naples is close to historical sites like Pompeii and the stunning Amalfi Coast, providing a mix of history and breathtaking landscapes.
+
+5. **Bologna**: Known as the culinary capital of Italy, Bologna boasts rich flavors and traditional dishes like tagliatelle al ragù (Bolognese sauce). The city is also home to one of the oldest universities in the world and has a charming medieval center.
+
+6. **Siena**: A beautiful medieval city in Tuscany, Siena is famous for its historic center, a UNESCO World Heritage Site. The surrounding countryside offers stunning landscapes, and the local cuisine features hearty Tuscan dishes.
+
+7. **Verona**: Known for its romantic history tied to Shakespeare's "Romeo and Juliet," Verona also has a rich historical heritage with its Roman amphitheater. The city is surrounded by beautiful vineyards and offers delicious local wines.
+
+If you'd like to explore these cities further or have any specific preferences in mind, feel free to share! Additionally, if you provide your travel dates, number of travelers, and any specific interests, I can help you tailor your itinerary even more. Alternatively, you can click the **Next button** below to continue planning your trip!
+2025-06-22 23:19:32,476 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 23:19:32,491 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Vegetarian-friendly restaurants in Austin with great ambiance., generated title: Veggie Eats Austin
+2025-06-22 23:19:37,277 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 23:19:37,284 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Vegetarian-friendly restaurants in Austin with great ambiance., generated todo list:
+description='Look for vegetarian-friendly restaurants in Austin.' type='RESEARCH_SPECIFIC_ITEM'
+description='Find restaurants with great ambiance in Austin.' type='RESEARCH_ATTRACTIONS'
+description='Compile a list of recommended vegetarian-friendly restaurants with great ambiance.' type='PRESENT_IDEAS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-22 23:19:40,074 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 23:19:40,077 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '17722a0a-04b3-4a92-a6d3-33067c74d16e', 'history': 'user: Vegetarian-friendly restaurants in Austin with great ambiance.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': 'Look for vegetarian-friendly restaurants in Austin.\nFind restaurants with great ambiance in Austin.\nCompile a list of recommended vegetarian-friendly restaurants with great ambiance.', 'user_input': 'Vegetarian-friendly restaurants in Austin with great ambiance.'}, ai response: Austin is a fantastic city for vegetarian-friendly dining with a vibrant ambiance! I'll start by looking for vegetarian-friendly restaurants in Austin that also offer a great atmosphere. Once I gather a few top spots, I'll compile a list for you. Meanwhile, if you have any specific preferences or dates for your trip, feel free to share them to help tailor recommendations further!
+2025-06-22 23:25:21,199 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 23:25:21,215 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: 4-day Paris trip: mix of landmarks, hidden gems, and food., generated title: Paris Highlights Trip
+2025-06-22 23:25:24,974 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 23:25:25,007 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: 4-day Paris trip: mix of landmarks, hidden gems, and food., generated todo list:
+description='Research popular landmarks in Paris including the Eiffel Tower, Louvre Museum, and Notre-Dame Cathedral.' type='RESEARCH_ATTRACTIONS'
+description='Look for hidden gems in Paris that are not typically highlighted in tourist guides.' type='RESEARCH_ATTRACTIONS'
+description='Compile a list of recommended restaurants in Paris, focusing on a mix of traditional French cuisine and modern eateries.' type='RESEARCH_SPECIFIC_ITEM'
+description='Explore food tours or experiences available in Paris that focus on local cuisine.' type='RESEARCH_ATTRACTIONS'
+description='Find accommodation options including hotels and unique stays in the city.' type='RESEARCH_SPECIFIC_ITEM'
+description='Research transportation options within Paris, including metro, buses, and bike rentals.' type='RESEARCH_SPECIFIC_ITEM'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-22 23:25:26,723 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 23:25:26,726 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': 'a664b396-a6ba-43c2-886e-975ae8a40946', 'history': 'user: 4-day Paris trip: mix of landmarks, hidden gems, and food.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': 'Research popular landmarks in Paris including the Eiffel Tower, Louvre Museum, and Notre-Dame Cathedral.\nLook for hidden gems in Paris that are not typically highlighted in tourist guides.\nCompile a list of recommended restaurants in Paris, focusing on a mix of traditional French cuisine and modern eateries.\nExplore food tours or experiences available in Paris that focus on local cuisine.\nFind accommodation options including hotels and unique stays in the city.\nResearch transportation options within Paris, including metro, buses, and bike rentals.\nDraft a detailed itinerary.\nFinalize itinerary document for user.', 'user_input': '4-day Paris trip: mix of landmarks, hidden gems, and food.'}, ai response: Hello! It's great to hear that you're planning a 4-day trip to Paris with a mix of landmarks, hidden gems, and food. To help me create a fantastic itinerary for you, I just need a bit more information. Could you let me know your travel dates, the number of travelers, and any specific preferences you might have?
+
+In the meantime, I'll start researching popular landmarks like the Eiffel Tower, Louvre Museum, and Notre-Dame Cathedral, as well as discovering some hidden gems and great restaurant options in Paris. Once you provide the additional details, I can tailor everything to your needs!
+2025-06-22 23:28:46,065 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 23:28:46,074 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Best cities in Italy for history, landscapes, and food., generated title: Italy: History & Food
+2025-06-22 23:28:53,387 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 23:28:53,399 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Best cities in Italy for history, landscapes, and food., generated todo list:
+description='Research the best cities in Italy known for their historical significance, beautiful landscapes, and culinary offerings.' type='RESEARCH_DESTINATIONS'
+description='Identify key historical sites, natural landscapes, and food markets or restaurants in the selected cities.' type='RESEARCH_ATTRACTIONS'
+description='Look for top-rated restaurants and local cuisine specialties in the chosen cities.' type='RESEARCH_SPECIFIC_ITEM'
+description='Compile a list of recommended cities along with their highlights for history, landscapes, and food.' type='PRESENT_IDEAS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-22 23:28:55,228 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 23:28:55,231 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': 'a6b7cb0d-06a6-4327-85ca-170e8d890d6d', 'history': 'user: Best cities in Italy for history, landscapes, and food.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': 'Research the best cities in Italy known for their historical significance, beautiful landscapes, and culinary offerings.\nIdentify key historical sites, natural landscapes, and food markets or restaurants in the selected cities.\nLook for top-rated restaurants and local cuisine specialties in the chosen cities.\nCompile a list of recommended cities along with their highlights for history, landscapes, and food.', 'user_input': 'Best cities in Italy for history, landscapes, and food.'}, ai response: Hello! It's great to see your interest in Italy. I can definitely help you find the best cities known for their rich history, stunning landscapes, and delicious food. 
+
+While I work on researching and compiling the information for you, it would be really helpful if you could share some basic details: 
+
+1. Where are you planning to travel to in Italy?
+2. What are your travel dates?
+3. How many travelers will be joining you?
+4. Any specific preferences for your trip?
+
+Alternatively, if you’d prefer to skip this step, I can proceed to recommend cities and scenic spots for you right away! Let me know how you would like to continue.
+2025-06-22 23:31:03,491 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 23:31:03,505 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Beaches with ideal February weather and vibes., generated title: February Beach Getaway
+2025-06-22 23:31:05,752 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 23:31:05,763 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Beaches with ideal February weather and vibes., generated todo list:
+description='Research beaches that are known for ideal weather and vibes in February.' type='RESEARCH_DESTINATIONS'
+description='Compile a list of top-rated beaches that fit the February criteria.' type='PRESENT_IDEAS'
+description='Research accommodations near the selected beaches for ideal stays.' type='RESEARCH_SPECIFIC_ITEM'
+description='Look into local attractions and activities available near the beaches in February.' type='RESEARCH_ATTRACTIONS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-22 23:31:07,380 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 23:31:07,383 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '437a8457-2f2a-48c8-afc0-6a90cd892376', 'history': 'user: Beaches with ideal February weather and vibes.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': None, 'user_input': 'Beaches with ideal February weather and vibes.'}, ai response: Hello! I'm excited to help you plan your beach getaway! To better assist you, could you please share a bit more information? Specifically, I'd love to know your preferred destination, travel dates, number of travelers, and any travel preferences you might have.
+
+If you'd rather skip this for now, I can recommend some popular beach destinations with ideal February weather and vibes. Just let me know what you prefer!
+2025-06-22 23:35:54,384 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 23:35:54,392 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Vegetarian-friendly restaurants in Austin with great ambiance., generated title: "Veggie Spots in Austin"
+2025-06-22 23:35:56,120 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 23:35:56,127 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Vegetarian-friendly restaurants in Austin with great ambiance., generated todo list:
+description='Research vegetarian-friendly restaurants in Austin known for their great ambiance.' type='RESEARCH_SPECIFIC_ITEM'
+description='Compile a list of top-rated vegetarian restaurants with unique dining experiences.' type='PRESENT_IDEAS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-22 23:36:01,406 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 23:36:01,409 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': 'a1fc0e22-f432-4ea6-aca0-4e5f9e4012ea', 'history': 'user: Vegetarian-friendly restaurants in Austin with great ambiance.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': None, 'user_input': 'Vegetarian-friendly restaurants in Austin with great ambiance.'}, ai response: Hello! It's great to help you find vegetarian-friendly restaurants in Austin with a wonderful ambiance. To tailor my recommendations better, could you please share a bit more about your travel plans? Specifically, it would be helpful to know your travel dates, the number of travelers, and any specific preferences you might have.
+
+Alternatively, if you prefer, you can click the **Next button** below for some city and scenic spot recommendations first, or click **Your Preference** at the top right to fill in the form. Feel free to share your details directly here as well!
+2025-06-22 23:37:17,010 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 23:37:17,013 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Vegetarian-friendly restaurants in Austin with great ambiance., generated title: Austin Veggie Dining
+2025-06-22 23:37:19,020 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 23:37:19,030 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Vegetarian-friendly restaurants in Austin with great ambiance., generated todo list:
+description='Research vegetarian-friendly restaurants in Austin known for their great ambiance.' type='RESEARCH_SPECIFIC_ITEM'
+description='Compile a list of the top-rated restaurants found during the research.' type='PRESENT_IDEAS'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-22 23:37:21,519 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 23:37:21,523 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Best cities in Italy for history, landscapes, and food., generated title: "Historic Italy Tour"
+2025-06-22 23:37:22,471 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 23:37:22,473 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '3ca41c9e-6e5a-430f-8655-3d19c62cbe69', 'history': 'user: Vegetarian-friendly restaurants in Austin with great ambiance.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': None, 'user_input': 'Vegetarian-friendly restaurants in Austin with great ambiance.'}, ai response: Hi! Austin is a great choice with plenty of vegetarian-friendly restaurants that also offer a wonderful ambiance. To help narrow down the best spots for you, could you please share a bit more about your travel plans? Specifically, your travel dates, how many people will be joining you, and any other preferences you might have. This will help me tailor recommendations perfectly for your trip. If you'd prefer, I can also start by suggesting some popular cities and scenic spots before diving into restaurant recommendations—just let me know!
+2025-06-22 23:37:27,246 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 23:37:27,266 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: Best cities in Italy for history, landscapes, and food., generated todo list:
+description='Research the best cities in Italy known for their history, landscapes, and food.' type='RESEARCH_DESTINATIONS'
+description='Compile a list of top cities in Italy that offer rich historical experiences, beautiful landscapes, and renowned cuisine.' type='PRESENT_IDEAS'
+description='Look into specific historical sites, natural landscapes, and food markets or restaurants in the selected cities.' type='RESEARCH_ATTRACTIONS'
+description='Find popular restaurants and local eateries in the chosen cities that showcase authentic Italian cuisine.' type='RESEARCH_SPECIFIC_ITEM'
+description='Draft a detailed itinerary.' type='DRAFT_ITINERARY'
+description='Finalize itinerary document for user.' type='FINALIZE_DOCUMENT'
+2025-06-22 23:37:28,876 - [INFO] - httpx - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-22 23:37:28,879 - [INFO] - TravelAI - 0e95c696ec66052c0083f33808be6c1e7d1f7824 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': '88572030-280b-483b-904c-fd981662ff04', 'history': 'user: Best cities in Italy for history, landscapes, and food.', 'missing_info_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I need to know some basic information: \ndestination, travel date, number of travelers and your travel preferences.\n\nOr you can:\n- Click the **Next button** below and let me recommend cities and scenic spots for you first.\n- Click **Your Preference** at the top right of the page at any time to fill in the form.\n- Tell me directly **in the conversation** at any time!\n", 'todo_prompt': None, 'user_input': 'Best cities in Italy for history, landscapes, and food.'}, ai response: Hello! I'm excited to help you plan your trip to Italy. To provide the best recommendations for cities that excel in history, landscapes, and food, I would love to know a bit more about your travel plans. 
