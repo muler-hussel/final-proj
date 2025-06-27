@@ -23,6 +23,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import { useShortlistStore } from '@/stores/shortlist.ts';
 
 export default defineComponent({
   setup() {

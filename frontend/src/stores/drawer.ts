@@ -2,14 +2,25 @@ import { defineStore } from 'pinia'
 
 export const useDrawerStore = defineStore('drawer', {
   state: () => ({
-    isOpen: false
+    preference: {
+      isOpen: false,
+    },
+    shortlist: {
+      isOpen: false,
+    },
   }),
   actions: {
-    showDrawer() {
-      this.isOpen = true
+    showPreference() {
+      this.preference.isOpen = true
     },
-    onClose() {
-      this.isOpen = false
+    showShortlist() {
+      this.shortlist.isOpen = true
+    },
+    onPreferenceClose() {
+      this.preference.isOpen = false
+    },
+    onShortlistClose() {
+      this.shortlist.isOpen = false
     }
   }
 })

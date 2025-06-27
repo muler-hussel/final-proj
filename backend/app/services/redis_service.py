@@ -1,6 +1,7 @@
 import redis
 from typing import Optional, List
-from app.models.session import SessionState, SlotData, ShortlistItem
+from app.models.session import SessionState
+from app.models.shortlist import ShortlistItem
 import json
 
 class RedisService:
@@ -64,15 +65,6 @@ class RedisService:
     session_state = await self.load_session_state(user_id, session_id)
     if session_state:
       session_state.title = new_title
-      await self.save_session_state(session_state)
-      return session_state
-    return None
-
-  async def update_slots(self, user_id: str, session_id: str, new_slots: SlotData) -> Optional[SessionState]:
-    session_state = await self.load_session_state(user_id, session_id)
-    if session_state:
-      # new_slots.model_dump(exclude_unset=True) only update data provided
-      session_state.slots = new_slots
       await self.save_session_state(session_state)
       return session_state
     return None

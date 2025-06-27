@@ -1,82 +1,84 @@
 <template>
-  <a-drawer title="Your Preference" :open="drawer.isOpen" @close="drawer.onClose()" class="flex flex-col">
-    <div class="flex flex-col h-full">
-      <div class="flex flex-row items-center justify-between mb-6">
-        <p class="font-semibold">Adults</p>
-        <a-input-number id="inputNumber" v-model:value="adult" :min="0" :max="100" />
-        <p class="font-semibold">Children</p>
-        <a-input-number id="inputNumber" v-model:value="child" :min="0" :max="100" />
+  <a-drawer title="Your Preference" :open="drawer.preference.isOpen" @close="drawer.onPreferenceClose" class="flex flex-col">
+    <p class="text-sm text-gray-300 w-44">If the ai fails to summarize your preferences, you can add a tag yourself.</p>
+    <div class="flex mb-2 mt-2 flex-col gap-y-1">
+      <div v-for="(p, idx) in state.tags" :key="idx">
+        <a-tooltip v-if="p && p.length > 20" :title="p">
+          <a-tag :closable="p" @close="handleClose(p)">
+            {{ `${p.slice(0, 20)}...` }}
+          </a-tag>
+        </a-tooltip>
+        <a-tag v-else :closable="p" @close="handleClose(p)">
+          {{ p }}
+        </a-tag>
       </div>
-
-      <p class="font-semibold mb-2">Destination</p>
-      <a-input v-model:value="value" placeholder="Type in any areas, countries, cities" />
-
-      <p class="font-semibold mb-2 mt-6">Pick your time</p>
-      <a-range-picker v-model:value="value3" :disabled-date="disabledDate" />
-
-      <p class="font-semibold mt-6">Type of attractions</p>
-      <p class="mb-2 text-sm mt-1 text-gray-400">You can type in any types not available</p>
-      <a-select
-        v-model:value="type"
-        mode="tags"
-        style="width: 100%"
-        placeholder="Choose types you want"
-        :options="options"
-        @change="addType"
-      ></a-select>
-
-      <div class="flex flex-col grow mt-6 mb-6">
-        <p class="font-semibold mb-2">Anything else</p>
-        <a-textarea
-          v-model:value="value2"
-          placeholder="I'd like to have picnic. | A hike. | Somewhere relaxing."
-          :auto-size="{ minRows: 2, maxRows: 7 }"
-        />
-      </div>
-      <div class="flex flex-col gap-y-2">
-        <div class="bg-gradient-to-r from-[#4c64db] to-[#a84adf] h-8 rounded-md leading-8 text-center
-          hover:cursor-pointer hover:shadow hover:shadow-indigo-500">
-          <p class="text-white">Consult AI With Choice</p>
-        </div>
-        <a-button type="primary">Save Choice</a-button>
-        <a-button>Create Trip</a-button>
-      </div>
+      <a-input
+        v-if="state.inputVisible"
+        ref="inputRef"
+        v-model:value="state.inputValue"
+        type="text"
+        size="small"
+        :style="{ width: '78px' }"
+        @blur="handleInputConfirm"
+        @keyup.enter="handleInputConfirm"
+      />
+      <a-tag v-else style="background: #fff; border-style: dashed" @click="showInput">
+        <plus-outlined />
+        New Tag
+      </a-tag>
     </div>
+    <a-button>Save</a-button>
   </a-drawer>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, reactive, nextTick } from 'vue';
 import { useDrawerStore } from '@/stores/drawer.ts';
-import dayjs, { Dayjs } from 'dayjs';
 
 export default defineComponent({
   setup() {
     const drawer = useDrawerStore();
-    const adult = ref<number>(1);
-    const child = ref<number>(0);
-    const value3 = ref<[Dayjs, Dayjs]>();
+    const inputRef = ref();
+    const state = reactive({
+      tags: ['Unremovable', 'Tag 2', 'Tag 3Tag 3Tag 3Tag 3Tag 3Tag 3Tag 3'],
+      inputVisible: false,
+      inputValue: '',
+    });
 
-    const disabledDate = (current: Dayjs) => {
-      // Can not select days before today and today
-      return current && current < dayjs().endOf('day');
+    const handleClose = (removedTag: string) => {
+      const tags = state.tags.filter(tag => tag !== removedTag);
+      console.log(tags);
+      state.tags = tags;
     };
 
-    const addType = (value: string) => {
-      console.log(`selected ${value}`);
+    const showInput = () => {
+      state.inputVisible = true;
+      nextTick(() => {
+        inputRef.value.focus();
+      });
     };
-    const type = ref([]);
-    const options = [{value:'Bustling cities'},{value:'Scenic landscapes'},{value:'Cultural heritage sites'},{value:'Coastal areas'}];
+
+    const handleInputConfirm = () => {
+      const inputValue = state.inputValue;
+      let tags = state.tags;
+      if (inputValue && tags.indexOf(inputValue) === -1) {
+        tags = [...tags, inputValue];
+      }
+      console.log(tags);
+      Object.assign(state, {
+        tags,
+        inputVisible: false,
+        inputValue: '',
+      });
+    };
 
     return {
       drawer,
-      adult,
-      child,
-      value3,
-      disabledDate,
-      addType,
-      type,
-      options,
+      handleClose,
+      inputRef,
+      handleInputConfirm,
+      state,
+      showInput,
     }
   }
 })

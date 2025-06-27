@@ -2,11 +2,10 @@ from pydantic import BaseModel
 from fastapi import APIRouter, HTTPException, Path, Body
 from app.services.redis_service import redis_service
 from app.services.chat_service import chat_service
-from app.models.session import SessionState, SlotData
+from app.models.session import SessionState
 import uuid
 from typing import Dict, Any
-from app.utils.prompts import MISSING_SLOT_PROMPT_FIRST_INPUT, MISSING_SLOT_PROMPT_BEFORE_PLANNING
-
+from app.utils.prompts import PROMPT_FIRST_INPUT
 router = APIRouter(prefix="/chat", tags=["chat"])
 
 class ChatRequest(BaseModel):
@@ -50,7 +49,6 @@ async def get_session(session_id: str = Path(...), data: ChatRequest = Body()):
 async def chat_with_ai(session_id: str = Path(...), data: ChatRequest = Body(...)):
   user_id = data.user_id
   session_state = await redis_service.load_session_state(user_id, session_id)
-  print(f"1",session_state.todo)
   if not session_state:
     raise HTTPException(status_code=404, detail="Session not found or expired. Please start a new session.")
 
@@ -58,57 +56,18 @@ async def chat_with_ai(session_id: str = Path(...), data: ChatRequest = Body(...
   # update session history with user prompts
   await redis_service.append_history(session_state, user_input, "user")
 
-  todo_prompt = None # One or several steps ai should go through
+  todo_step = session_state.todo_step
+  first_prompt = None
   # first prompt
-  is_first_user_input = 1
-  if not session_state.todo:
-    # slot extract
-    extracted_slots_from_input = await chat_service.extract_slots(user_input)
-    if extracted_slots_from_input:
-      session_state = await redis_service.update_slots(user_id, session_id, extracted_slots_from_input)
-      if not session_state:
-        raise HTTPException(status_code=500, detail="Failed to update session slots.")
-    # Todo List
-    session_state.todo = await chat_service.generate_initial_todo_list(
-      user_id, session_id, user_input
-    )
-    session_state.todo_step = 0
-    await redis_service.save_session_state(session_state)
-
-    # If in first prompt, user mentioned all preferences, ai try to recommend
-    final_step = -1
-    if check_slots_complete(session_state.slots):
-      for step in session_state.todo:
-        final_step += 1
-        if step.type == "PRESENT_IDEAS":
-          break
-      descriptions = [
-        session_state.todo[i].description
-        for i in range(0, final_step + 1)
-      ]
-      todo_prompt = "\n".join(descriptions)
-  # not first prompt, should adjust todo list
+  if todo_step == 0:
+    first_prompt = PROMPT_FIRST_INPUT
+    todo_step += 1
   else:
     todo_prompt, session_state = await chat_service.orchestrate_planning_step(session_state, user_input)
-    is_first_user_input = 0
-  print(f"2",session_state.todo)
-  # When first prompt arrives or before create a trip, remind of completing slots
-  missing_info_prompt = None
-  if not check_slots_complete(session_state.slots):
-    if is_first_user_input:
-      missing_info_prompt = MISSING_SLOT_PROMPT_FIRST_INPUT
-    elif session_state.todo_step == -2 and not session_state.reminded:
-      missing_info_prompt = MISSING_SLOT_PROMPT_BEFORE_PLANNING.format(
-        destination=session_state.slots.destination or "Not provided",
-        date=session_state.slots.date or "Not provided",
-        people=session_state.slots.people or "Not provided",
-        preferences=", ".join(session_state.slots.preferences) if session_state.slots.preferences else "Not provided"
-      )
-    session_state.reminded = True
-    await redis_service.save_session_state(session_state)
+  
   # Ai response, update session history
   ai_response_text = await chat_service.get_ai_response(
-    session_state, user_input, missing_info_prompt, todo_prompt
+    session_state, user_input, first_prompt, session_state.todo[todo_step]
   )
   await redis_service.append_history(session_state, ai_response_text, "ai")
 
@@ -118,12 +77,3 @@ async def chat_with_ai(session_id: str = Path(...), data: ChatRequest = Body(...
   }
   
   return response
-
-# TODO:shortlist
-def check_slots_complete(slots: SlotData) -> bool:
-  return all([
-    slots.destination is not None,
-    slots.date is not None,
-    slots.people is not None,
-    slots.preferences is not None and len(slots.preferences) > 0
-  ])

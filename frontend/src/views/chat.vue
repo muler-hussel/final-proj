@@ -18,11 +18,11 @@
             </template>
           </a-input>
         </div>
-        <div class="flex ml-auto mr-3 px-3 py-1 border gap-3 rounded-lg border-gray-300 hover:cursor-pointer">
+        <div class="flex ml-auto mr-3 px-3 py-1 border gap-3 rounded-lg border-gray-300 hover:cursor-pointer" @click="drawer.showShortlist()">
           <HeartOutlined style="color:#9370DB;" />
           <p class="text-sm text-indigo-900">Shortlist</p>
           <a-badge
-            count="4"
+            count="shortlistNum"
             :number-style="{
               backgroundColor: '#fff',
               color: '#999',
@@ -31,9 +31,8 @@
           />
         </div>
       
-        <div class="flex mr-3 px-3 py-1 bg-[#9370DB] gap-3 rounded-lg hover:cursor-pointer" @click="drawer.showDrawer()">
-          <p class="text-sm text-white">Your Preference</p>  
-          <SettingOutlined style="color:white;" />
+        <div class="flex mr-3 px-3 py-1 bg-[#9370DB] gap-3 rounded-lg hover:cursor-pointer" @click="drawer.showPreference()">
+          <p class="text-sm text-white">Your Preference</p>
         </div>
         
       </div>
@@ -86,6 +85,7 @@ import { useFirstPromStore } from '@/stores/firstPrompt';
 import { useSessionStore } from '@/stores/session';
 import { useRoute, useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
+import { useShortlistStore } from '@/stores/shortlist.ts';
 
 export default defineComponent({
   components: {
@@ -102,12 +102,14 @@ export default defineComponent({
     const session = useSessionStore();
     const firstPrompt = ref<string>('');
     const isEasyPlan = ref<boolean>(false);
-    const { title, sessionId, chatHistory } = storeToRefs(session); 
+    const { title, sessionId, chatHistory, currentSlots } = storeToRefs(session); 
     const drawer = useDrawerStore();
     const changeTitle = ref<Boolean>(false);
     const prompt = ref<string>('');
-    const firstPromptStore = useFirstPromStore()
-    const isAiGenerating = ref(false)
+    const firstPromptStore = useFirstPromStore();
+    const isAiGenerating = ref(false);
+    const shortlistStore = useShortlistStore();
+    const { shortlistNum } = storeToRefs(shortlistStore); 
 
     const fetchNewSession = async () => {
       try {
@@ -174,6 +176,8 @@ export default defineComponent({
       isAiGenerating,
       chatHistory,
       fetchAiRes,
+      currentSlots,
+      shortlistNum,
     }
   }
 })
