@@ -1,9 +1,13 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
+import type { ShortlistItem } from '@/types';
 
 interface ChatMessage {
   role: string;
-  message: string;
+  message: {
+    content?: string;
+    recommendations?: ShortlistItem[];
+  }
 }
 
 interface TravelSlots {
@@ -41,7 +45,9 @@ export const useSessionStore = defineStore('session', {
       
       const newMsg: ChatMessage = {
         role: 'user',
-        message: content,
+        message: {
+          response: content
+        }
       };
       
       this.chatHistory.push(newMsg);

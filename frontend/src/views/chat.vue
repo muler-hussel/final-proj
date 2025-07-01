@@ -42,11 +42,12 @@
           <template v-for="(content, idx) in chatHistory" :key="idx">
             <UserProm 
               v-if="content.role === 'user'"
-              :message="content.message"
+              :content="content.message.content || null"
             />
             <AiRes
               v-else-if="content.role === 'ai'"
-              :message="content.message"
+              :content="content.message.content"
+              :recommendations="content.message.recommendations"
               @next="fetchAiRes('ADVANCE_STEP')"
               @load-more="fetchAiRes('MORE_RECOMMENDATIONS')"
               @generate="fetchAiRes('ITINERARY_GENERATION')"
@@ -86,6 +87,7 @@ import { useSessionStore } from '@/stores/session';
 import { useRoute, useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useShortlistStore } from '@/stores/shortlist.ts';
+import { useUserBehaviorStore } from '@/stores/userBehavior';
 
 export default defineComponent({
   components: {
@@ -109,7 +111,8 @@ export default defineComponent({
     const firstPromptStore = useFirstPromStore();
     const isAiGenerating = ref(false);
     const shortlistStore = useShortlistStore();
-    const { shortlistNum } = storeToRefs(shortlistStore); 
+    const { shortlistNum, items } = storeToRefs(shortlistStore);
+    const userBehavior = useUserBehaviorStore();
 
     const fetchNewSession = async () => {
       try {
@@ -135,13 +138,25 @@ export default defineComponent({
       isAiGenerating.value = true;
       session.appendHistory({
         role: "user",
-        message: userInput,
+        message: {
+          content: userInput
+        }
       });
+
+      if (userBehavior.currentSession) {
+        if (userId === userBehavior.currentSession.userId && sessionId.value === userBehavior.currentSession.sessionId) {
+          // Deal with user behavior
+          userBehavior.uploadAndRestart();
+        }
+      }
+      
       try {
         const res = await axios.post(`/chat/${sessionId.value}/res`,{
           user_id: userId,
           user_input: userInput,
         })
+        userInput = '';
+        // TODO:只应该加入response，place_name, description
         session.appendHistory(res.data);
       } catch {
         alert("Failed to answer you. Please try again.");

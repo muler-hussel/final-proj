@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import List
+from typing import List, Optional, Set
 import uuid
 from backend.app.models.recommend import ShortTermProfile, UserBehavior
 
@@ -12,7 +12,8 @@ class SessionState(BaseModel):
   todo: List[str] = ["Init", "Present", "Draft", "Finalize",]
   todo_step: int = 0
   short_term_profile: ShortTermProfile = ShortTermProfile()
-  current_user_behavior: UserBehavior = UserBehavior()
+  current_user_behavior: Optional[List[UserBehavior]]
+  recommended_places: Set[str] = set()
 
   def get_redis_key(self):
     return f"user:{self.user_id}:session:{self.session_id}:metadata"

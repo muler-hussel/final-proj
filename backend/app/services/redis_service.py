@@ -108,6 +108,31 @@ class RedisService:
     history = self._redis_client.lrange(session_state.history_key, 0, -1)
     return [json.loads(msg) for msg in history]
 
+  async def get_place_info(self, place_name: str) -> ShortlistItem:
+    if not self._redis_client:
+      return None
+    
+    data = self._redis_client.get(place_name)
+    if data:
+      try:
+        return ShortlistItem.model_validate_json(data)
+      except Exception as e:
+        print(f"Error loading place infomation of {place_name}: {e}")
+        return None
+    return None
+  
+  async def save_place_info(self, place_name: str, place_info: ShortlistItem) -> bool:
+    if not self._redis_client:
+      return False
+    
+    try:
+      json_data = place_info.model_dump_json()
+      self._redis_client.set(place_name, json_data)
+      return True
+    except Exception as e:
+      print(f"Error saving place information for {place_name}: {e}")
+      return False
+  
   # Deal with shortlist
   async def add_to_shortlist(self, user_id: str, session_id: str, item: ShortlistItem) -> Optional[SessionState]:
     if not self._redis_client:

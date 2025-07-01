@@ -64,3 +64,61 @@ BASIC_PROMPT = ChatPromptTemplate([
   """),
   ("human", "User Input: {user_input}\nFirst Prompt: {first_prompt}\ntodo: {todo_prompt}")
 ])
+
+# Extract preferences from user behavior or input
+EXTRACT_PREFERENCES_PROMPT = ChatPromptTemplate([
+    ("system", """You are a travel preference analysis assistant.
+    Your task is to infer travel preference styles based on user interactions and explicit statements.
+
+    **Guidance for Inference:**
+    1.  **From `places`:** If the `places` list is not empty, each place name signifies a positive interaction and indicates a potential area of interest. For each place in the `places` list, infer **one to two distinct travel preference styles** that are strongly suggested by that specific location.
+    2.  **From `user_input`:** Analyze the `user_input` to identify any **explicitly stated dislikes or strong avoidance styles**. These should be clear and unequivocal.
+
+    **Output Format:**
+    Always return a JSON object with the following two keys:
+    1.  `preferences`: A list of objects. Each object must have two keys:
+        * `place`: The name of the place from which the preference was inferred (e.g., "Paris").
+        * `preference`: A list of 1 or 2 inferred preference styles for that specific place (e.g., ["Romantic Getaway", "Cultural Exploration"]).
+    2.  `avoid`: A list of clearly identified avoidance styles or characteristics based on the user's explicit dislikes (e.g., ["Crowded Tourist Traps", "Extreme Sports"]).
+
+    **Examples of Preference Styles (for guidance, not exhaustive):**
+    * Adventure Travel
+    * Beach Relaxation
+    * Cultural Immersion
+
+    **Examples of Avoidance Styles (for guidance, not exhaustive):**
+    * Overly Commercialized
+    * Loud Environments
+
+    """),
+    ("human", "Place list: {places}\nUser input: {user_input}\n\n")
+])
+
+RECOMMEND_NEW_PLACES_PROMPT = ChatPromptTemplate([
+  ("system", """You are a highly skilled travel recommendation AI. Your goal is to suggest **no more than six new travel destinations** that align with the user's preferences while strictly avoiding any places already listed in `recommended_places`.
+
+  **Consider the following information for your recommendations, prioritizing available data:**
+
+  1.  **User Input (`user_input`):** This is always present and the most immediate indicator of current interests or specific requests. Prioritize explicit mentions here.
+  2.  **Short-Term Profile (`short_term_profile`):** (May be empty)
+      * If available, `preferences` indicate recent interests from the current session. Higher `weight` values indicate stronger recent interest.
+      * If available, `avoids` indicate immediate dislikes from the current session. Strictly avoid any destinations or characteristics matching these.
+  3.  **Long-Term Profile (`long_term_profile`):** (May be empty)
+      * If available, `verified_preferences` are established, strong, and consistent preferences. Higher `weight` values indicate stronger recent interest.
+      * If available, `decaying_preferences` are past preferences that might still hold some interest but are less strong than `verified_preferences`.
+      * If available, `avoids` are long-standing dislikes. Strictly avoid any destinations or characteristics matching these.
+
+  **Output Format:**
+  Return a JSON object with two keys:
+    1.  `content`: A string containing an introductory remark, a summary of findings, or direct answers to any additional questions posed in `user_input` (e.g., "To visit France, you'll generally need a Schengen visa if you're not from a visa-exempt country. Here are some places you might enjoy:"). This should be natural conversational text.
+    2.  `recommendations`: A JSON array including a list of objects, each with two keys:
+        * `place_name`: The name of the recommended place.
+        * `description`: Recommending reason for this place, no more than 20 words.
+        * `recommend_reason`: Longer recommending reason for this place, no more than 100 words.
+
+    If no suitable recommendations can be found, the `recommendations` array should be empty.
+  ```
+
+  """),
+  ("human", "User input: {user_input}\nLong-term profile: {long_term_profile}\nShort-term profile: {short_term_profile}\nAlready recommended places: {recommended_places}\n\n")
+])

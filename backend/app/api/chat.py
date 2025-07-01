@@ -6,6 +6,7 @@ from app.models.session import SessionState
 import uuid
 from typing import Dict, Any
 from app.utils.prompts import PROMPT_FIRST_INPUT
+
 router = APIRouter(prefix="/chat", tags=["chat"])
 
 class ChatRequest(BaseModel):

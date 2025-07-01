@@ -2,10 +2,14 @@
   <div class="flex flex-col items-center p-4 gap-y-4">
     <p class="text-gray-700 text-justify leading-7 whitespace-pre-line" v-html="renderedMessage"></p>
     <a-card class="w-full h-fit shadow-md shadow-violet-200/50">
-      <a-tabs v-model:activeKey="activeKey">
+      <a-tabs v-model:activeKey="activeKey" v-if="recommendations">
         <a-tab-pane key="1" tab="Recommended">
           <a-scroll class="grid grid-cols-2 gap-4">
-            <div v-for="i in 8" :key="i"><SpotSelected></SpotSelected></div>
+            <SpotSelected
+              v-for="item in recommendations"
+              :key="item.place_id"
+              :item="item"
+            ></SpotSelected>
           </a-scroll>
         </a-tab-pane>
         <a-tab-pane key="2" tab="You May Like" force-render>Content of Tab Pane 2</a-tab-pane>
@@ -25,12 +29,21 @@
 import { ref, computed } from 'vue';
 import SpotSelected from './SpotSelected.vue';
 import { marked } from 'marked';
+import type { ShortlistItem } from '@/types';
+import type { PropType } from 'vue';
 
-const props = defineProps<{
-  message: string
-}>()
+const props = defineProps({
+  content: {
+    type: String,
+    default: null,
+  },
+  recommendations: {
+    type: Array as PropType<ShortlistItem[]>,
+    default: () => [],
+  },
+});
 const activeKey = ref('1');
 const emit = defineEmits(["ADVANCE_STEP", "MORE_RECOMMENDATIONS", "ITINERARY_GENERATION"]);
-const renderedMessage = computed(() => marked.parse(props.message));
+const renderedMessage = computed(() => marked.parse(props.content ?? ''));
 
 </script>
