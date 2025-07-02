@@ -10,18 +10,31 @@ interface ChatMessage {
   }
 }
 
-interface TravelSlots {
-  destination: string | null;
-  date: string | null;
-  people: string | null;
-  preferences: string | null;
+interface TagWeight{
+  tag: string;
+  weight: number;
+  consecutive_sessions?: number;
+}
+
+interface ShortTermProfile{
+  preferences: Record<string, TagWeight>;
+  avoids: string[];
+}
+
+interface Response {
+  role: string;
+  message: {
+    content?: string;
+    recommendations?: ShortlistItem[];
+  }
+  short_term_profile?: ShortTermProfile;
 }
 
 export const useSessionStore = defineStore('session', {
   state: () => ({
     sessionId: null as string | null,
     chatHistory: [] as ChatMessage[],
-    currentSlots: null as TravelSlots | null,
+    shortTermProfile: null as ShortTermProfile | null,
     title: 'New Trip',
   }),
 
@@ -36,7 +49,7 @@ export const useSessionStore = defineStore('session', {
     async fetchSessionData(sessionId: string) {
       const res = await axios.get(`/chat/${sessionId}`);
       this.chatHistory = res.data.messages;
-      this.currentSlots = res.data.slots;
+      this.shortTermProfile = res.data.short_term_profile;
       this.title = res.data.title || 'New Chat';
     },
 
@@ -46,7 +59,7 @@ export const useSessionStore = defineStore('session', {
       const newMsg: ChatMessage = {
         role: 'user',
         message: {
-          response: content
+          content: content
         }
       };
       
@@ -61,14 +74,22 @@ export const useSessionStore = defineStore('session', {
       this.sessionId = sessionId;
     },
 
-    appendHistory(content: ChatMessage) {
-      this.chatHistory.push(content);
+    appendHistory(data: Response) {
+      const newMsg: ChatMessage = {
+        role: data.role,
+        message: data.message
+      };
+      this.chatHistory.push(newMsg);
+    },
+    
+    setShortTermProfile(data: Response) {
+      this.shortTermProfile = data.short_term_profile ? data.short_term_profile : null;
     },
 
     clearSession() {
       this.sessionId = null;
       this.chatHistory = [];
-      this.currentSlots = null;
+      this.shortTermProfile = null;
       this.title = 'New Chat';
     }
   }

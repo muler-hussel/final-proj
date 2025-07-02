@@ -36,14 +36,13 @@ INTENT_CLASSIFIER_PROMPT = ChatPromptTemplate([
 
 # Remind of completing slots
 PROMPT_FIRST_INPUT = """
-Hello! It's a pleasure to plan the journey for you. To better assist you, I hope you can provide more and specific travel preferences.
-
-You can:
-- Click **Your Preference** at the top right of the page at any time to see your prefrences summarized by me, feel free to add, delete or modify them.
+Hello! It's a pleasure to plan the journey for you. If you want to provide more and specific travel preferences during our conversation, you can:
+- Click **Your Preference** at the top right of the page at any time to see your prefrences summarized by ai, feel free to add, delete or modify them.
 - Tell me directly in the conversation **at any time**!
+If you want to step forward, click the **next button** below.
 """
 
-# Response of ai TODO: short & long term prompt
+# Response of ai
 BASIC_PROMPT = ChatPromptTemplate([
   ("system", """You are a polite and helpful AI travel assistant. Your goal is to guide the user through planning their trip.
   
@@ -55,59 +54,57 @@ BASIC_PROMPT = ChatPromptTemplate([
   **Instructions for your response:**
   1.  **Respond to the user's input naturally.**
   2.  **If `first_prompt` is not empty**, you must:
+      - Do NOT have previous memory.
       - Fully and naturally include all content from `first_prompt` in your reply.
       - Do not shorten or omit any information from it.
       - You may paraphrase slightly to match the conversation tone, but **all bullet points and core ideas must appear** in your reply.
-  3.  **To-Do Step Guidance:** Gently guide the user to the next step in the `todo_prompt` or explain what you are doing next. If the current step is complete, indicate progress. If the user asks to skip, acknowledge it.
+  3.  **To-Do Step Guidance:** Always gently tell the user what you are going to do in the next step in the `todo_prompt`.
   4.  **Avoid Repetitive Questions:** Do NOT repeatedly ask for more information if `first_prompt` is NOT provided by the system.
-  5.  **Maintain a conversational and helpful tone.**
+  5.  **Avoid Further Step:** Do NOT start to recommend places for user.
+  6.  **Maintain a conversational and helpful tone.**
   """),
   ("human", "User Input: {user_input}\nFirst Prompt: {first_prompt}\ntodo: {todo_prompt}")
 ])
 
 # Extract preferences from user behavior or input
 EXTRACT_PREFERENCES_PROMPT = ChatPromptTemplate([
-    ("system", """You are a travel preference analysis assistant.
-    Your task is to infer travel preference styles based on user interactions and explicit statements.
+  ("system", """You are a highly specialized travel preference analysis assistant.
+  Your core task is to meticulously infer and categorize a user's **tourism-related travel preference styles** based on their provided interactions and explicit statements.
 
-    **Guidance for Inference:**
-    1.  **From `places`:** If the `places` list is not empty, each place name signifies a positive interaction and indicates a potential area of interest. For each place in the `places` list, infer **one to two distinct travel preference styles** that are strongly suggested by that specific location.
-    2.  **From `user_input`:** Analyze the `user_input` to identify any **explicitly stated dislikes or strong avoidance styles**. These should be clear and unequivocal.
-
-    **Output Format:**
-    Always return a JSON object with the following two keys:
-    1.  `preferences`: A list of objects. Each object must have two keys:
+  **Guidance for Inference:**
+  1.  **From `places`:** If the {places} list is not empty, each place name represents a positive interaction. For each place, infer **one to two travel preference styles** with no more than 2 words that are suggested by that particular location.
+  2.  **From `user_input`:** Analyze the {user_input} to identify any **explicitly stated preferences or strong avoidance styles**.
+  3.  **Overlap:** Any extracted detailed characteristics, preferences, or avoidance styles can appear in `short_term_profile` or `long_term_profile`, but for most of the time, you should explore new and more detailed characteristics, preferences, or avoidance.
+  
+   **Output Format:**
+  ALWAYS return a JSON object with the THREE keys:
+  1.  `place_preferences`: A list of objects. Each object ALWAYS have two keys:
         * `place`: The name of the place from which the preference was inferred (e.g., "Paris").
-        * `preference`: A list of 1 or 2 inferred preference styles for that specific place (e.g., ["Romantic Getaway", "Cultural Exploration"]).
-    2.  `avoid`: A list of clearly identified avoidance styles or characteristics based on the user's explicit dislikes (e.g., ["Crowded Tourist Traps", "Extreme Sports"]).
+        * `preference`: A list of 1 or 2 inferred preference styles with no more than 2 words for that specific place.
+  2.  `avoid`: A list of clearly identified avoidance styles or characteristics based on the user's explicit dislikes.
+  3.  `input_preferences`: A list of 0 to 2 clearly identified preference styles with no more than 2 words based on the user's `input`.
 
-    **Examples of Preference Styles (for guidance, not exhaustive):**
-    * Adventure Travel
-    * Beach Relaxation
-    * Cultural Immersion
-
-    **Examples of Avoidance Styles (for guidance, not exhaustive):**
-    * Overly Commercialized
-    * Loud Environments
-
-    """),
-    ("human", "Place list: {places}\nUser input: {user_input}\n\n")
+  """),
+  ("human", "Place list: {places}\nUser input: {user_input}\nshort term profile: {short_term_profile}\n Long term profile: {long_term_profile}\n\n")
 ])
 
 RECOMMEND_NEW_PLACES_PROMPT = ChatPromptTemplate([
-  ("system", """You are a highly skilled travel recommendation AI. Your goal is to suggest **no more than six new travel destinations** that align with the user's preferences while strictly avoiding any places already listed in `recommended_places`.
+  ("system", """You are a highly skilled travel recommendation AI. Your goal is to suggest **six new travel destinations** that align with the user's preferences while strictly avoiding any places already listed in `recommended_places`.
 
+  **When generating recommendations, aim to satisfy at least one, and ideally multiple, of the user's preferences.** It's not necessary for a single recommendation to meet all preferences, but it should resonate strongly with at least one key aspect of their travel style.
   **Consider the following information for your recommendations, prioritizing available data:**
 
   1.  **User Input (`user_input`):** This is always present and the most immediate indicator of current interests or specific requests. Prioritize explicit mentions here.
-  2.  **Short-Term Profile (`short_term_profile`):** (May be empty)
+  2.  **Current Session Context:** {history}. This is another most important indicator of interests or requests.
+  3.  **Short-Term Profile (`short_term_profile`):** (May be empty)
       * If available, `preferences` indicate recent interests from the current session. Higher `weight` values indicate stronger recent interest.
       * If available, `avoids` indicate immediate dislikes from the current session. Strictly avoid any destinations or characteristics matching these.
-  3.  **Long-Term Profile (`long_term_profile`):** (May be empty)
+  4.  **Long-Term Profile (`long_term_profile`):** (May be empty)
       * If available, `verified_preferences` are established, strong, and consistent preferences. Higher `weight` values indicate stronger recent interest.
       * If available, `decaying_preferences` are past preferences that might still hold some interest but are less strong than `verified_preferences`.
       * If available, `avoids` are long-standing dislikes. Strictly avoid any destinations or characteristics matching these.
-
+  
+  
   **Output Format:**
   Return a JSON object with two keys:
     1.  `content`: A string containing an introductory remark, a summary of findings, or direct answers to any additional questions posed in `user_input` (e.g., "To visit France, you'll generally need a Schengen visa if you're not from a visa-exempt country. Here are some places you might enjoy:"). This should be natural conversational text.

@@ -25,7 +25,7 @@ class PlaceReview(BaseModel):
   type: int # 0-Google latest, 1-Google relevant, 2-TripAdvisor latest, 3-TripAdivsor detailed
   
 # Infomation shown in drawer
-class PlaceInfo(BaseModel):
+class PlaceDetail(BaseModel):
   recommend_reason: Optional[str] = None # Recommend reason, city & attraction
   website: Optional[str] = None # Official website, if is attraction
   address: Optional[str] = None
@@ -45,9 +45,9 @@ class ShortlistItem(BaseModel):
   place_id: Optional[str] = None
   description: str
   tags: Optional[List[str]] = [] # tags of attraction, 'museum', 'animal', 'history'
-  info: Optional[PlaceInfo] = None
+  info: Optional[PlaceDetail] = None
   sub_items: Optional[List[str]] = [] # If city, containing recommended attraction names of this city
-  geometry: Optional[PlaceGeo] = PlaceGeo()
+  geometry: Optional[PlaceGeo] = None
   status: Optional[str] = "pending"  # Backend asynchronous processing status 'pending', 'processing', 'ready', 'error'
   photos: Optional[List[str]] = None
   updated_time: Optional[datetime] = None # Check website, weekday_text, prices, reviews every month

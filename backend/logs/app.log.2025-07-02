@@ -1,0 +1,237 @@
+2025-07-02 05:33:45,628 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 05:35:14,867 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 05:35:16,996 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 05:36:19,433 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 05:36:22,801 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 05:39:47,508 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 05:39:50,632 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 05:42:21,343 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 05:42:31,799 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 05:42:31,809 - [INFO] - TravelAI - f0c4476669f25d29e09815f838d51b5ed18b2a39 - prompt: {'user_id': '6849b8d6665200a07968b00c', 'session_id': 'f8e2735a-0907-498a-996c-e69e72821773', 'history': 'user: Best cities in Italy for history, landscapes, and food.', 'first_prompt': "\nHello! It's a pleasure to plan the journey for you. To better assist you, I hope you can provide more and specific travel preferences.\n\nYou can:\n- Click **Your Preference** at the top right of the page at any time to see your prefrences summarized by me, feel free to add, delete or modify them.\n- Tell me directly in the conversation **at any time**!\n", 'todo_prompt': 'Present', 'user_input': 'Best cities in Italy for history, landscapes, and food.'}, ai response: Hello! It's a pleasure to help you plan your journey to Italy. When it comes to exploring the best cities in Italy for history, landscapes, and food, here are some top recommendations:
+
+1. **Rome**: The capital city is a treasure trove of history with landmarks like the Colosseum, the Roman Forum, and the Vatican. The city also offers stunning architecture and a vibrant food scene, featuring traditional Roman dishes like pasta carbonara and pizza al taglio.
+
+2. **Florence**: Known as the cradle of the Renaissance, Florence is filled with art, history, and beautiful landscapes. Don't miss the Uffizi Gallery, the Florence Cathedral, and the picturesque views from Piazzale Michelangelo. The Tuscan cuisine here is also exceptional, with dishes like ribollita and Florentine steak.
+
+3. **Venice**: Famous for its canals and unique architecture, Venice is a city like no other. Explore St. Mark's Basilica, the Doge's Palace, and take a gondola ride through the canals. Venetian cuisine, including cicchetti (small snacks) and fresh seafood, is a must-try.
+
+4. **Bologna**: Often overlooked, Bologna is renowned for its rich culinary tradition, including pasta dishes like tagliatelle al ragù (Bolognese sauce). The city's medieval architecture and vibrant atmosphere make it a great place to experience both history and food.
+
+5. **Naples**: As the birthplace of pizza, Naples is a food lover's paradise. The city is also close to historical sites like Pompeii and Herculaneum, offering a mix of ancient history and stunning coastal views.
+
+6. **Siena**: This medieval city is famous for its well-preserved architecture and the Palio horse race. The Tuscan landscape surrounding Siena is breathtaking, and the local cuisine features delicious wines and hearty dishes.
+
+7. **Verona**: Known for its association with Shakespeare's Romeo and Juliet, Verona boasts a rich history and beautiful architecture, including the ancient Roman arena. The local food scene is vibrant, with a focus on regional specialties.
+
+These cities each offer a unique blend of history, stunning landscapes, and delicious food that will make your trip memorable.
+
+To help tailor your trip even further, feel free to share any specific preferences or interests you have regarding your travel plans. You can also click **Your Preference** at the top right of the page to see your preferences summarized and make any adjustments. Let me know how you’d like to proceed!
+2025-07-02 05:46:57,818 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 05:47:02,561 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 05:48:06,544 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 05:48:11,726 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 05:48:52,657 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 05:48:55,399 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 05:52:24,679 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 05:52:29,438 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 05:57:04,454 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 05:57:08,271 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 05:59:12,207 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 05:59:16,212 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 06:02:46,836 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 06:02:52,474 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 06:04:03,589 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 06:04:16,335 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 06:07:02,404 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 06:07:08,379 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 06:07:36,152 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 06:07:42,606 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 06:10:01,926 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 06:10:06,912 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 06:11:10,491 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 06:11:12,868 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 06:12:03,118 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 06:12:11,558 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 06:13:56,339 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 06:14:06,116 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 06:15:00,883 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 06:15:10,734 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 06:17:09,701 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 06:17:17,761 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 06:30:51,252 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 06:31:03,844 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 06:37:24,362 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 06:37:32,338 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 06:39:12,207 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 06:39:15,095 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 06:44:15,237 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 06:44:18,937 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 06:50:41,139 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 06:50:45,337 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:30:24,957 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:30:29,647 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:30:50,590 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:33:03,564 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:33:07,743 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:33:18,091 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:35:02,728 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:35:07,166 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:35:21,457 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:35:21,460 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 07:35:21,792 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:35:21,799 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 07:36:36,111 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:36:36,119 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 07:36:39,753 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:39:20,155 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:39:20,170 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 07:39:25,590 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:45:35,346 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:45:35,362 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 07:45:38,392 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:48:10,328 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:48:13,107 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:48:24,000 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:48:24,000 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 07:48:27,137 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:48:41,179 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:50:10,847 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:50:10,847 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 07:50:12,227 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:50:20,722 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:51:21,953 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:51:21,953 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 07:51:26,116 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:51:37,572 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:52:37,998 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:52:38,008 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 07:52:40,938 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:52:46,747 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:54:32,263 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:54:32,272 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 07:55:09,667 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:55:17,992 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:56:49,930 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:56:49,931 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 07:56:52,814 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 07:57:02,581 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 19:13:19,783 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 19:13:22,332 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 19:13:38,184 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 19:13:38,185 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 19:13:41,559 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 19:13:46,800 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 19:15:36,792 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 19:15:36,792 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 19:15:39,758 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 19:15:47,028 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 19:16:36,846 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 19:16:36,853 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 19:16:37,769 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 19:16:47,274 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 19:21:03,853 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 19:23:24,525 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 19:23:24,533 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 19:23:25,432 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 19:23:35,338 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 19:26:28,632 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 19:26:28,642 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 19:26:32,016 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 19:26:40,390 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 19:53:32,106 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 19:53:32,111 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 19:53:33,223 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 19:53:37,096 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 19:54:49,054 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 19:54:49,076 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 19:54:50,305 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 19:55:03,259 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 19:58:00,717 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 19:58:00,727 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 19:58:04,185 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 19:58:15,103 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 19:59:21,021 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 19:59:21,032 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 19:59:24,424 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 19:59:29,383 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 20:26:10,782 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 20:26:18,453 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 20:26:34,457 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 20:26:34,464 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 20:26:37,315 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 20:26:49,716 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 20:27:35,237 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 20:27:35,237 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 20:27:38,315 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 20:27:47,477 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:08:33,013 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:08:35,690 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:08:35,693 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 23:08:37,789 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:09:08,912 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:09:08,915 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 23:09:09,842 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:10:11,359 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:10:18,846 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:10:18,846 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 23:10:20,425 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:10:38,859 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:10:38,863 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 23:10:42,315 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:10:54,776 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:12:30,586 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:12:30,586 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 23:12:31,703 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:12:40,590 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:20:50,712 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:20:52,900 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:20:52,905 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 23:20:56,455 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:22:10,411 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:22:15,527 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:22:15,532 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 23:22:19,117 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:22:36,053 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:22:40,384 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:22:40,390 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 23:22:41,915 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:25:12,440 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:25:17,460 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:25:17,465 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 23:25:20,766 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:25:27,595 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:25:30,755 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:25:30,761 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 23:25:31,940 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:27:15,219 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:27:16,816 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:27:16,823 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 23:27:18,069 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:28:32,852 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:28:37,910 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:28:37,914 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 23:28:39,436 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:28:41,851 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:28:43,430 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:28:43,434 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 23:28:48,922 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:32:59,542 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:33:04,861 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:33:04,864 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 23:33:09,234 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:33:20,911 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:33:20,912 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 23:33:23,927 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:33:29,576 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:35:29,251 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:35:29,260 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 23:35:32,499 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:35:41,964 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:38:29,186 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:38:29,203 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 23:38:30,784 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:38:34,753 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:41:43,859 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:41:43,869 - [INFO] - googlemaps.client - f0c4476669f25d29e09815f838d51b5ed18b2a39 - API queries_quota: 60
+2025-07-02 23:41:47,403 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 23:41:51,603 - [INFO] - httpx - f0c4476669f25d29e09815f838d51b5ed18b2a39 - HTTP Request: POST https://free.v36.cm/v1/chat/completions "HTTP/1.1 200 OK"

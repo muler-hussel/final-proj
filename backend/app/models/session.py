@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field
 from typing import List, Optional, Set
 import uuid
-from backend.app.models.recommend import ShortTermProfile, UserBehavior
+from app.models.recommend import ShortTermProfile, UserBehavior
 
 class SessionState(BaseModel):
   user_id: str
@@ -9,10 +9,10 @@ class SessionState(BaseModel):
   history_key: str = "" # Redis key stores conversation history
   shortlist_key: str = ""
   title: str
-  todo: List[str] = ["Init", "Present", "Draft", "Finalize",]
+  todo: List[str] = ["Init", "Recommend places for user", "Draft an itinerary for user to modify", "Generate a final trip"]
   todo_step: int = 0
   short_term_profile: ShortTermProfile = ShortTermProfile()
-  current_user_behavior: Optional[List[UserBehavior]]
+  current_user_behavior: Optional[List[UserBehavior]] = None
   recommended_places: Set[str] = set()
 
   def get_redis_key(self):

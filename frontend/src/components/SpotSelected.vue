@@ -1,27 +1,27 @@
 <template>
-  <div class="relative flex items-center h-fit 
+  <div class="relative flex items-center
     border rounded-xl border-gray-200 
     hover:shadow hover:shadow-violet-200/50 hover:cursor-pointer p-3"
     @click="showDrawer()"
   >
     <!-- 注意图片加载的骨架占位符 -->
-    <div class="flex-shrink-0 w-1/3 rounded-lg overflow-hidden mr-4">
+    <div class="flex-shrink-0 w-1/3 rounded-lg overflow-hidden mr-4" style="aspect-ratio: 16/10; overflow: hidden;">
       <img
-        :src="`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${item.photos[0].photo_reference}&key=YOUR_API_KEY`"
+        :src="item.photos[0]"
         class="w-full h-full object-cover block" />
     </div>
     <div class="flex-grow"> 
-      <h3 class="text-xl font-semibold text-indigo-900 mb-2 leading-tight">{{ item.name }}</h3>
+      <h3 class="text-lg font-semibold text-indigo-900 mb-2 leading-tight">{{ item.name }}</h3>
       <p class="text-sm text-indigo-900 leading-tight">{{ item.description }}</p>
     </div>
     <div class="absolute top-2 right-2">
       <HeartOutlined 
         v-if="!shortlistStore.hasItem(item.name)" 
         style="color:#9370DB;" class="ml-auto" 
-        @click="handleAddToShortlist" />
+        @click="handleAddToShortlist()" />
       <HeartFilled 
         v-else style="color:#9370DB;" class="ml-auto"
-        @click="handleRemoveShortlist"
+        @click="handleRemoveShortlist()"
       />
     </div>
   </div>

@@ -18,11 +18,12 @@
             </template>
           </a-input>
         </div>
-        <div class="flex ml-auto mr-3 px-3 py-1 border gap-3 rounded-lg border-gray-300 hover:cursor-pointer" @click="drawer.showShortlist()">
+        <div class="flex ml-auto mr-3 px-3 py-1 border gap-3 rounded-lg border-gray-300 hover:cursor-pointer" @click="drawer.showShortlists()">
           <HeartOutlined style="color:#9370DB;" />
           <p class="text-sm text-indigo-900">Shortlist</p>
           <a-badge
-            count="shortlistNum"
+            show-zero
+            :count="shortlistNum"
             :number-style="{
               backgroundColor: '#fff',
               color: '#999',
@@ -71,6 +72,7 @@
   </div>
 
   <PreferenceDrawer></PreferenceDrawer>
+  <ShortlistDrawer></ShortlistDrawer>
 </template>
 
 <script lang="ts">
@@ -88,6 +90,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useShortlistStore } from '@/stores/shortlist.ts';
 import { useUserBehaviorStore } from '@/stores/userBehavior';
+import ShortlistDrawer from '@/components/ShortlistDrawer.vue';
 
 export default defineComponent({
   components: {
@@ -95,6 +98,7 @@ export default defineComponent({
     UserProm,
     AiRes,
     PreferenceDrawer,
+    ShortlistDrawer,
   },
   setup() {
     const auth = useAuthStore();
@@ -104,14 +108,14 @@ export default defineComponent({
     const session = useSessionStore();
     const firstPrompt = ref<string>('');
     const isEasyPlan = ref<boolean>(false);
-    const { title, sessionId, chatHistory, currentSlots } = storeToRefs(session); 
+    const { title, sessionId, chatHistory } = storeToRefs(session); 
     const drawer = useDrawerStore();
     const changeTitle = ref<Boolean>(false);
     const prompt = ref<string>('');
     const firstPromptStore = useFirstPromStore();
     const isAiGenerating = ref(false);
     const shortlistStore = useShortlistStore();
-    const { shortlistNum, items } = storeToRefs(shortlistStore);
+    const { shortlistNum } = storeToRefs(shortlistStore);
     const userBehavior = useUserBehaviorStore();
 
     const fetchNewSession = async () => {
@@ -129,6 +133,7 @@ export default defineComponent({
     };
 
     const onEditTitle = () => changeTitle.value = true;
+
     const completeChange = () => {
       changeTitle.value = false;
     }
@@ -144,7 +149,7 @@ export default defineComponent({
       });
 
       if (userBehavior.currentSession) {
-        if (userId === userBehavior.currentSession.userId && sessionId.value === userBehavior.currentSession.sessionId) {
+        if (userId === userBehavior.currentSession.userId && sessionId.value === userBehavior.currentSession.sessionId && userBehavior.currentSession.events) {
           // Deal with user behavior
           userBehavior.uploadAndRestart();
         }
@@ -155,11 +160,11 @@ export default defineComponent({
           user_id: userId,
           user_input: userInput,
         })
-        userInput = '';
-        // TODO:只应该加入response，place_name, description
+        prompt.value = '';
         session.appendHistory(res.data);
-      } catch {
-        alert("Failed to answer you. Please try again.");
+        session.setShortTermProfile(res.data);
+      } catch(e) {
+        alert(`Failed to answer you. Please try again, ${e}`);
       } finally {
         isAiGenerating.value = false;
       }
@@ -168,15 +173,18 @@ export default defineComponent({
     onMounted(async () => {
       const sessionId = route.query.sessionId as string | undefined;
       if (sessionId) {
-        await session.initializeSession(sessionId); 
+        await session.initializeSession(sessionId);
       } else {
         session.clearSession();
+        shortlistStore.clearShortlist();
+        userBehavior.currentSession = null;
         firstPrompt.value = firstPromptStore.firstPromptData.user_input;
         isEasyPlan.value = firstPromptStore.firstPromptData.isEasyPlan;
         await fetchNewSession();
         if (isEasyPlan.value) {
         } else {
           await fetchAiRes(firstPrompt.value);
+          userBehavior.startTracking();
         }
       }
     });
@@ -191,7 +199,6 @@ export default defineComponent({
       isAiGenerating,
       chatHistory,
       fetchAiRes,
-      currentSlots,
       shortlistNum,
     }
   }

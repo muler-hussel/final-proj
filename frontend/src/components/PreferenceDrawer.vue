@@ -1,8 +1,8 @@
 <template>
-  <a-drawer title="Your Preference" :open="drawer.preference.isOpen" @close="drawer.onPreferenceClose" class="flex flex-col">
-    <p class="text-sm text-gray-300 w-44">If the ai fails to summarize your preferences, you can add a tag yourself.</p>
+  <a-drawer title="Your Preference" :open="drawer.preference.isOpen" @close="drawer.onPreferenceClose()">
+    <p class="text-sm text-gray-300">If the AI fails to summarize your preferences, you can add a tag yourself.</p>
     <div class="flex mb-2 mt-2 flex-col gap-y-1">
-      <div v-for="(p, idx) in state.tags" :key="idx">
+      <div v-for="(p, idx) in tags" :key="idx">
         <a-tooltip v-if="p && p.length > 20" :title="p">
           <a-tag :closable="p" @close="handleClose(p)">
             {{ `${p.slice(0, 20)}...` }}
@@ -32,23 +32,34 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive, nextTick } from 'vue';
+import { defineComponent, ref, reactive, nextTick, computed } from 'vue';
 import { useDrawerStore } from '@/stores/drawer.ts';
+import { useSessionStore } from '@/stores/session';
+import { storeToRefs } from 'pinia';
 
 export default defineComponent({
   setup() {
     const drawer = useDrawerStore();
+    const session = useSessionStore();
+    const { shortTermProfile } = storeToRefs(session); 
     const inputRef = ref();
+
+    const tags = computed(() => 
+      shortTermProfile.value?.preferences 
+        ? Object.keys(shortTermProfile.value.preferences) 
+        : []
+    );
+
     const state = reactive({
-      tags: ['Unremovable', 'Tag 2', 'Tag 3Tag 3Tag 3Tag 3Tag 3Tag 3Tag 3'],
       inputVisible: false,
       inputValue: '',
     });
 
     const handleClose = (removedTag: string) => {
-      const tags = state.tags.filter(tag => tag !== removedTag);
-      console.log(tags);
-      state.tags = tags;
+      if (shortTermProfile.value?.preferences) {
+        delete shortTermProfile.value.preferences[removedTag];
+      }
+      // TODO: 在后端删除这个tag
     };
 
     const showInput = () => {
@@ -59,14 +70,18 @@ export default defineComponent({
     };
 
     const handleInputConfirm = () => {
-      const inputValue = state.inputValue;
-      let tags = state.tags;
-      if (inputValue && tags.indexOf(inputValue) === -1) {
-        tags = [...tags, inputValue];
+      const inputValue = state.inputValue.trim();
+      if (!inputValue) return;
+
+      if (!shortTermProfile.value) {
+        shortTermProfile.value = { preferences: {}, avoids: [] };
       }
-      console.log(tags);
+
+      if (!shortTermProfile.value.preferences[inputValue]) {
+        shortTermProfile.value.preferences[inputValue] = { tag: inputValue, weight: 1 };
+      }
+      // TODO: 在后端增加tag和weight
       Object.assign(state, {
-        tags,
         inputVisible: false,
         inputValue: '',
       });
@@ -79,6 +94,7 @@ export default defineComponent({
       handleInputConfirm,
       state,
       showInput,
+      tags,
     }
   }
 })

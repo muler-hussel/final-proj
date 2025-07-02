@@ -40,7 +40,7 @@ async def get_session(session_id: str = Path(...), data: ChatRequest = Body()):
   history = await redis_service.get_history(user_id, session_id)
   response = {
     "messages": history,
-    "slots": session_state.slots,
+    "short_term_profile": session_state.short_term_profile,
     "title": session_state.title,
   }
   return response
@@ -59,22 +59,23 @@ async def chat_with_ai(session_id: str = Path(...), data: ChatRequest = Body(...
 
   todo_step = session_state.todo_step
   first_prompt = None
+  ai_response_text = None
   # first prompt
   if todo_step == 0:
     first_prompt = PROMPT_FIRST_INPUT
     todo_step += 1
+    session_state.todo_step = todo_step
+    ai_response_text, session_state = await chat_service.get_ai_response(
+      session_state, user_input, first_prompt, session_state.todo[todo_step]
+    )
   else:
-    todo_prompt, session_state = await chat_service.orchestrate_planning_step(session_state, user_input)
+    ai_response_text, session_state = await chat_service.orchestrate_planning_step(session_state, user_input)
   
-  # Ai response, update session history
-  ai_response_text = await chat_service.get_ai_response(
-    session_state, user_input, first_prompt, session_state.todo[todo_step]
-  )
-  await redis_service.append_history(session_state, ai_response_text, "ai")
-
+  await redis_service.save_session_state(session_state)
   response = {
     "role": "ai",
     "message": ai_response_text,
+    "short_term_profile": session_state.short_term_profile
   }
   
   return response

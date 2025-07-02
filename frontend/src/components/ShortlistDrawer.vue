@@ -1,26 +1,33 @@
 <template>
-  <a-drawer title="Your Preference" :open="drawer.shortlist.isOpen" @close="drawer.onShortlistClose" class="flex flex-col">
-    <a-scroll class="h-2/3 grid-cols-1 gap-y-2">
-      <div v-for="item in shortlistStore.itemList" :key="item.place_id"><SpotSelected :item="item"></SpotSelected></div>
+  <a-drawer title="Your Shortlist" :open="drawer.shortlists.isOpen" @close="drawer.onShortlistsClose()" class="flex flex-col" size="large">
+    <a-scroll class="grid grid-cols-1 gap-4 items-stretch">
+      <SpotSelected
+        v-for="item in Array.from(items.values())" 
+        :key="item.name"
+        :item="item"
+      ></SpotSelected>
     </a-scroll>
   </a-drawer>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, computed } from 'vue';
 import { useDrawerStore } from '@/stores/drawer.ts';
 import { useShortlistStore } from '@/stores/shortlist.ts';
 import SpotSelected from './SpotSelected.vue';
 
 export default defineComponent({
+  components: { SpotSelected },
   setup() {
     const drawer = useDrawerStore();
     const shortlistStore = useShortlistStore();
+    const items = computed(() => Array.from(shortlistStore.items.values()))
 
     return {
       drawer,
       SpotSelected,
       shortlistStore,
+      items,
     }
   }
 })

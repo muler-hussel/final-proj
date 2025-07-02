@@ -1,9 +1,10 @@
 from pydantic import BaseModel
-from typing import List, Any
+from typing import List, Any, Dict, Optional
+from app.db.mongodb import MongoDB
 from app.models.user_preference import UserPreference
 from app.models.place_info import PlaceInfo
 from app.models.recommend import LongTermProfile, TagWeight, UserBehavior
-from app.models.shortlist import ShortlistItem, PlaceReview, PlaceGeo
+from app.models.shortlist import ShortlistItem, PlaceReview, PlaceGeo, PlaceDetail
 from app.models.session import SessionState
 from app.services.shared import language_model
 from app.services.redis_service import redis_service
@@ -14,18 +15,29 @@ import googlemaps
 from dotenv import load_dotenv
 import os
 from datetime import timedelta, datetime
+from app.utils.logger import logger
+
+class PlacePreference(BaseModel):
+  place: str
+  preference: List[str]
 
 class LLMExtract(BaseModel):
-  preferences: List[dict]  # [{"place": str, "preference": List[str]}]
+  place_preferences: List[PlacePreference]
   avoid: List[str]
+  input_preferences: List[str]
+
+class RecommendationItem(BaseModel):
+  place_name: str
+  description: str
+  recommend_reason: str
 
 class LLMRecommend(BaseModel):
   content: str
-  recommendations: List[dict] #[{"place_name": str, "description": str, "recommend_reason"}]
+  recommendations: List[RecommendationItem]
 
 class LLMResponse(BaseModel):
-  content: str
-  recommendations: List[ShortlistItem]
+  content: Optional[str] = None
+  recommendations: Optional[List[ShortlistItem]] = [] 
 
 # Fields needed in shortlist item
 ESSENTIAL_FIELDS = [
@@ -39,14 +51,14 @@ ADMINISTRATIVE_TYPES = {
   'administrative_area_level_2',
   'administrative_area_level_3',
   'administrative_area_level_4',
-  'administrative_area_level_5'
+  'administrative_area_level_5',
+  'political',
 }
 
 class RecommendService:
-  def __init__(self, user_preference: UserPreference, place_info: PlaceInfo):
-    self.user_preference = user_preference
-
-    self.place_info = place_info
+  def __init__(self, mongodb: MongoDB):
+    self.user_preference = UserPreference(mongodb.db)
+    self.place_info = PlaceInfo(mongodb.db)
 
     load_dotenv()
     self.key = os.getenv("GOOGLE_API")
@@ -80,32 +92,38 @@ class RecommendService:
   async def update_short_term_profile(self, session_state: SessionState, user_input: str) -> SessionState:
     user_behavior = session_state.current_user_behavior
     place_names = None
+    short_term_profile = session_state.short_term_profile
+    long_term_profile = await self.get_long_preferences(session_state.user_id)
+
     if (user_behavior != None): 
       place_names = list({behavior.place_name for behavior in user_behavior})
 
-    extracted_preferences: LLMExtract = await self.extract_preferences_chain.ainvoke({
-      "place_names": place_names, 
+    raw_data = await self.extract_preferences_chain.ainvoke({
+      "places": place_names, 
       "user_input": user_input,
+      "short_term_profile": short_term_profile,
+      "long_term_profile": long_term_profile,
     })
-    short_term_profile = session_state.short_term_profile
+    # logger.info(f"places: {place_names}, user_input: {user_input}, extracted_preferences: {raw_data}")
+    extracted_preferences = LLMExtract(**raw_data)
 
-    for item in extracted_preferences.preferences:
-      place_name = item["place"]
-      inferred_styles = item["preference"]
+    for item in extracted_preferences.place_preferences:
+      place_name = item.place
+      inferred_styles = item.preference
 
       # Behaviors acted at each place according to user_behavior
-
       if user_behavior != None:
         place_behaviors = [b for b in user_behavior if b.place_name == place_name]
 
         # Total weight of each place, according to place_behaviors
-        total_weight = sum(self.sigmoid(self.raw_behavior_score(b)) for b in place_behaviors)
+        total_weight = self.sigmoid(sum(self.raw_behavior_score(b) for b in place_behaviors))
 
         # Add new weight to short_term_profile, according to each style
         for style in inferred_styles:
           if style in short_term_profile.preferences:
             cur_weight = short_term_profile.preferences[style].weight
-            short_term_profile.preferences[style] = TagWeight(tag=style, weight=(cur_weight + total_weight) / 2)
+            new_weight = (cur_weight + total_weight) / 2
+            short_term_profile.preferences[style] = TagWeight(tag=style, weight=min(1.0, max(0.0, new_weight)))
           else:
             short_term_profile.preferences[style] = TagWeight(tag=style, weight=total_weight)
       else:
@@ -115,60 +133,77 @@ class RecommendService:
     for item in extracted_preferences.avoid:
       short_term_profile.avoids.add(item)
     
+    for style in extracted_preferences.input_preferences:
+      if style in short_term_profile.preferences:
+        cur_weight = short_term_profile.preferences[style].weight
+        short_term_profile.preferences[style] = TagWeight(tag=style, weight=(cur_weight + self.init_weight) / 2)
+      else:
+        short_term_profile.preferences[style] = TagWeight(tag=style, weight=self.init_weight)
+    print(short_term_profile)
     await redis_service.save_session_state(session_state)
     return session_state
   
   async def get_place_info(self, place_name: str) -> ShortlistItem | None:
-    return self.place_info.get_place(place_name)
+    return await self.place_info.get_place(place_name)
   
   async def sava_place_info(self, placeInfo: ShortlistItem):
-    return self.place_info.save_place(placeInfo)
+    return await self.place_info.save_place(placeInfo)
   
   async def recommend_places(self, session_state: SessionState, user_input: str):
     user_id = session_state.user_id
-    long_term_profile = self.get_long_preferences(user_id)
+    session_id = session_state.session_id
+    long_term_profile = await self.get_long_preferences(user_id)
     short_term_profile = session_state.short_term_profile
     recommended_places = session_state.recommended_places
+    history = (await redis_service.get_history(user_id, session_id))[-10:] # recent 10 conversation
+    history_str = "\n".join(f"{msg['role']}: {msg['message']}" for msg in history)
 
-    result: LLMRecommend = await self.recommend_places_chain.ainvoke({
+    raw_data = await self.recommend_places_chain.ainvoke({
       "user_input": user_input,
       "long_term_profile": long_term_profile,
       "short_term_profile": short_term_profile,
-      "recommended_places": recommended_places
+      "recommended_places": recommended_places,
+      "history": history_str,
     })
-
-    redis_service.append_history(session_state, result, "ai")
+    # logger.info(f"short_term_profile: {short_term_profile}, user_input: {user_input}, recommend_places: {raw_data}")
+    result = LLMRecommend(**raw_data)
+    await redis_service.append_history(session_state, raw_data, "ai")
 
     recommendations = result.recommendations
-    response: LLMResponse = None
+    response = LLMResponse()
     response.content = result.content
     
     for place in recommendations:
       # If place information is in DB, get place info, else fetch from google map api
-      session_state.recommended_places.add(place['place_name'])
-      place_info = await self.get_or_fetch_place_brief(place['place_name'], place['description'], place['recommend_reason'])
+      session_state.recommended_places.add(place.place_name)
+      place_info = await self.get_or_fetch_place_brief(place.place_name, place.description, place.recommend_reason)
       # TODO:Check if need updating
       response.recommendations.append(place_info) 
-    
-    redis_service.save_session_state(session_state)
+      
+    await redis_service.save_session_state(session_state)
     return response
   
   async def get_or_fetch_place_brief(self, place_name: str, description: str, recommend_reason: str) -> ShortlistItem:
     # Check if in Redis
       place_info = await redis_service.get_place_info(place_name)
-
       # Check if in MongoDB
       if place_info is None:
         place_info = await self.get_place_info(place_name)
-      
       if place_info is None:
         # Fetch from google map api
-        result = await self.gmaps.find_place(place_name, "textquery", ESSENTIAL_FIELDS).get("candidates", [])[0]
-        place_info = self.google_to_shortlist(result, description, recommend_reason)
+        places = self.gmaps.find_place(place_name, "textquery", fields=['place_id', 'name']).get("candidates", [])
+        if len(places):
+          place_id = places[0].get('place_id')
+          official_name = places[0].get('name')
+          place_info = await self.get_place_info(official_name)
+          if place_info:
+            return place_info
+          result = self.gmaps.place(place_id, ESSENTIAL_FIELDS).get("result")
+          place_info = self.google_to_shortlist(result, description, recommend_reason)
 
-      # Save in Redis and MongoDB
-      await redis_service.save_place_info(place_name, place_info)
-      await self.sava_place_info(place_info)
+          # Save in Redis and MongoDB
+          await redis_service.save_place_info(place_info.name, place_info)
+          await self.sava_place_info(place_info)
       return place_info
 
   def raw_behavior_score(self, behavior: UserBehavior) -> float:
@@ -183,11 +218,11 @@ class RecommendService:
   def sigmoid(self, x: float) -> float:
     return 1 / (1 + math.exp(-self.sigmoid_scale * x))
   
-  def google_to_placeinfo(self, result: Any, recommend_reason: str) -> PlaceInfo:
+  def google_to_placeinfo(self, result: Any, recommend_reason: str) -> PlaceDetail:
     opening_hours = result.get('opening_hours', {})
     reviews = result.get('reviews', [])
     
-    return PlaceInfo(
+    return PlaceDetail(
       recommend_reason=recommend_reason,
       website=result.get('website', None),
       address=result.get('formatted_address', None),
@@ -203,7 +238,7 @@ class RecommendService:
   def google_to_shortlist(self, result: Any, description: str, recommend_reason: str) -> ShortlistItem:
     photos = result.get('photos', [])
     type = "city" if ADMINISTRATIVE_TYPES.intersection(result.get('types', [])) else "attraction"
-    google_geom = result.get('geometry')
+    google_geom = result.get('geometry', {})
 
     return ShortlistItem(
       name=result.get('name'),
@@ -212,12 +247,12 @@ class RecommendService:
       description=description,
       info=self.google_to_placeinfo(result, recommend_reason),
       geometry=PlaceGeo(
-        location=[google_geom["location"]["lat"], google_geom["location"]["lng"]],
+        location=[google_geom.get('location').get('lat'), google_geom.get('location').get('lng')],
         viewport=[
-          [google_geom["viewport"]["northeast"]["lat"], 
-          google_geom["viewport"]["northeast"]["lng"]],
-          [google_geom["viewport"]["southwest"]["lat"],
-          google_geom["viewport"]["southwest"]["lng"]]
+          [google_geom.get('viewport').get('northeast').get('lat'), 
+          google_geom.get('viewport').get('northeast').get('lng')],
+          [google_geom.get('viewport').get('southwest').get('lat'),
+          google_geom.get('viewport').get('southwest').get('lng')]
         ]
       ),
       photos=[(f"https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&photo_reference={p.get('photo_reference')}&key={self.key}")
@@ -254,5 +289,3 @@ class RecommendService:
   #     place.updated_time = datetime.now()
 
   #   await save_to_db(place)
-
-recommend_service = RecommendService()

@@ -12,6 +12,9 @@ export const useShortlistStore = defineStore('shortlist', {
     removeFromShortlist(placeName: string) {
       this.items.delete(placeName);
     },
+    clearShortlist() {
+      this.items = new Map<string, ShortlistItem>();
+    }
   },
   getters: {
     shortlistNum: (state) => state.items.size,

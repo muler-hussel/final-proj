@@ -3,7 +3,7 @@ import { useAuthStore } from './auth';
 import { useSessionStore } from './session';
 import axios from "axios";
 
-type TrackEvent = { type: string; itemName: string; duration?: number }
+type TrackEvent = { place_name: string; event_type: string; duration_sec?: number }
 
 interface TrackingSession {
   userId: string;
@@ -38,7 +38,7 @@ export const useUserBehaviorStore = defineStore('userBehavior', {
 
     // add to shortlist, remove from shortlist, click
     recordAction(type: string, place_name: string) {
-      this.currentSession?.events.push({"type": type, "itemName": place_name});
+      this.currentSession?.events.push({"event_type": type, "place_name": place_name});
     },
 
     startViewing(place_name: string) {
@@ -50,7 +50,7 @@ export const useUserBehaviorStore = defineStore('userBehavior', {
       if (startTime) {
         const duration = (Date.now() - startTime) / 1000;
         if (duration >= 10.0) { // Valid only when more than 10 seconds
-          this.currentSession?.events.push({"type": "view", "itemName": place_name, "duration": duration});
+          this.currentSession?.events.push({"event_type": "view", "place_name": place_name, "duration_sec": duration});
         }
         this.activeViews.delete(place_name);
       }
@@ -73,9 +73,7 @@ export const useUserBehaviorStore = defineStore('userBehavior', {
       if (!this.currentSession) return;
 
       try {
-        await axios.post('/recommend/tracking', {
-          data: JSON.stringify(this.currentSession),
-        });
+        await axios.post('/recommend/tracking', this.currentSession);
         this.currentSession = null;
       } catch (error) {
         console.error('Fail to upload tracking data', error);

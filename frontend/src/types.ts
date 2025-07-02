@@ -4,13 +4,6 @@ interface PlaceGeo {
   viewport: [[number, number], [number, number]]; // [northeast, southwest]
 }
 
-interface PlacePhoto {
-  height: number;
-  width: number;
-  html_attributions?: string[];
-  photo_reference: string;
-}
-
 interface PlaceReview {
   review: string;
   type: 0 | 1 | 2 | 3; // 0-Google latest, etc.
@@ -41,5 +34,5 @@ export interface ShortlistItem {
   geometry?: PlaceGeo;
   updated_time?: string | null
   status?: string;
-  photos: PlacePhoto[];
+  photos: string[];
 }

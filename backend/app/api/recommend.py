@@ -15,7 +15,8 @@ router = APIRouter(prefix="/recommend", tags=["recommend"])
 @router.post("/tracking")
 async def save_user_behavior(data: BehaviorTrack = Body(...)):
   session_id = data.sessionId
-  user_id = data.user_id
+  user_id = data.userId
+  print(data)
   
   session_state = await redis_service.load_session_state(user_id, session_id)
 
@@ -23,4 +24,4 @@ async def save_user_behavior(data: BehaviorTrack = Body(...)):
     raise HTTPException(status_code=404, detail="Session not found or expired")
   
   session_state.current_user_behavior = data.events
-  redis_service.save_session_state(session_state)
+  await redis_service.save_session_state(session_state)

@@ -16,7 +16,7 @@ class PlaceInfo:
 
   async def save_place(self, placeInfo: ShortlistItem):
     await self.collection.replace_one(
-      {"place_name": placeInfo.place_name},
+      {"place_name": placeInfo.name},
       placeInfo.model_dump(),
       upsert=True
     )

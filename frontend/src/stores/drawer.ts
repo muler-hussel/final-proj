@@ -5,7 +5,7 @@ export const useDrawerStore = defineStore('drawer', {
     preference: {
       isOpen: false,
     },
-    shortlist: {
+    shortlists: {
       isOpen: false,
     },
   }),
@@ -13,14 +13,14 @@ export const useDrawerStore = defineStore('drawer', {
     showPreference() {
       this.preference.isOpen = true
     },
-    showShortlist() {
-      this.shortlist.isOpen = true
+    showShortlists() {
+      this.shortlists.isOpen = true
     },
     onPreferenceClose() {
       this.preference.isOpen = false
     },
-    onShortlistClose() {
-      this.shortlist.isOpen = false
+    onShortlistsClose() {
+      this.shortlists.isOpen = false
     }
   }
 })

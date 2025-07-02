@@ -10,7 +10,8 @@ from app.utils.prompts import (
 )
 from app.utils.logger import logger
 from app.services.redis_service import redis_service
-from app.services.recommend_service import recommend_service
+from app.services.recommend_service import RecommendService
+from app.db.mongodb import get_database
 
 class SlotDataExtractor(BaseModel):
   destination: Optional[str]
@@ -43,7 +44,7 @@ class ChatService:
   async def generate_session_title(self, prompt: str) -> str:
     try:
       generated_title = await self.title_generation_chain.ainvoke({"prompt": prompt})
-      logger.info(f"prompt: {prompt}, generated title: {generated_title}")
+      # logger.info(f"prompt: {prompt}, generated title: {generated_title}")
       return generated_title.strip('"').strip()
     except Exception as e:
       print(f"Error generating session title: {e}")
@@ -59,7 +60,7 @@ class ChatService:
       "user_input": user_input,
     })
     intent_set = set(classified_intent)
-    logger.info(f"prompt: {user_input}, intentions: {classified_intent}")
+    # logger.info(f"prompt: {user_input}, intentions: {classified_intent}")
 
     # Dispatch different AI according to intent
     # If GENERAL_QUERY, AI is free to answer
@@ -67,6 +68,8 @@ class ChatService:
       session_state.todo_step += 1
     
     if "MORE_RECOMMENDATIONS" or "MODIFY_PLAN" in intent_set:
+      db = await get_database()
+      recommend_service = RecommendService(db)
       # New preferences from behavior and input
       session_state = await recommend_service.update_short_term_profile(session_state, user_input)
       # Prompt for recommend
@@ -75,7 +78,7 @@ class ChatService:
       result = await self.get_ai_response(session_state, user_input, None, session_state.todo_step)
     elif "FINALIZE_TRIP" in intent_set:
       result = await self.get_ai_response(session_state, user_input, None, session_state.todo_step)
-    return result
+    return result, session_state
   
   # Executing one or several steps
   async def get_ai_response(self, session_state: SessionState, user_input: str, first_prompt: Optional[str] = None, todo_prompt: Optional[str] = None) -> str:   
@@ -94,7 +97,11 @@ class ChatService:
     }
 
     response = await self.primary_assistant_chain.ainvoke(prompt_data)
-    logger.info(f"prompt: {prompt_data}, ai response: {response}")
-    return response
+    await redis_service.append_history(session_state, response, "ai")
+    db = await get_database()
+    recommend_service = RecommendService(db)
+    session_state = await recommend_service.update_short_term_profile(session_state, user_input)
+    # logger.info(f"prompt: {prompt_data}, ai response: {response}")
+    return {"content": response}, session_state
 
 chat_service = ChatService()

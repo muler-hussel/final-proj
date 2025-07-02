@@ -6,5 +6,13 @@ export const useFirstPromStore = defineStore('firstProm', {
       isEasyPlan: false,
       user_input: ''
     }
-  })
+  }),
+  actions: {
+    clearFirstPrompt() {
+      this.firstPromptData = {
+        isEasyPlan: false,
+        user_input: ''
+      }
+    }
+  },
 })
