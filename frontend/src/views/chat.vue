@@ -12,7 +12,7 @@
             v-if="!changeTitle"
           >{{ title }}</p>
           <EditOutlined style="color:#9370DB;" class="hover:cursor-pointer" @click="onEditTitle" v-if="!changeTitle" />
-          <a-input v-model:value="title" placeholder="Enter your trip title" v-else pressEnter="completeChange">
+          <a-input v-model:value="title" placeholder="Enter your trip title" v-else @pressEnter="completeChange">
             <template #suffix>
               <EnterOutlined style="color:#9370DB; font-size: smaller;" />
             </template>
@@ -73,6 +73,7 @@
 
   <PreferenceDrawer></PreferenceDrawer>
   <ShortlistDrawer></ShortlistDrawer>
+  <SpaceInfoDrawer></SpaceInfoDrawer>
 </template>
 
 <script lang="ts">
@@ -80,7 +81,7 @@ import { defineComponent, ref, onMounted } from 'vue';
 import SideBar from '@/components/SideBar.vue';
 import UserProm from '@/components/UserProm.vue';
 import AiRes from '@/components/AiRes.vue';
-import { useDrawerStore } from '@/stores/drawer.ts'
+import { useDrawerStore } from '@/stores/drawer.ts';
 import PreferenceDrawer from '@/components/PreferenceDrawer.vue';
 import { useAuthStore } from '@/stores/auth';
 import axios from "axios";
@@ -91,6 +92,7 @@ import { storeToRefs } from 'pinia';
 import { useShortlistStore } from '@/stores/shortlist.ts';
 import { useUserBehaviorStore } from '@/stores/userBehavior';
 import ShortlistDrawer from '@/components/ShortlistDrawer.vue';
+import SpaceInfoDrawer from '@/components/SpaceInfoDrawer.vue';
 
 export default defineComponent({
   components: {
@@ -99,6 +101,7 @@ export default defineComponent({
     AiRes,
     PreferenceDrawer,
     ShortlistDrawer,
+    SpaceInfoDrawer,
   },
   setup() {
     const auth = useAuthStore();

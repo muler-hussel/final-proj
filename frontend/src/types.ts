@@ -21,6 +21,7 @@ interface PlaceInfo {
   summarized_review?: string;
   prices?: string[];
   price_level?: number
+  total_ratings?: number
 }
 
 export interface ShortlistItem {

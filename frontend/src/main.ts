@@ -6,15 +6,14 @@ import router from './router'
 import Antd from 'ant-design-vue'
 import * as Icons from '@ant-design/icons-vue'
 import axios from 'axios'
-import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+import PrimeVue from 'primevue/config';
 
 const pinia = createPinia()
-pinia.use(piniaPluginPersistedstate)
 const app = createApp(App)
 
 axios.defaults.baseURL = import.meta.env.VITE_SERVER
 
-app.use(Antd).use(router).use(pinia).mount('#app')
+app.use(Antd).use(PrimeVue).use(router).use(pinia).mount('#app')
 
 const icons = Icons;
 for (const i in icons) {

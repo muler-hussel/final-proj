@@ -1,3 +1,4 @@
+import type { ShortlistItem } from '@/types'
 import { defineStore } from 'pinia'
 
 export const useDrawerStore = defineStore('drawer', {
@@ -8,6 +9,10 @@ export const useDrawerStore = defineStore('drawer', {
     shortlists: {
       isOpen: false,
     },
+    spaceInfo: {
+      isOpen: false,
+      item: null as ShortlistItem | null,
+    },
   }),
   actions: {
     showPreference() {
@@ -16,11 +21,19 @@ export const useDrawerStore = defineStore('drawer', {
     showShortlists() {
       this.shortlists.isOpen = true
     },
+    showSpaceInfo(item: ShortlistItem) {
+      this.spaceInfo.isOpen = true
+      this.spaceInfo.item = item
+    },
     onPreferenceClose() {
       this.preference.isOpen = false
     },
     onShortlistsClose() {
       this.shortlists.isOpen = false
-    }
+    },
+    onSpaceInfoClose() {
+      this.spaceInfo.isOpen = false
+      this.spaceInfo.item = null
+    },
   }
 })

@@ -111,7 +111,7 @@ RECOMMEND_NEW_PLACES_PROMPT = ChatPromptTemplate([
     2.  `recommendations`: A JSON array including a list of objects, each with two keys:
         * `place_name`: The name of the recommended place.
         * `description`: Recommending reason for this place, no more than 20 words.
-        * `recommend_reason`: Longer recommending reason for this place, no more than 100 words.
+        * `recommend_reason`: Longer recommending reason for this place, 50 to 100 words.
 
     If no suitable recommendations can be found, the `recommendations` array should be empty.
   ```

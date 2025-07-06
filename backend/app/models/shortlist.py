@@ -37,6 +37,7 @@ class PlaceDetail(BaseModel):
   summarized_review: Optional[str] = None # Summarized according to reviews
   prices: Optional[List[str]] = None # extract from official website by ai
   price_level: Optional[int] = None
+  total_ratings: Optional[int] = None
   
 # Cities, attractions user like
 class ShortlistItem(BaseModel):

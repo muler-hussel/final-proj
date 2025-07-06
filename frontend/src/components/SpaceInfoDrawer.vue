@@ -1,0 +1,192 @@
+<template>
+  <a-drawer 
+    v-if="item" 
+    :title="item.name" 
+    size=large 
+    :open="drawer.spaceInfo.isOpen" 
+    @close="drawer.onSpaceInfoClose"
+  >
+    <a-carousel effect="fade" arrows>
+      <template #prevArrow>
+        <div class="custom-slick-arrow" style="left: 10px; z-index: 1">
+          <left-circle-outlined />
+        </div>
+      </template>
+      <template #nextArrow>
+        <div class="custom-slick-arrow" style="right: 10px">
+          <right-circle-outlined />
+        </div>
+      </template>
+      
+      <div v-for="(p, idx) in item.photos" :key="idx" class="carousel-image" >
+        <img src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" class="carousel-image" />
+        <!-- <img v-if="p" :src="p"/>
+        <a-skeleton-image v-else /> -->
+      </div>
+    </a-carousel>
+    <div class="mt-4">
+      <!-- anchor -->
+      <a-anchor
+        direction="horizontal"
+        affix="true"
+        :items="[
+          { key: 'horizontally-part-1', href: '#horizontally-part-1', title: 'About' },
+          { key: 'horizontally-part-2', href: '#horizontally-part-2', title: 'Reviews' },
+          { key: 'horizontally-part-3', href: '#horizontally-part-3', title: 'Advice Trip' },
+        ]"
+      />
+
+      <!-- About -->
+      <div id="horizontally-part-1" class="anchor-section mt-4">
+        <p class="text-lg text-gray-700 text-justify leading-6 whitespace-normal" v-html="renderedMessage"></p>
+        <a-divider />
+        <div class="grid grid-cols-2">
+          <div v-if="item.info?.website">
+            <p class="text-lg font-bold">
+              <WifiOutlined class="mr-1" /> Website
+            </p>
+            <a :href="item.info?.website" class="ml-7 text-gray-700">{{ item.info?.website }}</a>
+          </div>
+          <div v-if="item.info?.address">
+            <p class="text-lg font-bold">
+              <EnvironmentOutlined class="mr-1"/> Address
+            </p>
+            <p class="ml-7 text-gray-700 mt-1"> {{ item.info?.address }}</p>
+          </div>
+          <div v-if="item.info?.weekday_text">
+            <p class="text-lg font-bold">
+              <ClockCircleOutlined class="mr-2"/>Open Hour
+            </p>
+            <a-collapse ghost class="ml-10 text-gray-700 mt-1" expandIconPosition="end">
+              <a-collapse-panel :header="item.info?.weekday_text[0]">
+                <p v-for="(t,idx) in item.info?.weekday_text" :key="idx">{{ t }}</p>
+              </a-collapse-panel>
+            </a-collapse>
+          </div>
+        </div>
+      </div>
+
+      <a-divider />
+      <!-- Reviews -->
+      <div id="horizontally-part-2" class="anchor-section" v-if="item.info?.rating">
+        <h2 class="text-lg font-bold mb-4">Reviews</h2>
+        <div class="flex flex-row items-center gap-2 text-lg text-gray-700">
+          <p>{{ value }} / 5.0</p>
+          <a-rate :value="value" disabled allow-half style="color: mediumpurple;"/>
+          <a-divider type="vertical" style="height: 20px;" />
+          <p>{{ item.info?.total_ratings }}</p>
+          <p>3,098 Reviews</p>
+        </div>
+        <div class="text-lg font-bold mt-4 mb-2">✨ Summarized Reviews</div>
+        <Carousel :value="item.info.reviews" :numVisible="2" :numScroll="1" circular>
+          <template #item="slotProps">
+              <div class="border rounded-xl m-2 h-50 p-4 border-gray-300 text-gray-800 overflow-auto scroll-container">
+                <p class="font-medium"> Google Most Related</p> 
+                <a-divider /> 
+                <div class="mb-4">{{ slotProps.data.review }}</div>
+              </div>
+          </template>
+        </Carousel>
+        <div class="grid grid-cols-2 gap-x-2">
+          <div>
+            <div class="flex flex-row gap-2">
+              <LikeOutlined />
+              <p class="font-bold text-lg">Pros</p>
+            </div>
+            <p v-for="i in 5" class="ml-6">{{ i }}</p>
+          </div>
+          <div>
+            <div class="flex flex-row gap-2">
+              <DislikeOutlined />
+              <p class="font-bold text-lg">Cons</p>
+            </div>
+            <p v-for="i in 5" class="ml-6">{{ i }}</p>
+          </div>
+          
+        </div>
+      </div>
+
+      <a-divider />
+      <!-- Advice Trip -->
+      <div id="horizontally-part-3" class="anchor-section">
+        <h2 class="text-lg font-bold mb-4">Advice Trip</h2>
+        <p>这里是旅行建议内容...</p>
+      </div>
+    </div>
+  </a-drawer>
+</template>
+
+<script lang="ts">
+import { defineComponent, computed } from 'vue';
+import { useDrawerStore } from '@/stores/drawer.ts';
+import { storeToRefs } from 'pinia';
+import { marked } from 'marked';
+import Carousel from 'primevue/carousel';
+
+export default defineComponent({
+  components: {Carousel},
+  setup() {
+    const drawer = useDrawerStore();
+    const { spaceInfo } = storeToRefs(drawer);
+    const item = computed(() => spaceInfo.value.item);
+    const renderedMessage = computed(() => marked.parse(item.value?.info?.recommend_reason ?? ''));
+    const value = computed(() => item.value?.info?.rating)
+    const weekday_text = computed(() => item.value?.info?.weekday_text ?? null);
+    
+    return {
+      drawer,
+      item,
+      renderedMessage,
+      value,
+    }
+  }
+})
+</script>
+
+<style scoped>
+:deep(.ant-anchor-link-title) {
+  font-size: 16px;
+  font-weight:bold;
+}
+
+:deep(.slick-slide) {
+  height: 300px;
+}
+
+:deep(.slick-arrow.custom-slick-arrow) {
+  width: 25px;
+  height: 25px;
+  font-size: 25px;
+  color: #fff;
+  background-color: rgba(50, 31, 56, 0.589);
+  transition: ease all 0.3s;
+  opacity: 0.6;
+  z-index: 1;
+}
+
+:deep(.slick-arrow.custom-slick-arrow:before) {
+  display: none;
+}
+
+:deep(.slick-arrow.custom-slick-arrow:hover) {
+  color: #fff;
+  opacity: 0.8;
+}
+
+:deep(.carousel-image) {
+  object-fit: cover;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%; 
+}
+
+.scroll-container {
+  overflow: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+</style>

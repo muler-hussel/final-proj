@@ -37,13 +37,13 @@ class LLMRecommend(BaseModel):
 
 class LLMResponse(BaseModel):
   content: Optional[str] = None
-  recommendations: Optional[List[ShortlistItem]] = [] 
+  recommendations: Optional[List[ShortlistItem]] = []
 
 # Fields needed in shortlist item
 ESSENTIAL_FIELDS = [
   'name', 'types', 'geometry', 'rating', 'website',
   'reviews', 'opening_hours', 'photos', 'price_level', 
-  'place_id', 'formatted_address'
+  'place_id', 'formatted_address', 'user_ratings_total'
 ]
 
 ADMINISTRATIVE_TYPES = {
@@ -191,19 +191,20 @@ class RecommendService:
         place_info = await self.get_place_info(place_name)
       if place_info is None:
         # Fetch from google map api
-        places = self.gmaps.find_place(place_name, "textquery", fields=['place_id', 'name']).get("candidates", [])
-        if len(places):
-          place_id = places[0].get('place_id')
-          official_name = places[0].get('name')
-          place_info = await self.get_place_info(official_name)
-          if place_info:
-            return place_info
-          result = self.gmaps.place(place_id, ESSENTIAL_FIELDS).get("result")
-          place_info = self.google_to_shortlist(result, description, recommend_reason)
+        # places = self.gmaps.find_place(place_name, "textquery", fields=['place_id', 'name']).get("candidates", [])
+        # if len(places):
+        #   place_id = places[0].get('place_id')
+        #   official_name = places[0].get('name')
+        #   place_info = await self.get_place_info(official_name)
+        #   if place_info:
+        #     return place_info
+        #   result = self.gmaps.place(place_id, ESSENTIAL_FIELDS).get("result")
+        #   place_info = self.google_to_shortlist(result, description, recommend_reason)
 
-          # Save in Redis and MongoDB
-          await redis_service.save_place_info(place_info.name, place_info)
-          await self.sava_place_info(place_info)
+        #   # Save in Redis and MongoDB
+        #   await redis_service.save_place_info(place_info.name, place_info)
+        #   await self.sava_place_info(place_info)
+        place_info = ShortlistItem(name=place_name, description=description)
       return place_info
 
   def raw_behavior_score(self, behavior: UserBehavior) -> float:
@@ -233,6 +234,7 @@ class RecommendService:
         type=1,
       ) for r in reviews if isinstance(r, dict)],
       price_level=result.get('price_level', None),
+      total_ratings=result.get('user_ratings_total', None),
     )
 
   def google_to_shortlist(self, result: Any, description: str, recommend_reason: str) -> ShortlistItem:

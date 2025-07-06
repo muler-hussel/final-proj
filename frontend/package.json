@@ -14,11 +14,14 @@
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",
     "@heroicons/vue": "^2.2.0",
+    "@primeuix/themes": "^1.2.1",
     "@tailwindcss/vite": "^4.1.8",
     "ant-design-vue": "4.x",
     "axios": "^1.9.0",
     "dayjs": "^1.11.13",
+    "marked": "^16.0.0",
     "pinia": "^3.0.3",
+    "primevue": "^4.3.6",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
   },

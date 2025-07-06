@@ -39,7 +39,9 @@
           <a-card 
             v-for="(card, idx) in cardData"
             :key="idx"
-            class="hover:shadow hover:shadow-indigo-500/30 hover:scale-105 ease-in-out transition hover:cursor-pointer">
+            class="hover:shadow hover:shadow-indigo-500/30 hover:scale-105 ease-in-out transition hover:cursor-pointer"
+            @click="hadleCardClick(card)"
+          >
             <template #title>
               <p>🫧 {{ card.title }}</p>
             </template>
@@ -103,6 +105,10 @@ export default defineComponent({
       }
     };
     
+    const hadleCardClick = (card: any) => {
+      prompt.value = card.description
+    }
+
     onMounted(() => {
       auth.initialize();
     });
@@ -112,6 +118,7 @@ export default defineComponent({
       cardData,
       prompt,
       submitPrompt,
+      hadleCardClick,
     }
   }
 })

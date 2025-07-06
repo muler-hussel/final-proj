@@ -2,7 +2,7 @@
   <div class="flex flex-col p-4 gap-y-4">
     <div class="inline-block">
       <p class="text-gray-700 text-justify leading-8 whitespace-normal" v-html="renderedMessage"></p>
-      <FastForwardOutlined style="color:#9370DB;" class="hover:cursor-pointer" @click="$emit('advance-step')" />
+      <FastForwardOutlined style="color:#9370DB;" class="hover:cursor-pointer" @click="$emit('next')" />
     </div>
     <div v-if="recommendations && recommendations.length > 0">
       <a-card class="w-full h-fit shadow-md shadow-violet-200/50">
@@ -21,12 +21,11 @@
         </a-tabs>
         <a-divider />
         <div class="flex flex-row justify-end gap-x-4">
-          <a-button @click="$emit('more-recommendations')">Load more</a-button>
-          <a-button type="primary" @click="$emit('itinerary-generation')">Generate trip with shortlist</a-button>
+          <a-button @click="$emit('load-more')">Load more</a-button>
+          <a-button type="primary" @click="$emit('generate')">Generate trip with shortlist</a-button>
         </div>
       </a-card>
     </div>
-    
   </div>
 </template>
 
@@ -47,12 +46,15 @@ const {content, recommendations} = defineProps({
     default: () => [],
   },
 });
+
 const activeKey = ref('1');
+
 defineEmits([
-  'advance-step',
-  'more-recommendations', 
-  'itinerary-generation'
+  'next',
+  'load-more', 
+  'generate'
 ])
+
 const renderedMessage = computed(() => marked.parse(content ?? ''));
 </script>
 

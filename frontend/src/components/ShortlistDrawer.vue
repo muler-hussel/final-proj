@@ -1,5 +1,5 @@
 <template>
-  <a-drawer title="Your Shortlist" :open="drawer.shortlists.isOpen" @close="drawer.onShortlistsClose()" class="flex flex-col" size="large">
+  <a-drawer title="Your Shortlist" :open="drawer.shortlists.isOpen" @close="drawer.onShortlistsClose()" class="flex flex-col" width="500">
     <a-scroll class="grid grid-cols-1 gap-4 items-stretch">
       <SpotSelected
         v-for="item in Array.from(items.values())" 
