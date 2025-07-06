@@ -1,5 +1,5 @@
 <template>
-  <a-drawer title="Your Preference" :open="drawer.preference.isOpen" @close="drawer.onPreferenceClose()">
+  <a-drawer title="Your Preference" :open="drawer.preference.isOpen" @close="drawer.onPreferenceClose">
     <p class="text-sm text-gray-300">If the AI fails to summarize your preferences, you can add a tag yourself.</p>
     <div class="flex mb-2 mt-2 flex-col gap-y-1">
       <div v-for="(p, idx) in tags" :key="idx">

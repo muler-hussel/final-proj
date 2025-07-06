@@ -28,7 +28,7 @@
       <!-- anchor -->
       <a-anchor
         direction="horizontal"
-        affix="true"
+        :affix="true"
         :items="[
           { key: 'horizontally-part-1', href: '#horizontally-part-1', title: 'About' },
           { key: 'horizontally-part-2', href: '#horizontally-part-2', title: 'Reviews' },
@@ -53,7 +53,7 @@
             </p>
             <p class="ml-7 text-gray-700 mt-1"> {{ item.info?.address }}</p>
           </div>
-          <div v-if="item.info?.weekday_text">
+          <div v-if="item.info?.weekday_text?.length">
             <p class="text-lg font-bold">
               <ClockCircleOutlined class="mr-2"/>Open Hour
             </p>
@@ -65,10 +65,10 @@
           </div>
         </div>
       </div>
-
-      <a-divider />
+      
       <!-- Reviews -->
       <div id="horizontally-part-2" class="anchor-section" v-if="item.info?.rating">
+        <a-divider />
         <h2 class="text-lg font-bold mb-4">Reviews</h2>
         <div class="flex flex-row items-center gap-2 text-lg text-gray-700">
           <p>{{ value }} / 5.0</p>
@@ -105,10 +105,10 @@
           
         </div>
       </div>
-
-      <a-divider />
+      
       <!-- Advice Trip -->
       <div id="horizontally-part-3" class="anchor-section">
+        <a-divider />
         <h2 class="text-lg font-bold mb-4">Advice Trip</h2>
         <p>这里是旅行建议内容...</p>
       </div>
