@@ -59,7 +59,7 @@
       </a-scroll>
       <!-- bottom -->
       <div class="w-3/5 h-10 mb-3 mx-auto">
-        <a-input v-model:value="prompt" placeholder="Tell me something..." size="large" class="gap-x-1">
+        <a-input v-model:value="prompt" placeholder="Tell me something..." size="large" class="gap-x-1" @pressEnter="fetchAiRes(prompt)">
           <template #prefix>
             <PlusCircleOutlined style="color:#9370DB;" class="hover:cursor-pointer" />
           </template>

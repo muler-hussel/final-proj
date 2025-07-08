@@ -26,6 +26,10 @@ const router = createRouter({
       }
     },
     {
+      path: '/chat/calendar',
+      component: () => import('../views/ItineraryCalendar.vue'),
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'NotFound',
       redirect: '/',

@@ -11,6 +11,21 @@ importers:
       '@ant-design/icons-vue':
         specifier: ^7.0.1
         version: 7.0.1(vue@3.5.16(typescript@5.8.3))
+      '@fullcalendar/core':
+        specifier: ^6.1.18
+        version: 6.1.18
+      '@fullcalendar/daygrid':
+        specifier: ^6.1.18
+        version: 6.1.18(@fullcalendar/core@6.1.18)
+      '@fullcalendar/interaction':
+        specifier: ^6.1.18
+        version: 6.1.18(@fullcalendar/core@6.1.18)
+      '@fullcalendar/timegrid':
+        specifier: ^6.1.18
+        version: 6.1.18(@fullcalendar/core@6.1.18)
+      '@fullcalendar/vue3':
+        specifier: ^6.1.18
+        version: 6.1.18(@fullcalendar/core@6.1.18)(vue@3.5.16(typescript@5.8.3))
       '@heroicons/vue':
         specifier: ^2.2.0
         version: 2.2.0(vue@3.5.16(typescript@5.8.3))
@@ -454,6 +469,30 @@ packages:
   '@eslint/plugin-kit@0.3.1':
     resolution: {integrity: sha512-0J+zgWxHN+xXONWIyPWKFMgVuJoZuGiIFu8yxk7RJjxkzpGmyja5wRFqZIVtjDVOQpV+Rw0iOAjYPE2eQyjr0w==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@fullcalendar/core@6.1.18':
+    resolution: {integrity: sha512-cD7XtZIZZ87Cg2+itnpsONCsZ89VIfLLDZ22pQX4IQVWlpYUB3bcCf878DhWkqyEen6dhi5ePtBoqYgm5K+0fQ==}
+
+  '@fullcalendar/daygrid@6.1.18':
+    resolution: {integrity: sha512-s452Zle1SdMEzZDw+pDczm8m3JLIZzS9ANMThXTnqeqJewW1gqNFYas18aHypJSgF9Fh9rDJjTSUw04BpXB/Mg==}
+    peerDependencies:
+      '@fullcalendar/core': ~6.1.18
+
+  '@fullcalendar/interaction@6.1.18':
+    resolution: {integrity: sha512-f/mD5RTjzw+Q6MGTMZrLCgIrQLIUUO9NV/58aM2J6ZBQZeRlNizDqmqldqyG+j49zj2vFhUfZibPrVKWm5yA4Q==}
+    peerDependencies:
+      '@fullcalendar/core': ~6.1.18
+
+  '@fullcalendar/timegrid@6.1.18':
+    resolution: {integrity: sha512-T/ouhs+T1tM8JcW7Cjx+KiohL/qQWKqvRITwjol8ktJ1e1N/6noC40/obR1tyolqOxMRWHjJkYoj9fUqfoez9A==}
+    peerDependencies:
+      '@fullcalendar/core': ~6.1.18
+
+  '@fullcalendar/vue3@6.1.18':
+    resolution: {integrity: sha512-YMagwTumxsIx3GFYWLa9Yr73EMA+JuH6S3EeZGS+rEjvG5fDGdf+33rxGMzmw+LdO7SWi3ctbzRnJlv3fnm3RQ==}
+    peerDependencies:
+      '@fullcalendar/core': ~6.1.18
+      vue: ^3.0.11
 
   '@heroicons/vue@2.2.0':
     resolution: {integrity: sha512-G3dbSxoeEKqbi/DFalhRxJU4mTXJn7GwZ7ae8NuEQzd1bqdd0jAbdaBZlHPcvPD2xI1iGzNVB4k20Un2AguYPw==}
@@ -1752,6 +1791,9 @@ packages:
     resolution: {integrity: sha512-QSa9EBe+uwlGTFmHsPKokv3B/oEMQZxfqW0QqNCyhpa6mB1afzulwn8hihglqAb2pOw+BJgNlmXQ8la2VeHB7w==}
     engines: {node: ^10 || ^12 || >=14}
 
+  preact@10.12.1:
+    resolution: {integrity: sha512-l8386ixSsBdbreOAkqtrwqHwdvR35ID8c3rKPa8lCWuO86dBi32QWHV4vfsZK1utLLFMvw+Z5Ad4XLkZzchscg==}
+
   prelude-ls@1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
@@ -2410,6 +2452,28 @@ snapshots:
     dependencies:
       '@eslint/core': 0.14.0
       levn: 0.4.1
+
+  '@fullcalendar/core@6.1.18':
+    dependencies:
+      preact: 10.12.1
+
+  '@fullcalendar/daygrid@6.1.18(@fullcalendar/core@6.1.18)':
+    dependencies:
+      '@fullcalendar/core': 6.1.18
+
+  '@fullcalendar/interaction@6.1.18(@fullcalendar/core@6.1.18)':
+    dependencies:
+      '@fullcalendar/core': 6.1.18
+
+  '@fullcalendar/timegrid@6.1.18(@fullcalendar/core@6.1.18)':
+    dependencies:
+      '@fullcalendar/core': 6.1.18
+      '@fullcalendar/daygrid': 6.1.18(@fullcalendar/core@6.1.18)
+
+  '@fullcalendar/vue3@6.1.18(@fullcalendar/core@6.1.18)(vue@3.5.16(typescript@5.8.3))':
+    dependencies:
+      '@fullcalendar/core': 6.1.18
+      vue: 3.5.16(typescript@5.8.3)
 
   '@heroicons/vue@2.2.0(vue@3.5.16(typescript@5.8.3))':
     dependencies:
@@ -3674,6 +3738,8 @@ snapshots:
       nanoid: 3.3.11
       picocolors: 1.1.1
       source-map-js: 1.2.1
+
+  preact@10.12.1: {}
 
   prelude-ls@1.2.1: {}
 
