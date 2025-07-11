@@ -95,8 +95,20 @@ class RecommendService:
     short_term_profile = session_state.short_term_profile
     long_term_profile = await self.get_long_preferences(session_state.user_id)
 
+    # Update shortlist
     if (user_behavior != None): 
-      place_names = list({behavior.place_name for behavior in user_behavior})
+      place_names = []
+      for behavior in user_behavior:
+        place_names.append(behavior.place_name)
+        if behavior.event_type == 'shortlist':
+          shortlist_place = await redis_service.get_place_info(behavior.place_name)
+          s1 = await self.get_place_info(behavior.place_name)
+          print(s1)
+          if shortlist_place is None:
+            raise Exception("None")
+          await redis_service.add_to_shortlist(session_state, shortlist_place)
+        elif behavior.event_type == 'unshortlist':
+          await redis_service.remove_from_shortlist(session_state, behavior.place_name)
 
     raw_data = await self.extract_preferences_chain.ainvoke({
       "places": place_names, 
@@ -139,14 +151,13 @@ class RecommendService:
         short_term_profile.preferences[style] = TagWeight(tag=style, weight=(cur_weight + self.init_weight) / 2)
       else:
         short_term_profile.preferences[style] = TagWeight(tag=style, weight=self.init_weight)
-    print(short_term_profile)
     await redis_service.save_session_state(session_state)
     return session_state
   
   async def get_place_info(self, place_name: str) -> ShortlistItem | None:
     return await self.place_info.get_place(place_name)
   
-  async def sava_place_info(self, placeInfo: ShortlistItem):
+  async def save_place_info(self, placeInfo: ShortlistItem):
     return await self.place_info.save_place(placeInfo)
   
   async def recommend_places(self, session_state: SessionState, user_input: str):
@@ -191,20 +202,20 @@ class RecommendService:
         place_info = await self.get_place_info(place_name)
       if place_info is None:
         # Fetch from google map api
-        # places = self.gmaps.find_place(place_name, "textquery", fields=['place_id', 'name']).get("candidates", [])
-        # if len(places):
-        #   place_id = places[0].get('place_id')
-        #   official_name = places[0].get('name')
-        #   place_info = await self.get_place_info(official_name)
-        #   if place_info:
-        #     return place_info
-        #   result = self.gmaps.place(place_id, ESSENTIAL_FIELDS).get("result")
-        #   place_info = self.google_to_shortlist(result, description, recommend_reason)
+        places = self.gmaps.find_place(place_name, "textquery", fields=['place_id', 'name']).get("candidates", [])
+        if len(places):
+          place_id = places[0].get('place_id')
+          official_name = places[0].get('name')
+          place_info = await self.get_place_info(official_name)
+          if place_info:
+            return place_info
+          result = self.gmaps.place(place_id, ESSENTIAL_FIELDS).get("result")
+          place_info = self.google_to_shortlist(result, description, recommend_reason)
 
-        #   # Save in Redis and MongoDB
-        #   await redis_service.save_place_info(place_info.name, place_info)
-        #   await self.sava_place_info(place_info)
-        place_info = ShortlistItem(name=place_name, description=description)
+          # Save in Redis and MongoDB
+          await redis_service.save_place_info(place_info.name, place_info)
+          await self.save_place_info(place_info)
+        # place_info = ShortlistItem(name=place_name, description=description)
       return place_info
 
   def raw_behavior_score(self, behavior: UserBehavior) -> float:

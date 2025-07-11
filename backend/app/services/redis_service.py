@@ -134,12 +134,8 @@ class RedisService:
       return False
   
   # Deal with shortlist
-  async def add_to_shortlist(self, user_id: str, session_id: str, item: ShortlistItem) -> Optional[SessionState]:
+  async def add_to_shortlist(self, session_state: SessionState, item: ShortlistItem) -> Optional[SessionState]:
     if not self._redis_client:
-      return False
-    
-    session_state = await self.load_session_state(user_id, session_id)
-    if not session_state:
       return False
     
     try:
@@ -147,36 +143,28 @@ class RedisService:
       self._redis_client.hset(session_state.shortlist_key, item_id, item.model_dump_json())
       return True
     except Exception as e:
-      print(f"Error adding to shortlist for {user_id}/{session_id}: {e}")
+      print(f"Error adding to shortlist for {session_state.user_id}/{session_state.session_id}: {e}")
 
-  async def get_shortlist(self, user_id: str, session_id: str) -> List[ShortlistItem]:
+  async def get_shortlist(self, session_state: SessionState) -> List[ShortlistItem]:
     if not self._redis_client:
-      return []
-    
-    session_state = await self.load_session_state(user_id, session_id)
-    if not session_state:
       return []
     
     try:
       items_data = self._redis_client.hgetall(session_state.shortlist_key)
       return [ShortlistItem.model_validate_json(data) for data in items_data.values()]
     except Exception as e:
-      print(f"Error adding to shortlist for {user_id}/{session_id}: {e}")
+      print(f"Error adding to shortlist for {session_state.user_id}/{session_state.session_id}: {e}")
       return []
 
-  async def remove_from_shortlist(self, user_id: str, session_id: str, item_id: str) -> bool:
+  async def remove_from_shortlist(self, session_state: SessionState, item_id: str) -> bool:
     if not self._redis_client:
-      return False
-    
-    session_state = await self.load_session_state(user_id, session_id)
-    if not session_state:
       return False
     
     try:
       self._redis_client.hdel(session_state.shortlist_key, item_id)
       return True
     except Exception as e:
-      print(f"Error removing from shortlist for {user_id}/{session_id}: {e}")
+      print(f"Error removing from shortlist for {session_state.user_id}/{session_state.session_id}: {e}")
       return False
   
 # Ensure single instance

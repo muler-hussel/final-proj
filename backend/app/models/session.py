@@ -9,8 +9,8 @@ class SessionState(BaseModel):
   history_key: str = "" # Redis key stores conversation history
   shortlist_key: str = ""
   title: str
-  todo: List[str] = ["Init", "Recommend places for user", "Draft an itinerary for user to modify", "Generate a final trip"]
-  todo_step: int = 0
+  todo: List[str] = ["Init", "Recommend", "Draft", "Final trip"]
+  todo_step: int = -1
   short_term_profile: ShortTermProfile = ShortTermProfile()
   current_user_behavior: Optional[List[UserBehavior]] = None
   recommended_places: Set[str] = set()

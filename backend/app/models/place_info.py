@@ -6,13 +6,14 @@ class PlaceInfo:
     self.collection = db["place_info"]
 
   async def _create_indexes(self):
-    await self.collection.create_indexes([
-      IndexModel([("place_name", 1)], unique=True)
-    ])
+    await self.collection.create_index("place_name", unique=True)
 
   async def get_place(self, place_name: str) -> ShortlistItem | None:
     data = await self.collection.find_one({"place_name": place_name})
-    return ShortlistItem(**data) if data else None
+    if data:
+      data.pop("_id", None)  # 避免 Pydantic 校验失败
+      return ShortlistItem(**data)
+    return None
 
   async def save_place(self, placeInfo: ShortlistItem):
     await self.collection.replace_one(

@@ -1,12 +1,13 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
-import type { ShortlistItem } from '@/types';
+import type { DailyItinerary, ShortlistItem } from '@/types';
 
 interface ChatMessage {
   role: string;
   message: {
     content?: string;
     recommendations?: ShortlistItem[];
+    itinerary?: DailyItinerary[];
   }
 }
 
@@ -26,6 +27,7 @@ interface Response {
   message: {
     content?: string;
     recommendations?: ShortlistItem[];
+    itinerary?: DailyItinerary[];
   }
   short_term_profile?: ShortTermProfile;
 }

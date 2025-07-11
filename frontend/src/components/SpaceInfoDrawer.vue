@@ -19,9 +19,9 @@
       </template>
       
       <div v-for="(p, idx) in item.photos" :key="idx" class="carousel-image" >
-        <img src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" class="carousel-image" />
-        <!-- <img v-if="p" :src="p"/>
-        <a-skeleton-image v-else /> -->
+        <!-- <img src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" class="carousel-image" /> -->
+        <img v-if="p" :src="p"/>
+        <a-skeleton-image v-else />
       </div>
     </a-carousel>
     <div class="mt-4">
@@ -74,8 +74,7 @@
           <p>{{ value }} / 5.0</p>
           <a-rate :value="value" disabled allow-half style="color: mediumpurple;"/>
           <a-divider type="vertical" style="height: 20px;" />
-          <p>{{ item.info?.total_ratings }}</p>
-          <p>3,098 Reviews</p>
+          <p>{{ item.info?.total_ratings }} Reviews</p>
         </div>
         <div class="text-lg font-bold mt-4 mb-2">✨ Summarized Reviews</div>
         <Carousel :value="item.info.reviews" :numVisible="2" :numScroll="1" circular>

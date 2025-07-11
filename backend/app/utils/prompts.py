@@ -95,7 +95,7 @@ RECOMMEND_NEW_PLACES_PROMPT = ChatPromptTemplate([
   **Consider the following information for your recommendations, prioritizing available data:**
 
   1.  **User Input (`user_input`):** This is always present and the most immediate indicator of current interests or specific requests. Prioritize explicit mentions here.
-  2.  **Current Session Context:** {history}. This is another most important indicator of interests or requests.
+  2.  **Current Session Context (`history`):** This is another most important indicator of interests or requests.
   3.  **Short-Term Profile (`short_term_profile`):** (May be empty)
       * If available, `preferences` indicate recent interests from the current session. Higher `weight` values indicate stronger recent interest.
       * If available, `avoids` indicate immediate dislikes from the current session. Strictly avoid any destinations or characteristics matching these.
@@ -104,18 +104,39 @@ RECOMMEND_NEW_PLACES_PROMPT = ChatPromptTemplate([
       * If available, `decaying_preferences` are past preferences that might still hold some interest but are less strong than `verified_preferences`.
       * If available, `avoids` are long-standing dislikes. Strictly avoid any destinations or characteristics matching these.
   
-  
   **Output Format:**
   Return a JSON object with two keys:
     1.  `content`: A string containing an introductory remark, a summary of findings, or direct answers to any additional questions posed in `user_input` (e.g., "To visit France, you'll generally need a Schengen visa if you're not from a visa-exempt country. Here are some places you might enjoy:"). This should be natural conversational text.
-    2.  `recommendations`: A JSON array including a list of objects, each with two keys:
+    2.  `recommendations`: A JSON array including a list of objects, each with three keys:
         * `place_name`: The name of the recommended place.
         * `description`: Recommending reason for this place, no more than 20 words.
         * `recommend_reason`: Longer recommending reason for this place, 50 to 100 words.
 
     If no suitable recommendations can be found, the `recommendations` array should be empty.
   ```
-
   """),
-  ("human", "User input: {user_input}\nLong-term profile: {long_term_profile}\nShort-term profile: {short_term_profile}\nAlready recommended places: {recommended_places}\n\n")
+  ("human", "User input: {user_input}\nChat history: {history}\nLong-term profile: {long_term_profile}\nShort-term profile: {short_term_profile}\nAlready recommended places: {recommended_places}\n\n")
+])
+
+CREATE_ITINERARY_PROMPT = ChatPromptTemplate([
+  ("system", """You are a highly skilled travel planning AI. Your goal is to generate an itinerary with places user chose.
+
+  1.  **User Input (`user_input`):** In addition to the instructions for generating the itinerary, there may be other information in the `user_input`, you must answer to this information.
+  2.  **Current Session Context (`history`):** You must understand what kind of itinerary the user wants based on `history_str`(e.g. a 4-day trip, an in-depth tour).
+  3.  **Places user chose (`place_names`):** (May be empty)
+      * If available, `place_names` contains the names of the places and their opening hours. Without user's specific request (e.g. user wants a 3-day trip but places are not enough, user asks you to suggest more places), MUST ALWAYS stick to places user chose (`place_names`).
+      * If not available, you should suggest several popular places and generate the itinerary according to `user_input` and `history_str`.
+  4.  **You need to arrange itinerary based on the possible duration of user's visit to each place, the opening hours of the places, and the distances between the places, the possible time for user having meals.
+  
+  **Output Format:**
+  Return a JSON object with two keys:
+    1.  `content`: A string containing an introductory remark, a summary of your work, or direct answers to any additional questions posed in `user_input` (e.g., "To visit France, you'll generally need a Schengen visa if you're not from a visa-exempt country. Here are some places you might enjoy:"). This should be natural conversational text.
+    2.  `itinerary`: A JSON array including a list of objects, each object represents an event with four keys:
+        * `date`: An Integer representing the day of the trip, starting from 1.
+        * `place_name`: The name of the place will be visited in this event.
+        * `start_time`: Start time of this event, "HH:MM" (24h format).
+        * `end_time`: End time of this event, "HH:MM" (24h format).
+  ```
+  """),
+  ("human", "User input: {user_input}\n history: {history} \nShortlist places: {place_names}\n\n")
 ])

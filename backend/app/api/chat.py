@@ -61,7 +61,7 @@ async def chat_with_ai(session_id: str = Path(...), data: ChatRequest = Body(...
   first_prompt = None
   ai_response_text = None
   # first prompt
-  if todo_step == 0:
+  if todo_step == -1:
     first_prompt = PROMPT_FIRST_INPUT
     todo_step += 1
     session_state.todo_step = todo_step

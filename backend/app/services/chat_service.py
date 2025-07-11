@@ -4,6 +4,7 @@ from pydantic import BaseModel
 from typing import List, Optional
 from app.models.session import SessionState
 from app.utils.prompts import (
+  CREATE_ITINERARY_PROMPT,
   INTENT_CLASSIFIER_PROMPT,
   BASIC_PROMPT,
   GENERATE_SESSION_TITLE_PROMPT
@@ -40,6 +41,12 @@ class ChatService:
       | StrOutputParser()
     )
 
+    self.create_itinerary_chain = (
+      CREATE_ITINERARY_PROMPT
+      | language_model
+      | JsonOutputParser()
+    )
+
   # Automatically generate trip title
   async def generate_session_title(self, prompt: str) -> str:
     try:
@@ -66,22 +73,29 @@ class ChatService:
     # If GENERAL_QUERY, AI is free to answer
     if "ADVANCE_STEP" in intent_set:
       session_state.todo_step += 1
+      todoType = session_state.todo[session_state.todo_step]
+      if todoType == 'Recommend': 
+        intent_set.add("MORE_RECOMMENDATIONS")
+      elif todoType == 'Draft':
+        intent_set.add("ITINERARY_GENERATION")
+      else: intent_set.add("FINALIZE_TRIP")
+
+    db = await get_database()
+    recommend_service = RecommendService(db)
+    # New preferences from behavior and input
+    session_state = await recommend_service.update_short_term_profile(session_state, user_input)
+    print(redis_service.get_shortlist)
     
-    if "MORE_RECOMMENDATIONS" or "MODIFY_PLAN" in intent_set:
-      db = await get_database()
-      recommend_service = RecommendService(db)
-      # New preferences from behavior and input
-      session_state = await recommend_service.update_short_term_profile(session_state, user_input)
+    if ("MORE_RECOMMENDATIONS" in intent_set) or ("MODIFY_PLAN" in intent_set):
       # Prompt for recommend
       result = await recommend_service.recommend_places(session_state, user_input)
     elif "ITINERARY_GENERATION" in intent_set:
-      result = await self.get_ai_response(session_state, user_input, None, session_state.todo_step)
+      result = await self.create_itinerary(session_state, user_input)
     elif "FINALIZE_TRIP" in intent_set:
       result = await self.get_ai_response(session_state, user_input, None, session_state.todo_step)
     return result, session_state
   
-  # Executing one or several steps
-  async def get_ai_response(self, session_state: SessionState, user_input: str, first_prompt: Optional[str] = None, todo_prompt: Optional[str] = None) -> str:   
+  async def get_ai_response(self, session_state: SessionState, user_input: str, first_prompt: Optional[str] = None, todo_prompt: Optional[str] = None):   
     user_id = session_state.user_id
     session_id = session_state.session_id
     history = (await redis_service.get_history(user_id, session_id))[-10:] # recent 10 conversation
@@ -103,5 +117,20 @@ class ChatService:
     session_state = await recommend_service.update_short_term_profile(session_state, user_input)
     # logger.info(f"prompt: {prompt_data}, ai response: {response}")
     return {"content": response}, session_state
+
+  async def create_itinerary(self, session_state: SessionState, user_input: str):
+    history = (await redis_service.get_history(session_state.user_id, session_state.session_id))[-10:]
+    history_str = "\n".join(f"{msg['role']}: {msg['message']}" for msg in history)
+    shortlist = await redis_service.get_shortlist(session_state)
+    place_names = ",".join(f"{s.name}: {s.info.weekday_text}" for s in shortlist)
+    
+    prompt_data = {
+      "history": history_str,
+      "place_names":  place_names,
+      "user_input": user_input,
+    }
+    response = await self.create_itinerary_chain.ainvoke(prompt_data)
+    await redis_service.append_history(session_state, response, "ai")
+    return response
 
 chat_service = ChatService()

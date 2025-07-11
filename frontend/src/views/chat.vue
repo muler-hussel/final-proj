@@ -38,7 +38,7 @@
         
       </div>
       <!-- scroll -->
-      <a-scroll class="w-full flex flex-col items-center flex-grow overflow-y-auto">
+      <div class="w-full flex flex-col items-center flex-grow overflow-y-auto">
         <div class="grid w-3/5 py-10 gap-y-7">
           <template v-for="(content, idx) in chatHistory" :key="idx">
             <UserProm 
@@ -49,6 +49,7 @@
               v-else-if="content.role === 'ai'"
               :content="content.message.content"
               :recommendations="content.message.recommendations"
+              :itinerary="content.message.itinerary"
               @next="fetchAiRes('ADVANCE_STEP')"
               @load-more="fetchAiRes('MORE_RECOMMENDATIONS')"
               @generate="fetchAiRes('ITINERARY_GENERATION')"
@@ -56,7 +57,7 @@
           </template>
           <a-spin v-if="isAiGenerating" />
         </div>
-      </a-scroll>
+      </div>
       <!-- bottom -->
       <div class="w-3/5 h-10 mb-3 mx-auto">
         <a-input v-model:value="prompt" placeholder="Tell me something..." size="large" class="gap-x-1" @pressEnter="fetchAiRes(prompt)">

@@ -37,3 +37,10 @@ export interface ShortlistItem {
   status?: string;
   photos: string[];
 }
+
+export interface DailyItinerary {
+  date: number;
+  place_name: string;
+  start_time: string;
+  end_time: string;
+}
