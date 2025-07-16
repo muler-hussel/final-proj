@@ -16,11 +16,13 @@ export const useAuthStore = defineStore('auth', {
         expires
       }));
     },
+    
     clearToken() {
       this.token = null;
       this.tokenExpires = null;
       localStorage.removeItem('auth');
     },
+
     initialize() {
       const raw = localStorage.getItem('auth');
       if (!raw) return;

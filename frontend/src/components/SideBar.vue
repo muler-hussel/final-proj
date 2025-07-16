@@ -30,14 +30,11 @@
     <p class="text-xs text-gray-500 font-bold mb-2">
       Recent Chats
     </p>
-    <div v-for="i in 5">
-      <div class="text-sm text-gray-700 hover:bg-gray-200/50 hover:cursor-pointer active:bg-gray-200/100 focus:bg-violet-300 rounded-lg p-2">东京一日游</div>
-    </div>
     <div v-for="(s, idx) in sessions" :key="idx">
       <div 
         v-if="s"
-        class="text-sm text-gray-700 hover:bg-gray-200/50 hover:cursor-pointer active:bg-gray-200/100 
-        'bg-violet-300': currentSessionId === session.session_id, rounded-lg p-2"
+        class="text-sm text-gray-700 hover:bg-gray-200/50 hover:cursor-pointer active:bg-gray-200/100 rounded-lg p-2"
+        :class="{ 'bg-violet-200 hover:bg-violet-200': currentSessionId === s.session_id }"
         @click="loadSession(s.session_id)"
       >{{ s.title }}</div>
     </div>
@@ -85,7 +82,7 @@ export default defineComponent({
       historyOpen.value = !historyOpen.value;
     }
 
-    const loadSession = (sessionId: string) => {
+    const loadSession = async (sessionId: string) => {
       router.push(`/chat/${sessionId}`);
       userSession.setCurrentSession(sessionId);
     }
@@ -103,8 +100,8 @@ export default defineComponent({
       }
     }
 
-    onMounted(() => {
-      userSession.getSessions();
+    onMounted(async () => {
+      await userSession.initialize();
       document.addEventListener('click', handleClickOutside);
     });
 

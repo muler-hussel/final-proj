@@ -18,6 +18,29 @@ export const useUserBehaviorStore = defineStore('userBehavior', {
     pendingUpload: false,
   }),
   actions: {
+    initialize() {
+      if (typeof window === 'undefined') return;
+
+      const rawData = localStorage.getItem('tracking_data');
+      if (!rawData) return;
+
+      try {
+        const parsed = JSON.parse(rawData);
+        if (parsed?.currentSession) {
+          this.currentSession = parsed.currentSession;
+        }
+        
+        if (Array.isArray(parsed?.activeViews)) {
+          parsed.activeViews.forEach(([placeName, timestamp]:[string, number]) => {
+            this.activeViews.set(placeName, timestamp);
+          });
+        }
+      } catch (error) {
+        console.error('Failed to parse tracking data:', error);
+        this.clearStorage();
+      }
+    },
+
     startTracking() {
       const authStore = useAuthStore();
       const sessionStore = useSessionStore();
@@ -34,15 +57,18 @@ export const useUserBehaviorStore = defineStore('userBehavior', {
         this.currentSession.userId = authStore.token;
         this.currentSession.sessionId = sessionStore.sessionId;
       }
+      this.saveToStorage();
     },
 
     // add to shortlist, remove from shortlist, click
     recordAction(type: string, place_name: string) {
       this.currentSession?.events.push({"event_type": type, "place_name": place_name});
+      this.saveToStorage();
     },
 
     startViewing(place_name: string) {
       this.activeViews.set(place_name, Date.now());
+      this.saveToStorage();
     },
 
     endViewing(place_name: string) {
@@ -53,6 +79,7 @@ export const useUserBehaviorStore = defineStore('userBehavior', {
           this.currentSession?.events.push({"event_type": "view", "place_name": place_name, "duration_sec": duration});
         }
         this.activeViews.delete(place_name);
+        this.saveToStorage();
       }
     },
 
@@ -75,9 +102,29 @@ export const useUserBehaviorStore = defineStore('userBehavior', {
       try {
         await axios.post('/recommend/tracking', this.currentSession);
         this.currentSession = null;
+        this.clearStorage();
       } catch (error) {
         console.error('Fail to upload tracking data', error);
+        throw error;
       }
     },
+
+    saveToStorage() {
+      if (typeof window === 'undefined') return;
+      
+      const data = {
+        currentSession: this.currentSession,
+        activeViews: Array.from(this.activeViews.entries()),
+        savedAt: Date.now()
+      };
+
+      localStorage.setItem('tracking_data', JSON.stringify(data));
+    },
+
+    clearStorage() {
+      if (typeof window === 'undefined') return;
+      localStorage.removeItem('tracking_data');
+    },
+
   },
 });

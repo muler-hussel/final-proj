@@ -58,13 +58,12 @@ class RedisService:
     sessions = []
 
     while cursor:
-      cursor, keys = await self._redis_client.scan(cursor=cursor, match=pattern, count=100)
+      cursor, keys = self._redis_client.scan(cursor=cursor, match=pattern, count=100)
       for key in keys:
-        key_str = key.decode()
-        match = re.search(rf"user:{user_id}:session:(.*):metadata", key_str)
+        match = re.search(rf"user:{user_id}:session:(.*):metadata", key)
         if match:
           session_id = match.group(1)
-          raw_data = await self._redis_client.get(key)
+          raw_data = self._redis_client.get(key)
           if not raw_data:
             continue
           try:

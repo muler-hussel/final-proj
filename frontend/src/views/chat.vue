@@ -78,7 +78,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted } from 'vue';
+import { defineComponent, ref, onMounted, watch } from 'vue';
 import SideBar from '@/components/SideBar.vue';
 import UserProm from '@/components/UserProm.vue';
 import AiRes from '@/components/AiRes.vue';
@@ -94,6 +94,7 @@ import { useShortlistStore } from '@/stores/shortlist.ts';
 import { useUserBehaviorStore } from '@/stores/userBehavior';
 import ShortlistDrawer from '@/components/ShortlistDrawer.vue';
 import SpaceInfoDrawer from '@/components/SpaceInfoDrawer.vue';
+import { useUserSessionsStore } from '@/stores/userSessions';
 
 export default defineComponent({
   components: {
@@ -121,6 +122,7 @@ export default defineComponent({
     const shortlistStore = useShortlistStore();
     const { shortlistNum } = storeToRefs(shortlistStore);
     const userBehavior = useUserBehaviorStore();
+    const userSessions = useUserSessionsStore();
 
     const fetchNewSession = async () => {
       try {
@@ -128,18 +130,25 @@ export default defineComponent({
           user_id: userId,
           user_input: firstPrompt.value,
         })
-        session.setTitle(res.data.title)
-        session.setSessionId(res.data.session_id)
-        router.push(`/chat/${sessionId.value}`)
+        session.setTitle(res.data.title);
+        session.setSessionId(res.data.session_id);
+        userSessions.updateSession(res.data.session_id, res.data.title);
+        router.push(`/chat/${sessionId.value}`);
       } catch (error) {
         console.error("Error start new session:", error);
       }
     };
 
-    const onEditTitle = () => changeTitle.value = true;
+    const onEditTitle = () => {
+      changeTitle.value = true;
+    }
 
     const completeChange = () => {
-      changeTitle.value = false;
+      if (sessionId.value) {
+        session.setTitle(title.value);
+        userSessions.updateSession(sessionId.value, title.value);
+        changeTitle.value = false;
+      }
     }
 
     const fetchAiRes = async(userInput: string) => {
@@ -174,10 +183,26 @@ export default defineComponent({
       }
     }
 
+    watch(
+      () => route.params.sessionId,
+      async (newSessionId, oldSessionId) => {
+        if (newSessionId && newSessionId !== oldSessionId) {
+          try {
+            await session.initializeSession(newSessionId as string);
+          } catch (error) {
+            console.error('Fail to load session:', error);
+          }
+        }
+      },
+      { immediate: true }
+    );
+
     onMounted(async () => {
-      const sessionId = route.query.sessionId as string | undefined;
+      const sessionId = route.params.sessionId as string | undefined;
       if (sessionId) {
         await session.initializeSession(sessionId);
+        shortlistStore.initialize();
+        userBehavior.initialize();
       } else {
         session.clearSession();
         shortlistStore.clearShortlist();

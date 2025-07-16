@@ -59,6 +59,7 @@ import SideBar from '@/components/SideBar.vue';
 import { useRouter } from 'vue-router';
 import { useFirstPromStore } from '@/stores/firstPrompt';
 import { useAuthStore } from '@/stores/auth';
+import { useUserSessionsStore } from '@/stores/userSessions';
 
 export default defineComponent({
   components: {
@@ -96,6 +97,7 @@ export default defineComponent({
     ]
     const firstPromptStore = useFirstPromStore()
     const auth = useAuthStore();
+    const userSessions = useUserSessionsStore()
     
     const submitPrompt = async () => {
       router.push("/chat/new");
@@ -109,8 +111,9 @@ export default defineComponent({
       prompt.value = card.description
     }
 
-    onMounted(() => {
+    onMounted(async () => {
       auth.initialize();
+      await userSessions.initialize();
     });
     
     return {

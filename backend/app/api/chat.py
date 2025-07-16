@@ -9,6 +9,7 @@ from app.utils.prompts import PROMPT_FIRST_INPUT
 from app.db.mongodb import get_database
 from app.models.db_session import DbSession
 from typing import List
+import json
 
 router = APIRouter(prefix="/chat", tags=["chat"])
 
@@ -40,39 +41,46 @@ async def create_session(data: ChatRequest = Body(...)):
   await redis_service.save_session_state(session_state)
   return session_state
 
+# Get user's all sessions. Special routers must be placed ahead.
+@router.post("/allSessions", response_model=List[AllSessionRes])
+async def get_session_with_userId(data: UserIdReq = Body(...)):
+  user_id = data.user_id
+  session_info = []
+  db = await get_database()
+  sessions = await DbSession(db).get_sessions_by_user_id(user_id)
+  if len(sessions) == 0:
+    return session_info
+  for s in sessions:
+    session_info.append({"session_id": s.session_id, "title": s.title, "update_time": s.update_time})
+  session_info.sort(key=lambda x: x["update_time"], reverse=True)
+  return [AllSessionRes(**s) for s in session_info]
+
 # Get session when refresh or from history chats
-@router.post("/{session_id}", response_model=SessionState)
-async def get_session(user_id: str, session_id: str = Path(...) ):
-  session_state = await redis_service.load_session_state(user_id, session_id)
+@router.post("/{session_id}")
+async def get_session(session_id: str = Path(...), data: UserIdReq = Body(...)):
+  user_id = data.user_id
+  db = await get_database()
+  session_state = await DbSession(db).get_sesssion(user_id, session_id)
   if not session_state:
     raise HTTPException(status_code=404, detail="Session not found or expired")
-  history = await redis_service.get_history(user_id, session_id)
-  shortlist = await redis_service.get_shortlist(session_state)
+  
+  history = session_state.history
+  shortlist = session_state.shortlist
+
+  await redis_service.save_session_state(session_state)
+  for h in history:
+    redis_service.append_history(session_state, h)
+  for s in shortlist:
+    redis_service.add_to_shortlist(session_state, s)
+
   response = {
     "messages": history,
     "short_term_profile": session_state.short_term_profile,
     "title": session_state.title,
     "shortlist": shortlist,
   }
+  print(shortlist)
   return response
-
-# Get user's all sessions
-@router.post("/allSessions", response_model=List[AllSessionRes])
-async def get_session_with_userId(req: UserIdReq = Body(...)):
-  user_id = req.user_id
-  session_info = await redis_service.load_session_with_userId(user_id)
-  print(0)
-  if len(session_info) == 0:
-    db = await get_database()
-    sessions = await DbSession(db).get_sessions_by_user_id(user_id)
-    print(1)
-    if len(session_info) == 0:
-      return []
-    for s in sessions:
-      await redis_service.save_session_state(s)
-      session_info.append({"session_id": s.session_id, "title": s.title, "update_time": s.update_time})
-    session_info.sort(key=lambda x: x["update_time"], reverse=True)
-  return [AllSessionRes(**s) for s in session_info]
 
 # Answer to user prompts, justify todo list, todo step, slots, update session info
 @router.post("/{session_id}/res", response_model=Dict[str, Any])

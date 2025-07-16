@@ -251,3 +251,47 @@ AttributeError: 'NoneType' object has no attribute 'type'
 2025-07-17 03:31:45,075 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
 2025-07-17 03:32:03,346 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
 2025-07-17 03:34:09,102 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 06:11:09,825 - [ERROR] - asyncio - 474c571be813c6dbd332b86860ab3ecc9ea0f6a4 - Task exception was never retrieved
+future: <Task finished name='Task-36' coro=<RedisExpiredListener.listen() done, defined at D:\finalPro\backend\app\utils\async_listener.py:7> exception=ConnectionError('Error UNKNOWN while writing to socket. Connection lost.')>
+Traceback (most recent call last):
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\redis\asyncio\connection.py", line 530, in send_packed_command
+    await self._writer.drain()
+  File "D:\Program Files (x86)\Python\Python312\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "D:\Program Files (x86)\Python\Python312\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\utils\async_listener.py", line 10, in listen
+    await pubsub.subscribe("__keyevent@0__:expired")
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\redis\asyncio\client.py", line 1071, in subscribe
+    ret_val = await self.execute_command("SUBSCRIBE", *new_channels.keys())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\redis\asyncio\client.py", line 924, in execute_command
+    await self.connect()
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\redis\asyncio\client.py", line 934, in connect
+    self.connection = await self.connection_pool.get_connection()
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\redis\asyncio\connection.py", line 1141, in get_connection
+    await self.ensure_connection(connection)
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\redis\asyncio\connection.py", line 1174, in ensure_connection
+    await connection.connect()
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\redis\asyncio\connection.py", line 296, in connect
+    await self.connect_check_health(check_health=True)
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\redis\asyncio\connection.py", line 317, in connect_check_health
+    await self.on_connect_check_health(check_health=check_health)
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\redis\asyncio\connection.py", line 436, in on_connect_check_health
+    await self.send_command(
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\redis\asyncio\connection.py", line 554, in send_command
+    await self.send_packed_command(
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\redis\asyncio\connection.py", line 541, in send_packed_command
+    raise ConnectionError(
+redis.exceptions.ConnectionError: Error UNKNOWN while writing to socket. Connection lost.
+2025-07-17 06:29:08,787 - [INFO] - googlemaps.client - 474c571be813c6dbd332b86860ab3ecc9ea0f6a4 - API queries_quota: 60
+2025-07-17 06:30:22,430 - [INFO] - googlemaps.client - 474c571be813c6dbd332b86860ab3ecc9ea0f6a4 - API queries_quota: 60
+2025-07-17 06:30:24,114 - [INFO] - googlemaps.client - 474c571be813c6dbd332b86860ab3ecc9ea0f6a4 - API queries_quota: 60
+2025-07-17 06:30:27,353 - [INFO] - googlemaps.client - 474c571be813c6dbd332b86860ab3ecc9ea0f6a4 - API queries_quota: 60
+2025-07-17 06:30:30,600 - [INFO] - googlemaps.client - 474c571be813c6dbd332b86860ab3ecc9ea0f6a4 - API queries_quota: 60

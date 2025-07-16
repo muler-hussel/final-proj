@@ -36,8 +36,11 @@ const router = createRouter({
 // check login
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore();
+  // Must. Prevent status recovery later than check isAuthenticated
+  authStore.initialize(); 
 
   if (to.meta.requiresAuth) {
+    console.log(authStore.isAuthenticated)
     if (authStore.isAuthenticated) {
       next();
     } else {
