@@ -1,11 +1,11 @@
 <template>
-  <div class="bg-violet-50 p-4 w-16 flex flex-col items-center">
+  <div id="sidebar" class="bg-violet-50 p-4 w-16 flex flex-col items-center">
     <RocketOutlined style="color:#8A54FF;" class="text-3xl" />
     <a-divider />
     <div class="gap-y-7 flex-col flex text-xl flex-grow">
       <HomeOutlined style="color:#9370DB;" class="hover:cursor-pointer" @click="toHomePage" />
       <FormOutlined style="color:#9370DB;" class="hover:cursor-pointer" @click="toChatPage" />
-      <HistoryOutlined style="color:#9370DB;" class="hover:cursor-pointer" />
+      <HistoryOutlined style="color:#9370DB;" class="hover:cursor-pointer" @click="toggleCard" />
     </div>
     <div class="flex pb-10 text-2xl">
       <UserOutlined 
@@ -22,19 +22,44 @@
       />
     </div>
   </div>
+  <div
+    v-if="historyOpen" id="history"
+    class="absolute left-16 w-64 h-full border-l-1 border-r-1 border-violet-200 bg-violet-50 flex flex-col z-1000 p-4 gap-y-2"
+  >
+    <span class="text-gradient font-bold text-xl mb-4">YOURTravel</span>
+    <p class="text-xs text-gray-500 font-bold mb-2">
+      Recent Chats
+    </p>
+    <div v-for="i in 5">
+      <div class="text-sm text-gray-700 hover:bg-gray-200/50 hover:cursor-pointer active:bg-gray-200/100 focus:bg-violet-300 rounded-lg p-2">东京一日游</div>
+    </div>
+    <div v-for="(s, idx) in sessions" :key="idx">
+      <div 
+        v-if="s"
+        class="text-sm text-gray-700 hover:bg-gray-200/50 hover:cursor-pointer active:bg-gray-200/100 
+        'bg-violet-300': currentSessionId === session.session_id, rounded-lg p-2"
+        @click="loadSession(s.session_id)"
+      >{{ s.title }}</div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, onMounted, ref, onBeforeUnmount } from 'vue';
 import { useAuthStore } from '@/stores/auth.ts';
 import { useRouter } from 'vue-router';
 import { useSessionStore } from '@/stores/session';
+import { useUserSessionsStore } from '@/stores/userSessions';
+import { storeToRefs } from 'pinia';
 
 export default defineComponent({
   setup() {
     const auth = useAuthStore();
     const router = useRouter();
     const session = useSessionStore();
+    const historyOpen = ref<boolean>(false);
+    const userSession = useUserSessionsStore();
+    const { sessions, currentSessionId } = storeToRefs(userSession);
     
     const toHomePage = () => {
       session.clearSession();
@@ -56,13 +81,59 @@ export default defineComponent({
       router.push('/login');
     };
 
+    const toggleCard = () => {
+      historyOpen.value = !historyOpen.value;
+    }
+
+    const loadSession = (sessionId: string) => {
+      router.push(`/chat/${sessionId}`);
+      userSession.setCurrentSession(sessionId);
+    }
+
+    const handleClickOutside = (event: MouseEvent) => {
+      const sidebarEl = document.getElementById("sidebar");
+      const historyEl = document.getElementById("history");
+      if (
+        sidebarEl &&
+        historyEl &&
+        !sidebarEl.contains(event.target as Node) &&
+        !historyEl.contains(event.target as Node)
+      ) {
+        historyOpen.value = false;
+      }
+    }
+
+    onMounted(() => {
+      userSession.getSessions();
+      document.addEventListener('click', handleClickOutside);
+    });
+
+    onBeforeUnmount(() => {
+      document.removeEventListener('click', handleClickOutside)
+    });
+
     return {
       auth,
       toHomePage,
       toChatPage,
       handleLogin,
       handleLogout,
+      historyOpen,
+      toggleCard,
+      sessions,
+      loadSession,
+      currentSessionId,
     }
   }
 })
 </script>
+
+<style>
+.text-gradient {
+  background-image: linear-gradient(to bottom, #6498ff , #a928f9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+</style>

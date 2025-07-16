@@ -2,6 +2,23 @@ from pydantic import BaseModel, Field
 from typing import List, Optional, Set
 import uuid
 from app.models.recommend import ShortTermProfile, UserBehavior
+from app.models.shortlist import ShortlistItem
+from datetime import datetime
+
+class DailyItinerary(BaseModel):
+  date: int
+  place_name: str
+  start_time: str
+  end_time: str
+
+class Message(BaseModel):
+  content: str
+  recommendations: Optional[List[ShortlistItem]] = []
+  itinerary: Optional[List[DailyItinerary]] = []
+
+class History(BaseModel):
+  role: str
+  message: Message
 
 class SessionState(BaseModel):
   user_id: str
@@ -13,7 +30,10 @@ class SessionState(BaseModel):
   todo_step: int = -1
   short_term_profile: ShortTermProfile = ShortTermProfile()
   current_user_behavior: Optional[List[UserBehavior]] = None
-  recommended_places: Set[str] = set()
+  recommended_places: List[str] = []
+  history: Optional[List[History]] = []
+  shortlist: Optional[List[ShortlistItem]] = []
+  update_time: Optional[datetime] = None
 
   def get_redis_key(self):
     return f"user:{self.user_id}:session:{self.session_id}:metadata"
@@ -25,3 +45,12 @@ class SessionState(BaseModel):
       self.history_key = f"user:{self.user_id}:session:{self.session_id}:history"
     if not self.shortlist_key:
       self.shortlist_key = f"user:{self.user_id}:session:{self.session_id}:shortlist"
+  
+  @property
+  def recommended_places_set(self) -> Set[str]:
+      return set(self.recommended_places)
+
+  def add_recommended_places(self, item: str):
+      current = set(self.recommended_places)
+      current.update(item)
+      self.recommended_places = list(current)

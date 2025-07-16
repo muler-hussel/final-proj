@@ -3,11 +3,22 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.db.mongodb import mongodb
 from contextlib import asynccontextmanager
 from app.api import auth, chat, recommend
+from app.utils.async_listener import RedisExpiredListener
+import asyncio
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
   await mongodb.connect()
+  listener = RedisExpiredListener("redis://localhost:6379/0")
+  task = asyncio.create_task(listener.listen())
+
   yield
+
+  task.cancel()
+  try:
+    await task
+  except asyncio.CancelledError:
+    print("Redis listener task cancelled")
   await mongodb.close()
 
 app = FastAPI(title="YOURTravel", version="0.1", lifespan=lifespan)

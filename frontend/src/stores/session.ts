@@ -1,26 +1,8 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
-import type { DailyItinerary, ShortlistItem } from '@/types';
-
-interface ChatMessage {
-  role: string;
-  message: {
-    content?: string;
-    recommendations?: ShortlistItem[];
-    itinerary?: DailyItinerary[];
-  }
-}
-
-interface TagWeight{
-  tag: string;
-  weight: number;
-  consecutive_sessions?: number;
-}
-
-interface ShortTermProfile{
-  preferences: Record<string, TagWeight>;
-  avoids: string[];
-}
+import type { DailyItinerary, ShortlistItem, ShortTermProfile, ChatMessage } from '@/types';
+import { useShortlistStore } from '@/stores/shortlist.ts';
+import { useAuthStore } from '@/stores/auth';
 
 interface Response {
   role: string;
@@ -30,6 +12,7 @@ interface Response {
     itinerary?: DailyItinerary[];
   }
   short_term_profile?: ShortTermProfile;
+  shortlist?: ShortlistItem[];
 }
 
 export const useSessionStore = defineStore('session', {
@@ -49,10 +32,18 @@ export const useSessionStore = defineStore('session', {
     },
 
     async fetchSessionData(sessionId: string) {
-      const res = await axios.get(`/chat/${sessionId}`);
+      const shortlistStore = useShortlistStore();
+      const auth = useAuthStore();
+      if (!auth.isAuthenticated) return;
+      
+      const res = await axios.post(`/chat/${sessionId}`,{user_id: auth.token});
       this.chatHistory = res.data.messages;
       this.shortTermProfile = res.data.short_term_profile;
       this.title = res.data.title || 'New Chat';
+      const shortlist: ShortlistItem[] | undefined = res.data.shortlist;
+      shortlist?.forEach((item) => {
+        shortlistStore.addToShortlist(item);
+      });
     },
 
     async sendMessage(content: string) {

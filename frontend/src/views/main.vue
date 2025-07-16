@@ -1,7 +1,7 @@
 <template>
   <div class="flex">
     <SideBar></SideBar>
-    <div class="min-h-screen w-full text-gray-800 flex flex-col items-center  px-4">
+    <div class="h-screen w-full text-gray-800 flex flex-col items-center px-4 overflow-y-auto">
       <header>
         <div class="text-3xl flex justify-center gap-2 pt-20">
           <RocketTwoTone two-tone-color="#8A54FF" />

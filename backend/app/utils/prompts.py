@@ -49,7 +49,6 @@ BASIC_PROMPT = ChatPromptTemplate([
   Current Session Context:
   User ID: {user_id}
   Session ID: {session_id}
-  History: {history}
   
   **Instructions for your response:**
   1.  **Respond to the user's input naturally.**
@@ -108,7 +107,7 @@ RECOMMEND_NEW_PLACES_PROMPT = ChatPromptTemplate([
   Return a JSON object with two keys:
     1.  `content`: A string containing an introductory remark, a summary of findings, or direct answers to any additional questions posed in `user_input` (e.g., "To visit France, you'll generally need a Schengen visa if you're not from a visa-exempt country. Here are some places you might enjoy:"). This should be natural conversational text.
     2.  `recommendations`: A JSON array including a list of objects, each with three keys:
-        * `place_name`: The name of the recommended place.
+        * `name`: The name of the recommended place.
         * `description`: Recommending reason for this place, no more than 20 words.
         * `recommend_reason`: Longer recommending reason for this place, 50 to 100 words.
 
@@ -122,10 +121,11 @@ CREATE_ITINERARY_PROMPT = ChatPromptTemplate([
   ("system", """You are a highly skilled travel planning AI. Your goal is to generate an itinerary with places user chose.
 
   1.  **User Input (`user_input`):** In addition to the instructions for generating the itinerary, there may be other information in the `user_input`, you must answer to this information.
-  2.  **Current Session Context (`history`):** You must understand what kind of itinerary the user wants based on `history_str`(e.g. a 4-day trip, an in-depth tour).
+  2.  **Current Session Context (`history`):** You must understand what kind of itinerary the user wants based on `history`(e.g. a 4-day trip, an in-depth tour).
+  
   3.  **Places user chose (`place_names`):** (May be empty)
-      * If available, `place_names` contains the names of the places and their opening hours. Without user's specific request (e.g. user wants a 3-day trip but places are not enough, user asks you to suggest more places), MUST ALWAYS stick to places user chose (`place_names`).
-      * If not available, you should suggest several popular places and generate the itinerary according to `user_input` and `history_str`.
+      * If available, `place_names` contains the names of the places and their opening hours.
+      * If not available, you should suggest several popular places and generate the itinerary according to `user_input` and `history`.
   4.  **You need to arrange itinerary based on the possible duration of user's visit to each place, the opening hours of the places, and the distances between the places, the possible time for user having meals.
   
   **Output Format:**
@@ -139,4 +139,33 @@ CREATE_ITINERARY_PROMPT = ChatPromptTemplate([
   ```
   """),
   ("human", "User input: {user_input}\n history: {history} \nShortlist places: {place_names}\n\n")
+])
+
+PLACE_DETAIL_ENRICH_PROMPT = ChatPromptTemplate([
+  ("system", """You are a travel AI assistant. Your goal is to analyze the pros, cons and possible trip of a place for user.
+
+  **Output Format:**
+  Return a JSON object with three keys:
+    1.  `pros`: A JSON array including 3 to 5 pros of the given place, each one should be no more than 20 characters.
+    2.  `cons`: A JSON array including 3 to 5 cons of the given place, each one should be no more than 20 characters.
+    3.  `advice_trip`: A Markdown formatted string with:
+        - Itinerary suggestions
+        - Must-see spots
+        - Local tips
+        - Transportation advice
+        - Budget estimates
+  """),
+  ("human", "place: {place_name}\n\n")
+])
+
+CITY_POPULAR_ATTRACTIONS_PROMPT = ChatPromptTemplate([
+  ("system", """You are a travel AI assistant. Your goal is to recommend the most popular places in the given city for user.
+
+  **Output Format:**
+  Return a JSON array including no more than 10 objects, each represents one place with three keys:
+    1.  `name`: Name of place.
+    2.  `description`: Recommending reason for this place, no more than 20 words.
+    3.  `recommend_reason`: Longer recommending reason for this place, 50 to 100 words.
+  """),
+  ("human", "place name: {place_name}\n\n")
 ])

@@ -6,18 +6,18 @@
   >
     <div class="flex-shrink-0 w-1/3 rounded-lg overflow-hidden mr-4" style="aspect-ratio: 16/10; overflow: hidden;">
       <img
-        v-if="item.photos"
-        :src="item.photos[0]"
+        v-if="displayItem.photos"
+        :src="displayItem.photos[0]"
         class="w-full h-full object-cover block" />
       <a-skeleton-image v-else />
     </div>
     <div class="flex-grow"> 
-      <h3 class="text-lg font-semibold text-indigo-900 mb-2 leading-tight">{{ item.name }}</h3>
-      <p class="text-sm text-indigo-900 leading-tight">{{ item.description }}</p>
+      <h3 class="text-lg font-semibold text-indigo-900 mb-2 leading-tight">{{ displayItem.name }}</h3>
+      <p class="text-sm text-indigo-900 leading-tight">{{ displayItem.description }}</p>
     </div>
     <div class="absolute top-2 right-2">
       <HeartOutlined 
-        v-if="!shortlistStore.hasItem(item.name)" 
+        v-if="!shortlistStore.hasItem(displayItem.name)" 
         style="color:#9370DB;" class="ml-auto" 
         @click.stop="handleAddToShortlist()" />
       <HeartFilled 
@@ -29,12 +29,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, computed } from 'vue';
 import type { PropType } from 'vue';
 import type { ShortlistItem } from '@/types';
 import { useShortlistStore } from '@/stores/shortlist.ts';
 import { useUserBehaviorStore } from '@/stores/userBehavior';
 import { useDrawerStore } from '@/stores/drawer.ts';
+import axios from 'axios';
 
 export default defineComponent({
   props: {
@@ -47,26 +48,34 @@ export default defineComponent({
     const shortlistStore = useShortlistStore();
     const userBehaviorStore = useUserBehaviorStore();
     const drawer = useDrawerStore();
+    const displayItem = computed(() => {
+      return shortlistStore.items.get(props.item.name) || props.item;
+    });
 
-    const showDrawer = () => {
-      drawer.showSpaceInfo(props.item);
-      userBehaviorStore.recordAction('click', props.item.name);
-      userBehaviorStore.startViewing(props.item.name);
+    const showDrawer = async () => {
+      const item = displayItem.value;
+      if (!item.updated_time || (+new Date() - +new Date(item.updated_time)) / (1000 * 60 * 60 * 24) > 30 || (!item.info?.cons && item.sub_items?.length == 0)) {
+        const res = await axios.post("/recommend/enrich", {place_name: item.name})
+        shortlistStore.addToShortlist(res.data)
+      }
+      drawer.showSpaceInfo(displayItem.value);
+      userBehaviorStore.recordAction('click', displayItem.value.name);
+      userBehaviorStore.startViewing(displayItem.value.name);
     };
 
     const onClose = () => {
       drawer.onSpaceInfoClose();
-      userBehaviorStore.endViewing(props.item.name);
+      userBehaviorStore.endViewing(displayItem.value.name);
     };
 
     const handleAddToShortlist = () => {
-      shortlistStore.addToShortlist(props.item);
-      userBehaviorStore.recordAction('shortlist', props.item.name);
+      shortlistStore.addToShortlist(displayItem.value);
+      userBehaviorStore.recordAction('shortlist', displayItem.value.name);
     };
 
     const handleRemoveShortlist = () => {
-      shortlistStore.removeFromShortlist(props.item.name);
-      userBehaviorStore.recordAction('unshortlist', props.item.name);
+      shortlistStore.removeFromShortlist(displayItem.value.name);
+      userBehaviorStore.recordAction('unshortlist', displayItem.value.name);
     }
 
     return {
@@ -74,9 +83,9 @@ export default defineComponent({
       onClose,
       open,
       shortlistStore,
-      props,
       handleAddToShortlist,
       handleRemoveShortlist,
+      displayItem,
     }
   }
 })

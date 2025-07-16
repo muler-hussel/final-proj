@@ -1,9 +1,10 @@
 import { defineStore } from 'pinia';
 import type { ShortlistItem } from '@/types';
+import { reactive } from 'vue';
 
 export const useShortlistStore = defineStore('shortlist', {
   state: () => ({
-    items: new Map<string, ShortlistItem>(),
+    items: reactive(new Map<string, ShortlistItem>()),
   }),
   actions: {
     addToShortlist(item: ShortlistItem) {
@@ -14,7 +15,7 @@ export const useShortlistStore = defineStore('shortlist', {
     },
     clearShortlist() {
       this.items = new Map<string, ShortlistItem>();
-    }
+    },
   },
   getters: {
     shortlistNum: (state) => state.items.size,

@@ -1,0 +1,11 @@
+2025-07-16 22:25:15,187 - [ERROR] - asyncio - b0cae2bb53eec33478a626d9b1025414def2a991 - Task exception was never retrieved
+future: <Task finished name='Task-77' coro=<RedisService._history_to_mongodb() done, defined at D:\finalPro\backend\app\services\redis_service.py:235> exception=TypeError("'coroutine' object is not iterable")>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\redis_service.py", line 242, in _history_to_mongodb
+    history_list = [History.model_validate_json(entry_json) for entry_json in history]
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'coroutine' object is not iterable
+2025-07-16 22:39:52,136 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-16 22:44:38,359 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-16 23:01:09,489 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-16 23:04:50,760 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60

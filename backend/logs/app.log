@@ -1,43 +1,253 @@
-2025-07-11 04:27:12,512 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 04:29:22,017 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 04:29:28,447 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 04:31:00,838 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 04:31:04,363 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 04:37:53,123 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 04:37:56,225 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 05:17:39,743 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 05:19:51,944 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 05:19:54,532 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 05:22:10,137 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 06:12:22,874 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 06:12:29,181 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 06:40:25,333 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 06:40:28,477 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 06:44:06,863 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 06:44:10,835 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 06:44:24,481 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 06:53:10,452 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 06:58:07,127 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 06:58:09,631 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 07:00:36,921 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 07:00:39,565 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 07:07:23,971 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 07:07:26,172 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 07:13:03,431 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 07:13:05,929 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 07:15:50,722 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 07:22:23,126 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 07:23:49,772 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 07:24:19,601 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 07:27:25,377 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 07:27:29,271 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 07:29:44,053 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 08:16:29,974 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 08:16:36,266 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 08:17:00,051 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 08:35:41,150 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 08:35:43,677 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 08:36:03,553 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 08:49:31,947 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 08:49:34,621 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
-2025-07-11 08:49:50,686 - [INFO] - googlemaps.client - 3ddbcbe94bed0a0c86b8fb3bc08bcf59e7369ad6 - API queries_quota: 60
+2025-07-17 00:12:56,843 - [ERROR] - asyncio - b0cae2bb53eec33478a626d9b1025414def2a991 - Task exception was never retrieved
+future: <Task finished name='Task-61' coro=<RedisService._history_to_mongodb() done, defined at D:\finalPro\backend\app\services\redis_service.py:236> exception=1 validation error for History
+  JSON input should be string, bytes or bytearray [type=json_type, input_value=History(role='user', mess...tions=[], itinerary=[])), input_type=History]
+    For further information visit https://errors.pydantic.dev/2.11/v/json_type>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\redis_service.py", line 243, in _history_to_mongodb
+    history_list = [History.model_validate_json(entry_json) for entry_json in history]
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\pydantic\main.py", line 746, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for History
+  JSON input should be string, bytes or bytearray [type=json_type, input_value=History(role='user', mess...tions=[], itinerary=[])), input_type=History]
+    For further information visit https://errors.pydantic.dev/2.11/v/json_type
+2025-07-17 00:12:57,972 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 00:12:57,972 - [ERROR] - asyncio - b0cae2bb53eec33478a626d9b1025414def2a991 - Task exception was never retrieved
+future: <Task finished name='Task-94' coro=<RedisService._history_to_mongodb() done, defined at D:\finalPro\backend\app\services\redis_service.py:236> exception=1 validation error for History
+  JSON input should be string, bytes or bytearray [type=json_type, input_value=History(role='user', mess...tions=[], itinerary=[])), input_type=History]
+    For further information visit https://errors.pydantic.dev/2.11/v/json_type>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\redis_service.py", line 243, in _history_to_mongodb
+    history_list = [History.model_validate_json(entry_json) for entry_json in history]
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\pydantic\main.py", line 746, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for History
+  JSON input should be string, bytes or bytearray [type=json_type, input_value=History(role='user', mess...tions=[], itinerary=[])), input_type=History]
+    For further information visit https://errors.pydantic.dev/2.11/v/json_type
+2025-07-17 00:15:16,426 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 00:17:49,731 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 00:19:06,330 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 00:20:40,017 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 00:30:01,114 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 00:32:10,493 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 00:33:40,010 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 00:36:01,223 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 00:38:43,772 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 00:40:02,986 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 00:40:39,301 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 00:40:45,293 - [ERROR] - asyncio - b0cae2bb53eec33478a626d9b1025414def2a991 - Task exception was never retrieved
+future: <Task finished name='Task-266' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:293> exception=TypeError("object NoneType can't be used in 'await' expression")>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\recommend_service.py", line 296, in enrich_place_detail
+    if await redis_service.get(lock_key):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\finalPro\backend\app\services\redis_service.py", line 219, in get
+    return await self._redis_client.get(key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: object NoneType can't be used in 'await' expression
+2025-07-17 00:40:45,295 - [ERROR] - asyncio - b0cae2bb53eec33478a626d9b1025414def2a991 - Task exception was never retrieved
+future: <Task finished name='Task-267' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:293> exception=TypeError("object NoneType can't be used in 'await' expression")>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\recommend_service.py", line 296, in enrich_place_detail
+    if await redis_service.get(lock_key):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\finalPro\backend\app\services\redis_service.py", line 219, in get
+    return await self._redis_client.get(key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: object NoneType can't be used in 'await' expression
+2025-07-17 00:40:45,835 - [ERROR] - asyncio - b0cae2bb53eec33478a626d9b1025414def2a991 - Task exception was never retrieved
+future: <Task finished name='Task-274' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:293> exception=TypeError("object NoneType can't be used in 'await' expression")>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\recommend_service.py", line 296, in enrich_place_detail
+    if await redis_service.get(lock_key):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\finalPro\backend\app\services\redis_service.py", line 219, in get
+    return await self._redis_client.get(key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: object NoneType can't be used in 'await' expression
+2025-07-17 00:40:45,836 - [ERROR] - asyncio - b0cae2bb53eec33478a626d9b1025414def2a991 - Task exception was never retrieved
+future: <Task finished name='Task-275' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:293> exception=TypeError("object NoneType can't be used in 'await' expression")>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\recommend_service.py", line 296, in enrich_place_detail
+    if await redis_service.get(lock_key):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\finalPro\backend\app\services\redis_service.py", line 219, in get
+    return await self._redis_client.get(key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: object NoneType can't be used in 'await' expression
+2025-07-17 00:40:46,365 - [ERROR] - asyncio - b0cae2bb53eec33478a626d9b1025414def2a991 - Task exception was never retrieved
+future: <Task finished name='Task-282' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:293> exception=TypeError("object NoneType can't be used in 'await' expression")>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\recommend_service.py", line 296, in enrich_place_detail
+    if await redis_service.get(lock_key):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\finalPro\backend\app\services\redis_service.py", line 219, in get
+    return await self._redis_client.get(key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: object NoneType can't be used in 'await' expression
+2025-07-17 00:40:47,099 - [ERROR] - asyncio - b0cae2bb53eec33478a626d9b1025414def2a991 - Task exception was never retrieved
+future: <Task finished name='Task-289' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:293> exception=TypeError("object NoneType can't be used in 'await' expression")>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\recommend_service.py", line 296, in enrich_place_detail
+    if await redis_service.get(lock_key):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\finalPro\backend\app\services\redis_service.py", line 219, in get
+    return await self._redis_client.get(key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: object NoneType can't be used in 'await' expression
+2025-07-17 00:42:55,734 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 00:42:59,312 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 00:43:05,449 - [ERROR] - asyncio - b0cae2bb53eec33478a626d9b1025414def2a991 - Task exception was never retrieved
+future: <Task finished name='Task-259' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:293> exception=TypeError("'coroutine' object is not subscriptable")>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\recommend_service.py", line 316, in enrich_place_detail
+    place.info.pros = enrich_data['pros']
+                      ~~~~~~~~~~~^^^^^^^^
+TypeError: 'coroutine' object is not subscriptable
+2025-07-17 00:43:06,018 - [ERROR] - asyncio - b0cae2bb53eec33478a626d9b1025414def2a991 - Task exception was never retrieved
+future: <Task finished name='Task-268' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:293> exception=TypeError("'coroutine' object is not subscriptable")>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\recommend_service.py", line 316, in enrich_place_detail
+    place.info.pros = enrich_data['pros']
+                      ~~~~~~~~~~~^^^^^^^^
+TypeError: 'coroutine' object is not subscriptable
+2025-07-17 00:43:06,019 - [ERROR] - asyncio - b0cae2bb53eec33478a626d9b1025414def2a991 - Task exception was never retrieved
+future: <Task finished name='Task-269' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:293> exception=AttributeError("'NoneType' object has no attribute 'type'")>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\recommend_service.py", line 306, in enrich_place_detail
+    if (place.type == "city") and (len(place.sub_items) == 0):
+        ^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'type'
+2025-07-17 00:43:06,777 - [ERROR] - asyncio - b0cae2bb53eec33478a626d9b1025414def2a991 - Task exception was never retrieved
+future: <Task finished name='Task-280' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:293> exception=TypeError("'coroutine' object is not iterable")>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\recommend_service.py", line 308, in enrich_place_detail
+    popular_places: List[PlaceCard] = [PlaceCard(**item) for item in raw_data]
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'coroutine' object is not iterable
+2025-07-17 00:43:07,280 - [ERROR] - asyncio - b0cae2bb53eec33478a626d9b1025414def2a991 - Task exception was never retrieved
+future: <Task finished name='Task-289' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:293> exception=TypeError("'coroutine' object is not iterable")>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\recommend_service.py", line 308, in enrich_place_detail
+    popular_places: List[PlaceCard] = [PlaceCard(**item) for item in raw_data]
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'coroutine' object is not iterable
+2025-07-17 00:43:07,510 - [ERROR] - asyncio - b0cae2bb53eec33478a626d9b1025414def2a991 - Task exception was never retrieved
+future: <Task finished name='Task-298' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:293> exception=TypeError("'coroutine' object is not subscriptable")>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\recommend_service.py", line 316, in enrich_place_detail
+    place.info.pros = enrich_data['pros']
+                      ~~~~~~~~~~~^^^^^^^^
+TypeError: 'coroutine' object is not subscriptable
+2025-07-17 02:38:36,582 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 02:38:40,106 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 02:38:48,922 - [ERROR] - asyncio - b0cae2bb53eec33478a626d9b1025414def2a991 - Task exception was never retrieved
+future: <Task finished name='Task-416' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:292> exception=AttributeError("'dict' object has no attribute 'pros'")>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\recommend_service.py", line 315, in enrich_place_detail
+    place.info.pros = enrich_data.pros
+                      ^^^^^^^^^^^^^^^^
+AttributeError: 'dict' object has no attribute 'pros'
+2025-07-17 02:38:49,831 - [ERROR] - asyncio - b0cae2bb53eec33478a626d9b1025414def2a991 - Task exception was never retrieved
+future: <Task finished name='Task-496' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:292> exception=AttributeError("'dict' object has no attribute 'pros'")>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\recommend_service.py", line 315, in enrich_place_detail
+    place.info.pros = enrich_data.pros
+                      ^^^^^^^^^^^^^^^^
+AttributeError: 'dict' object has no attribute 'pros'
+2025-07-17 02:38:49,942 - [ERROR] - asyncio - b0cae2bb53eec33478a626d9b1025414def2a991 - Task exception was never retrieved
+future: <Task finished name='Task-430' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:292> exception=AttributeError("'dict' object has no attribute 'pros'")>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\recommend_service.py", line 315, in enrich_place_detail
+    place.info.pros = enrich_data.pros
+                      ^^^^^^^^^^^^^^^^
+AttributeError: 'dict' object has no attribute 'pros'
+2025-07-17 02:38:51,058 - [ERROR] - asyncio - b0cae2bb53eec33478a626d9b1025414def2a991 - Task exception was never retrieved
+future: <Task finished name='Task-452' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:292> exception=AttributeError("'dict' object has no attribute 'pros'")>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\recommend_service.py", line 315, in enrich_place_detail
+    place.info.pros = enrich_data.pros
+                      ^^^^^^^^^^^^^^^^
+AttributeError: 'dict' object has no attribute 'pros'
+2025-07-17 02:38:51,153 - [ERROR] - asyncio - b0cae2bb53eec33478a626d9b1025414def2a991 - Task exception was never retrieved
+future: <Task finished name='Task-466' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:292> exception=AttributeError("'coroutine' object has no attribute 'name'")>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\recommend_service.py", line 310, in enrich_place_detail
+    place.sub_items.append(PlaceCard(place_info.name, p.description, p.recommend_reason))
+                                     ^^^^^^^^^^^^^^^
+AttributeError: 'coroutine' object has no attribute 'name'
+2025-07-17 02:38:54,271 - [ERROR] - asyncio - b0cae2bb53eec33478a626d9b1025414def2a991 - Task exception was never retrieved
+future: <Task finished name='Task-480' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:292> exception=AttributeError("'coroutine' object has no attribute 'name'")>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\recommend_service.py", line 310, in enrich_place_detail
+    place.sub_items.append(PlaceCard(place_info.name, p.description, p.recommend_reason))
+                                     ^^^^^^^^^^^^^^^
+AttributeError: 'coroutine' object has no attribute 'name'
+2025-07-17 02:39:08,767 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 02:39:09,662 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 02:39:11,083 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 02:39:11,715 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 02:39:14,942 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 02:41:21,928 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 02:42:11,389 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 02:42:58,835 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 02:46:25,942 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 02:46:59,857 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 02:48:23,034 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 02:50:32,896 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 02:51:25,568 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 02:54:28,830 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 02:55:31,526 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 02:56:49,891 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 02:57:21,757 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 02:58:40,417 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 02:59:10,609 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 02:59:47,273 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 03:00:43,685 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 03:00:48,989 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 03:02:21,541 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 03:11:37,876 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 03:13:22,573 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 03:17:18,616 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 03:26:06,348 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 03:26:09,244 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 03:27:11,662 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 03:27:14,152 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 03:27:49,818 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 03:27:54,891 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 03:27:59,760 - [ERROR] - asyncio - b0cae2bb53eec33478a626d9b1025414def2a991 - Task exception was never retrieved
+future: <Task finished name='Task-210' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:292> exception=AttributeError("'NoneType' object has no attribute 'type'")>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\recommend_service.py", line 305, in enrich_place_detail
+    if (place.type == "city") and (len(place.sub_items) == 0):
+        ^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'type'
+2025-07-17 03:28:00,295 - [ERROR] - asyncio - b0cae2bb53eec33478a626d9b1025414def2a991 - Task exception was never retrieved
+future: <Task finished name='Task-241' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:292> exception=AttributeError("'NoneType' object has no attribute 'type'")>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\recommend_service.py", line 305, in enrich_place_detail
+    if (place.type == "city") and (len(place.sub_items) == 0):
+        ^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'type'
+2025-07-17 03:28:00,302 - [ERROR] - asyncio - b0cae2bb53eec33478a626d9b1025414def2a991 - Task exception was never retrieved
+future: <Task finished name='Task-242' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:292> exception=AttributeError("'NoneType' object has no attribute 'type'")>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\recommend_service.py", line 305, in enrich_place_detail
+    if (place.type == "city") and (len(place.sub_items) == 0):
+        ^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'type'
+2025-07-17 03:28:38,035 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 03:28:42,078 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 03:28:53,904 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 03:28:58,612 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 03:29:02,006 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 03:29:09,809 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 03:30:30,532 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 03:30:32,374 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 03:31:01,469 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 03:31:45,075 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 03:32:03,346 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60
+2025-07-17 03:34:09,102 - [INFO] - googlemaps.client - b0cae2bb53eec33478a626d9b1025414def2a991 - API queries_quota: 60

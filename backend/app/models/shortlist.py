@@ -23,7 +23,12 @@ class PlaceGeo(BaseModel):
 class PlaceReview(BaseModel):
   review: str
   type: int # 0-Google latest, 1-Google relevant, 2-TripAdvisor latest, 3-TripAdivsor detailed
-  
+
+class PlaceCard(BaseModel):
+  name: str
+  description: Optional[str] = None
+  recommend_reason: Optional[str] = None
+
 # Infomation shown in drawer
 class PlaceDetail(BaseModel):
   recommend_reason: Optional[str] = None # Recommend reason, city & attraction
@@ -33,8 +38,8 @@ class PlaceDetail(BaseModel):
   rating: Optional[float] = None
   reviews: Optional[List[PlaceReview]] = None # extract by AI
   pros: Optional[List[str]] = None
-  contra: Optional[List[str]] = None
-  summarized_review: Optional[str] = None # Summarized according to reviews
+  cons: Optional[List[str]] = None
+  advice_trip: Optional[str] = None # Adviced by ai
   prices: Optional[List[str]] = None # extract from official website by ai
   price_level: Optional[int] = None
   total_ratings: Optional[int] = None
@@ -47,7 +52,7 @@ class ShortlistItem(BaseModel):
   description: str
   tags: Optional[List[str]] = [] # tags of attraction, 'museum', 'animal', 'history'
   info: Optional[PlaceDetail] = None
-  sub_items: Optional[List[str]] = [] # If city, containing recommended attraction names of this city
+  sub_items: Optional[List[PlaceCard]] = [] # If city, containing recommended attraction names of this city
   geometry: Optional[PlaceGeo] = None
   status: Optional[str] = "pending"  # Backend asynchronous processing status 'pending', 'processing', 'ready', 'error'
   photos: Optional[List[str]] = None

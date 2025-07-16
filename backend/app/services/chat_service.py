@@ -2,7 +2,7 @@ from app.services.shared import language_model
 from langchain_core.output_parsers import StrOutputParser, JsonOutputParser
 from pydantic import BaseModel
 from typing import List, Optional
-from app.models.session import SessionState
+from app.models.session import SessionState, Message, History
 from app.utils.prompts import (
   CREATE_ITINERARY_PROMPT,
   INTENT_CLASSIFIER_PROMPT,
@@ -44,7 +44,7 @@ class ChatService:
     self.create_itinerary_chain = (
       CREATE_ITINERARY_PROMPT
       | language_model
-      | JsonOutputParser()
+      | JsonOutputParser(pydantic_object=Message)
     )
 
   # Automatically generate trip title
@@ -60,7 +60,14 @@ class ChatService:
   # Processing prompt
   async def orchestrate_planning_step(self, session_state: SessionState, user_input: str) -> int:
     # Append input into conversation history
-    await redis_service.append_history(session_state, user_input, "user")
+    user_message_content = Message(
+      content=user_input
+    )
+    user_history_entry = History(
+      role="user",
+      message=user_message_content
+    )
+    await redis_service.append_history(session_state, user_history_entry)
 
     # Intent recognition
     classified_intent: List[str] = await self.intent_classifier_chain.ainvoke({
@@ -84,7 +91,6 @@ class ChatService:
     recommend_service = RecommendService(db)
     # New preferences from behavior and input
     session_state = await recommend_service.update_short_term_profile(session_state, user_input)
-    print(redis_service.get_shortlist)
     
     if ("MORE_RECOMMENDATIONS" in intent_set) or ("MODIFY_PLAN" in intent_set):
       # Prompt for recommend
@@ -98,20 +104,24 @@ class ChatService:
   async def get_ai_response(self, session_state: SessionState, user_input: str, first_prompt: Optional[str] = None, todo_prompt: Optional[str] = None):   
     user_id = session_state.user_id
     session_id = session_state.session_id
-    history = (await redis_service.get_history(user_id, session_id))[-10:] # recent 10 conversation
-    history_str = "\n".join(f"{msg['role']}: {msg['message']}" for msg in history)
     
     prompt_data = {
       "user_id": user_id,
       "session_id": session_id,
-      "history": history_str,
       "first_prompt": first_prompt,
       "todo_prompt": todo_prompt,
       "user_input": user_input,
     }
 
     response = await self.primary_assistant_chain.ainvoke(prompt_data)
-    await redis_service.append_history(session_state, response, "ai")
+    user_message_content = Message(
+      content=response
+    )
+    user_history_entry = History(
+      role="ai",
+      message=user_message_content
+    )
+    await redis_service.append_history(session_state, user_history_entry)
     db = await get_database()
     recommend_service = RecommendService(db)
     session_state = await recommend_service.update_short_term_profile(session_state, user_input)
@@ -120,7 +130,7 @@ class ChatService:
 
   async def create_itinerary(self, session_state: SessionState, user_input: str):
     history = (await redis_service.get_history(session_state.user_id, session_state.session_id))[-10:]
-    history_str = "\n".join(f"{msg['role']}: {msg['message']}" for msg in history)
+    history_str = "\n".join(f"{msg.role}: {msg.message}" for msg in history)
     shortlist = await redis_service.get_shortlist(session_state)
     place_names = ",".join(f"{s.name}: {s.info.weekday_text}" for s in shortlist)
     
@@ -129,8 +139,12 @@ class ChatService:
       "place_names":  place_names,
       "user_input": user_input,
     }
-    response = await self.create_itinerary_chain.ainvoke(prompt_data)
-    await redis_service.append_history(session_state, response, "ai")
+    response: Message = await self.create_itinerary_chain.ainvoke(prompt_data)
+    user_history_entry = History(
+      role="ai",
+      message=response
+    )
+    await redis_service.append_history(session_state, user_history_entry)
     return response
 
 chat_service = ChatService()

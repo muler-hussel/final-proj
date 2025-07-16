@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional, Dict, Literal, Set
+from typing import Optional, Dict, Literal, List, Set
 
 class TagWeight(BaseModel):
   tag: str
@@ -11,13 +11,32 @@ class TagWeight(BaseModel):
 # Profile according to preferences in one session.
 class ShortTermProfile(BaseModel):
   preferences: Dict[str, TagWeight] = {}
-  avoids: Set[str] = set()
+  avoids: List[str] = [] 
+
+  # Mongodb does not support set
+  @property
+  def avoids_set(self) -> Set[str]:
+      return set(self.avoids)
+
+  def add_avoids(self, items: List[str]):
+      current = set(self.avoids)
+      current.update(items)
+      self.avoids = list(current)
 
 class LongTermProfile(BaseModel):
   user_id: str
   verified_preferences: Dict[str, TagWeight] = {}
   decaying_preferences: Dict[str, TagWeight] = {}
-  avoids: Set[str] = set()
+  avoids: List[str] = []
+
+  @property
+  def avoids_set(self) -> Set[str]:
+      return set(self.avoids)
+
+  def add_avoids(self, items: List[str]):
+      current = set(self.avoids)
+      current.update(items)
+      self.avoids = list(current)
 
 class UserBehavior(BaseModel):
   place_name: str # Name of place card user acts
