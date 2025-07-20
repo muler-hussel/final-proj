@@ -1,3 +1,4 @@
+import json
 from pydantic import BaseModel
 from typing import List, Any
 from app.db.mongodb import MongoDB
@@ -13,6 +14,7 @@ from app.utils.prompts import (
   RECOMMEND_NEW_PLACES_PROMPT, 
   PLACE_DETAIL_ENRICH_PROMPT,
   CITY_POPULAR_ATTRACTIONS_PROMPT,
+  RECOMMEND_POPULAR_PLACES_PROMPT,
 )
 from langchain_core.output_parsers import JsonOutputParser
 import math
@@ -31,10 +33,6 @@ class LLMExtract(BaseModel):
   place_preferences: List[PlacePreference]
   avoid: List[str]
   input_preferences: List[str]
-
-class LLMRecommend(BaseModel):
-  content: str
-  recommendations: List[PlaceCard]
 
 # Fields needed in shortlist item
 ESSENTIAL_FIELDS = [
@@ -85,6 +83,12 @@ class RecommendService:
       | JsonOutputParser(pydantic_object=PlaceCard)
     )
 
+    self.popular_recommends_chain = (
+      RECOMMEND_POPULAR_PLACES_PROMPT
+      | language_model
+      | JsonOutputParser(pydantic_object=PlaceCard)
+    )
+    
     self.sigmoid_scale = 0.5
 
     self.init_weight = 0.8
@@ -184,9 +188,17 @@ class RecommendService:
       "recommended_places": recommended_places,
       "history": history_str,
     })
-    # logger.info(f"short_term_profile: {short_term_profile}, user_input: {user_input}, recommend_places: {raw_data}")
-    result = LLMRecommend(**raw_data)
 
+    raw_popular = await self.popular_recommends_chain.ainvoke({
+      "user_input": user_input,
+      "recommended_places": recommended_places,
+      "history": history_str,
+    })
+
+    # logger.info(f"short_term_profile: {short_term_profile}, user_input: {user_input}, recommend_places: {raw_data}")
+    result = Message(**raw_data)
+    populars = [ShortlistItem(**p) for p in json.loads(raw_popular)]
+    
     recommendations = result.recommendations
     response = Message(
       content=result.content
@@ -197,6 +209,12 @@ class RecommendService:
       session_state.add_recommended_places(place.name)
       place_info = await self.get_or_fetch_place_brief(place.name, place.description, place.recommend_reason)
       response.recommendations.append(place_info)
+    
+    for place in populars:
+      # If place information is in DB, get place info, else fetch from google map api
+      session_state.add_recommended_places(place.name)
+      place_info = await self.get_or_fetch_place_brief(place.name, place.description, place.recommend_reason)
+      response.populars.append(place_info)
       asyncio.create_task(self.enrich_place_detail(place_info.name))
     
     user_history_entry = History(
@@ -210,28 +228,28 @@ class RecommendService:
   
   async def get_or_fetch_place_brief(self, place_name: str, description: str, recommend_reason: str) -> ShortlistItem:
     # Check if in Redis
-      place_info = await redis_service.get_place_info(place_name)
-      # Check if in MongoDB
-      if place_info is None:
-        place_info = await self.get_place_info(place_name)
-      if place_info is None:
-        # Fetch from google map api
-        places = self.gmaps.find_place(place_name, "textquery", fields=['place_id', 'name']).get("candidates", [])
-        if len(places):
-          place_id = places[0].get('place_id')
-          official_name = places[0].get('name')
-          place_info = await self.get_place_info(official_name)
-          if place_info:
-            return place_info
-          result = self.gmaps.place(place_id, ESSENTIAL_FIELDS).get("result")
-          place_info = self.google_to_shortlist(result, description, recommend_reason)
-
-          # Save in Redis and MongoDB
-          await redis_service.save_place_info(place_info.name, place_info)
-          await self.save_place_info(place_info)
-        # place_info = ShortlistItem(name=place_name, description=description)
-        
-      return place_info
+    place_info = await redis_service.get_place_info(place_name)
+    # Check if in MongoDB
+    if place_info is None:
+      place_info = await self.get_place_info(place_name)
+    if place_info is None:
+      # Fetch from google map api
+      places = self.gmaps.find_place(place_name, "textquery", fields=['place_id', 'name']).get("candidates", [])
+      if len(places):
+        place_id = places[0].get('place_id')
+        official_name = places[0].get('name')
+        place_info = await self.get_place_info(official_name)
+        if place_info:
+          return place_info
+        result = self.gmaps.place(place_id, ESSENTIAL_FIELDS).get("result")
+        place_info = self.google_to_shortlist(result, description, recommend_reason)
+        # Save in Redis and MongoDB
+        await redis_service.save_place_info(place_info.name, place_info)
+        await self.save_place_info(place_info)
+        asyncio.create_task(self.enrich_place_detail(place_info.name))
+      # place_info = ShortlistItem(name=place_name, description=description)
+      
+    return place_info
 
   def raw_behavior_score(self, behavior: UserBehavior) -> float:
     return (
@@ -289,25 +307,36 @@ class RecommendService:
     )
 
   # Place information needs to be generated by ai or updated
-  async def enrich_place_detail(self, place_name: str):
+  async def enrich_place_detail(self, place_name: str) -> ShortlistItem:
     # Redis lock ensures tasks not duplicate
     lock_key = f"place_lock:{place_name}"
     if redis_service.get(lock_key):
       return
-
     try:
       redis_service.set(lock_key, "1", ex=300)
-      place = await self.get_place_info(place_name)
+      place = await redis_service.get_place_info(place_name)
+
+      if not place:
+        place = await self.get_place_info(place_name)
+      if not place:
+        place = await self.get_or_fetch_place_brief(place_name, None, None)
+      
       if not place:
         return
 
+      isChanged = False
       # City: Top ten attractions in city
       if (place.type == "city") and (len(place.sub_items) == 0):
         raw_data = await self.popular_places_chain.ainvoke(place_name)
         popular_places: List[PlaceCard] = [PlaceCard(**item) for item in raw_data]
         for p in popular_places:
           place_info = await self.get_or_fetch_place_brief(p.name, p.description, p.recommend_reason)
-          place.sub_items.append(PlaceCard(name=place_info.name, description=p.description, recommend_reason=p.recommend_reason))
+          place.sub_items.append(ShortlistItem(
+            name=place_info.name, 
+            description=p.description, 
+            recommend_reason=p.recommend_reason, 
+            photos=place_info.photos[0]))
+        isChanged = True
 
       # Not city: update if over one month or haven't generated by ai
       elif (place.type != "city") and ((place.info.advice_trip is None) or (datetime.now() - place.updated_time > timedelta(days=30))):
@@ -315,10 +344,12 @@ class RecommendService:
         place.info.pros = enrich_data['pros']
         place.info.cons = enrich_data['cons']
         place.info.advice_trip = enrich_data['advice_trip']
-        
-      place.updated_time = datetime.now()
-      await redis_service.save_place_info(place_name, place)
-      await self.save_place_info(place)
+        isChanged = True
+      
+      if isChanged:
+        place.updated_time = datetime.now()
+        await redis_service.save_place_info(place_name, place)
+        await self.save_place_info(place)
 
       return place
 

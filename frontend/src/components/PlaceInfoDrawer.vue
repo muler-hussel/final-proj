@@ -3,8 +3,8 @@
     v-if="item" 
     :title="item.name" 
     size=large 
-    :open="drawer.spaceInfo.isOpen" 
-    @close="drawer.onSpaceInfoClose"
+    :open="drawer.placeInfo.isOpen" 
+    @close="drawer.onPlaceInfoClose"
   >
     <a-carousel effect="fade" arrows>
       <template #prevArrow>
@@ -19,9 +19,9 @@
       </template>
       
       <div v-for="(p, idx) in item.photos" :key="idx" class="carousel-image" >
-        <!-- <img src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" class="carousel-image" /> -->
-        <img v-if="p" :src="p"/>
-        <a-skeleton-image v-else />
+        <img src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" class="carousel-image" />
+        <img v-if="p" :src="p" />
+        <!-- <a-skeleton-image v-else /> -->
       </div>
     </a-carousel>
     <div class="mt-4">
@@ -53,13 +53,13 @@
             </p>
             <p class="ml-7 text-gray-700 mt-1"> {{ item.info?.address }}</p>
           </div>
-          <div v-if="item.info?.weekday_text?.length">
+          <div v-if="dynamic_weekday && dynamic_weekday.content.length > 0">
             <p class="text-lg font-bold">
               <ClockCircleOutlined class="mr-2"/>Open Hour
             </p>
             <a-collapse ghost class="ml-10 text-gray-700 mt-1" expandIconPosition="end">
-              <a-collapse-panel :header="item.info?.weekday_text[0]">
-                <p v-for="(t,idx) in item.info?.weekday_text" :key="idx">{{ t }}</p>
+              <a-collapse-panel :header="dynamic_weekday.header">
+                <p v-for="(t,idx) in dynamic_weekday.content" :key="idx">{{ t }}</p>
               </a-collapse-panel>
             </a-collapse>
           </div>
@@ -119,9 +119,8 @@
         </div>
         
         <p v-if="item.info?.advice_trip" v-html="renderedAdvice" class="leading-8 whitespace-normal text-gray-700"></p>
-        <div v-if="item.sub_items.length > 0">
-          <SpotSelected v-for="(i, idx) in item.sub_items" :key="idx" :item="i">
-          </SpotSelected>
+        <div v-if="item.sub_items.length > 0" class="grid grid-cols-2 gap-4 items-stretch">
+          <SpotSelected v-for="(i, idx) in item.sub_items" :key="idx" :item="i"></SpotSelected>
         </div>
       </div>
     </div>
@@ -140,11 +139,25 @@ export default defineComponent({
   components: {Carousel},
   setup() {
     const drawer = useDrawerStore();
-    const { spaceInfo } = storeToRefs(drawer);
-    const item = computed(() => spaceInfo.value.item);
+    const { placeInfo } = storeToRefs(drawer);
+    const item = computed(() => placeInfo.value.item);
     const renderedRcommendReason = computed(() => marked.parse(item.value?.info?.recommend_reason ?? ''));
     const value = computed(() => item.value?.info?.rating)
     const weekday_text = computed(() => item.value?.info?.weekday_text ?? null);
+    const todayIndex = new Date().getDay();
+
+    const dynamic_weekday = computed(() => {
+      if (!weekday_text.value) return;
+      const list = [];
+      for (let i = 0; i < 7; i++) {
+        list.push(weekday_text.value[(i + todayIndex) % 7]);
+      }
+      return {
+        header: list[0],
+        content: list.slice(1)
+      };
+    });
+
     const renderedAdvice = computed(() => marked.parse(item.value?.info?.advice_trip ?? ''));
     
     return {
@@ -153,6 +166,7 @@ export default defineComponent({
       renderedRcommendReason,
       value,
       renderedAdvice,
+      dynamic_weekday,
     }
   }
 })

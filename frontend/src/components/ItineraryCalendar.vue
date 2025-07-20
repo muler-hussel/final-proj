@@ -16,10 +16,7 @@
         class="mb-2 p-3 cursor-move fc-draggable"
         :data-transfer="JSON.stringify(place)"
       >
-        <SpotSelected v-if="items.get(place.name)" :item="items.get(place.name)!"></SpotSelected>
-        <!-- <div class="min-h-[40px] rounded border-l-4 border-violet-300 shadow p-4 bg-violet-50">
-          {{ place.name }}
-        </div> -->
+        <SpotSelected v-if="placeDetails.get(place.name)" :item="placeDetails.get(place.name)!"></SpotSelected>
       </div>
     </div>
   </div>
@@ -46,13 +43,35 @@ import { type CalendarOptions, type EventApi, type EventClickArg, type EventCont
 import { useShortlistStore } from '@/stores/shortlist.ts';
 import SpotSelected from '@/components/SpotSelected.vue';
 import { storeToRefs } from 'pinia';
-import type { DailyItinerary } from '@/types';
+import type { DailyItinerary, ShortlistItem } from '@/types';
+import dayjs from 'dayjs';
 
-const {events} = defineProps({
+interface Place {
+  id: string;
+  name: string;
+  duration: number; //Hours
+}
+
+const {events, recommends} = defineProps({
   events: {
     type: Array as PropType<DailyItinerary[]>,
     default: () => []
   },
+  recommends: {
+    type: Array as PropType<ShortlistItem[]>,
+    default: () => [],
+  }
+});
+const calendarRef = ref();
+const shortlistStore = useShortlistStore();
+const { items } = storeToRefs(shortlistStore);
+const placeDetails = computed(() => {
+  const map = new Map<string, ShortlistItem>();
+  recommends.forEach(item => map.set(item.name, item));
+  for (const item of items.value.values()) {
+    map.set(item.name, item);
+  }
+  return map;
 });
 
 // Convert DailyItinerary into EventInput
@@ -68,16 +87,21 @@ const convertToEventInput = (itineraries: DailyItinerary[]): EventInput[] => {
     const endTime = new Date(targetDate);
     endTime.setHours(endHours, endMinutes, 0, 0);
     
-    const title = item.place_name;
-    const place_info = items.value.get(title);
+    let title = null;
+    let place_info = null;
+    if (item.place_name) {
+      title = item.place_name;
+      place_info = items.value.get(title);
+    }
 
     return {
       id: `event-${index}`,
-      title: title,
+      title: title ? title : item.commute_mode,
       start: startTime,
       end: endTime,
       extendedProps: {
-        openingHours: place_info?.info?.weekday_text
+        openingHours: place_info?.info?.weekday_text,
+        type: item.type,
       }
     };
   });
@@ -87,8 +111,26 @@ const calendarEvents = computed(() => {
   return convertToEventInput(events);
 });
 
-const shortlistStore = useShortlistStore();
-const { items } = storeToRefs(shortlistStore);
+// Extract EventInput as DailyItinerary
+const extractEventData = () => {
+  const events: EventApi[] = calendarRef.value.getApi().getEvents();
+  const baseDate = dayjs(events[0]?.start || new Date()).startOf('day');
+  return events.map(event => {
+    const start = dayjs(event.start);
+    const end = dayjs(event.end);
+    const type = event.extendedProps.type;
+
+    return {
+      date: start.diff(baseDate, 'day') + 1,
+      type,
+      place_name: type === 'visit' ? event.title : undefined,
+      start_time: start.format('HH:mm'),
+      end_time: end.format('HH:mm'),
+      commute_mode: type === 'commuting' ? event.title : undefined,
+    } satisfies DailyItinerary;
+  });
+}
+
 
 // Customize Header as Day 1, Day 2, Day 3
 const formatDayHeader = (date: Date) => {
@@ -96,14 +138,6 @@ const formatDayHeader = (date: Date) => {
   const diffDays = Math.floor((+date - +startDate) / (1000 * 60 * 60 * 24)) + 2;
   return `Day ${diffDays}`;
 };
-
-const calendarRef = ref();
-
-interface Place {
-  id: string;
-  name: string;
-  duration: number; //Hours
-}
 
 const discardPlaces = ref<Set<Place>>(new Set([]));
 
@@ -126,9 +160,7 @@ const handleDragStart = (e: DragEvent, place: Place) => {
 
 // Calendar receive from discardPlaces
 const handleEventReceive = (info: EventReceiveArg) => {
-  console.log(1);
   if (!info.draggedEl.dataset.transfer) return;
-  console.log(2);
   const place = JSON.parse(info.draggedEl.dataset.transfer);
   info.event.setProp('title', place.name);
   info.event.setExtendedProp('placeId', place.id);
@@ -138,7 +170,7 @@ const handleEventReceive = (info: EventReceiveArg) => {
   end.setHours(end.getHours() + place.duration);
   info.event.setEnd(end);
   
-  setOperations.delete(place.id)
+  setOperations.delete(place.id);
 };
 
 // DiscardPlaces receive from calendar
@@ -213,11 +245,13 @@ const formatTime = (date: Date | null) => {
 
 const deleteEvent = (event: EventApi) => {
   if (event && event.end && event.start) {
-    setOperations.add({
-      id: event.id,
-      name: event.title,
-      duration: (+event.end - +event.start) / 3600000
-    });
+    if (event.extendedProps.type === 'visit') {
+      setOperations.add({
+        id: event.id,
+        name: event.title,
+        duration: (+event.end - +event.start) / 3600000
+      });
+    }
     event.remove();
   }
 }
@@ -263,7 +297,8 @@ const calendarOptions = ref<CalendarOptions>({
     const hasOpeningHours = openingHours.length > 0;
     return {
       html: `
-        <div class="p-2 bg-indigo-100 border-l-4 border-indigo-400 rounded w-full h-full text-gray-500 flex flex-col gap-y-1">
+        ${arg.event.extendedProps.type === 'visit' ?
+        `<div class="p-2 bg-indigo-100 border-l-4 border-indigo-400 rounded w-full h-full text-gray-500 flex flex-col gap-y-1">
           <div class="font-medium text-gray-700">${arg.event.title}</div>
           <div class="text-xs">
             ${arg.timeText}
@@ -277,7 +312,13 @@ const calendarOptions = ref<CalendarOptions>({
             </span>
           ` : ''}
           </div>
-        </div>
+        </div>` : 
+        `<div class="p-2 bg-indigo-100 border-l-4 border-indigo-400 rounded w-full h-full text-gray-500 flex flex-col gap-y-1">
+          <div class="font-medium text-gray-700">${arg.event.title}</div>
+          <div class="text-xs">
+            ${arg.timeText}
+          </div>
+        </div>`}
       `
     };
   },
@@ -292,7 +333,6 @@ const calendarOptions = ref<CalendarOptions>({
 // Register shortlistItem as the external event source of FullCalendar
 const initDraggable = () => {
   const dropContainer = document.querySelector('.drop-container') as HTMLElement;
-  console.log(dropContainer);
   if (dropContainer) {
     new Draggable(dropContainer, {
       itemSelector: '.fc-draggable',
@@ -315,6 +355,8 @@ onMounted(() => {
     setTimeout(initDraggable, 100);
   });
 });
+
+defineExpose({ extractEventData });
 </script>
 
 <style>

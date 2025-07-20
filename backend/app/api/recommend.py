@@ -23,8 +23,6 @@ router = APIRouter(prefix="/recommend", tags=["recommend"])
 async def save_user_behavior(data: BehaviorTrack = Body(...)):
   session_id = data.sessionId
   user_id = data.userId
-  print(data)
-  
   session_state = await redis_service.load_session_state(user_id, session_id)
 
   if not session_state:
@@ -41,9 +39,8 @@ async def save_user_behavior(data: BehaviorTrack = Body(...)):
 @router.post("/enrich")
 async def get_place_detail(req: PlaceReq = Body(...)) -> ShortlistItem:
   place_name = req.place_name
-  place = await redis_service.get_place_info(place_name)
-  if not place:
-    db = await get_database()
-    place = await RecommendService(db).enrich_place_detail(place_name)
+  
+  db = await get_database()
+  place = await RecommendService(db).enrich_place_detail(place_name)
 
   return place

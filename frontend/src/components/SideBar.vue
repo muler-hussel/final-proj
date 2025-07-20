@@ -83,6 +83,7 @@ export default defineComponent({
     }
 
     const loadSession = async (sessionId: string) => {
+      historyOpen.value = false;
       router.push(`/chat/${sessionId}`);
       userSession.setCurrentSession(sessionId);
     }

@@ -2,27 +2,26 @@ from pydantic import BaseModel
 from fastapi import APIRouter, HTTPException, Path, Body
 from app.services.redis_service import redis_service
 from app.services.chat_service import chat_service
-from app.models.session import SessionState, Message, History
+from app.models.session import SessionState, Message, History, DailyItinerary
 import uuid
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 from app.utils.prompts import PROMPT_FIRST_INPUT
 from app.db.mongodb import get_database
 from app.models.db_session import DbSession
 from typing import List
-import json
 
 router = APIRouter(prefix="/chat", tags=["chat"])
 
 class ChatRequest(BaseModel):
   user_id: str
-  user_input: str
+  user_input: Optional[str] = None
+  title: Optional[str] = None
+  itinerary: Optional[List[DailyItinerary]] = None
+  chat_idx: Optional[int] = None
 
 class AllSessionRes(BaseModel):
   session_id: str
   title: str
-
-class UserIdReq(BaseModel):
-  user_id: str
 
 # New chat with or without prompt.
 # Suitable for both easy plan and chatting with ai
@@ -43,7 +42,7 @@ async def create_session(data: ChatRequest = Body(...)):
 
 # Get user's all sessions. Special routers must be placed ahead.
 @router.post("/allSessions", response_model=List[AllSessionRes])
-async def get_session_with_userId(data: UserIdReq = Body(...)):
+async def get_session_with_userId(data: ChatRequest = Body(...)):
   user_id = data.user_id
   session_info = []
   db = await get_database()
@@ -57,7 +56,7 @@ async def get_session_with_userId(data: UserIdReq = Body(...)):
 
 # Get session when refresh or from history chats
 @router.post("/{session_id}")
-async def get_session(session_id: str = Path(...), data: UserIdReq = Body(...)):
+async def get_session(session_id: str = Path(...), data: ChatRequest = Body(...)):
   user_id = data.user_id
   db = await get_database()
   session_state = await DbSession(db).get_sesssion(user_id, session_id)
@@ -69,9 +68,9 @@ async def get_session(session_id: str = Path(...), data: UserIdReq = Body(...)):
 
   await redis_service.save_session_state(session_state)
   for h in history:
-    redis_service.append_history(session_state, h)
+    await redis_service.append_history(session_state, h)
   for s in shortlist:
-    redis_service.add_to_shortlist(session_state, s)
+    await redis_service.add_to_shortlist(session_state, s)
 
   response = {
     "messages": history,
@@ -79,7 +78,6 @@ async def get_session(session_id: str = Path(...), data: UserIdReq = Body(...)):
     "title": session_state.title,
     "shortlist": shortlist,
   }
-  print(shortlist)
   return response
 
 # Answer to user prompts, justify todo list, todo step, slots, update session info
@@ -89,8 +87,8 @@ async def chat_with_ai(session_id: str = Path(...), data: ChatRequest = Body(...
   session_state = await redis_service.load_session_state(user_id, session_id)
   if not session_state:
     db = await get_database()
-    session_state = DbSession(db).get_sesssion(user_id, session_id)
-    redis_service.save_session_state(session_state)
+    session_state = await DbSession(db).get_sesssion(user_id, session_id)
+    await redis_service.save_session_state(session_state)
   if not session_state:
     raise HTTPException(status_code=404, detail="Session not found or expired. Please start a new session.")
 
@@ -127,3 +125,35 @@ async def chat_with_ai(session_id: str = Path(...), data: ChatRequest = Body(...
   }
   
   return response
+
+# Save title
+@router.post("/{session_id}/title")
+async def save_title(session_id: str = Path(...), data: ChatRequest = Body(...)):
+  user_id = data.user_id
+  title = data.title
+
+  if not title:
+    raise HTTPException(status_code=404, detail="No title provided.")
+  await redis_service.update_session_title(user_id, session_id, title)
+  return
+
+# Save changed itinerary
+@router.post("/{session_id}/updateItinerary")
+async def save_itinerary(session_id: str = Path(...), data: ChatRequest = Body(...)):
+  user_id = data.user_id
+  itinerary = data.itinerary
+  chat_idx = data.chat_idx
+
+  if not (itinerary and chat_idx):
+    raise HTTPException(status_code=404, detail="No itinerary provided.")
+  
+  session_state = await redis_service.load_session_state(user_id, session_id)
+  if not session_state:
+    db = await get_database()
+    session_state = DbSession(db).get_sesssion(user_id, session_id)
+
+  if not session_state:
+    raise HTTPException(status_code=404, detail="Session not found or expired. Please start a new session.")
+
+  await redis_service.update_itinerary(session_state, itinerary, chat_idx)
+  return

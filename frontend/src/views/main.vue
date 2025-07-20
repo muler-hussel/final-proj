@@ -113,7 +113,10 @@ export default defineComponent({
 
     onMounted(async () => {
       auth.initialize();
-      await userSessions.initialize();
+      if (auth.isAuthenticated) {
+        await userSessions.initialize();
+      }
+      userSessions.setCurrentSession(null);
     });
     
     return {

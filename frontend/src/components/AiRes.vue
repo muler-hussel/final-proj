@@ -5,7 +5,14 @@
       <FastForwardOutlined style="color:#9370DB;" class="hover:cursor-pointer" @click="$emit('next')" />
     </div>
 
-    <div v-if="recommendations && recommendations.length > 0">
+    <div v-if="itinerary && itinerary.length > 0">
+      <a-button @click="openItinerary">
+        Open in canvas
+        <template #icon><ExpandAltOutlined /></template>
+      </a-button>
+    </div>
+
+    <div v-else-if="recommendations && recommendations.length > 0">
       <a-card class="w-full h-fit shadow-md shadow-violet-200/50">
         <a-tabs v-model:activeKey="activeKey">
           <a-tab-pane key="1" tab="Recommended">
@@ -17,8 +24,15 @@
               ></SpotSelected>
             </div>
           </a-tab-pane>
-          <a-tab-pane key="2" tab="You May Like" force-render>Content of Tab Pane 2</a-tab-pane>
-          <a-tab-pane key="3" tab="Have A Look">Content of Tab Pane 3</a-tab-pane>
+          <a-tab-pane key="2" tab="Have A Look" v-if="populars && populars.length > 0">
+            <div class="grid grid-cols-2 gap-4 items-stretch">
+              <SpotSelected
+                v-for="item in populars"
+                :key="item.place_id"
+                :item="item"
+              ></SpotSelected>
+            </div>
+          </a-tab-pane>
         </a-tabs>
         <a-divider />
         <div class="flex flex-row justify-end gap-x-4">
@@ -28,19 +42,16 @@
       </a-card>
     </div>
 
-    <div v-if="itinerary && itinerary.length > 0">
-      <a-button @click="openItinerary">
-        Open in canvas
-        <template #icon><ExpandAltOutlined /></template>
-      </a-button>
-    </div>
   </div>
   <a-modal
     v-model:open="itineraryOpen"
-    width="100%"
-    wrap-class-name="full-modal"
+    width="100%" wrap-class-name="full-modal"
+    ok-text="Save" cancel-text="Cancel"
+    @ok="saveItinerary"
+    @cancel="onCancel"
+    ref="editorRef"
   >
-    <ItineraryCalendar :events="itinerary"></ItineraryCalendar>
+    <ItineraryCalendar :events="itinerary" :recommends="recommendations"></ItineraryCalendar>
   </a-modal>
 </template>
 
@@ -50,8 +61,10 @@ import SpotSelected from './SpotSelected.vue';
 import { marked } from 'marked';
 import type { DailyItinerary, ShortlistItem } from '@/types';
 import ItineraryCalendar from './ItineraryCalendar.vue';
+import { useItineraryStore } from '@/stores/itinerary.ts';
+import { storeToRefs } from 'pinia';
 
-const {content, recommendations, itinerary} = defineProps({
+const {content, recommendations, populars, itinerary} = defineProps({
   content: {
     type: String,
     default: null,
@@ -60,14 +73,25 @@ const {content, recommendations, itinerary} = defineProps({
     type: Array as PropType<ShortlistItem[]>,
     default: () => [],
   },
+  populars: {
+    type: Array as PropType<ShortlistItem[]>,
+    default: () => [],
+  },
   itinerary: {
     type: Array as PropType<DailyItinerary[]>,
     default: () => [],
   },
+  messageIndex: {
+    type: Number,
+    default: 0,
+  }
 });
 
+const useItinerary = useItineraryStore();
+const { itineraryOpen } = storeToRefs(useItinerary);
+
 const activeKey = ref('1');
-const itineraryOpen = ref(false);
+const editorRef = ref();
 
 defineEmits([
   'next',
@@ -77,6 +101,19 @@ defineEmits([
 
 const openItinerary = () => {
   itineraryOpen.value = true;
+}
+
+const saveItinerary = async () => {
+  itineraryOpen.value = false;
+  useItinerary.newItinerary = editorRef.value?.extractEventData()
+  await useItinerary.handleSave();
+}
+
+const onCancel = async () => {
+  if (useItinerary.ifChanged()) {
+    const confirmLeave = window.confirm("Changes you made may not be saved. Do you want to leave this page?");
+    if (confirmLeave) itineraryOpen.value = false;
+  }
 }
 
 const renderedMessage = computed(() => marked.parse(content ?? ''));

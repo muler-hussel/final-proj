@@ -1,6 +1,6 @@
 import redis
 from typing import Optional, List
-from app.models.session import SessionState, History
+from app.models.session import SessionState, History, DailyItinerary
 from app.models.shortlist import ShortlistItem
 import asyncio
 from app.db.mongodb import get_database
@@ -107,6 +107,7 @@ class RedisService:
     if session_state:
       session_state.title = new_title
       await self.save_session_state(session_state)
+      asyncio.create_task(self._session_to_mongodb(session_state))
       return session_state
     return None
 
@@ -150,6 +151,17 @@ class RedisService:
     
     history = self._redis_client.lrange(session_state.history_key, 0, -1)
     return [History(**json.loads(msg)) for msg in history]
+
+  async def update_itinerary(self, session_state: SessionState, itinerary: DailyItinerary, chat_idx: int):
+    history = await redis_service.get_history(session_state.user_id, session_state.session_id)
+    cur_history = history[chat_idx]
+    if cur_history.role != 'ai':
+      print("Trying to modify a wrong message")
+      return False
+    
+    cur_history.message.itinerary = itinerary
+    asyncio.create_task(self._history_to_mongodb(session_state))
+    return True
 
   async def get_place_info(self, place_name: str) -> ShortlistItem:
     if not self._redis_client:
@@ -254,7 +266,7 @@ class RedisService:
       print(f"ERROR: Background save to MongoDB failed for {session_state.user_id}/{session_state.session_id}: {e}")
 
   async def _get_session_from_db(self, user_id: str, session_id: str):
-    db = await get_database
+    db = await get_database()
     data = await DbSession(db).get_sesssion(user_id, session_id)
     if data:
       self.save_session_state(data)

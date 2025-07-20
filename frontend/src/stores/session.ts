@@ -3,7 +3,8 @@ import axios from 'axios';
 import type { DailyItinerary, ShortlistItem, ShortTermProfile, ChatMessage } from '@/types';
 import { useShortlistStore } from '@/stores/shortlist.ts';
 import { useAuthStore } from '@/stores/auth';
-import { useRoute } from 'vue-router';
+import { useUserBehaviorStore } from './userBehavior';
+import { useUserSessionsStore } from '@/stores/userSessions';
 
 interface Response {
   role: string;
@@ -26,9 +27,9 @@ export const useSessionStore = defineStore('session', {
 
   actions: {
     async initializeSession(sessionId?: string) {
-      this.loadFromLocalStorage();
-      
-      if (sessionId && sessionId !== this.sessionId) {
+      if (!sessionId) return;
+      const result = this.loadFromLocalStorage(sessionId);
+      if (!result && sessionId && sessionId !== this.sessionId) {
         this.sessionId = sessionId;
         await this.fetchSessionData(sessionId);
         this.saveToLocalStorage();
@@ -39,10 +40,13 @@ export const useSessionStore = defineStore('session', {
       const shortlistStore = useShortlistStore();
       const auth = useAuthStore();
       if (!auth.isAuthenticated) return;
+      const userBehavior = useUserBehaviorStore();
       
       try {
         const res = await axios.post(`/chat/${sessionId}`,{user_id: auth.token});
         const shortlist: ShortlistItem[] | undefined = res.data.shortlist;
+
+        shortlistStore.initialize(sessionId);
         shortlist?.forEach((item) => {
           shortlistStore.addToShortlist(item);
         });
@@ -51,15 +55,18 @@ export const useSessionStore = defineStore('session', {
         this.title = res.data.title || 'New Chat';
 
         this.saveToLocalStorage();
+        shortlistStore.saveToLocalStorage();
+        userBehavior.initialize(sessionId);
       } catch (error) {
         console.error('Failed to fetch session:', error);
         throw error;
       }
     },
 
-    async sendMessage(content: string) {
+    sendMessage(content: string) {
       if (!this.sessionId) return;
-      
+
+      const userSessions = useUserSessionsStore();
       const newMsg: ChatMessage = {
         role: 'user',
         message: {
@@ -69,25 +76,62 @@ export const useSessionStore = defineStore('session', {
       
       this.chatHistory.push(newMsg);
       this.saveToLocalStorage();
+      userSessions.updateSessionTime(this.sessionId);
     },
 
-    setTitle(title: string) {
+    async setTitle(title: string) {
+      if (!this.sessionId) return;
+      const auth = useAuthStore();
+      if (!auth.isAuthenticated) return;
+      const userSessions = useUserSessionsStore();
       this.title = title;
       this.saveToLocalStorage();
+      userSessions.updateSessionTime(this.sessionId);
+      try {
+        await axios.post(`/chat/${this.sessionId}/title`, {user_id: auth.token, title: title});
+      } catch (error) {
+        console.error('Fail to save title:', error);
+        throw error;
+      }
+      
     },
 
     setSessionId(sessionId: string) {
       this.sessionId = sessionId;
       this.saveToLocalStorage();
+      const userSessions = useUserSessionsStore();
+      userSessions.updateSessionTime(this.sessionId);
     },
 
     appendHistory(data: Response) {
+      if (!this.sessionId) return;
+      
       const newMsg: ChatMessage = {
         role: data.role,
         message: data.message
       };
       this.chatHistory.push(newMsg);
       this.saveToLocalStorage();
+      const userSessions = useUserSessionsStore();
+      userSessions.updateSessionTime(this.sessionId);
+    },
+
+    // Update recommended places infomation after enrich
+    updateRecommendation(placeName: string, newData: Partial<ShortlistItem>) {
+      this.chatHistory.forEach((msg) => {
+        if (msg.role === 'ai' && msg.message.recommendations) {
+          const targetIndex = msg.message.recommendations.findIndex(
+            (item) => item.name === placeName
+          );
+          if (targetIndex !== -1) {
+            msg.message.recommendations[targetIndex] = {
+              ...msg.message.recommendations[targetIndex],
+              ...newData,
+            };
+            this.saveToLocalStorage();
+          }
+        }
+      });
     },
     
     setShortTermProfile(data: Response) {
@@ -96,7 +140,6 @@ export const useSessionStore = defineStore('session', {
     },
 
     clearSession() {
-      this.clearLocalStorage();
       this.sessionId = null;
       this.chatHistory = [];
       this.shortTermProfile = null;
@@ -117,16 +160,10 @@ export const useSessionStore = defineStore('session', {
       localStorage.setItem(`session_${this.sessionId}`, JSON.stringify(data));
     },
 
-    loadFromLocalStorage() {
-      if (typeof window === 'undefined') return;
-      
-      const route = useRoute();
-      const sessionId = route.params.sessionId?.toString() || null;
-      
-      if (!sessionId) return;
-      
+    loadFromLocalStorage(sessionId: string) {
+      if (typeof window === 'undefined') return false;
       const rawData = localStorage.getItem(`session_${sessionId}`);
-      if (!rawData) return;
+      if (!rawData) return false;
       
       try {
         const data = JSON.parse(rawData);
@@ -135,13 +172,21 @@ export const useSessionStore = defineStore('session', {
         const isExpired = data.timestamp && (Date.now() - data.timestamp > 24 * 3600 * 1000);
         if (isExpired) {
           this.clearSession();
-          return;
+          return false;
         }
         
         this.sessionId = data.sessionId;
         this.chatHistory = data.chatHistory || [];
         this.shortTermProfile = data.shortTermProfile;
         this.title = data.title || 'New Chat';
+
+        const shortlistStore = useShortlistStore();
+        const auth = useAuthStore();
+        if (!auth.isAuthenticated) return;
+        const userBehavior = useUserBehaviorStore();
+        shortlistStore.initialize(sessionId);
+        userBehavior.initialize(sessionId);
+        return true;
       } catch (error) {
         console.error('Failed to parse session data:', error);
         this.clearLocalStorage(sessionId);
@@ -152,6 +197,7 @@ export const useSessionStore = defineStore('session', {
       if (typeof window === 'undefined') return;
       
       const idToClear = sessionId || this.sessionId;
+      this.clearSession();
       if (idToClear) {
         localStorage.removeItem(`session_${idToClear}`);
       }

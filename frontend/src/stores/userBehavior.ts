@@ -13,16 +13,22 @@ interface TrackingSession {
 
 export const useUserBehaviorStore = defineStore('userBehavior', {
   state: () => ({
+    sessionId: null as string | null,
     currentSession: null as TrackingSession | null,
     activeViews: new Map<string, number>(), // Viewing place name and start time
     pendingUpload: false,
   }),
   actions: {
-    initialize() {
+    initialize(session_id: string) {
       if (typeof window === 'undefined') return;
 
-      const rawData = localStorage.getItem('tracking_data');
-      if (!rawData) return;
+      this.sessionId = session_id;
+      const rawData = localStorage.getItem(`tracking_data:${session_id}`);
+      if (!rawData) {
+        this.sessionId = session_id;
+        this.saveToStorage();
+        return;
+      }
 
       try {
         const parsed = JSON.parse(rawData);
@@ -37,7 +43,7 @@ export const useUserBehaviorStore = defineStore('userBehavior', {
         }
       } catch (error) {
         console.error('Failed to parse tracking data:', error);
-        this.clearStorage();
+        this.clearStorage(session_id);
       }
     },
 
@@ -45,7 +51,7 @@ export const useUserBehaviorStore = defineStore('userBehavior', {
       const authStore = useAuthStore();
       const sessionStore = useSessionStore();
 
-      if (!authStore.token || !sessionStore.sessionId) return;
+      if (!authStore.token || !sessionStore.sessionId || this.sessionId != sessionStore.sessionId) return;
       
       if (!this.currentSession) {
         this.currentSession = {
@@ -102,7 +108,7 @@ export const useUserBehaviorStore = defineStore('userBehavior', {
       try {
         await axios.post('/recommend/tracking', this.currentSession);
         this.currentSession = null;
-        this.clearStorage();
+        this.clearStorage(this.sessionId as string);
       } catch (error) {
         console.error('Fail to upload tracking data', error);
         throw error;
@@ -118,13 +124,19 @@ export const useUserBehaviorStore = defineStore('userBehavior', {
         savedAt: Date.now()
       };
 
-      localStorage.setItem('tracking_data', JSON.stringify(data));
+      localStorage.setItem(`tracking_data:${this.sessionId}`, JSON.stringify(data));
     },
 
-    clearStorage() {
+    clearStorage(sessionId: string) {
       if (typeof window === 'undefined') return;
-      localStorage.removeItem('tracking_data');
+      localStorage.removeItem(`tracking_data:${sessionId}`);
     },
 
+    clearBehavior() {
+      this.sessionId = null;
+      this.currentSession = null;
+      this.activeViews = new Map<string, number>();
+      this.pendingUpload = false;
+    }
   },
 });

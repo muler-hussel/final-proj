@@ -50,6 +50,8 @@
               :content="content.message.content"
               :recommendations="content.message.recommendations"
               :itinerary="content.message.itinerary"
+              :messageIndex="idx"
+              :populars="content.message.populars"
               @next="fetchAiRes('ADVANCE_STEP')"
               @load-more="fetchAiRes('MORE_RECOMMENDATIONS')"
               @generate="fetchAiRes('ITINERARY_GENERATION')"
@@ -93,8 +95,11 @@ import { storeToRefs } from 'pinia';
 import { useShortlistStore } from '@/stores/shortlist.ts';
 import { useUserBehaviorStore } from '@/stores/userBehavior';
 import ShortlistDrawer from '@/components/ShortlistDrawer.vue';
-import SpaceInfoDrawer from '@/components/SpaceInfoDrawer.vue';
+import SpaceInfoDrawer from '@/components/PlaceInfoDrawer.vue';
 import { useUserSessionsStore } from '@/stores/userSessions';
+import { onBeforeRouteLeave } from 'vue-router';
+import { Modal } from 'ant-design-vue';
+import { useItineraryStore } from '@/stores/itinerary.ts';
 
 export default defineComponent({
   components: {
@@ -123,6 +128,8 @@ export default defineComponent({
     const { shortlistNum } = storeToRefs(shortlistStore);
     const userBehavior = useUserBehaviorStore();
     const userSessions = useUserSessionsStore();
+    const editorRef = ref();
+    const useItinerary = useItineraryStore();
 
     const fetchNewSession = async () => {
       try {
@@ -130,9 +137,14 @@ export default defineComponent({
           user_id: userId,
           user_input: firstPrompt.value,
         })
-        session.setTitle(res.data.title);
-        session.setSessionId(res.data.session_id);
-        userSessions.updateSession(res.data.session_id, res.data.title);
+        const session_id = res.data.session_id;
+        const title = res.data.title;
+        await session.setTitle(title);
+        session.setSessionId(session_id);
+        userSessions.updateSession(session_id, title);
+        userSessions.setCurrentSession(session_id);
+        userBehavior.initialize(session_id);
+        shortlistStore.initialize(session_id);
         router.push(`/chat/${sessionId.value}`);
       } catch (error) {
         console.error("Error start new session:", error);
@@ -143,9 +155,9 @@ export default defineComponent({
       changeTitle.value = true;
     }
 
-    const completeChange = () => {
+    const completeChange = async () => {
       if (sessionId.value) {
-        session.setTitle(title.value);
+        await session.setTitle(title.value);
         userSessions.updateSession(sessionId.value, title.value);
         changeTitle.value = false;
       }
@@ -188,7 +200,10 @@ export default defineComponent({
       async (newSessionId, oldSessionId) => {
         if (newSessionId && newSessionId !== oldSessionId) {
           try {
+            shortlistStore.clearShortlist();
+            userBehavior.clearBehavior();
             await session.initializeSession(newSessionId as string);
+            userBehavior.startTracking();
           } catch (error) {
             console.error('Fail to load session:', error);
           }
@@ -201,12 +216,10 @@ export default defineComponent({
       const sessionId = route.params.sessionId as string | undefined;
       if (sessionId) {
         await session.initializeSession(sessionId);
-        shortlistStore.initialize();
-        userBehavior.initialize();
       } else {
         session.clearSession();
         shortlistStore.clearShortlist();
-        userBehavior.currentSession = null;
+        userBehavior.clearBehavior();
         firstPrompt.value = firstPromptStore.firstPromptData.user_input;
         isEasyPlan.value = firstPromptStore.firstPromptData.isEasyPlan;
         await fetchNewSession();
@@ -217,6 +230,24 @@ export default defineComponent({
         }
       }
     });
+
+    onBeforeRouteLeave(async (to, from, next) => {
+      useItinerary.newItinerary = editorRef.value.extractEventData();
+      if (useItinerary.ifChanged()) {
+        Modal.confirm({
+          title: 'Changes you made may not be saved. Do you want to leave this page?',
+          onOk: () => {
+            next();
+          },
+          onCancel: () => {
+            next(false);
+          }
+        });
+      } else {
+        next();
+      }
+    });
+
 
     return {
       title,

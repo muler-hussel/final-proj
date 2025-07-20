@@ -40,7 +40,6 @@ router.beforeEach((to, from, next) => {
   authStore.initialize(); 
 
   if (to.meta.requiresAuth) {
-    console.log(authStore.isAuthenticated)
     if (authStore.isAuthenticated) {
       next();
     } else {

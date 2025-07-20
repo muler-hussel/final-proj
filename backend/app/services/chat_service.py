@@ -4,7 +4,6 @@ from pydantic import BaseModel
 from typing import List, Optional
 from app.models.session import SessionState, Message, History
 from app.utils.prompts import (
-  CREATE_ITINERARY_PROMPT,
   INTENT_CLASSIFIER_PROMPT,
   BASIC_PROMPT,
   GENERATE_SESSION_TITLE_PROMPT
@@ -13,6 +12,7 @@ from app.utils.logger import logger
 from app.services.redis_service import redis_service
 from app.services.recommend_service import RecommendService
 from app.db.mongodb import get_database
+from app.services.itinerary_service import itinerary_service
 
 class SlotDataExtractor(BaseModel):
   destination: Optional[str]
@@ -39,12 +39,6 @@ class ChatService:
       BASIC_PROMPT
       | language_model
       | StrOutputParser()
-    )
-
-    self.create_itinerary_chain = (
-      CREATE_ITINERARY_PROMPT
-      | language_model
-      | JsonOutputParser(pydantic_object=Message)
     )
 
   # Automatically generate trip title
@@ -94,10 +88,12 @@ class ChatService:
     
     if ("MORE_RECOMMENDATIONS" in intent_set) or ("MODIFY_PLAN" in intent_set):
       # Prompt for recommend
+      session_state.todo_step = 1
       result = await recommend_service.recommend_places(session_state, user_input)
-    elif "ITINERARY_GENERATION" in intent_set:
-      result = await self.create_itinerary(session_state, user_input)
-    elif "FINALIZE_TRIP" in intent_set:
+    if "ITINERARY_GENERATION" in intent_set:
+      session_state.todo_step = 2
+      result = await itinerary_service.create_itinerary(session_state, user_input)
+    if "FINALIZE_TRIP" in intent_set:
       result = await self.get_ai_response(session_state, user_input, None, session_state.todo_step)
     return result, session_state
   
@@ -127,24 +123,5 @@ class ChatService:
     session_state = await recommend_service.update_short_term_profile(session_state, user_input)
     # logger.info(f"prompt: {prompt_data}, ai response: {response}")
     return {"content": response}, session_state
-
-  async def create_itinerary(self, session_state: SessionState, user_input: str):
-    history = (await redis_service.get_history(session_state.user_id, session_state.session_id))[-10:]
-    history_str = "\n".join(f"{msg.role}: {msg.message}" for msg in history)
-    shortlist = await redis_service.get_shortlist(session_state)
-    place_names = ",".join(f"{s.name}: {s.info.weekday_text}" for s in shortlist)
-    
-    prompt_data = {
-      "history": history_str,
-      "place_names":  place_names,
-      "user_input": user_input,
-    }
-    response: Message = await self.create_itinerary_chain.ainvoke(prompt_data)
-    user_history_entry = History(
-      role="ai",
-      message=response
-    )
-    await redis_service.append_history(session_state, user_history_entry)
-    return response
 
 chat_service = ChatService()

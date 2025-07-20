@@ -36,6 +36,7 @@ import { useShortlistStore } from '@/stores/shortlist.ts';
 import { useUserBehaviorStore } from '@/stores/userBehavior';
 import { useDrawerStore } from '@/stores/drawer.ts';
 import axios from 'axios';
+import { useSessionStore } from '@/stores/session';
 
 export default defineComponent({
   props: {
@@ -51,12 +52,14 @@ export default defineComponent({
     const displayItem = computed(() => {
       return shortlistStore.items.get(props.item.name) || props.item;
     });
+    const session = useSessionStore()
 
     const showDrawer = async () => {
       const item = displayItem.value;
       if (!item.updated_time || (+new Date() - +new Date(item.updated_time)) / (1000 * 60 * 60 * 24) > 30 || (!item.info?.cons && item.sub_items?.length == 0)) {
-        const res = await axios.post("/recommend/enrich", {place_name: item.name})
-        shortlistStore.addToShortlist(res.data)
+        const res = await axios.post("/recommend/enrich", {place_name: item.name});
+        console.log(res.data);
+        session.updateRecommendation(item.name, res.data);
       }
       drawer.showSpaceInfo(displayItem.value);
       userBehaviorStore.recordAction('click', displayItem.value.name);

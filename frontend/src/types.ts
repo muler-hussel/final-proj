@@ -37,7 +37,7 @@ export interface ShortlistItem {
   description: string;
   tags?: string[]; //'museum', 'history'
   info?: PlaceInfo;
-  sub_items: PlaceCard[]; // if type='city'
+  sub_items: ShortlistItem[]; // if type='city'
   geometry?: PlaceGeo;
   updated_time?: string | null
   status?: string;
@@ -46,9 +46,11 @@ export interface ShortlistItem {
 
 export interface DailyItinerary {
   date: number;
-  place_name: string;
+  type: string;
+  place_name?: string;
   start_time: string;
   end_time: string;
+  commute_mode?: string;
 }
 
 export interface ChatMessage {
@@ -56,6 +58,7 @@ export interface ChatMessage {
   message: {
     content?: string;
     recommendations?: ShortlistItem[];
+    populars?: ShortlistItem[];
     itinerary?: DailyItinerary[];
   }
 }

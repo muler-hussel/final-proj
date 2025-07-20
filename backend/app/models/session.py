@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import List, Optional, Set
+from typing import List, Optional, Set, Literal
 import uuid
 from app.models.recommend import ShortTermProfile, UserBehavior
 from app.models.shortlist import ShortlistItem
@@ -7,13 +7,16 @@ from datetime import datetime
 
 class DailyItinerary(BaseModel):
   date: int
-  place_name: str
+  type: Literal['visit', 'commuting']
+  place_name: Optional[str] = None
   start_time: str
   end_time: str
+  commute_mode: Optional[str] = None
 
 class Message(BaseModel):
   content: str
   recommendations: Optional[List[ShortlistItem]] = []
+  populars: Optional[List[ShortlistItem]] = []
   itinerary: Optional[List[DailyItinerary]] = []
 
 class History(BaseModel):
