@@ -111,6 +111,22 @@ class RedisService:
       return session_state
     return None
 
+  async def delete_session(self, session_state: SessionState) -> bool:
+    histroy_key = session_state.history_key
+    shortlist_key = session_state.shortlist_key
+    meta_key = self._get_session_metadata_key(session_state.user_id, session_state.session_id)
+
+    try:
+      self.delete(histroy_key)
+      self.delete(shortlist_key)
+      self.delete(meta_key)
+
+      asyncio.create_task(self._delete_session_in_db(session_state.user_id, session_state.session_id))
+      return True
+    except Exception as e:
+      print(f"Fail to delete session {session_state.user_id}/{session_state.session_id}: {e}")
+      return False
+
   # Deal with metadata except from title and slot
   async def update_session_field(self, user_id: str, session_id: str, field_name: str, value: any) -> Optional[SessionState]:
     session_state = await self.load_session_state(user_id, session_id)
@@ -132,7 +148,6 @@ class RedisService:
     
     try:
       self._redis_client.rpush(session_state.history_key, history.model_dump_json())
-      await self.save_session_state(session_state)
       asyncio.create_task(self._history_to_mongodb(session_state))
       return True
     except Exception as e:
@@ -146,6 +161,15 @@ class RedisService:
     session_state = await self.load_session_state(user_id, session_id)
     if not session_state:
       session_state = await self._get_session_from_db(user_id, session_id)
+      history = session_state.history
+      shortlist = session_state.shortlist
+
+      await redis_service.save_session_state(session_state)
+      for h in history:
+        await redis_service.append_history(session_state, h)
+      for s in shortlist:
+        await redis_service.add_to_shortlist(session_state, s)
+
     if not session_state:
       return []
     
@@ -154,12 +178,13 @@ class RedisService:
 
   async def update_itinerary(self, session_state: SessionState, itinerary: DailyItinerary, chat_idx: int):
     history = await redis_service.get_history(session_state.user_id, session_state.session_id)
-    cur_history = history[chat_idx]
-    if cur_history.role != 'ai':
+    if (chat_idx >= len(history)) or (history[chat_idx].role != 'ai') :
       print("Trying to modify a wrong message")
       return False
     
+    cur_history = history[chat_idx]
     cur_history.message.itinerary = itinerary
+    self._redis_client.lset(session_state.history_key, chat_idx, cur_history.model_dump_json())
     asyncio.create_task(self._history_to_mongodb(session_state))
     return True
 
@@ -202,8 +227,24 @@ class RedisService:
     except Exception as e:
       print(f"Error adding to shortlist for {session_state.user_id}/{session_state.session_id}: {e}")
 
-  async def get_shortlist(self, session_state: SessionState) -> List[ShortlistItem]:
+  async def get_shortlist(self, user_id: str, session_id: str) -> List[ShortlistItem]:
     if not self._redis_client:
+      return []
+    
+    session_state = await self.load_session_state(user_id, session_id)
+    if not session_state:
+      session_state = await self._get_session_from_db(user_id, session_id)
+      
+      history = session_state.history
+      shortlist = session_state.shortlist
+
+      await redis_service.save_session_state(session_state)
+      for h in history:
+        await redis_service.append_history(session_state, h.model_dump_json())
+      for s in shortlist:
+        await redis_service.add_to_shortlist(session_state, s.model_dump_json())
+
+    if not session_state:
       return []
     
     try:
@@ -258,7 +299,7 @@ class RedisService:
     db = await get_database()
     user_id = session_state.user_id
     session_id = session_state.session_id
-    shortlist = await self.get_shortlist(session_state)
+    shortlist = await self.get_shortlist(user_id, session_id)
 
     try:
       await DbSession(db).save_shortlist(user_id, session_id, shortlist)
@@ -269,8 +310,12 @@ class RedisService:
     db = await get_database()
     data = await DbSession(db).get_sesssion(user_id, session_id)
     if data:
-      self.save_session_state(data)
+      await self.save_session_state(data)
     return data
+  
+  async def _delete_session_in_db(self, user_id: str, session_id: str):
+    db = await get_database()
+    await DbSession(db).delete_session(user_id, session_id)
   
 # Ensure single instance
 redis_service = RedisService()

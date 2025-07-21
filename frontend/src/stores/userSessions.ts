@@ -1,6 +1,9 @@
 import { defineStore } from 'pinia';
 import { useAuthStore } from '@/stores/auth';
 import axios from 'axios';
+import { useSessionStore } from './session';
+import { useShortlistStore } from './shortlist';
+import { useUserBehaviorStore } from './userBehavior';
 
 interface SessionInfo {
   session_id: string;
@@ -95,6 +98,30 @@ export const useUserSessionsStore = defineStore('userSessions', {
     
     getCurrentSession(): SessionInfo | null {
       return this.sessions.find(s => s.session_id === this.currentSessionId) || null;
+    },
+
+    async deleteSession(sessionId: string) {
+      const auth = useAuthStore();
+      if (auth.isAuthenticated) {
+        try {
+          const updatedSessions = this.sessions.filter(s => s.session_id != sessionId);
+          this.sessions = updatedSessions;
+          this.saveToStorage();
+
+          const session = useSessionStore();
+          session.clearLocalStorage(sessionId);
+
+          const useShortlist = useShortlistStore();
+          useShortlist.clearLocalStorage(sessionId);
+
+          const userBehavior = useUserBehaviorStore();
+          userBehavior.clearStorage(sessionId);
+          
+          await axios.post(`chat/${sessionId}/delete`, {user_id: auth.token});
+        } catch (error) {
+          console.error("Failed to delete session:", error);
+        }
+      }
     },
 
     saveToStorage() {

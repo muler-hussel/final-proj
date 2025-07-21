@@ -38,7 +38,7 @@
         
       </div>
       <!-- scroll -->
-      <div class="w-full flex flex-col items-center flex-grow overflow-y-auto">
+      <div id="messageContainer" class="w-full flex flex-col items-center flex-grow overflow-y-auto">
         <div class="grid w-3/5 py-10 gap-y-7">
           <template v-for="(content, idx) in chatHistory" :key="idx">
             <UserProm 
@@ -128,7 +128,6 @@ export default defineComponent({
     const { shortlistNum } = storeToRefs(shortlistStore);
     const userBehavior = useUserBehaviorStore();
     const userSessions = useUserSessionsStore();
-    const editorRef = ref();
     const useItinerary = useItineraryStore();
 
     const fetchNewSession = async () => {
@@ -138,10 +137,10 @@ export default defineComponent({
           user_input: firstPrompt.value,
         })
         const session_id = res.data.session_id;
-        const title = res.data.title;
-        await session.setTitle(title);
+        const newTitle = res.data.title;
+        title.value = newTitle;
         session.setSessionId(session_id);
-        userSessions.updateSession(session_id, title);
+        userSessions.updateSession(session_id, newTitle);
         userSessions.setCurrentSession(session_id);
         userBehavior.initialize(session_id);
         shortlistStore.initialize(session_id);
@@ -211,6 +210,23 @@ export default defineComponent({
       },
       { immediate: true }
     );
+    
+    window.addEventListener('beforeunload', (e) => {
+      // Have to use returnValue, otherwise doesn't work
+      if (useItinerary.currentIndex && useItinerary.ifChanged()) {
+        e.preventDefault();
+        const confirmationMessage = '';
+        e.returnValue = confirmationMessage;
+        return confirmationMessage;
+      }
+    });
+
+    const scrollBottom = () => {
+      const container = document.getElementById("messageContainer");
+      if (container) {
+        container.scrollTop = container.scrollHeight;
+      }
+    }
 
     onMounted(async () => {
       const sessionId = route.params.sessionId as string | undefined;
@@ -229,25 +245,25 @@ export default defineComponent({
           userBehavior.startTracking();
         }
       }
+      scrollBottom();
     });
 
     onBeforeRouteLeave(async (to, from, next) => {
-      useItinerary.newItinerary = editorRef.value.extractEventData();
-      if (useItinerary.ifChanged()) {
+      firstPromptStore.clearFirstPrompt();
+      if (useItinerary.currentIndex && useItinerary.ifChanged()) {
         Modal.confirm({
-          title: 'Changes you made may not be saved. Do you want to leave this page?',
-          onOk: () => {
+          title: "Changes you made may not be saved.",
+          content: "Do you want to save?",
+          onOk: async () => {
+            await useItinerary.handleSave();
             next();
           },
-          onCancel: () => {
-            next(false);
-          }
+          onCancel: () => next()
         });
       } else {
         next();
       }
     });
-
 
     return {
       title,

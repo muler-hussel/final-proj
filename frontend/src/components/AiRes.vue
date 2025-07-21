@@ -18,17 +18,17 @@
           <a-tab-pane key="1" tab="Recommended">
             <div class="grid grid-cols-2 gap-4 items-stretch">
               <SpotSelected
-                v-for="item in recommendations"
-                :key="item.place_id"
+                v-for="(item, idx) in recommendations"
+                :key="idx"
                 :item="item"
               ></SpotSelected>
             </div>
           </a-tab-pane>
-          <a-tab-pane key="2" tab="Have A Look" v-if="populars && populars.length > 0">
+          <a-tab-pane key="2" tab="Most Popular" v-if="populars && populars.length > 0">
             <div class="grid grid-cols-2 gap-4 items-stretch">
               <SpotSelected
-                v-for="item in populars"
-                :key="item.place_id"
+                v-for="(item, idx) in populars"
+                :key="idx"
                 :item="item"
               ></SpotSelected>
             </div>
@@ -41,18 +41,8 @@
         </div>
       </a-card>
     </div>
-
   </div>
-  <a-modal
-    v-model:open="itineraryOpen"
-    width="100%" wrap-class-name="full-modal"
-    ok-text="Save" cancel-text="Cancel"
-    @ok="saveItinerary"
-    @cancel="onCancel"
-    ref="editorRef"
-  >
-    <ItineraryCalendar :events="itinerary" :recommends="recommendations"></ItineraryCalendar>
-  </a-modal>
+  <ItineraryCalendar :events="itinerary" :recommends="recommendations" v-if="useItinerary.itineraryOpen"></ItineraryCalendar>
 </template>
 
 <script setup lang="ts">
@@ -62,9 +52,8 @@ import { marked } from 'marked';
 import type { DailyItinerary, ShortlistItem } from '@/types';
 import ItineraryCalendar from './ItineraryCalendar.vue';
 import { useItineraryStore } from '@/stores/itinerary.ts';
-import { storeToRefs } from 'pinia';
 
-const {content, recommendations, populars, itinerary} = defineProps({
+const {content, recommendations, populars, itinerary, messageIndex} = defineProps({
   content: {
     type: String,
     default: null,
@@ -88,10 +77,8 @@ const {content, recommendations, populars, itinerary} = defineProps({
 });
 
 const useItinerary = useItineraryStore();
-const { itineraryOpen } = storeToRefs(useItinerary);
 
 const activeKey = ref('1');
-const editorRef = ref();
 
 defineEmits([
   'next',
@@ -100,20 +87,8 @@ defineEmits([
 ])
 
 const openItinerary = () => {
-  itineraryOpen.value = true;
-}
-
-const saveItinerary = async () => {
-  itineraryOpen.value = false;
-  useItinerary.newItinerary = editorRef.value?.extractEventData()
-  await useItinerary.handleSave();
-}
-
-const onCancel = async () => {
-  if (useItinerary.ifChanged()) {
-    const confirmLeave = window.confirm("Changes you made may not be saved. Do you want to leave this page?");
-    if (confirmLeave) itineraryOpen.value = false;
-  }
+  useItinerary.itineraryOpen = true;
+  useItinerary.currentIndex = messageIndex;
 }
 
 const renderedMessage = computed(() => marked.parse(content ?? ''));

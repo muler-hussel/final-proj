@@ -15,6 +15,15 @@ interface PlaceCard {
   recommend_reason: string;
 }
 
+export interface DiscardPlace {
+  name: string;
+  duration: number; //Hours
+  extendedProps: {
+    openingHours: string[],
+    type: string,
+  }
+}
+
 interface PlaceInfo {
   recommend_reason?: string;
   website?: string;
@@ -47,10 +56,11 @@ export interface ShortlistItem {
 export interface DailyItinerary {
   date: number;
   type: string;
-  place_name?: string;
+  place_name: string | null;
   start_time: string;
   end_time: string;
-  commute_mode?: string;
+  commute_mode: string | null;
+  discarded_places: DiscardPlace[]
 }
 
 export interface ChatMessage {

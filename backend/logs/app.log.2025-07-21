@@ -1,0 +1,584 @@
+2025-07-21 00:00:02,742 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 00:03:18,238 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 00:03:21,678 - [ERROR] - asyncio - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - Task exception was never retrieved
+future: <Task finished name='Task-39' coro=<RedisService._delete_session_in_db() done, defined at D:\finalPro\backend\app\services\redis_service.py:291> exception=AttributeError("'DeleteResult' object has no attribute 'matched_count'")>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\redis_service.py", line 293, in _delete_session_in_db
+    await DbSession(db).delete_session(user_id, session_id)
+  File "D:\finalPro\backend\app\models\db_session.py", line 31, in delete_session
+    if result.matched_count > 0:
+       ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'DeleteResult' object has no attribute 'matched_count'
+2025-07-21 00:05:45,612 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 00:05:56,633 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 00:06:12,111 - [ERROR] - asyncio - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - Task exception was never retrieved
+future: <Task finished name='Task-51' coro=<RedisService._delete_session_in_db() done, defined at D:\finalPro\backend\app\services\redis_service.py:291> exception=AttributeError("'DeleteResult' object has no attribute 'deletedCount'")>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\redis_service.py", line 293, in _delete_session_in_db
+    await DbSession(db).delete_session(user_id, session_id)
+  File "D:\finalPro\backend\app\models\db_session.py", line 31, in delete_session
+    if result.deletedCount > 0:
+       ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'DeleteResult' object has no attribute 'deletedCount'. Did you mean: 'deleted_count'?
+2025-07-21 00:06:49,877 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 00:11:14,360 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 00:11:24,458 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 00:12:18,276 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 00:15:02,801 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 04:19:27,521 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 04:19:33,442 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 04:24:32,061 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 04:24:57,234 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 04:27:12,088 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 04:27:32,037 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 04:30:15,842 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 04:31:45,383 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 04:32:16,224 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 04:33:39,375 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 04:34:00,309 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 04:34:05,443 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 04:34:44,784 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 04:34:59,491 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 04:35:07,143 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 04:38:34,996 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 04:38:58,570 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 04:39:38,396 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 04:39:53,405 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 04:40:09,403 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 04:40:13,561 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 04:41:46,404 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 04:42:08,305 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 04:59:04,917 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 04:59:14,148 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 04:59:40,143 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 04:59:52,293 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:00:01,802 - [ERROR] - asyncio - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - Task exception was never retrieved
+future: <Task finished name='Task-276' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:314> exception=OutputParserException("Invalid json output: I'm sorry, I don't have enough information about that location to provide recommendations. Can you provide more details, such as the country or region where Iwakura is located?\nFor troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/errors/OUTPUT_PARSING_FAILURE ")>
+Traceback (most recent call last):
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\output_parsers\json.py", line 82, in parse_result
+    return parse_json_markdown(text)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\utils\json.py", line 150, in parse_json_markdown
+    return _parse_json(json_str, parser=parser)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\utils\json.py", line 166, in _parse_json
+    return parser(json_str)
+           ^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\utils\json.py", line 123, in parse_partial_json
+    return json.loads(s, strict=strict)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\json\__init__.py", line 359, in loads
+    return cls(**kw).decode(s)
+           ^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\json\decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\recommend_service.py", line 335, in enrich_place_detail
+    raw_data = await self.popular_places_chain.ainvoke(place_name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\runnables\base.py", line 3089, in ainvoke
+    input_ = await coro_with_context(part(), context, create_task=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\output_parsers\base.py", line 219, in ainvoke
+    return await self._acall_with_config(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\runnables\base.py", line 1991, in _acall_with_config
+    output: Output = await coro_with_context(coro, context)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\output_parsers\base.py", line 280, in aparse_result
+    return await run_in_executor(None, self.parse_result, result, partial=partial)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\runnables\config.py", line 616, in run_in_executor
+    return await asyncio.get_running_loop().run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\concurrent\futures\thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\runnables\config.py", line 607, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\output_parsers\json.py", line 85, in parse_result
+    raise OutputParserException(msg, llm_output=text) from e
+langchain_core.exceptions.OutputParserException: Invalid json output: I'm sorry, I don't have enough information about that location to provide recommendations. Can you provide more details, such as the country or region where Iwakura is located?
+For troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/errors/OUTPUT_PARSING_FAILURE 
+2025-07-21 05:00:26,116 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:01:21,455 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:02:01,395 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:02:04,980 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:03:23,986 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:09:16,489 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:09:21,042 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:09:53,161 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:09:56,919 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:13:47,984 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:15:23,430 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:15:26,883 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:15:44,477 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:16:24,341 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:16:50,004 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:16:52,980 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:16:58,888 - [ERROR] - asyncio - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - Task exception was never retrieved
+future: <Task finished name='Task-544' coro=<RedisService._history_to_mongodb() done, defined at D:\finalPro\backend\app\services\redis_service.py:262> exception=2 validation errors for History
+message.recommendations.3
+  Input should be a valid dictionary or object to extract fields from [type=model_attributes_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.11/v/model_attributes_type
+message.recommendations.5
+  Input should be a valid dictionary or object to extract fields from [type=model_attributes_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.11/v/model_attributes_type>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\redis_service.py", line 266, in _history_to_mongodb
+    history = await self.get_history(user_id, session_id)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\finalPro\backend\app\services\redis_service.py", line 169, in get_history
+    return [History(**json.loads(msg)) for msg in history]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\pydantic\main.py", line 253, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 2 validation errors for History
+message.recommendations.3
+  Input should be a valid dictionary or object to extract fields from [type=model_attributes_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.11/v/model_attributes_type
+message.recommendations.5
+  Input should be a valid dictionary or object to extract fields from [type=model_attributes_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.11/v/model_attributes_type
+2025-07-21 05:17:44,437 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:18:04,650 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:18:07,803 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:18:13,097 - [ERROR] - asyncio - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - Task exception was never retrieved
+future: <Task finished name='Task-245' coro=<RedisService._history_to_mongodb() done, defined at D:\finalPro\backend\app\services\redis_service.py:262> exception=1 validation error for History
+message.recommendations.3
+  Input should be a valid dictionary or object to extract fields from [type=model_attributes_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.11/v/model_attributes_type>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\redis_service.py", line 266, in _history_to_mongodb
+    history = await self.get_history(user_id, session_id)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\finalPro\backend\app\services\redis_service.py", line 169, in get_history
+    return [History(**json.loads(msg)) for msg in history]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\pydantic\main.py", line 253, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for History
+message.recommendations.3
+  Input should be a valid dictionary or object to extract fields from [type=model_attributes_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.11/v/model_attributes_type
+2025-07-21 05:24:35,574 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:25:05,771 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:25:08,818 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:25:27,383 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:25:44,082 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:26:07,859 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:28:12,103 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:28:21,875 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:28:23,020 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:28:30,197 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:30:22,156 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:30:41,766 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:30:45,794 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:31:01,761 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:31:20,230 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:31:52,198 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:32:00,483 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:34:39,277 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:35:04,268 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 05:35:07,223 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 06:05:19,168 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 06:05:28,856 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 06:46:14,872 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 08:36:44,178 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 08:38:31,279 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 08:38:38,668 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 403 Forbidden"
+2025-07-21 08:38:39,595 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 403 Forbidden"
+2025-07-21 08:39:11,800 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 08:42:01,066 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 403 Forbidden"
+2025-07-21 08:42:01,500 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 403 Forbidden"
+2025-07-21 08:42:36,365 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 08:42:45,806 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-07-21 08:42:46,281 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-07-21 08:44:44,392 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 08:44:56,034 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:45:05,245 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:45:05,252 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 08:45:10,987 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:45:49,212 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 08:50:23,696 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:50:32,503 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:50:32,508 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 08:50:37,286 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:50:42,246 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:50:42,257 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 08:50:45,539 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:51:03,044 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:51:17,054 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:51:30,404 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:51:30,844 - [ERROR] - asyncio - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - Task exception was never retrieved
+future: <Task finished name='Task-602' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:314> exception=1 validation error for ShortlistItem
+photos
+  Input should be a valid list [type=list_type, input_value='https://maps.googleapis....gNgdQP_9zrOYiMISYRjp9J0', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/list_type>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\recommend_service.py", line 339, in enrich_place_detail
+    place.sub_items.append(ShortlistItem(
+                           ^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\pydantic\main.py", line 253, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for ShortlistItem
+photos
+  Input should be a valid list [type=list_type, input_value='https://maps.googleapis....gNgdQP_9zrOYiMISYRjp9J0', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/list_type
+2025-07-21 08:51:31,382 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 08:51:33,295 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:51:33,885 - [ERROR] - asyncio - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - Task exception was never retrieved
+future: <Task finished name='Task-603' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:314> exception=1 validation error for ShortlistItem
+photos
+  Input should be a valid list [type=list_type, input_value='https://maps.googleapis....gNgdQP_9zrOYiMISYRjp9J0', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/list_type>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\recommend_service.py", line 339, in enrich_place_detail
+    place.sub_items.append(ShortlistItem(
+                           ^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\pydantic\main.py", line 253, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for ShortlistItem
+photos
+  Input should be a valid list [type=list_type, input_value='https://maps.googleapis....gNgdQP_9zrOYiMISYRjp9J0', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/list_type
+2025-07-21 08:51:40,703 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:51:41,393 - [ERROR] - asyncio - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - Task exception was never retrieved
+future: <Task finished name='Task-601' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:314> exception=1 validation error for ShortlistItem
+photos
+  Input should be a valid list [type=list_type, input_value='https://maps.googleapis....gNgdQP_9zrOYiMISYRjp9J0', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/list_type>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\recommend_service.py", line 339, in enrich_place_detail
+    place.sub_items.append(ShortlistItem(
+                           ^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\pydantic\main.py", line 253, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for ShortlistItem
+photos
+  Input should be a valid list [type=list_type, input_value='https://maps.googleapis....gNgdQP_9zrOYiMISYRjp9J0', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/list_type
+2025-07-21 08:51:42,916 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:51:43,116 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:51:49,814 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 08:51:54,005 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:51:55,517 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 08:52:00,227 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:52:00,729 - [ERROR] - asyncio - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - Task exception was never retrieved
+future: <Task finished name='Task-585' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:314> exception=1 validation error for ShortlistItem
+photos
+  Input should be a valid list [type=list_type, input_value='https://maps.googleapis....gNgdQP_9zrOYiMISYRjp9J0', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/list_type>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\recommend_service.py", line 339, in enrich_place_detail
+    place.sub_items.append(ShortlistItem(
+                           ^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\pydantic\main.py", line 253, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for ShortlistItem
+photos
+  Input should be a valid list [type=list_type, input_value='https://maps.googleapis....gNgdQP_9zrOYiMISYRjp9J0', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/list_type
+2025-07-21 08:52:08,304 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:52:13,300 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:52:13,769 - [ERROR] - asyncio - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - Task exception was never retrieved
+future: <Task finished name='Task-597' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:314> exception=1 validation error for ShortlistItem
+photos
+  Input should be a valid list [type=list_type, input_value='https://maps.googleapis....gNgdQP_9zrOYiMISYRjp9J0', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/list_type>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\recommend_service.py", line 339, in enrich_place_detail
+    place.sub_items.append(ShortlistItem(
+                           ^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\pydantic\main.py", line 253, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for ShortlistItem
+photos
+  Input should be a valid list [type=list_type, input_value='https://maps.googleapis....gNgdQP_9zrOYiMISYRjp9J0', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/list_type
+2025-07-21 08:52:15,840 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 08:52:20,707 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:52:21,095 - [ERROR] - asyncio - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - Task exception was never retrieved
+future: <Task finished name='Task-598' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:314> exception=1 validation error for ShortlistItem
+photos
+  Input should be a valid list [type=list_type, input_value='https://maps.googleapis....gNgdQP_9zrOYiMISYRjp9J0', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/list_type>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\recommend_service.py", line 339, in enrich_place_detail
+    place.sub_items.append(ShortlistItem(
+                           ^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\pydantic\main.py", line 253, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for ShortlistItem
+photos
+  Input should be a valid list [type=list_type, input_value='https://maps.googleapis....gNgdQP_9zrOYiMISYRjp9J0', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/list_type
+2025-07-21 08:52:22,086 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:52:27,578 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:52:42,082 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 08:53:21,153 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 08:53:34,101 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:54:26,664 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 08:54:29,958 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 08:55:14,993 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:55:22,706 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 08:55:25,812 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:55:26,055 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:55:27,039 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:55:27,399 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:55:28,257 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:55:29,866 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:55:31,303 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:55:32,954 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:56:46,888 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 08:57:28,802 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:57:37,762 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:57:41,344 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:57:42,527 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:57:42,543 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:57:42,661 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:57:44,109 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 08:57:49,801 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 08:58:04,063 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 08:58:06,864 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:06:53,235 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:07:03,966 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:07:04,620 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:07:12,864 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:07:14,169 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:07:14,288 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:07:15,022 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:07:15,487 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:07:15,837 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:07:16,935 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:07:21,812 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:07:22,612 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:07:30,487 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:07:46,478 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:09:05,821 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:09:05,838 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:09:18,234 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:09:49,401 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:13:58,435 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:17:23,740 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:17:57,267 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:18:17,360 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:18:21,642 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:19:04,145 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:19:08,776 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:19:41,592 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:19:56,357 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:20:53,043 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:20:53,059 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:21:06,244 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:21:31,397 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:24:36,411 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:26:10,596 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:26:15,154 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:27:24,611 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:27:24,620 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:27:31,146 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:27:47,669 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:29:11,419 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:29:56,494 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:29:56,500 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:30:01,318 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:30:27,674 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:32:32,491 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:32:50,952 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:32:50,963 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:32:56,331 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:33:23,876 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:35:22,696 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:35:32,273 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:35:32,276 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:35:36,517 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:36:10,274 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:37:34,301 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:37:51,624 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:37:51,634 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:37:58,007 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:38:40,571 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:39:42,024 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:39:50,244 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:39:50,254 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:39:55,284 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:40:30,088 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:50:01,462 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:50:05,022 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:50:05,036 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:50:09,700 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:50:52,249 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:51:34,280 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:51:44,932 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:51:44,946 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:51:49,064 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:52:16,421 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:53:40,159 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:54:15,466 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:54:24,360 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:54:32,403 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:54:32,420 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:54:36,111 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:55:06,630 - [INFO] - httpx - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-21 09:57:46,836 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:57:52,853 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 09:59:58,601 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 10:00:40,443 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 10:05:28,468 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 10:08:12,988 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 10:08:14,210 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 10:08:19,524 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 10:13:53,763 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 18:48:04,092 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 18:48:17,909 - [ERROR] - asyncio - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - Task exception was never retrieved
+future: <Task finished name='Task-7588' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:314> exception=OutputParserException('Invalid json output: ```json\n{\n  "pros": [\n    "Historical Landmark",\n    "Stunning Architecture",\n    "Cultural Experience",\n    "Central Location"\n  ],\n  "cons": [\n    "Can be crowded",\n    "Ticket costs",\n    "Limited accessibility"\n  ],\n  "advice_trip": "### Trip to Teatro Grande\\n\\n**Itinerary Suggestions:**\\n\\n*   **Morning:** Arrive early to avoid crowds and take a guided tour of Teatro Grande.\\n*   **Afternoon:** Explore the surrounding area, including Piazza della Loggia.\\n*   **Evening:** Attend a performance at the theater if available, or enjoy dinner at a local restaurant.\\n\\n**Must-See Spots:**\\n\\n*   **Main Hall:** Marvel at the ornate decorations and architecture.\\n*   **Foyer:** Admire the historical artifacts and exhibits.\\n*   **Exterior:** Take photos of the impressive facade.\\n\\n**Local Tips:**\\n\\n*   Check the theater\'s schedule in advance for performances and events.\\n*   Purchase tickets online to secure your spot.\\n*   Dress appropriately if attending a performance.\\n\\n**Transportation Advice:**\\n\\n*   Teatro Grande is located in the city center and is easily accessible by public transportation.\\n*   Consider walking if you\'re staying nearby.\\n\\n**Budget Estimates:**\\n\\n*   **Entrance Fee:** \\$10 - \\$20\\n*   **Dinner:** \\$20 - \\$50\\n*   **Transportation:** \\$5 - \\$15"\n}\n```\nFor troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/errors/OUTPUT_PARSING_FAILURE ')>
+Traceback (most recent call last):
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\output_parsers\json.py", line 82, in parse_result
+    return parse_json_markdown(text)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\utils\json.py", line 150, in parse_json_markdown
+    return _parse_json(json_str, parser=parser)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\utils\json.py", line 166, in _parse_json
+    return parser(json_str)
+           ^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\utils\json.py", line 123, in parse_partial_json
+    return json.loads(s, strict=strict)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\json\__init__.py", line 359, in loads
+    return cls(**kw).decode(s)
+           ^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\json\decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ^^^^^^^^^^^^^^^^^^^^^^
+json.decoder.JSONDecodeError: Invalid \escape: line 13 column 996 (char 1207)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\recommend_service.py", line 344, in enrich_place_detail
+    enrich_data = await self.enrich_place_detail_chain.ainvoke(place_name)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\runnables\base.py", line 3089, in ainvoke
+    input_ = await coro_with_context(part(), context, create_task=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\output_parsers\base.py", line 219, in ainvoke
+    return await self._acall_with_config(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\runnables\base.py", line 1991, in _acall_with_config
+    output: Output = await coro_with_context(coro, context)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\output_parsers\base.py", line 280, in aparse_result
+    return await run_in_executor(None, self.parse_result, result, partial=partial)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\runnables\config.py", line 616, in run_in_executor
+    return await asyncio.get_running_loop().run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\concurrent\futures\thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\runnables\config.py", line 607, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\output_parsers\json.py", line 85, in parse_result
+    raise OutputParserException(msg, llm_output=text) from e
+langchain_core.exceptions.OutputParserException: Invalid json output: ```json
+{
+  "pros": [
+    "Historical Landmark",
+    "Stunning Architecture",
+    "Cultural Experience",
+    "Central Location"
+  ],
+  "cons": [
+    "Can be crowded",
+    "Ticket costs",
+    "Limited accessibility"
+  ],
+  "advice_trip": "### Trip to Teatro Grande\n\n**Itinerary Suggestions:**\n\n*   **Morning:** Arrive early to avoid crowds and take a guided tour of Teatro Grande.\n*   **Afternoon:** Explore the surrounding area, including Piazza della Loggia.\n*   **Evening:** Attend a performance at the theater if available, or enjoy dinner at a local restaurant.\n\n**Must-See Spots:**\n\n*   **Main Hall:** Marvel at the ornate decorations and architecture.\n*   **Foyer:** Admire the historical artifacts and exhibits.\n*   **Exterior:** Take photos of the impressive facade.\n\n**Local Tips:**\n\n*   Check the theater's schedule in advance for performances and events.\n*   Purchase tickets online to secure your spot.\n*   Dress appropriately if attending a performance.\n\n**Transportation Advice:**\n\n*   Teatro Grande is located in the city center and is easily accessible by public transportation.\n*   Consider walking if you're staying nearby.\n\n**Budget Estimates:**\n\n*   **Entrance Fee:** \$10 - \$20\n*   **Dinner:** \$20 - \$50\n*   **Transportation:** \$5 - \$15"
+}
+```
+For troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/errors/OUTPUT_PARSING_FAILURE 
+2025-07-21 20:47:05,669 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 20:47:08,751 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 20:47:09,108 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 23:06:27,550 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 23:07:31,640 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 23:07:50,102 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 23:07:54,012 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 23:08:38,081 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 23:21:53,721 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 23:25:43,495 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 23:26:07,078 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 23:27:38,342 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 23:30:35,944 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 23:32:06,426 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 23:32:24,917 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 23:32:48,880 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 23:36:32,148 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 23:36:47,697 - [ERROR] - asyncio - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - Task exception was never retrieved
+future: <Task finished name='Task-52' coro=<RedisService._history_to_mongodb() done, defined at D:\finalPro\backend\app\services\redis_service.py:264> exception=ResponseError('WRONGTYPE Operation against a key holding the wrong kind of value')>
+Traceback (most recent call last):
+  File "D:\finalPro\backend\app\services\redis_service.py", line 268, in _history_to_mongodb
+    history = await self.get_history(user_id, session_id)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\finalPro\backend\app\services\redis_service.py", line 168, in get_history
+    history = self._redis_client.lrange(session_state.history_key, 0, -1)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\redis\commands\core.py", line 2718, in lrange
+    return self.execute_command("LRANGE", name, start, end, keys=[name])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\redis\client.py", line 623, in execute_command
+    return self._execute_command(*args, **options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\redis\client.py", line 634, in _execute_command
+    return conn.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\redis\retry.py", line 87, in call_with_retry
+    return do()
+           ^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\redis\client.py", line 635, in <lambda>
+    lambda: self._send_command_parse_response(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\redis\client.py", line 606, in _send_command_parse_response
+    return self.parse_response(conn, command_name, **options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\redis\client.py", line 653, in parse_response
+    response = connection.read_response()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\redis\connection.py", line 666, in read_response
+    raise response
+redis.exceptions.ResponseError: WRONGTYPE Operation against a key holding the wrong kind of value
+2025-07-21 23:43:36,767 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 23:44:54,295 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 23:49:25,464 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 23:50:30,845 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 23:53:25,452 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 23:53:44,347 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 23:54:40,509 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 23:55:31,314 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 23:55:49,691 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 23:57:28,052 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 23:58:17,613 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 23:58:43,065 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60
+2025-07-21 23:59:11,400 - [INFO] - googlemaps.client - 3bf98e76bb0607b28a20217a76d2dd4e80d70530 - API queries_quota: 60

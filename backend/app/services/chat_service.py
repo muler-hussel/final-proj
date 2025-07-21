@@ -53,16 +53,6 @@ class ChatService:
   
   # Processing prompt
   async def orchestrate_planning_step(self, session_state: SessionState, user_input: str) -> int:
-    # Append input into conversation history
-    user_message_content = Message(
-      content=user_input
-    )
-    user_history_entry = History(
-      role="user",
-      message=user_message_content
-    )
-    await redis_service.append_history(session_state, user_history_entry)
-
     # Intent recognition
     classified_intent: List[str] = await self.intent_classifier_chain.ainvoke({
       "user_input": user_input,

@@ -150,13 +150,13 @@ CREATE_ITINERARY_PROMPT = ChatPromptTemplate([
   **Output Format:**
   Return a JSON object with two keys:
     1.  `content`: A string containing an introductory remark, a summary of your work, or direct answers to any additional questions posed in `user_input` (e.g., "To visit France, you'll generally need a Schengen visa if you're not from a visa-exempt country. Here are some places you might enjoy:"). This should be natural conversational text.
-    2.  `itinerary`: A JSON array including a list of objects, each object represents an event with four keys:
+    2.  `itinerary`: A JSON array including a list of objects, each object represents an event with six keys:
         * `date`: An Integer representing the day of the trip, starting from 1.
-        * `type`: This string can be commuting or visit. If this event is about the travel time between spots, `type` should be commuting. If not, `type` should be visit.
+        * `type`: This string can be commute or visit. If this event is about the travel time between spots, `type` should be commute. If not, `type` should be visit.
         * `place_name`: If `type` is visit, this string is the name of the place will be visited in this event. If not, remain null.
         * `start_time`: Start time of this event, "HH:MM" (24h format).
         * `end_time`: End time of this event, "HH:MM" (24h format).
-        * `commute_mode` (only for commuting): If `type` is commuting, this string is the selected mode of transportation (e.g., walking, metro, taxi). If not remain null.
+        * `commute_mode` (only for commute): If `type` is commute, this string is the selected mode of transportation (e.g., walking, metro, taxi). If not remain null.
   ```
   """),
   ("human", "User input: {user_input}\n history: {history} \nShortlist places: {place_names}\n\n")

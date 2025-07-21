@@ -22,6 +22,8 @@
       />
     </div>
   </div>
+
+  <!-- History sidebar -->
   <div
     v-if="historyOpen" id="history"
     class="absolute left-16 w-64 h-full border-l-1 border-r-1 border-violet-200 bg-violet-50 flex flex-col z-1000 p-4 gap-y-2"
@@ -30,13 +32,12 @@
     <p class="text-xs text-gray-500 font-bold mb-2">
       Recent Chats
     </p>
-    <div v-for="(s, idx) in sessions" :key="idx">
-      <div 
-        v-if="s"
-        class="text-sm text-gray-700 hover:bg-gray-200/50 hover:cursor-pointer active:bg-gray-200/100 rounded-lg p-2"
-        :class="{ 'bg-violet-200 hover:bg-violet-200': currentSessionId === s.session_id }"
-        @click="loadSession(s.session_id)"
-      >{{ s.title }}</div>
+    <div v-for="(s, idx) in sessions" :key="idx" 
+      class="flex flex-row p-3 text-sm text-gray-700 hover:bg-gray-200/50 hover:cursor-pointer active:bg-gray-200/100 rounded-lg "
+      :class="{ 'bg-violet-200 hover:bg-violet-200': currentSessionId === s.session_id }"
+    >
+      <div v-if="s" @click="loadSession(s.session_id)">{{ s.title }}</div>
+      <DeleteOutlined class="ml-6 hover:bg-gray-300/100 hover:cursor-pointer rounded-lg" @click.stop="deleteSession(s.session_id)"/>
     </div>
   </div>
 </template>
@@ -101,6 +102,10 @@ export default defineComponent({
       }
     }
 
+    const deleteSession = async (sessionId: string) => {
+      await userSession.deleteSession(sessionId);
+    }
+
     onMounted(async () => {
       await userSession.initialize();
       document.addEventListener('click', handleClickOutside);
@@ -121,6 +126,7 @@ export default defineComponent({
       sessions,
       loadSession,
       currentSessionId,
+      deleteSession,
     }
   }
 })

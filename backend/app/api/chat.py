@@ -150,10 +150,22 @@ async def save_itinerary(session_id: str = Path(...), data: ChatRequest = Body(.
   session_state = await redis_service.load_session_state(user_id, session_id)
   if not session_state:
     db = await get_database()
-    session_state = DbSession(db).get_sesssion(user_id, session_id)
+    session_state = await DbSession(db).get_sesssion(user_id, session_id)
 
   if not session_state:
     raise HTTPException(status_code=404, detail="Session not found or expired. Please start a new session.")
 
   await redis_service.update_itinerary(session_state, itinerary, chat_idx)
   return
+
+# Delete session
+@router.post("/{session_id}/delete")
+async def delete_session(session_id: str = Path(...), data: ChatRequest = Body(...)):
+  user_id = data.user_id
+
+  session_state = await redis_service.load_session_state(user_id, session_id)
+  if session_state:
+    await redis_service.delete_session(session_state)
+  if not session_state:
+    db = await get_database()
+    await DbSession(db).delete_session(user_id, session_id)

@@ -58,8 +58,16 @@
               <ClockCircleOutlined class="mr-2"/>Open Hour
             </p>
             <a-collapse ghost class="ml-10 text-gray-700 mt-1" expandIconPosition="end">
-              <a-collapse-panel :header="dynamic_weekday.header">
-                <p v-for="(t,idx) in dynamic_weekday.content" :key="idx">{{ t }}</p>
+              <a-collapse-panel>
+                <template #header>
+                  <div class="grid grid-cols-2 gap-4">
+                    <span class="font-bold">{{ dynamic_weekday.header[0] }}</span>
+                    <span>{{ dynamic_weekday.header[1] }}</span>
+                  </div>
+                </template>
+                <div v-for="(t,idx) in dynamic_weekday.content" :key="idx" class="grid grid-cols-2 items-stretch">
+                  <p class="font-bold">{{ t[0] }}</p> <p>{{ t[1] }}</p>
+                </div>
               </a-collapse-panel>
             </a-collapse>
           </div>
@@ -136,7 +144,10 @@ import Carousel from 'primevue/carousel';
 import SpotSelected from './SpotSelected.vue';
 
 export default defineComponent({
-  components: {Carousel},
+  components: {
+    Carousel,
+    SpotSelected,
+  },
   setup() {
     const drawer = useDrawerStore();
     const { placeInfo } = storeToRefs(drawer);
@@ -147,10 +158,14 @@ export default defineComponent({
     const todayIndex = new Date().getDay();
 
     const dynamic_weekday = computed(() => {
-      if (!weekday_text.value) return;
+      if (!weekday_text.value || weekday_text.value?.length == 0) return;
       const list = [];
       for (let i = 0; i < 7; i++) {
-        list.push(weekday_text.value[(i + todayIndex) % 7]);
+        const str = weekday_text.value[(i + todayIndex) % 7];
+        const colonIndex = str.indexOf(":");
+        const day = str.substring(0, colonIndex);
+        const time = str.substring(colonIndex + 2);
+        list.push([day, time]);
       }
       return {
         header: list[0],

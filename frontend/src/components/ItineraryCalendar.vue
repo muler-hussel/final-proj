@@ -1,22 +1,40 @@
 <template>
-  <div class="flex h-[calc(100vh-70px)]">
-    <div class="w-7/10 mr-4 scroll-container">
-      <FullCalendar
-        ref="calendarRef"
-        :options="calendarOptions"
-      />
-    </div>
-    <div class="w-3/10 p-4 bg-gray-50 rounded-xl shadow-xl overflow-y-auto drop-container">
-      <div class="text-xs text-gray-300 p-4">Drag event here, if you want to discard it</div>
-      <div 
-        v-for="place in discardPlaces" 
-        :key="place.id"
-        draggable="true"
-        @dragstart="handleDragStart($event, place)"
-        class="mb-2 p-3 cursor-move fc-draggable"
-        :data-transfer="JSON.stringify(place)"
+  <div class="fixed inset-0 z-50 p-1">
+    <div class="flex relative w-full h-[calc(100vh-8px)] max-w-none transform overflow-hidden bg-white text-left shadow-xl transition-all rounded-xl">
+      <!-- Close button -->
+      <button 
+        @click="onCancel"
+        class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition-colors"
       >
-        <SpotSelected v-if="placeDetails.get(place.name)" :item="placeDetails.get(place.name)!"></SpotSelected>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <!-- Calendar area -->
+      <div class="w-7/10 p-1 mr-4 scroll-container">
+        <FullCalendar ref="calendarRef" :options="calendarOptions" />
+      </div>
+      
+      <!-- Discarded area -->
+      <div class="flex flex-col w-3/10 p-4 h-full bg-gray-50 rounded-xl shadow-xl overflow-y-auto drop-container">
+        <div class="text-xs text-gray-300 p-4">Drag event here, if you want to discard it</div>
+        <div 
+          v-for="(place, idx) in discardPlaces" 
+          :key="idx"
+          draggable="true"
+          class="mb-2 p-3 cursor-move fc-draggable"
+          :data-transfer="JSON.stringify(place)"
+        >
+          <SpotSelected v-if="placeDetails.get(place.name)" :item="placeDetails.get(place.name)!"></SpotSelected>
+          <div v-else p-2 bg-indigo-100 border-l-4 border-indigo-400 rounded w-full h-full text-gray-500 flex flex-col gap-y-1>
+            {{ place.name }}
+          </div>
+        </div>
+        <div class="mt-auto px-4 py-3 sm:px-6 flex justify-end rounded-b-lg gap-3">
+          <a-button @click="onCancel">Cancel</a-button>
+          <a-button @click="saveItinerary" type="primary">Save</a-button>
+        </div>
       </div>
     </div>
   </div>
@@ -34,7 +52,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, type PropType, computed, nextTick } from 'vue';
+import { ref, onMounted, type PropType, computed, watch, watchEffect } from 'vue';
 import FullCalendar from '@fullcalendar/vue3';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -43,14 +61,9 @@ import { type CalendarOptions, type EventApi, type EventClickArg, type EventCont
 import { useShortlistStore } from '@/stores/shortlist.ts';
 import SpotSelected from '@/components/SpotSelected.vue';
 import { storeToRefs } from 'pinia';
-import type { DailyItinerary, ShortlistItem } from '@/types';
+import type { DailyItinerary, ShortlistItem, DiscardPlace } from '@/types';
 import dayjs from 'dayjs';
-
-interface Place {
-  id: string;
-  name: string;
-  duration: number; //Hours
-}
+import { useItineraryStore } from '@/stores/itinerary';
 
 const {events, recommends} = defineProps({
   events: {
@@ -73,6 +86,25 @@ const placeDetails = computed(() => {
   }
   return map;
 });
+const discardPlaces = ref<Set<DiscardPlace>>(new Set([]));
+const useItinerary = useItineraryStore();
+
+const saveItinerary = async () => {
+  useItinerary.itineraryOpen= false;
+  await useItinerary.handleSave();
+}
+
+const onCancel = async () => {
+  if (useItinerary.ifChanged()) {
+    const confirmLeave = window.confirm("Changes you made may not be saved. Do you want to leave this page?");
+    if (confirmLeave) {
+      useItinerary.clearChange();
+    } else {
+      useItinerary.itineraryOpen = true;
+    }
+  }
+  useItinerary.clearChange();
+}
 
 // Convert DailyItinerary into EventInput
 const convertToEventInput = (itineraries: DailyItinerary[]): EventInput[] => {
@@ -87,16 +119,17 @@ const convertToEventInput = (itineraries: DailyItinerary[]): EventInput[] => {
     const endTime = new Date(targetDate);
     endTime.setHours(endHours, endMinutes, 0, 0);
     
-    let title = null;
+    let title = undefined;
     let place_info = null;
     if (item.place_name) {
       title = item.place_name;
       place_info = items.value.get(title);
     }
+    const eventTitle = title ? title : item.commute_mode;
 
     return {
       id: `event-${index}`,
-      title: title ? title : item.commute_mode,
+      title: eventTitle ?? undefined,
       start: startTime,
       end: endTime,
       extendedProps: {
@@ -123,14 +156,14 @@ const extractEventData = () => {
     return {
       date: start.diff(baseDate, 'day') + 1,
       type,
-      place_name: type === 'visit' ? event.title : undefined,
+      place_name: type === 'visit' ? event.title : null,
       start_time: start.format('HH:mm'),
       end_time: end.format('HH:mm'),
-      commute_mode: type === 'commuting' ? event.title : undefined,
+      commute_mode: type === 'commute' ? event.title : null,
+      discarded_places: Array.from(discardPlaces.value),
     } satisfies DailyItinerary;
   });
 }
-
 
 // Customize Header as Day 1, Day 2, Day 3
 const formatDayHeader = (date: Date) => {
@@ -139,43 +172,41 @@ const formatDayHeader = (date: Date) => {
   return `Day ${diffDays}`;
 };
 
-const discardPlaces = ref<Set<Place>>(new Set([]));
-
 const setOperations = {
-  add: (place: Place) => {
-    discardPlaces.value = new Set([...discardPlaces.value, place]);
-  },
-  delete: (id: string) => {
+  add: (place: DiscardPlace) => {
     const newSet = new Set(discardPlaces.value);
-    [...newSet].find(p => p.id === id) && newSet.delete([...newSet].find(p => p.id === id)!);
+    [...newSet].find(p => p.name === place.name) && newSet.delete([...newSet].find(p => p.name === place.name)!);
+    discardPlaces.value = newSet.add(place);
+  },
+  delete: (name: string) => {
+    const newSet = new Set(discardPlaces.value);
+    [...newSet].find(p => p.name === name) && newSet.delete([...newSet].find(p => p.name === name)!);
     discardPlaces.value = new Set(newSet);
   }
 };
 
-// Drag from discardPlaces to calendar
-const handleDragStart = (e: DragEvent, place: Place) => {
-  if (!e.dataTransfer) return;
-  e.dataTransfer.setData('text/plain', JSON.stringify(place));
-};
-
 // Calendar receive from discardPlaces
 const handleEventReceive = (info: EventReceiveArg) => {
+  console.log(info)
   if (!info.draggedEl.dataset.transfer) return;
   const place = JSON.parse(info.draggedEl.dataset.transfer);
   info.event.setProp('title', place.name);
   info.event.setExtendedProp('placeId', place.id);
+  info.event.setExtendedProp('type', place.extendedProps.type);
+  info.event.setExtendedProp('openingHours', place.extendedProps.openingHours);
   
   if (!info.event.start) return;
   const end = new Date(info.event.start);
   end.setHours(end.getHours() + place.duration);
   info.event.setEnd(end);
-  
-  setOperations.delete(place.id);
+  setOperations.delete(place.name);
 };
 
 // DiscardPlaces receive from calendar
 const handleDropFromCalendar = (event: EventApi) => {
-  deleteEvent(event);
+  if(event.extendedProps.type === 'visit') {
+    deleteEvent(event);
+  }
 };
 
 // Handle with drags stopping inside of discardPlaces area
@@ -191,7 +222,7 @@ const handleDragStop = (info: EventDragStopArg) => {
       jsEvent.clientY >= rect.top &&
       jsEvent.clientY <= rect.bottom
     ) {
-      handleDropFromCalendar(event); 
+      handleDropFromCalendar(event);
     }
   }
 }
@@ -246,11 +277,15 @@ const formatTime = (date: Date | null) => {
 const deleteEvent = (event: EventApi) => {
   if (event && event.end && event.start) {
     if (event.extendedProps.type === 'visit') {
-      setOperations.add({
-        id: event.id,
+      const place = {
         name: event.title,
-        duration: (+event.end - +event.start) / 3600000
-      });
+        duration: (+event.end - +event.start) / 3600000,
+        extendedProps:{
+          openingHours: event.extendedProps.openingHours,
+          type: event.extendedProps.type,
+        }
+      };
+      setOperations.add(place);
     }
     event.remove();
   }
@@ -295,6 +330,14 @@ const calendarOptions = ref<CalendarOptions>({
   eventContent: (arg: EventContentArg) => {
     const openingHours = arg.event.extendedProps.openingHours || [];
     const hasOpeningHours = openingHours.length > 0;
+    const title = arg.event.title;
+    const icon = {
+      'walking': '👣',
+      'transit': '🚌',
+      'bicycling': '🚲',
+      'driving': '🚙',
+    }[title.toLowerCase()] || '✈️';
+    
     return {
       html: `
         ${arg.event.extendedProps.type === 'visit' ?
@@ -313,8 +356,8 @@ const calendarOptions = ref<CalendarOptions>({
           ` : ''}
           </div>
         </div>` : 
-        `<div class="p-2 bg-indigo-100 border-l-4 border-indigo-400 rounded w-full h-full text-gray-500 flex flex-col gap-y-1">
-          <div class="font-medium text-gray-700">${arg.event.title}</div>
+        `<div class="m-auto bg-amber-100/50 rounded w-1/2 h-full border-dashed border-amber-200 border-1 text-gray-500 flex flex-row gap-x-1 items-center">
+          <div>${icon}</div> 
           <div class="text-xs">
             ${arg.timeText}
           </div>
@@ -330,33 +373,46 @@ const calendarOptions = ref<CalendarOptions>({
   eventClick: (info) => handleEventClick(info),
 });
 
+let draggableInstance: Draggable | null = null
 // Register shortlistItem as the external event source of FullCalendar
 const initDraggable = () => {
-  const dropContainer = document.querySelector('.drop-container') as HTMLElement;
-  if (dropContainer) {
-    new Draggable(dropContainer, {
-      itemSelector: '.fc-draggable',
-      eventData: (el) => {
-        const data = el.dataset.transfer ? JSON.parse(el.dataset.transfer) : {};
-        return {
-          title: data.name,
-          duration: { hours: data.duration || 2 },
-          extendedProps: {
-            ...data
-          }
-        };
-      }
-    });
-  }
+  // Cannot get children els from class drop-container, can only get from the whole document.
+  // Using watch to guarantee, only when discardPlaces changed, el register as Draggable.
+  // Use draggableInstance to guarantee only one instance exsits.
+  if (draggableInstance) draggableInstance.destroy();
+  draggableInstance = new Draggable(document.body, {
+    itemSelector: '.fc-draggable',
+    eventData: (el) => {
+      const data = el.dataset.transfer ? JSON.parse(el.dataset.transfer) : {};
+      return {
+        title: data.name,
+        duration: { hours: data.duration || 2 },
+        extendedProps: {
+          ...data
+        }
+      };
+    }
+  });
 };
 
+
+watch(discardPlaces, () => {
+  initDraggable();
+}); 
+
 onMounted(() => {
-  nextTick(() => {
-    setTimeout(initDraggable, 100);
-  });
+  // Something wrong with onMounted, mount for 3 times. If initDraggable() here, 3 instances exsits every time.
+  useItinerary.registerExtractFn(extractEventData);
+  if (events.length > 0) {
+    const firstEvent = events[0]
+    const places = firstEvent.discarded_places || []
+    discardPlaces.value.clear()
+    places.forEach((place: DiscardPlace) => {
+      discardPlaces.value.add(place)
+    })
+  }
 });
 
-defineExpose({ extractEventData });
 </script>
 
 <style>
@@ -432,10 +488,12 @@ defineExpose({ extractEventData });
 .tooltip-text {
   visibility: hidden;
   width: 205px;
-  background: #c7c7c7;
-  color: #ffffff;
+  background: #ffffff;
+  color: #828282;
   text-align: start;
   border-radius: 4px;
+  border-width: 1px;
+  border-color: #a8a7a7;
   padding: 4px;
   position: absolute;
   z-index: 100;

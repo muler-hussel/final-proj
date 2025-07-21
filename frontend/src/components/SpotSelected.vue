@@ -5,11 +5,12 @@
     @click="showDrawer()"
   >
     <div class="flex-shrink-0 w-1/3 rounded-lg overflow-hidden mr-4" style="aspect-ratio: 16/10; overflow: hidden;">
-      <img
+      <!-- <img
         v-if="displayItem.photos"
         :src="displayItem.photos[0]"
-        class="w-full h-full object-cover block" />
-      <a-skeleton-image v-else />
+        class="w-full h-full object-cover block" /> -->
+      <!-- <a-skeleton-image v-else /> -->
+      <a-skeleton-image />
     </div>
     <div class="flex-grow"> 
       <h3 class="text-lg font-semibold text-indigo-900 mb-2 leading-tight">{{ displayItem.name }}</h3>
@@ -61,13 +62,13 @@ export default defineComponent({
         console.log(res.data);
         session.updateRecommendation(item.name, res.data);
       }
-      drawer.showSpaceInfo(displayItem.value);
+      drawer.showPlaceInfo(displayItem.value);
       userBehaviorStore.recordAction('click', displayItem.value.name);
       userBehaviorStore.startViewing(displayItem.value.name);
     };
 
     const onClose = () => {
-      drawer.onSpaceInfoClose();
+      drawer.onPlaceInfoClose();
       userBehaviorStore.endViewing(displayItem.value.name);
     };
 

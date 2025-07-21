@@ -25,6 +25,14 @@ class DbSession:
     session_states = [SessionState(**doc) for doc in docs]
     return session_states
 
+  async def delete_session(self, user_id: str, session_id: str):
+    result = await self.collection.delete_one({"user_id": user_id, "session_id": session_id})
+
+    if result.deleted_count > 0:
+      print(f"MongoDB: Updated session for user {user_id}, session {session_id}. Modified count: {result.deleted_count}")
+    else:
+      print(f"MongoDB: No session found for user {user_id}, session {session_id} to update history.")
+
   async def save_session(self, session: SessionState):
     result = await self.collection.update_one(
       {"user_id": session.user_id, "session_id": session.session_id},
