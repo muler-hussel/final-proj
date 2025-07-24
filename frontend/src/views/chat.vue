@@ -165,6 +165,7 @@ export default defineComponent({
     const fetchAiRes = async(userInput: string) => {
       if (!userInput) return;
       isAiGenerating.value = true;
+      prompt.value = '';
       session.appendHistory({
         role: "user",
         message: {
@@ -184,7 +185,6 @@ export default defineComponent({
           user_id: userId,
           user_input: userInput,
         })
-        prompt.value = '';
         session.appendHistory(res.data);
         session.setShortTermProfile(res.data);
       } catch(e) {

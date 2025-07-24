@@ -65,5 +65,5 @@ class SessionState(BaseModel):
 
   def add_recommended_places(self, item: str):
       current = set(self.recommended_places)
-      current.update(item)
+      current.add(item)
       self.recommended_places = list(current)

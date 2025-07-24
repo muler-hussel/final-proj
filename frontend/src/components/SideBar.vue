@@ -37,7 +37,7 @@
       :class="{ 'bg-violet-200 hover:bg-violet-200': currentSessionId === s.session_id }"
     >
       <div v-if="s" @click="loadSession(s.session_id)">{{ s.title }}</div>
-      <DeleteOutlined class="ml-6 hover:bg-gray-300/100 hover:cursor-pointer rounded-lg" @click.stop="deleteSession(s.session_id)"/>
+      <DeleteOutlined class="flex ml-auto hover:bg-gray-300/100 hover:cursor-pointer rounded-lg" @click.stop="deleteSession(s.session_id)"/>
     </div>
   </div>
 </template>

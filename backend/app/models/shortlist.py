@@ -49,10 +49,10 @@ class ShortlistItem(BaseModel):
   name: str
   type: Optional[str] = None # 'city' | 'attraction'
   place_id: Optional[str] = None
-  description: str
+  description: Optional[str] = None
   tags: Optional[List[str]] = [] # tags of attraction, 'museum', 'animal', 'history'
   info: Optional[PlaceDetail] = None
-  sub_items: Optional[List[PlaceCard]] = [] # If city, containing recommended attraction names of this city
+  sub_items: Optional[List["ShortlistItem"]] = [] # If city, containing recommended attraction names of this city
   geometry: Optional[PlaceGeo] = None
   status: Optional[str] = "pending"  # Backend asynchronous processing status 'pending', 'processing', 'ready', 'error'
   photos: Optional[List[str]] = None

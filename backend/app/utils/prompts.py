@@ -143,12 +143,12 @@ CREATE_ITINERARY_PROMPT = ChatPromptTemplate([
   3.  **Places user chose (`place_names`):** (May be empty)
       * If available, `place_names` contains the names of the places and their opening hours.
       * If not available, you should suggest several popular places and generate the itinerary according to `user_input` and `history`.
-  4.  **You need to arrange itinerary based on the possible duration of user's visit to each place, the opening hours of the places, and the distances between the places, the possible time for user having meals.
-  5. **You must also suggest a reasonable transportation method (e.g., walking, metro, car) between places.**
-  6. **You must use a provided tool to calculate commute time based on place names and commute mode. Make a tool call to get the actual commute time and use that time to plan your itinerary.**
+  4.  **You Must arrange itinerary based on the possible duration of user's visit to each place, the opening hours of the places, and the distances between the places, the possible time for user having meals.
+  5.  **You must also suggest a reasonable transportation method (e.g., walking, bicycling, transit, driving) between places considering user is on a trip.**
+  6.  **You MUST use a provided tool to calculate commute time based on place names and commute mode. Make a tool call to get the actual commute time and show that time to in your itinerary.**
   
   **Output Format:**
-  Return a JSON object with two keys:
+  Always return a JSON object with two keys:
     1.  `content`: A string containing an introductory remark, a summary of your work, or direct answers to any additional questions posed in `user_input` (e.g., "To visit France, you'll generally need a Schengen visa if you're not from a visa-exempt country. Here are some places you might enjoy:"). This should be natural conversational text.
     2.  `itinerary`: A JSON array including a list of objects, each object represents an event with six keys:
         * `date`: An Integer representing the day of the trip, starting from 1.
@@ -156,7 +156,7 @@ CREATE_ITINERARY_PROMPT = ChatPromptTemplate([
         * `place_name`: If `type` is visit, this string is the name of the place will be visited in this event. If not, remain null.
         * `start_time`: Start time of this event, "HH:MM" (24h format).
         * `end_time`: End time of this event, "HH:MM" (24h format).
-        * `commute_mode` (only for commute): If `type` is commute, this string is the selected mode of transportation (e.g., walking, metro, taxi). If not remain null.
+        * `commute_mode` (only for commute): If `type` is commute, this string is the selected mode of transportation (e.g., walking, driving, bicycling, transit). If not remain null.
   ```
   """),
   ("human", "User input: {user_input}\n history: {history} \nShortlist places: {place_names}\n\n")

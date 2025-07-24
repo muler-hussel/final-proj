@@ -1,40 +1,28 @@
 import json
 import re
 from app.utils.prompts import CREATE_ITINERARY_PROMPT
-from app.services.shared import language_model
+from app.services.shared import openai_language_model, language_model
 from app.models.session import Message, SessionState, History
 from app.services.redis_service import redis_service
 from langchain.agents import initialize_agent
 from langchain.agents.agent_types import AgentType
-from pydantic import BaseModel, Field
-from enum import Enum
 from app.db.mongodb import get_database
 from app.services.recommend_service import RecommendService
 from app.utils.tools import get_route_info
-
-class TravelMode(str, Enum):
-  driving = "driving"
-  walking = "walking"
-  bicycling = "bicycling"
-  transit = "transit"
-
-class RouteInput(BaseModel):
-  origin: str = Field(..., description="Starting location")
-  destination: str = Field(..., description="Ending location")
-  mode: TravelMode = Field(..., description="Travel mode: one of 'driving', 'walking', 'bicycling', or 'transit'")
+from langchain_core.messages import HumanMessage, ToolMessage
 
 class ItineraryService:
   def __init__(self):
+    self.llm_with_tools = language_model.bind_tools(tools=[get_route_info])
     self.agent = initialize_agent(
       tools=[get_route_info],
-      llm=language_model,
-      agent=AgentType.OPENAI_FUNCTIONS,
+      llm=openai_language_model,
+      agent=AgentType.OPENAI_MULTI_FUNCTIONS,
       verbose=True
     )
   
   async def create_itinerary(self, session_state: SessionState, user_input: str):
-    history = (await redis_service.get_history(session_state.user_id, session_state.session_id))[-10:]
-    history_str = "\n".join(f"{msg.role}: {msg.message}" for msg in history)
+    history_str = await redis_service.get_simplified_history(session_state)
     shortlist = await redis_service.get_shortlist(session_state.user_id, session_state.session_id)
     place_names = ",".join(f"{s.name}: {s.info.weekday_text}" for s in shortlist)
     
@@ -43,16 +31,45 @@ class ItineraryService:
       history=history_str,
       place_names=place_names
     )
-    raw_data = await self.agent.ainvoke(user_prompt)
-    output_str = raw_data["output"]
-    json_str = re.sub(r"^```json|```$", "", output_str.strip(), flags=re.MULTILINE).strip()
+    messages = [HumanMessage(user_prompt)]
+    while True:
+      ai_msg = self.llm_with_tools.invoke(messages)
+      messages.append(ai_msg)
+
+      if not getattr(ai_msg, "tool_calls", None):
+        break
+
+      for tool_call in ai_msg.tool_calls:
+        tool_name = tool_call["name"]
+        args = tool_call["args"]
+        if isinstance(args, str):
+          args = json.loads(args)
+
+        tool_fn = {
+          "get_route_info": get_route_info
+        }.get(tool_name)
+
+        if tool_fn is None:
+          raise ValueError(f"No tool found for: {tool_name}")
+
+        tool_output = tool_fn.invoke(args)
+
+        messages.append(
+          ToolMessage(content=tool_output, tool_call_id=tool_call["id"])
+        )
+
+    raw_data = ai_msg.content
+    print(raw_data)
+    json_str = re.sub(r"^```json|```$", "", raw_data.strip(), flags=re.MULTILINE).strip()
     parsed_data = json.loads(json_str)
     response = Message(**parsed_data)
 
     shortlist_names = set(s.name for s in shortlist)
+    if not response.itinerary:
+      return response
     # If recommend more places
     for place in response.itinerary:
-      db = await get_database()
+      db = get_database()
       place_name = place.place_name
       if place_name and (place_name != "null") and (place_name not in shortlist_names):
         place_info = await RecommendService(db).get_or_fetch_place_brief(place_name, None, None)

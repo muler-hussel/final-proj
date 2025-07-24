@@ -1,8 +1,7 @@
+from typing import Literal
 from langchain.tools import tool
 from pydantic import BaseModel, Field
 from enum import Enum
-from app.db.mongodb import get_database
-from app.models.place_info import PlaceInfo
 import googlemaps
 from dotenv import load_dotenv
 import os
@@ -23,27 +22,19 @@ key = os.getenv("GOOGLE_API")
 gmaps = googlemaps.Client(key=key)
 
 # Should be out of a class
-@tool(args_schema=RouteInput)
-async def get_route_info(params: RouteInput) -> str:
+@tool
+def get_route_info(origin: str, destination: str, mode: Literal["walking", "transit", "bicycling", "driving"]) -> str:
   """
   Use Google Maps to get travel time and distance.
   
-  Args:
-      origin (str): Starting location.
-      destination (str): Destination location.
-      mode (str): Travel mode. Must be one of ["driving", "walking", "bicycling", "transit"].
+  Input route data with fields:
+    - origin (str): Starting location.
+    - destination (str): Destination location.
+    - mode (str): Travel mode. Must be one of ["driving", "walking", "bicycling", "transit"].
   """
 
-  origin = params.origin
-  destination = params.destination
-  mode = params.mode or "transit"
-
-  db = await get_database()
-  origin_id = (await PlaceInfo(db).get_place(origin)).place_id
-  destination_id = (await PlaceInfo(db).get_place(destination)).place_id
-
   try: 
-    res = gmaps.directions('place_id:'+origin_id, 'place_id:'+destination_id, mode=mode)
+    res = gmaps.directions(origin, destination, mode=mode)
     if not res or not isinstance(res, list) or len(res) == 0:
       return "No route info found."
     first_route = res[0]

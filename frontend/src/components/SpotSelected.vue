@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
+import { defineComponent, ref, toRaw, watch } from 'vue';
 import type { PropType } from 'vue';
 import type { ShortlistItem } from '@/types';
 import { useShortlistStore } from '@/stores/shortlist.ts';
@@ -50,19 +50,19 @@ export default defineComponent({
     const shortlistStore = useShortlistStore();
     const userBehaviorStore = useUserBehaviorStore();
     const drawer = useDrawerStore();
-    const displayItem = computed(() => {
-      return shortlistStore.items.get(props.item.name) || props.item;
-    });
+    const displayItem = ref(props.item);
     const session = useSessionStore()
 
     const showDrawer = async () => {
-      const item = displayItem.value;
+      const proxyItem = displayItem.value;
+      const item = toRaw(proxyItem);
+      drawer.placeInfo.isOpen = true;
       if (!item.updated_time || (+new Date() - +new Date(item.updated_time)) / (1000 * 60 * 60 * 24) > 30 || (!item.info?.cons && item.sub_items?.length == 0)) {
         const res = await axios.post("/recommend/enrich", {place_name: item.name});
-        console.log(res.data);
         session.updateRecommendation(item.name, res.data);
-      }
-      drawer.showPlaceInfo(displayItem.value);
+        displayItem.value = res.data;
+      } 
+      drawer.placeInfo.item = displayItem.value;
       userBehaviorStore.recordAction('click', displayItem.value.name);
       userBehaviorStore.startViewing(displayItem.value.name);
     };
@@ -72,15 +72,26 @@ export default defineComponent({
       userBehaviorStore.endViewing(displayItem.value.name);
     };
 
-    const handleAddToShortlist = () => {
-      shortlistStore.addToShortlist(displayItem.value);
+    const handleAddToShortlist = async () => {
+      const proxyItem = displayItem.value;
+      const item = toRaw(proxyItem);
+      const res = await axios.post("/recommend/enrich", {place_name: item.name});
+      shortlistStore.addToShortlist(res.data);
       userBehaviorStore.recordAction('shortlist', displayItem.value.name);
     };
 
-    const handleRemoveShortlist = () => {
+    const handleRemoveShortlist = async () => {
+      const proxyItem = displayItem.value;
+      const item = toRaw(proxyItem);
+      const res = await axios.post("/recommend/enrich", {place_name: item.name});
+      shortlistStore.addToShortlist(res.data);
       shortlistStore.removeFromShortlist(displayItem.value.name);
       userBehaviorStore.recordAction('unshortlist', displayItem.value.name);
     }
+
+    watch(() => props.item, (newVal) => {
+      displayItem.value = newVal;
+    });
 
     return {
       showDrawer,

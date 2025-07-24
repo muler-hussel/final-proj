@@ -26,10 +26,6 @@ async def save_user_behavior(data: BehaviorTrack = Body(...)):
   session_state = await redis_service.load_session_state(user_id, session_id)
 
   if not session_state:
-    db = await get_database()
-    session_state = DbSession(db).get_sesssion(user_id, session_id)
-    redis_service.save_session_state(session_state)
-  if not session_state:
     raise HTTPException(status_code=404, detail="Session not found or expired")
   
   session_state.current_user_behavior = data.events
@@ -40,7 +36,7 @@ async def save_user_behavior(data: BehaviorTrack = Body(...)):
 async def get_place_detail(req: PlaceReq = Body(...)) -> ShortlistItem:
   place_name = req.place_name
   
-  db = await get_database()
+  db = get_database()
   place = await RecommendService(db).enrich_place_detail(place_name)
 
   return place

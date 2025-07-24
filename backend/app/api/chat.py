@@ -45,7 +45,7 @@ async def create_session(data: ChatRequest = Body(...)):
 async def get_session_with_userId(data: ChatRequest = Body(...)):
   user_id = data.user_id
   session_info = []
-  db = await get_database()
+  db = get_database()
   sessions = await DbSession(db).get_sessions_by_user_id(user_id)
   if len(sessions) == 0:
     return session_info
@@ -58,7 +58,7 @@ async def get_session_with_userId(data: ChatRequest = Body(...)):
 @router.post("/{session_id}")
 async def get_session(session_id: str = Path(...), data: ChatRequest = Body(...)):
   user_id = data.user_id
-  db = await get_database()
+  db = get_database()
   session_state = await DbSession(db).get_sesssion(user_id, session_id)
   if not session_state:
     raise HTTPException(status_code=404, detail="Session not found or expired")
@@ -66,11 +66,7 @@ async def get_session(session_id: str = Path(...), data: ChatRequest = Body(...)
   history = session_state.history
   shortlist = session_state.shortlist
 
-  await redis_service.save_session_state(session_state)
-  for h in history:
-    await redis_service.append_history(session_state, h)
-  for s in shortlist:
-    await redis_service.add_to_shortlist(session_state, s)
+  await redis_service.save_from_db(session_state)
 
   response = {
     "messages": history,
@@ -85,10 +81,6 @@ async def get_session(session_id: str = Path(...), data: ChatRequest = Body(...)
 async def chat_with_ai(session_id: str = Path(...), data: ChatRequest = Body(...)):
   user_id = data.user_id
   session_state = await redis_service.load_session_state(user_id, session_id)
-  if not session_state:
-    db = await get_database()
-    session_state = await DbSession(db).get_sesssion(user_id, session_id)
-    await redis_service.save_session_state(session_state)
   if not session_state:
     raise HTTPException(status_code=404, detail="Session not found or expired. Please start a new session.")
 
@@ -112,7 +104,7 @@ async def chat_with_ai(session_id: str = Path(...), data: ChatRequest = Body(...
     todo_step += 1
     session_state.todo_step = todo_step
     ai_response_text, session_state = await chat_service.get_ai_response(
-      session_state, user_input, first_prompt, session_state.todo[todo_step]
+      session_state, user_input, first_prompt, session_state.todo[todo_step+1]
     )
   else:
     ai_response_text, session_state = await chat_service.orchestrate_planning_step(session_state, user_input)
@@ -148,9 +140,6 @@ async def save_itinerary(session_id: str = Path(...), data: ChatRequest = Body(.
     raise HTTPException(status_code=404, detail="No itinerary provided.")
   
   session_state = await redis_service.load_session_state(user_id, session_id)
-  if not session_state:
-    db = await get_database()
-    session_state = await DbSession(db).get_sesssion(user_id, session_id)
 
   if not session_state:
     raise HTTPException(status_code=404, detail="Session not found or expired. Please start a new session.")
@@ -167,5 +156,5 @@ async def delete_session(session_id: str = Path(...), data: ChatRequest = Body(.
   if session_state:
     await redis_service.delete_session(session_state)
   if not session_state:
-    db = await get_database()
+    db = get_database()
     await DbSession(db).delete_session(user_id, session_id)

@@ -1,3 +1,4 @@
+import asyncio
 from pymongo import IndexModel, ASCENDING
 from app.models.session import SessionState, History
 from typing import List
@@ -6,6 +7,7 @@ from app.models.shortlist import ShortlistItem
 class DbSession:
   def __init__(self, db):
     self.collection = db["session"]
+    self._init_task = asyncio.create_task(self._create_indexes())
 
   async def _create_indexes(self):
     await self.collection.create_indexes([
@@ -28,9 +30,7 @@ class DbSession:
   async def delete_session(self, user_id: str, session_id: str):
     result = await self.collection.delete_one({"user_id": user_id, "session_id": session_id})
 
-    if result.deleted_count > 0:
-      print(f"MongoDB: Updated session for user {user_id}, session {session_id}. Modified count: {result.deleted_count}")
-    else:
+    if result.deleted_count <= 0:
       print(f"MongoDB: No session found for user {user_id}, session {session_id} to update history.")
 
   async def save_session(self, session: SessionState):
@@ -40,9 +40,7 @@ class DbSession:
       upsert=True
     )
 
-    if result.matched_count > 0:
-      print(f"MongoDB: Updated session for user {session.user_id}, session {session.session_id}. Modified count: {result.modified_count}")
-    else:
+    if result.matched_count <= 0:
       print(f"MongoDB: No session found for user {session.user_id}, session {session.session_id} to update history.")
 
   async def save_history(self, user_id: str, session_id: str, history: List[History]):
@@ -54,9 +52,7 @@ class DbSession:
       upsert=True
     )
     
-    if result.matched_count > 0:
-      print(f"MongoDB: Updated history for user {user_id}, session {session_id}. Modified count: {result.modified_count}")
-    else:
+    if result.matched_count <= 0:
       print(f"MongoDB: No session found for user {user_id}, session {session_id} to update history.")
 
   async def save_shortlist(self, user_id: str, session_id: str, shortlist: List[ShortlistItem]):
@@ -68,7 +64,5 @@ class DbSession:
       upsert=False
     )
     
-    if result.matched_count > 0:
-      print(f"MongoDB: Updated history for user {user_id}, session {session_id}. Modified count: {result.modified_count}")
-    else:
+    if result.matched_count <= 0:
       print(f"MongoDB: No session found for user {user_id}, session {session_id} to update history.")

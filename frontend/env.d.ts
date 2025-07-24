@@ -6,4 +6,4 @@ interface Window {
   google: typeof google
 }
 
-VUE_APP_API_BASE_URL=http://localhost:8000
+VUE_APP_API_BASE_URL="http://localhost:8000";

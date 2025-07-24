@@ -1,4 +1,8 @@
 import { defineStore } from 'pinia';
+import { useUserSessionsStore } from './userSessions';
+import { useSessionStore } from './session';
+import { useShortlistStore } from './shortlist';
+import { useUserBehaviorStore } from './userBehavior';
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -20,6 +24,7 @@ export const useAuthStore = defineStore('auth', {
     clearToken() {
       this.token = null;
       this.tokenExpires = null;
+      this.clearStorage();
       localStorage.removeItem('auth');
     },
 
@@ -38,6 +43,22 @@ export const useAuthStore = defineStore('auth', {
       } catch {
         this.clearToken();
       }
+    },
+
+    clearStorage() {
+      const userSessions = useUserSessionsStore();
+      const useSession = useSessionStore();
+      const useShortlist = useShortlistStore();
+      const userBehavior = useUserBehaviorStore();
+
+      const allSessions = userSessions.sessions;
+      for (const session of allSessions) {
+        const session_id = session.session_id;
+        useSession.clearLocalStorage(session_id);
+        useShortlist.clearLocalStorage(session_id);
+        userBehavior.clearStorage(session_id);
+      }
+      userSessions.clearStorage();
     }
   },
   getters: {

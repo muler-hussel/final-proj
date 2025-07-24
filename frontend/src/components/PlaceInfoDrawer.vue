@@ -20,7 +20,7 @@
       
       <div v-for="(p, idx) in item.photos" :key="idx" class="carousel-image" >
         <img src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" class="carousel-image" />
-        <img v-if="p" :src="p" />
+        <!-- <img v-if="p" :src="p" /> -->
         <!-- <a-skeleton-image v-else /> -->
       </div>
     </a-carousel>
@@ -94,13 +94,14 @@
               </div>
           </template>
         </Carousel>
-        <div class="grid grid-cols-2 gap-x-2">
+        <div class="grid grid-cols-2 gap-x-2" v-if="item.type && item.type === 'attraction'">
           <div>
             <div class="flex flex-row gap-2">
               <LikeOutlined />
               <p class="font-bold text-lg">Pros</p>
             </div>
             <p v-if="item.info.pros" v-for="(p, idx) in item.info.pros" :key="idx" class="ml-5 p-1">{{ p }}</p>
+            <a-skeleton active v-else />
           </div>
           <div>
             <div class="flex flex-row gap-2">
@@ -108,6 +109,7 @@
               <p class="font-bold text-lg">Cons</p>
             </div>
             <p v-if="item.info.cons" v-for="(c, idx) in item.info.cons" :key="idx" class="ml-5 p-1">{{ c }}</p>
+            <a-skeleton active v-else />
           </div>
           
         </div>
@@ -126,9 +128,15 @@
           </a-popover>
         </div>
         
-        <p v-if="item.info?.advice_trip" v-html="renderedAdvice" class="leading-8 whitespace-normal text-gray-700"></p>
-        <div v-if="item.sub_items.length > 0" class="grid grid-cols-2 gap-4 items-stretch">
-          <SpotSelected v-for="(i, idx) in item.sub_items" :key="idx" :item="i"></SpotSelected>
+        <div v-if="item.type && item.type === 'attraction'">
+          <p v-if="item.info?.advice_trip" v-html="renderedAdvice" class="leading-8 whitespace-normal text-gray-700"></p>
+          <a-skeleton active v-else />
+        </div>
+        <div v-if="item.type && item.type === 'city'">
+          <div v-if="item.sub_items.length > 0" class="grid grid-cols-2 gap-4 items-stretch">
+            <SpotSelected v-for="(i, idx) in item.sub_items" :key="idx" :item="i"></SpotSelected>
+          </div>
+          <a-skeleton active v-else />
         </div>
       </div>
     </div>

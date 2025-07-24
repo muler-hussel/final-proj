@@ -1,6 +1,6 @@
 import redis
 from typing import Optional, List
-from app.models.session import SessionState, History, DailyItinerary
+from app.models.session import Message, SessionState, History, DailyItinerary
 from app.models.shortlist import ShortlistItem
 import asyncio
 from app.db.mongodb import get_database
@@ -44,6 +44,8 @@ class RedisService:
 
     key = self._get_session_metadata_key(user_id, session_id)
     data = self._redis_client.get(key)
+    if not data:
+      await self._get_session_from_db(user_id, session_id)
     if data:
       try:
         return SessionState.model_validate_json(data)
@@ -83,7 +85,27 @@ class RedisService:
 
     sessions.sort(key=lambda x: x["update_time"], reverse=True)
     return sessions
-    
+  
+  async def save_from_db(self, session_state: SessionState) -> bool:
+    if not self._redis_client:
+      return False
+
+    key = session_state.get_redis_key()
+    try:
+      json_data = session_state.model_dump_json()
+      history = session_state.history
+      shortlist = session_state.shortlist
+      for h in history:
+        self._redis_client.rpush(session_state.history_key, h.model_dump_json())
+      for s in shortlist:
+        self._redis_client.hset(session_state.shortlist_key, s.name, s.model_dump_json())
+
+      self._redis_client.set(key, json_data, ex=3600)
+      return True
+    except Exception as e:
+      print(f"Error saving session state for {session_state.user_id}/{session_state.session_id}: {e}")
+      return False
+
   async def save_session_state(self, session_state: SessionState) -> bool:
     if not self._redis_client:
       return False
@@ -102,12 +124,9 @@ class RedisService:
 
   async def update_session_title(self, user_id: str, session_id: str, new_title: str) -> Optional[SessionState]:
     session_state = await self.load_session_state(user_id, session_id)
-    if not session_state:
-      session_state = await self._get_session_from_db(user_id, session_id)
     if session_state:
       session_state.title = new_title
       await self.save_session_state(session_state)
-      asyncio.create_task(self._session_to_mongodb(session_state))
       return session_state
     return None
 
@@ -130,8 +149,6 @@ class RedisService:
   # Deal with metadata except from title and slot
   async def update_session_field(self, user_id: str, session_id: str, field_name: str, value: any) -> Optional[SessionState]:
     session_state = await self.load_session_state(user_id, session_id)
-    if not session_state:
-      session_state = await self._get_session_from_db(user_id, session_id)
     if session_state and hasattr(session_state, field_name):
       setattr(session_state, field_name, value)
       await self.save_session_state(session_state)
@@ -159,22 +176,20 @@ class RedisService:
       return []
     
     session_state = await self.load_session_state(user_id, session_id)
-    if not session_state:
-      session_state = await self._get_session_from_db(user_id, session_id)
-      history = session_state.history
-      shortlist = session_state.shortlist
-
-      await redis_service.save_session_state(session_state)
-      for h in history:
-        await redis_service.append_history(session_state, h)
-      for s in shortlist:
-        await redis_service.add_to_shortlist(session_state, s)
 
     if not session_state:
       return []
     
     history = self._redis_client.lrange(session_state.history_key, 0, -1)
     return [History(**json.loads(msg)) for msg in history]
+  
+  async def get_simplified_history(self, session_state: SessionState) -> str:
+    history = await self.get_history(session_state.user_id, session_state.session_id)
+    history_str = '\n'.join(
+      f"{h.role}: {self._format_message_content(h.message)}"
+      for h in history
+    )
+    return history_str
 
   async def update_itinerary(self, session_state: SessionState, itinerary: DailyItinerary, chat_idx: int):
     history = await redis_service.get_history(session_state.user_id, session_state.session_id)
@@ -214,35 +229,24 @@ class RedisService:
       return False
   
   # Deal with shortlist
-  async def add_to_shortlist(self, session_state: SessionState, item: ShortlistItem) -> Optional[SessionState]:
+  async def add_to_shortlist(self, session_state: SessionState, item: ShortlistItem) -> bool:
     if not self._redis_client:
       return False
     
     try:
       item_id = item.name
       self._redis_client.hset(session_state.shortlist_key, item_id, item.model_dump_json())
-      await self.save_session_state(session_state)
       asyncio.create_task(self._shortlist_to_mongodb(session_state))
       return True
     except Exception as e:
       print(f"Error adding to shortlist for {session_state.user_id}/{session_state.session_id}: {e}")
+      return False
 
   async def get_shortlist(self, user_id: str, session_id: str) -> List[ShortlistItem]:
     if not self._redis_client:
       return []
     
     session_state = await self.load_session_state(user_id, session_id)
-    if not session_state:
-      session_state = await self._get_session_from_db(user_id, session_id)
-      
-      history = session_state.history
-      shortlist = session_state.shortlist
-
-      await redis_service.save_session_state(session_state)
-      for h in history:
-        await redis_service.append_history(session_state, h.model_dump_json())
-      for s in shortlist:
-        await redis_service.add_to_shortlist(session_state, s.model_dump_json())
 
     if not session_state:
       return []
@@ -278,14 +282,14 @@ class RedisService:
 
   # helper functions
   async def _session_to_mongodb(self, session_state: SessionState):
-    db = await get_database()
+    db = get_database()
     try:
       await DbSession(db).save_session(session_state)
     except Exception as e:
       print(f"ERROR: Background save to MongoDB failed for {session_state.user_id}/{session_state.session_id}: {e}")
   
   async def _history_to_mongodb(self, session_state: SessionState):
-    db = await get_database()
+    db = get_database()
     user_id = session_state.user_id
     session_id = session_state.session_id
     history = await self.get_history(user_id, session_id)
@@ -296,7 +300,7 @@ class RedisService:
       print(f"ERROR: Background save to MongoDB failed for {session_state.user_id}/{session_state.session_id}: {e}")
 
   async def _shortlist_to_mongodb(self, session_state: SessionState):
-    db = await get_database()
+    db = get_database()
     user_id = session_state.user_id
     session_id = session_state.session_id
     shortlist = await self.get_shortlist(user_id, session_id)
@@ -307,15 +311,25 @@ class RedisService:
       print(f"ERROR: Background save to MongoDB failed for {session_state.user_id}/{session_state.session_id}: {e}")
 
   async def _get_session_from_db(self, user_id: str, session_id: str):
-    db = await get_database()
+    db = get_database()
     data = await DbSession(db).get_sesssion(user_id, session_id)
     if data:
-      await self.save_session_state(data)
+      await self.save_from_db(data)
     return data
   
   async def _delete_session_in_db(self, user_id: str, session_id: str):
-    db = await get_database()
+    db = get_database()
     await DbSession(db).delete_session(user_id, session_id)
   
+  def _format_message_content(self, message: Message) -> str:
+    parts = []
+    parts = [
+      message.content,
+      str(message.itinerary) if message.itinerary else None,
+      ','.join(r.name for r in message.recommendations) if getattr(message, 'recommendations', None) else None,
+      ','.join(p.name for p in message.populars) if getattr(message, 'populars', None) else None
+    ]
+    return ' '.join(filter(None, parts))
+
 # Ensure single instance
 redis_service = RedisService()

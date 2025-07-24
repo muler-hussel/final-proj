@@ -1,9 +1,11 @@
+import asyncio
 from pymongo import IndexModel
 from app.models.recommend import LongTermProfile
 
 class UserPreference:
   def __init__(self, db):
     self.collection = db["user_preferences"]
+    self._init_task = asyncio.create_task(self._create_indexes())
 
   async def _create_indexes(self):
     await self.collection.create_indexes([

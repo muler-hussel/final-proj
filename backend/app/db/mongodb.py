@@ -40,7 +40,7 @@ class MongoDB:
 
 mongodb = MongoDB()
 
-async def get_database():
+def get_database():
   if mongodb.db is None:
     raise RuntimeError("Database not connected. Call connect_to_mongo() first.")
   return mongodb.db

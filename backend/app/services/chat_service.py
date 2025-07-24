@@ -58,7 +58,7 @@ class ChatService:
       "user_input": user_input,
     })
     intent_set = set(classified_intent)
-    # logger.info(f"prompt: {user_input}, intentions: {classified_intent}")
+    # logger.info(f"intentions: {classified_intent}")
 
     # Dispatch different AI according to intent
     # If GENERAL_QUERY, AI is free to answer
@@ -71,7 +71,7 @@ class ChatService:
         intent_set.add("ITINERARY_GENERATION")
       else: intent_set.add("FINALIZE_TRIP")
 
-    db = await get_database()
+    db = get_database()
     recommend_service = RecommendService(db)
     # New preferences from behavior and input
     session_state = await recommend_service.update_short_term_profile(session_state, user_input)
@@ -83,8 +83,6 @@ class ChatService:
     if "ITINERARY_GENERATION" in intent_set:
       session_state.todo_step = 2
       result = await itinerary_service.create_itinerary(session_state, user_input)
-    if "FINALIZE_TRIP" in intent_set:
-      result = await self.get_ai_response(session_state, user_input, None, session_state.todo_step)
     return result, session_state
   
   async def get_ai_response(self, session_state: SessionState, user_input: str, first_prompt: Optional[str] = None, todo_prompt: Optional[str] = None):   
@@ -108,7 +106,7 @@ class ChatService:
       message=user_message_content
     )
     await redis_service.append_history(session_state, user_history_entry)
-    db = await get_database()
+    db = get_database()
     recommend_service = RecommendService(db)
     session_state = await recommend_service.update_short_term_profile(session_state, user_input)
     # logger.info(f"prompt: {prompt_data}, ai response: {response}")

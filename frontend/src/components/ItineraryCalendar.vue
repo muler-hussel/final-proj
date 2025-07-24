@@ -52,7 +52,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, type PropType, computed, watch, watchEffect } from 'vue';
+import { ref, onMounted, type PropType, computed, watch } from 'vue';
 import FullCalendar from '@fullcalendar/vue3';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -337,10 +337,13 @@ const calendarOptions = ref<CalendarOptions>({
       'bicycling': '🚲',
       'driving': '🚙',
     }[title.toLowerCase()] || '✈️';
+    // Make sure drag mirror rendered in type visit way
+    const isMirror = arg.isMirror
+    const type = arg.event.extendedProps?.type || (isMirror ? 'visit' : 'commute')
     
     return {
       html: `
-        ${arg.event.extendedProps.type === 'visit' ?
+        ${type === 'visit' ?
         `<div class="p-2 bg-indigo-100 border-l-4 border-indigo-400 rounded w-full h-full text-gray-500 flex flex-col gap-y-1">
           <div class="font-medium text-gray-700">${arg.event.title}</div>
           <div class="text-xs">
@@ -395,13 +398,13 @@ const initDraggable = () => {
   });
 };
 
-
 watch(discardPlaces, () => {
   initDraggable();
 }); 
 
 onMounted(() => {
   // Something wrong with onMounted, mount for 3 times. If initDraggable() here, 3 instances exsits every time.
+  // Due to parent components mount for several times.
   useItinerary.registerExtractFn(extractEventData);
   if (events.length > 0) {
     const firstEvent = events[0]
