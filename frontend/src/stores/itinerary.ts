@@ -36,11 +36,34 @@ export const useItineraryStore = defineStore('itinerary', {
             useSession.chatHistory[this.currentIndex].message.itinerary = newItinerary;
             const auth = useAuthStore();
             try {
+              await axios.post(`chat/${useSession.sessionId}/saveItinerary`, {user_id: auth.token, itinerary: newItinerary, chat_idx: this.currentIndex});
+              this.clearChange();
+              useSession.saveToLocalStorage();
+            } catch (error) {
+              console.error("Fail to save itinerary:", error);
+            }
+          }
+        }
+      }
+    },
+
+    async handleUpdate() {
+      if (this.currentIndex && this.extractFns) {
+        const useSession = useSessionStore();
+        const sessionId = useSession.sessionId;
+        if (!sessionId) return;
+        const extract = this.getExtractFn(sessionId);
+        if (extract) {
+          const newItinerary = extract();
+          if (useSession.chatHistory[this.currentIndex] && useSession.chatHistory[this.currentIndex].role === 'ai') {
+            useSession.chatHistory[this.currentIndex].message.itinerary = newItinerary;
+            const auth = useAuthStore();
+            try {
               await axios.post(`chat/${useSession.sessionId}/updateItinerary`, {user_id: auth.token, itinerary: newItinerary, chat_idx: this.currentIndex});
               this.clearChange();
               useSession.saveToLocalStorage();
             } catch (error) {
-              console.error("Fail to update itinerary:", error);
+              console.error("Fail to save itinerary:", error);
             }
           }
         }

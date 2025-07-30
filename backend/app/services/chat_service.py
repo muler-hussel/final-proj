@@ -10,8 +10,7 @@ from app.utils.prompts import (
 )
 from app.utils.logger import logger
 from app.services.redis_service import redis_service
-from app.services.recommend_service import RecommendService
-from app.db.mongodb import get_database
+from app.services.recommend_service import recommend_service
 from app.services.itinerary_service import itinerary_service
 
 class SlotDataExtractor(BaseModel):
@@ -53,36 +52,38 @@ class ChatService:
   
   # Processing prompt
   async def orchestrate_planning_step(self, session_state: SessionState, user_input: str) -> int:
-    # Intent recognition
-    classified_intent: List[str] = await self.intent_classifier_chain.ainvoke({
-      "user_input": user_input,
-    })
-    intent_set = set(classified_intent)
-    # logger.info(f"intentions: {classified_intent}")
-
-    # Dispatch different AI according to intent
-    # If GENERAL_QUERY, AI is free to answer
-    if "ADVANCE_STEP" in intent_set:
-      session_state.todo_step += 1
-      todoType = session_state.todo[session_state.todo_step]
-      if todoType == 'Recommend': 
-        intent_set.add("MORE_RECOMMENDATIONS")
-      elif todoType == 'Draft':
-        intent_set.add("ITINERARY_GENERATION")
-      else: intent_set.add("FINALIZE_TRIP")
-
-    db = get_database()
-    recommend_service = RecommendService(db)
-    # New preferences from behavior and input
-    session_state = await recommend_service.update_short_term_profile(session_state, user_input)
-    
-    if ("MORE_RECOMMENDATIONS" in intent_set) or ("MODIFY_PLAN" in intent_set):
-      # Prompt for recommend
-      session_state.todo_step = 1
+    if session_state.todo_step == -1:
       result = await recommend_service.recommend_places(session_state, user_input)
-    if "ITINERARY_GENERATION" in intent_set:
-      session_state.todo_step = 2
-      result = await itinerary_service.create_itinerary(session_state, user_input)
+      session_state.todo_step = 1
+    else:
+      # Intent recognition
+      classified_intent: List[str] = await self.intent_classifier_chain.ainvoke({
+        "user_input": user_input,
+      })
+      intent_set = set(classified_intent)
+      # logger.info(f"intentions: {classified_intent}")
+
+      # Dispatch different AI according to intent
+      # If GENERAL_QUERY, AI is free to answer
+      if "ADVANCE_STEP" in intent_set:
+        session_state.todo_step += 1
+        todoType = session_state.todo[session_state.todo_step]
+        if todoType == 'Recommend': 
+          intent_set.add("MORE_RECOMMENDATIONS")
+        elif todoType == 'Draft':
+          intent_set.add("ITINERARY_GENERATION")
+        else: intent_set.add("FINALIZE_TRIP")
+
+      # New preferences from behavior and input
+      session_state = await recommend_service.update_short_term_profile(session_state, user_input)
+      
+      if ("MORE_RECOMMENDATIONS" in intent_set) or ("MODIFY_PLAN" in intent_set):
+        # Prompt for recommend
+        session_state.todo_step = 1
+        result = await recommend_service.recommend_places(session_state, user_input)
+      if "ITINERARY_GENERATION" in intent_set:
+        session_state.todo_step = 2
+        result = await itinerary_service.create_itinerary(session_state, user_input)
     return result, session_state
   
   async def get_ai_response(self, session_state: SessionState, user_input: str, first_prompt: Optional[str] = None, todo_prompt: Optional[str] = None):   
@@ -106,8 +107,6 @@ class ChatService:
       message=user_message_content
     )
     await redis_service.append_history(session_state, user_history_entry)
-    db = get_database()
-    recommend_service = RecommendService(db)
     session_state = await recommend_service.update_short_term_profile(session_state, user_input)
     # logger.info(f"prompt: {prompt_data}, ai response: {response}")
     return {"content": response}, session_state

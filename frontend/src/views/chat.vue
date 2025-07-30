@@ -32,9 +32,9 @@
           />
         </div>
       
-        <div class="flex mr-3 px-3 py-1 bg-[#9370DB] gap-3 rounded-lg hover:cursor-pointer" @click="drawer.showPreference()">
+        <!-- <div class="flex mr-3 px-3 py-1 bg-[#9370DB] gap-3 rounded-lg hover:cursor-pointer" @click="drawer.showPreference()">
           <p class="text-sm text-white">Your Preference</p>
-        </div>
+        </div> -->
         
       </div>
       <!-- scroll -->
@@ -74,7 +74,7 @@
     </div>
   </div>
 
-  <PreferenceDrawer></PreferenceDrawer>
+  <!-- <PreferenceDrawer></PreferenceDrawer> -->
   <ShortlistDrawer></ShortlistDrawer>
   <SpaceInfoDrawer></SpaceInfoDrawer>
 </template>
@@ -240,6 +240,8 @@ export default defineComponent({
         isEasyPlan.value = firstPromptStore.firstPromptData.isEasyPlan;
         await fetchNewSession();
         if (isEasyPlan.value) {
+          const input = "Create itinerary:" + firstPrompt.value;
+          await fetchAiRes(input)
         } else {
           await fetchAiRes(firstPrompt.value);
           userBehavior.startTracking();

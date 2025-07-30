@@ -19,8 +19,8 @@
         <div class="flex justify-end mt-3 gap-x-5 items-center">
           <a-popover>
             <template #content>
-              <p>Skips all clarification questions.</p>
-              <p>Create your trip with any infomation.</p>
+              <p>Skips all recommendations.</p>
+              <p>Create your trip directly with your request.</p>
             </template>
             <a-switch v-model:checked="easyPlan" size="small" />
             <span class="text-sm text-gray-500 ml-2">Easy Plan</span>

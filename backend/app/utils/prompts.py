@@ -121,6 +121,7 @@ RECOMMEND_POPULAR_PLACES_PROMPT = ChatPromptTemplate([
   ("system", """You are a highly skilled travel recommendation AI. 
    Your goal is to identify if there are areas containing several travel destinations in `user_input` and `history`.
    If there are such areas, suggest **six new most popular travel destinations** belonging to these areas while strictly avoiding any places already listed in `recommended_places`.
+   **Do NOT consider user's preference**
    If there are not, do NOT recommend any destinations.
 
   **Output Format:**
@@ -135,7 +136,7 @@ RECOMMEND_POPULAR_PLACES_PROMPT = ChatPromptTemplate([
   ("human", "User input: {user_input}\nChat history: {history}\nAlready recommended places: {recommended_places}\n\n")
 ])
 
-CREATE_ITINERARY_PROMPT = ChatPromptTemplate([
+CREATE_ITINERARY_TOOL_PROMPT = ChatPromptTemplate([
   ("system", """You are a highly skilled travel planning AI. Your goal is to generate an itinerary with places user chose.
 
   1.  **User Input (`user_input`):** In addition to the instructions for generating the itinerary, there may be other information in the `user_input`, you must answer to this information.
@@ -157,6 +158,32 @@ CREATE_ITINERARY_PROMPT = ChatPromptTemplate([
         * `start_time`: Start time of this event, "HH:MM" (24h format).
         * `end_time`: End time of this event, "HH:MM" (24h format).
         * `commute_mode` (only for commute): If `type` is commute, this string is the selected mode of transportation (e.g., walking, driving, bicycling, transit). If not remain null.
+  ```
+  """),
+  ("human", "User input: {user_input}\n history: {history} \nShortlist places: {place_names}\n\n")
+])
+
+CREATE_ITINERARY_PROMPT = ChatPromptTemplate([
+  ("system", """You are a highly skilled travel planning AI. Your goal is to generate an itinerary with places user chose.
+
+  1.  **User Input (`user_input`):** In addition to the instructions for generating the itinerary, there may be other information in the `user_input`, you must answer to this information.
+  2.  **Current Session Context (`history`):** You must understand what kind of itinerary the user wants based on `history`(e.g. a 4-day trip, an in-depth tour).
+  3.  **Places user chose (`place_names`):** (May be empty)
+      * If available, `place_names` contains the names of the places and their opening hours, you must arrange itinerary based on opening hours.
+      * If not available, you should suggest several popular places and generate the itinerary according to `user_input` and `history`.
+  4.  **You must also suggest a reasonable transportation method (e.g., WALK, TRANSIT, BICYCLE, DRIVE) between places considering user is on a trip, calculate commute time based on place names and commute mode, and show in your itinerary.**
+  5.  **You Must arrange itinerary based on the possible duration of user's visit to each place, and the possible time for user having meals.
+  
+  **Output Format:**
+  Always return a JSON object with two keys:
+    1.  `content`: A string containing an introductory remark, a summary of your work, or direct answers to any additional questions posed in `user_input` (e.g., "To visit France, you'll generally need a Schengen visa if you're not from a visa-exempt country. Here are some places you might enjoy:"). This should be natural conversational text.
+    2.  `itinerary`: A JSON array including a list of objects, each object represents an event with six keys:
+        * `date`: An Integer representing the day of the trip, starting from 1.
+        * `type`: This string can be commute or visit. If this event is about the travel time between spots, `type` should be commute. If not, `type` should be visit.
+        * `place_name`: If `type` is visit, this string is the name of the place will be visited in this event. If not, remain null.
+        * `start_time`: Start time of this event, "HH:MM" (24h format).
+        * `end_time`: End time of this event, "HH:MM" (24h format).
+        * `commute_mode` (only for commute): If `type` is commute, this string is the selected mode of transportation (e.g., WALK, TRANSIT, BICYCLE, DRIVE). If not remain null.
   ```
   """),
   ("human", "User input: {user_input}\n history: {history} \nShortlist places: {place_names}\n\n")

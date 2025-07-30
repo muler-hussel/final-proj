@@ -81,10 +81,6 @@ export default defineComponent({
     };
 
     const handleRemoveShortlist = async () => {
-      const proxyItem = displayItem.value;
-      const item = toRaw(proxyItem);
-      const res = await axios.post("/recommend/enrich", {place_name: item.name});
-      shortlistStore.addToShortlist(res.data);
       shortlistStore.removeFromShortlist(displayItem.value.name);
       userBehaviorStore.recordAction('unshortlist', displayItem.value.name);
     }

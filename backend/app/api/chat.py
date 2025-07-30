@@ -2,6 +2,7 @@ from pydantic import BaseModel
 from fastapi import APIRouter, HTTPException, Path, Body
 from app.services.redis_service import redis_service
 from app.services.chat_service import chat_service
+from app.services.itinerary_service import itinerary_service
 from app.models.session import SessionState, Message, History, DailyItinerary
 import uuid
 from typing import Dict, Any, Optional
@@ -95,19 +96,19 @@ async def chat_with_ai(session_id: str = Path(...), data: ChatRequest = Body(...
   # update session history with user prompts
   await redis_service.append_history(session_state, user_history_entry)
 
-  todo_step = session_state.todo_step
-  first_prompt = None
-  ai_response_text = None
-  # first prompt
-  if todo_step == -1:
-    first_prompt = PROMPT_FIRST_INPUT
-    todo_step += 1
-    session_state.todo_step = todo_step
-    ai_response_text, session_state = await chat_service.get_ai_response(
-      session_state, user_input, first_prompt, session_state.todo[todo_step+1]
-    )
-  else:
-    ai_response_text, session_state = await chat_service.orchestrate_planning_step(session_state, user_input)
+  # todo_step = session_state.todo_step
+  # first_prompt = None
+  # ai_response_text = None
+  # # first prompt
+  # if todo_step == -1:
+  #   first_prompt = PROMPT_FIRST_INPUT
+  #   todo_step += 1
+  #   session_state.todo_step = todo_step
+  #   ai_response_text, session_state = await chat_service.get_ai_response(
+  #     session_state, user_input, first_prompt, session_state.todo[todo_step+1]
+  #   )
+  # else:
+  ai_response_text, session_state = await chat_service.orchestrate_planning_step(session_state, user_input)
   
   await redis_service.save_session_state(session_state)
   response = {
@@ -130,7 +131,7 @@ async def save_title(session_id: str = Path(...), data: ChatRequest = Body(...))
   return
 
 # Save changed itinerary
-@router.post("/{session_id}/updateItinerary")
+@router.post("/{session_id}/saveItinerary")
 async def save_itinerary(session_id: str = Path(...), data: ChatRequest = Body(...)):
   user_id = data.user_id
   itinerary = data.itinerary
@@ -144,8 +145,28 @@ async def save_itinerary(session_id: str = Path(...), data: ChatRequest = Body(.
   if not session_state:
     raise HTTPException(status_code=404, detail="Session not found or expired. Please start a new session.")
 
-  await redis_service.update_itinerary(session_state, itinerary, chat_idx)
+  await redis_service.save_itinerary(session_state, itinerary, chat_idx)
   return
+
+# Update routes when itinerary changes
+@router.post("/{session_id}/updateItinerary")
+async def update_itinerary(session_id: str = Path(...), data: ChatRequest = Body(...)):
+  user_id = data.user_id
+  itinerary = data.itinerary
+  chat_idx = data.chat_idx
+
+  if not (itinerary and chat_idx):
+    raise HTTPException(status_code=404, detail="No itinerary provided.")
+  
+  session_state = await redis_service.load_session_state(user_id, session_id)
+
+  if not session_state:
+    raise HTTPException(status_code=404, detail="Session not found or expired. Please start a new session.")
+
+  new_itinerary = await itinerary_service.update_itinerary_time(itinerary)
+  await redis_service.save_itinerary(session_state, new_itinerary, chat_idx)
+
+  return new_itinerary
 
 # Delete session
 @router.post("/{session_id}/delete")
@@ -156,5 +177,5 @@ async def delete_session(session_id: str = Path(...), data: ChatRequest = Body(.
   if session_state:
     await redis_service.delete_session(session_state)
   if not session_state:
-    db = get_database()
+    db = await get_database()
     await DbSession(db).delete_session(user_id, session_id)

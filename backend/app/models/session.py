@@ -5,6 +5,16 @@ from app.models.recommend import ShortTermProfile, UserBehavior
 from app.models.shortlist import ShortlistItem
 from datetime import datetime
 
+class RouteStep(BaseModel):
+  step_mode: str
+  step_duration: str
+  departure_stop: Optional[str] = None
+  departure_time: Optional[str] = None
+  arrival_stop: Optional[str] = None
+  arrival_time: Optional[str] = None
+  transit_name: Optional[str] = None
+  color: Optional[str] = None
+
 class Extend(BaseModel):
   openingHours: List[str]
   type: str
@@ -21,6 +31,7 @@ class DailyItinerary(BaseModel):
   start_time: str
   end_time: str
   commute_mode: Optional[str] = None
+  route_steps: Optional[List[RouteStep]] = None
   discarded_places: Optional[List[DiscardPlace]] = []
 
 class Message(BaseModel):

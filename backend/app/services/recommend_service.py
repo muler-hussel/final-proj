@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from typing import List, Any, Optional
-from app.db.mongodb import MongoDB, get_database
+from app.db.mongodb import get_database
 from app.models.user_preference import UserPreference
 from app.models.place_info import PlaceInfo
 from app.models.recommend import LongTermProfile, TagWeight, UserBehavior
@@ -54,11 +54,7 @@ ADMINISTRATIVE_TYPES = {
 }
 
 class RecommendService:
-  def __init__(self, mongodb: MongoDB):
-    self.db = get_database()
-    self.user_preference = UserPreference(self.db)
-    self.place_info = PlaceInfo(self.db)
-
+  def __init__(self):
     load_dotenv()
     self.key = os.getenv("GOOGLE_API")
     self.gmaps = googlemaps.Client(key=self.key)
@@ -98,20 +94,25 @@ class RecommendService:
     self.init_weight = 0.8
 
   async def get_long_preferences(self, user_id: str):
-    return await self.user_preference.get_preference(user_id)
+    db = get_database()
+    user_preference = UserPreference(db)
+    return await user_preference.get_preference(user_id)
 
   async def save_long_preferences(self, profile: LongTermProfile):
-    await self.user_preference.save_preference(profile)
+    db = get_database()
+    user_preference = UserPreference(db)
+    await user_preference.save_preference(profile)
 
   async def clear_long_preferences(self, user_id: str):
-    await self.user_preference.delete_preference(user_id)
+    db = get_database()
+    user_preference = UserPreference(db)
+    await user_preference.delete_preference(user_id)
 
   async def update_short_term_profile(self, session_state: SessionState, user_input: str) -> SessionState:
     user_behavior = session_state.current_user_behavior
     place_names = None
     short_term_profile = session_state.short_term_profile
     long_term_profile = await self.get_long_preferences(session_state.user_id)
-
     # Update shortlist
     if (user_behavior != None): 
       place_names = []
@@ -167,14 +168,20 @@ class RecommendService:
         short_term_profile.preferences[style] = TagWeight(tag=style, weight=(cur_weight + self.init_weight) / 2)
       else:
         short_term_profile.preferences[style] = TagWeight(tag=style, weight=self.init_weight)
-    await redis_service.save_session_state(session_state)
+    
+    shortlist = await redis_service.get_shortlist(session_state.user_id, session_state.session_id)
+    session_state = await redis_service.update_session_field(session_state.user_id, session_state.session_id, "shortlist", shortlist)
     return session_state
   
   async def get_place_info(self, place_name: str) -> ShortlistItem | None:
-    return await self.place_info.get_place(place_name)
+    db = get_database()
+    place_info = PlaceInfo(db)
+    return await place_info.get_place(place_name)
   
   async def save_place_info(self, placeInfo: ShortlistItem):
-    return await self.place_info.save_place(placeInfo)
+    db = get_database()
+    place_info = PlaceInfo(db)
+    return await place_info.save_place(placeInfo)
   
   async def recommend_places(self, session_state: SessionState, user_input: str):
     user_id = session_state.user_id
@@ -244,15 +251,16 @@ class RecommendService:
         place_id = places[0].get('place_id')
         official_name = places[0].get('name')
         place_info = await self.get_place_info(official_name)
-        if place_info:
-          return place_info
-        result = self.gmaps.place(place_id, ESSENTIAL_FIELDS).get("result")
-        place_info = self.google_to_shortlist(result, description, recommend_reason)
-        # Save in Redis and MongoDB
-        await redis_service.save_place_info(place_info.name, place_info)
-        await self.save_place_info(place_info)
-        asyncio.create_task(self.enrich_place_detail(place_info.name))
-      # place_info = ShortlistItem(name=place_name, description=description)
+        if not place_info:
+          result = self.gmaps.place(place_id, ESSENTIAL_FIELDS).get("result")
+          place_info = self.google_to_shortlist(result, description, recommend_reason)
+        
+    place_info.description = description
+    place_info.info.recommend_reason = recommend_reason
+    # Save in Redis and MongoDB
+    await redis_service.save_place_info(place_info.name, place_info)
+    await self.save_place_info(place_info)
+    asyncio.create_task(self.enrich_place_detail(place_info.name))
     
     return place_info
 
@@ -319,11 +327,14 @@ class RecommendService:
       return
     try:
       redis_service.set(lock_key, "1", ex=300)
+      print(place_name)
       place = await redis_service.get_place_info(place_name)
 
       if not place:
+        print(1)
         place = await self.get_place_info(place_name)
       if not place:
+        print(2)
         place = await self.get_or_fetch_place_brief(place_name, None, None)
       
       if not place:
@@ -357,3 +368,5 @@ class RecommendService:
 
     finally:
       redis_service.delete(lock_key)
+
+recommend_service = RecommendService()

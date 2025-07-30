@@ -191,7 +191,8 @@ class RedisService:
     )
     return history_str
 
-  async def update_itinerary(self, session_state: SessionState, itinerary: DailyItinerary, chat_idx: int):
+  # Handle with itinerary
+  async def save_itinerary(self, session_state: SessionState, itinerary: DailyItinerary, chat_idx: int):
     history = await redis_service.get_history(session_state.user_id, session_state.session_id)
     if (chat_idx >= len(history)) or (history[chat_idx].role != 'ai') :
       print("Trying to modify a wrong message")
@@ -203,6 +204,7 @@ class RedisService:
     asyncio.create_task(self._history_to_mongodb(session_state))
     return True
 
+  # Deal with place infomation
   async def get_place_info(self, place_name: str) -> ShortlistItem:
     if not self._redis_client:
       return None
@@ -236,7 +238,6 @@ class RedisService:
     try:
       item_id = item.name
       self._redis_client.hset(session_state.shortlist_key, item_id, item.model_dump_json())
-      asyncio.create_task(self._shortlist_to_mongodb(session_state))
       return True
     except Exception as e:
       print(f"Error adding to shortlist for {session_state.user_id}/{session_state.session_id}: {e}")
@@ -264,7 +265,6 @@ class RedisService:
     
     try:
       self._redis_client.hdel(session_state.shortlist_key, item_id)
-      asyncio.create_task(self._shortlist_to_mongodb(session_state))
       return True
     except Exception as e:
       print(f"Error removing from shortlist for {session_state.user_id}/{session_state.session_id}: {e}")

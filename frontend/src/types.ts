@@ -53,6 +53,17 @@ export interface ShortlistItem {
   photos: string[];
 }
 
+export interface RouteStep {
+  step_mode: string;
+  step_duration: string;
+  departure_stop: string | null;
+  departure_time: string | null;
+  arrival_stop: string | null;
+  arrival_time: string | null;
+  transit_name: string | null;
+  color: string | null;
+}
+
 export interface DailyItinerary {
   date: number;
   type: string;
@@ -60,7 +71,8 @@ export interface DailyItinerary {
   start_time: string;
   end_time: string;
   commute_mode: string | null;
-  discarded_places: DiscardPlace[]
+  route_steps: RouteStep[] | null;
+  discarded_places: DiscardPlace[];
 }
 
 export interface ChatMessage {

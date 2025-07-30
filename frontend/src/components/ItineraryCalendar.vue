@@ -31,9 +31,16 @@
             {{ place.name }}
           </div>
         </div>
+        <!-- Buttons -->
         <div class="mt-auto px-4 py-3 sm:px-6 flex justify-end rounded-b-lg gap-3">
           <a-button @click="onCancel">Cancel</a-button>
           <a-button @click="saveItinerary" type="primary">Save</a-button>
+          <!-- <a-tooltip :arrow="false" color="white">
+            <template #title>
+              <div class="text-black">Update travelling time</div>
+            </template>
+            <a-button @click="updateItinerary" type="primary">Update</a-button>
+          </a-tooltip> -->
         </div>
       </div>
     </div>
@@ -52,7 +59,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, type PropType, computed, watch } from 'vue';
+import { ref, onMounted, type PropType, computed, watch, toRaw } from 'vue';
 import FullCalendar from '@fullcalendar/vue3';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -61,7 +68,7 @@ import { type CalendarOptions, type EventApi, type EventClickArg, type EventCont
 import { useShortlistStore } from '@/stores/shortlist.ts';
 import SpotSelected from '@/components/SpotSelected.vue';
 import { storeToRefs } from 'pinia';
-import type { DailyItinerary, ShortlistItem, DiscardPlace } from '@/types';
+import type { DailyItinerary, ShortlistItem, DiscardPlace, RouteStep } from '@/types';
 import dayjs from 'dayjs';
 import { useItineraryStore } from '@/stores/itinerary';
 
@@ -94,7 +101,11 @@ const saveItinerary = async () => {
   await useItinerary.handleSave();
 }
 
-const onCancel = async () => {
+const updateItinerary = async () => {
+  await useItinerary.handleUpdate();
+}
+
+const onCancel = () => {
   if (useItinerary.ifChanged()) {
     const confirmLeave = window.confirm("Changes you made may not be saved. Do you want to leave this page?");
     if (confirmLeave) {
@@ -102,8 +113,9 @@ const onCancel = async () => {
     } else {
       useItinerary.itineraryOpen = true;
     }
+  } else {
+    useItinerary.clearChange();
   }
-  useItinerary.clearChange();
 }
 
 // Convert DailyItinerary into EventInput
@@ -118,7 +130,7 @@ const convertToEventInput = (itineraries: DailyItinerary[]): EventInput[] => {
     startTime.setHours(startHours, startMinutes, 0, 0);
     const endTime = new Date(targetDate);
     endTime.setHours(endHours, endMinutes, 0, 0);
-    
+
     let title = undefined;
     let place_info = null;
     if (item.place_name) {
@@ -126,7 +138,7 @@ const convertToEventInput = (itineraries: DailyItinerary[]): EventInput[] => {
       place_info = items.value.get(title);
     }
     const eventTitle = title ? title : item.commute_mode;
-
+    
     return {
       id: `event-${index}`,
       title: eventTitle ?? undefined,
@@ -135,6 +147,7 @@ const convertToEventInput = (itineraries: DailyItinerary[]): EventInput[] => {
       extendedProps: {
         openingHours: place_info?.info?.weekday_text,
         type: item.type,
+        routeSteps: toRaw(item.route_steps),
       }
     };
   });
@@ -152,6 +165,7 @@ const extractEventData = () => {
     const start = dayjs(event.start);
     const end = dayjs(event.end);
     const type = event.extendedProps.type;
+    const route_steps = toRaw(event.extendedProps.routeSteps);
 
     return {
       date: start.diff(baseDate, 'day') + 1,
@@ -160,6 +174,7 @@ const extractEventData = () => {
       start_time: start.format('HH:mm'),
       end_time: end.format('HH:mm'),
       commute_mode: type === 'commute' ? event.title : null,
+      route_steps: route_steps,
       discarded_places: Array.from(discardPlaces.value),
     } satisfies DailyItinerary;
   });
@@ -187,7 +202,6 @@ const setOperations = {
 
 // Calendar receive from discardPlaces
 const handleEventReceive = (info: EventReceiveArg) => {
-  console.log(info)
   if (!info.draggedEl.dataset.transfer) return;
   const place = JSON.parse(info.draggedEl.dataset.transfer);
   info.event.setProp('title', place.name);
@@ -301,7 +315,7 @@ const calendarOptions = ref<CalendarOptions>({
     right: 'next'
   },
   allDaySlot: false,
-  slotMinTime: '00:00',
+  slotMinTime: '07:00',
   slotMaxTime: '24:00',
   height: 'auto',
   editable: true,
@@ -310,10 +324,12 @@ const calendarOptions = ref<CalendarOptions>({
     hour12: false
   },
   eventResizableFromStart: true,
-  snapDuration: '00:10:00',
+  snapDuration: '00:05:00',
+  slotDuration: '00:20:00',  // If slotDuration is large, while the event time is short, event will move downward instead of being smaller, and overlap with the following event
   validRange: { start: new Date() },
   droppable: true,
   eventStartEditable: true,
+  slotEventOverlap: false,
 
   // Header: Day 1, Day 2, Day 3
   views: {
@@ -328,45 +344,88 @@ const calendarOptions = ref<CalendarOptions>({
 
   // Render events
   eventContent: (arg: EventContentArg) => {
-    const openingHours = arg.event.extendedProps.openingHours || [];
-    const hasOpeningHours = openingHours.length > 0;
-    const title = arg.event.title;
-    const icon = {
-      'walking': '👣',
-      'transit': '🚌',
-      'bicycling': '🚲',
-      'driving': '🚙',
-    }[title.toLowerCase()] || '✈️';
-    // Make sure drag mirror rendered in type visit way
-    const isMirror = arg.isMirror
-    const type = arg.event.extendedProps?.type || (isMirror ? 'visit' : 'commute')
-    
-    return {
-      html: `
-        ${type === 'visit' ?
-        `<div class="p-2 bg-indigo-100 border-l-4 border-indigo-400 rounded w-full h-full text-gray-500 flex flex-col gap-y-1">
-          <div class="font-medium text-gray-700">${arg.event.title}</div>
-          <div class="text-xs">
-            ${arg.timeText}
-            ${hasOpeningHours ? `
-            <span class="icon-tooltip ml-1">🛈
-              <span class="tooltip-text">
-                ${openingHours.map((hours: any) => `
-                  <div>${hours}</div>
-                `).join('')}
-              </span>
+    const event = arg.event;
+    const extendedProps = event.extendedProps || {};
+    const type = extendedProps.type || 'visit';
+    const title = event.title;
+    const timeText = arg.timeText;
+
+    if (type === 'visit') {
+      const openingHours = extendedProps.openingHours || [];
+      const hoursTooltip = openingHours.length > 0 ? `
+        <div class="opening-hours-tooltip">
+          <span class="icon-tooltip ml-1">🛈
+            <span class="tooltip-text">
+              ${openingHours.map((hours: any) => `<div>${hours}</div>`).join('')}
             </span>
-          ` : ''}
+          </span>
+        </div>
+      ` : '';
+
+      return {
+        html: `
+          <div class="p-2 bg-indigo-100 border-l-4 border-indigo-400 rounded w-full h-full text-gray-500 flex flex-col gap-y-1">
+            <div class="font-medium text-gray-700">${title}</div>
+            <div class="text-xs flex">
+              ${timeText}
+              ${hoursTooltip}
+            </div>
           </div>
-        </div>` : 
-        `<div class="m-auto bg-amber-100/50 rounded w-1/2 h-full border-dashed border-amber-200 border-1 text-gray-500 flex flex-row gap-x-1 items-center">
-          <div>${icon}</div> 
-          <div class="text-xs">
-            ${arg.timeText}
+        `
+      };
+    }
+    else {
+      const routeSteps = toRaw(extendedProps.routeSteps) || [];
+      const iconMap = {
+        walk: '👣',
+        transit: '🚌',
+        bicycle: '🚲',
+        drive: '🚙'
+      } as const;
+      type TransportMode = keyof typeof iconMap;
+      const icon = iconMap[title.toLowerCase() as TransportMode] || '✈️';
+
+      const stepsTimeline = routeSteps.length > 0 ? `
+        <span class="icon-tooltip ml-1">🛈
+          <span class="tooltip-text">
+            ${routeSteps.map((step: RouteStep) => `
+              <div class="timeline-line"></div>
+              <div class="step-item">
+                <div class="step-header">
+                  <span class="step-icon">${iconMap[step.step_mode?.toLowerCase() as TransportMode] || '✈️'}</span>
+                  ${step.transit_name || step.step_mode}
+                </div>
+                ${step.departure_time ? `
+                  <div class="step-detail">
+                    <div class="stop-time-row">
+                      <span class="stop">${step.departure_stop}</span>
+                      <span class="time">${step.departure_time}</span>
+                    </div>
+                    <div class="duration">${step.step_duration}</div>
+                    <div class="stop-time-row">
+                      <span class="stop">${step.arrival_stop}</span>
+                      <span class="time">${step.arrival_time}</span>
+                    </div>
+                  </div>
+                ` : `
+                  <div class="step-detail duration">${step.step_duration}</div>
+                `}
+              </div>
+            `).join('')}
+          </span>
+        </span>
+      ` : '';
+
+      return {
+        html: `
+          <div class="text-xs m-auto bg-amber-100/50 rounded h-full border-dashed border-amber-200 border-1 text-gray-500 flex flex-row gap-x-1 items-center">
+            ${icon}
+            ${timeText}
+            ${stepsTimeline}
           </div>
-        </div>`}
-      `
-    };
+        `
+      };
+    }
   },
 
   eventReceive: (info) => {handleEventReceive(info)},
@@ -485,31 +544,62 @@ onMounted(() => {
 
 .icon-tooltip {
   position: relative;
+  display: inline-block;
   cursor: pointer;
 }
 
 .tooltip-text {
   visibility: hidden;
-  width: 205px;
-  background: #ffffff;
-  color: #828282;
-  text-align: start;
+  width: max-content;
+  background-color: white;
+  color: #333;
+  text-align: left;
   border-radius: 4px;
-  border-width: 1px;
-  border-color: #a8a7a7;
-  padding: 4px;
+  padding: 8px;
   position: absolute;
-  z-index: 100;
+  z-index: 99999;
   bottom: 125%;
   left: 50%;
   transform: translateX(-50%);
-  opacity: 0;
-  transition: opacity 0.3s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  line-height: 1.5rem;
 }
 
 .icon-tooltip:hover .tooltip-text {
   visibility: visible;
-  opacity: 1;
 }
 
+.step-item {
+  margin: 6px 0;
+  padding: 4px;
+  border-bottom: 1px dashed #eee;
+}
+
+.step-header {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.step-icon {
+  font-size: 1.2em;
+}
+
+.duration {
+  color: #666;
+  font-size: 0.9em;
+  margin: 2px 0;
+}
+
+.step-detail {
+  text-indent: 2em;
+}
+
+.stop-time-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+}
 </style>

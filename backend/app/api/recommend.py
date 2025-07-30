@@ -3,10 +3,8 @@ from app.services.redis_service import redis_service
 from app.models.recommend import UserBehavior
 from pydantic import BaseModel
 from typing import List
-from app.db.mongodb import get_database
-from app.models.db_session import DbSession
 from app.models.shortlist import ShortlistItem
-from app.services.recommend_service import RecommendService
+from app.services.recommend_service import recommend_service
 
 class BehaviorTrack(BaseModel):
   userId:str
@@ -36,7 +34,6 @@ async def save_user_behavior(data: BehaviorTrack = Body(...)):
 async def get_place_detail(req: PlaceReq = Body(...)) -> ShortlistItem:
   place_name = req.place_name
   
-  db = get_database()
-  place = await RecommendService(db).enrich_place_detail(place_name)
+  place = await recommend_service.enrich_place_detail(place_name)
 
   return place

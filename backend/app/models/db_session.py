@@ -61,7 +61,7 @@ class DbSession:
     result = await self.collection.update_one(
       {"user_id": user_id, "session_id": session_id},
       {"$set": {"shortlist": shortlist_dicts}}, 
-      upsert=False
+      upsert=True
     )
     
     if result.matched_count <= 0:
