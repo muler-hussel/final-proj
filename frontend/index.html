@@ -5,6 +5,24 @@
     <link rel="icon" href="/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vite App</title>
+    <script>
+      (g => {
+        var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window;
+        b = b[c] || (b[c] = {});
+        const apiKey = "%VITE_GOOGLE_API%";
+        var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => {
+          await (a = m.createElement("script"));
+          e.set("key", apiKey);
+          e.set("v", "weekly");
+          e.set("callback", c + ".maps." + q);
+          a.src = "https://maps.googleapis.com/maps/api/js?" + e;
+          d[q] = f;
+          a.onerror = () => h = n(Error(p + " could not load."));
+          m.head.appendChild(a);
+        }));
+        d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n));
+      })({});
+    </script>
   </head>
   <body>
     <div id="app"></div>

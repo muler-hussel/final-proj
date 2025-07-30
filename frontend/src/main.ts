@@ -16,6 +16,7 @@ axios.defaults.baseURL = import.meta.env.VITE_SERVER
 app.use(Antd).use(PrimeVue).use(router).use(pinia).mount('#app')
 
 const icons = Icons;
+type iconKey = keyof typeof icons
 for (const i in icons) {
-    app.component(i, icons[i]);
+    app.component(i as iconKey, icons[i as iconKey]);
 }

@@ -30,10 +30,10 @@ export default defineComponent({
   setup() {
     const drawer = useDrawerStore();
     const shortlistStore = useShortlistStore();
-    const items = computed(() => Array.from(shortlistStore.items.values()))
-    let map: google.maps.Map | null = null
-    let markers: google.maps.marker.AdvancedMarkerElement[] = []
-    const spotRefs = new Map<string, HTMLElement>()
+    const items = computed(() => Array.from(shortlistStore.items.values()));
+    let map: google.maps.Map | null = null;
+    let markers: google.maps.marker.AdvancedMarkerElement[] = [];
+    const spotRefs = new Map<string, HTMLElement>();
 
     const markerElement = document.createElement("div");
     markerElement.innerHTML = `
@@ -58,48 +58,78 @@ export default defineComponent({
       });
       markers = [];
     }
-
+    
     const loadMapAPI = async() => {
       return new Promise((resolve, reject) => {
-        const script = document.createElement('script');
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${import.meta.env.VITE_GOOGLE_API}&libraries=marker&loading=async`;
-        script.onload = resolve;
-        script.onerror = () => {
-          reject(new Error('Failed to load Google Maps'));
+        const p = "The Google Maps JavaScript API";
+        const c = "google";
+        const l = "importLibrary";
+        const q = "__ib__";
+        const m = document;
+        const b: any = window;
+        const d = (b[c] = b[c] || {});
+        const maps = (d.maps = d.maps || {});
+        const r = new Set<string>();
+        const e = new URLSearchParams();
+
+        if (maps[l]) {
+          console.warn(p + " only loads once. Ignoring:");
+          return;
+        }
+
+        const u = () =>
+          maps[q] ||
+          (maps[q] = new Promise(async (f, n) => {
+            const a = m.createElement("script");
+            r.add("maps,marker");
+            e.set("libraries", [...r].join(","));
+            e.set("key", import.meta.env.VITE_GOOGLE_API);
+            e.set("v", "3.53");
+            e.set("callback", `${c}.maps.${q}`);
+            a.src = `https://maps.${c}apis.com/maps/api/js?` + e;
+            a.onerror = () => (maps[q] = n(Error(p + " could not load.")));
+            a.nonce = (m.querySelector("script[nonce]") as HTMLScriptElement | null)?.nonce || "";
+            m.head.appendChild(a);
+            b[c].maps[q] = f;
+          }));
+
+        d[l] = (f: string, ...n: any[]) => {
+          r.add(f);
+          return u().then(() => d[l](f, ...n));
         };
-        document.head.appendChild(script);
+
+        resolve(d);
       });
     }
 
     const initMap = async() => {
       try {
-        if (!window.google?.maps?.Map) await loadMapAPI();
+        if (!window.google.maps.importLibrary) {
+          throw new Error("google.maps.importLibrary is not available.");
+        }
+        const { Map } = await window.google.maps.importLibrary('maps') as google.maps.MapsLibrary;
         
-        const mapContainer = document.getElementById('mapContainer');
-        if (!mapContainer) throw new Error("Fail to find mapContainer");
-        
-        map = new google.maps.Map(mapContainer, {
+        map = new Map(document.getElementById('mapContainer') as HTMLElement, {
           center: { lat: 39.9042, lng: 116.4074 },
           zoom: 12,
           mapId: "DEMO_MAP_ID",
         });
-        
-        updateMarkers();
+        await updateMarkers();
       } catch (err) {
         console.error('Map init failed:', err);
       }
     }
 
-    const updateMarkers = () => {
+    const updateMarkers = async () => {
       clearMapResources();
-      
+      const { AdvancedMarkerElement } = await window.google.maps.importLibrary("marker") as google.maps.MarkerLibrary;
       items.value.forEach((item, index) => {
         if (!item.geometry?.location || !map) return;
         
         const markerEl = markerElement.cloneNode(true) as HTMLElement;
         markerEl.querySelector('div')!.textContent = `${index + 1}`;
         
-        const marker = new google.maps.marker.AdvancedMarkerElement({
+        const marker = new AdvancedMarkerElement({
           position: {
             lat: item.geometry.location[0],
             lng: item.geometry.location[1]
@@ -114,17 +144,17 @@ export default defineComponent({
         markers.push(marker);
       });
       
-      fitMapToMarkers();
+      await fitMapToMarkers();
     }
 
-    const fitMapToMarkers = () => {
+    const fitMapToMarkers = async () => {
       if (!map || markers.length === 0) return;
-      
-      const bounds = new google.maps.LatLngBounds();
+      const {LatLngBounds} = await window.google.maps.importLibrary("core") as google.maps.CoreLibrary;
+      const bounds = new LatLngBounds();
       markers.forEach(marker => {
+        console.log(marker.position)
         if (marker.position) bounds.extend(marker.position);
       });
-      
       if (!bounds.isEmpty()) {
         map.fitBounds(bounds, 50);
       }
