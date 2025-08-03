@@ -39,5 +39,11 @@ export const useSurveyStore = defineStore('survey', {
     onConsentCancel() {
       this.consentOpen = false;
     },
+    clear() {
+      this.projectInfoOpen = false;
+      this.consentOpen = false;
+      this.surveyShow = false;
+      this.surveyCompleted = false;
+    }
   }
 })

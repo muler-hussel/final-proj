@@ -72,7 +72,6 @@ const improvementSuggestion = ref<string>('');
 const allEmpty = computed(() => {
   return questions.value.every(q => q.value === null) && improvementSuggestion.value === '';
 })
-console.log(allEmpty)
 
 const onSubmit = async () => {
   const allCompleted = questions.value.every(q => q.value);
@@ -108,12 +107,17 @@ onBeforeRouteLeave(async (to, from) => {
       Modal.confirm({
         title: "Unsaved Changes",
         content: "Leave without submitting?",
-        onOk: () => resolve(true),
+        onOk: () => {
+          useSurvey.surveyShow = false;
+          resolve(true);
+        },
         onCancel: () => resolve(false)
       });
     });
+  } else {
+    useSurvey.clear();
+    return true;
   }
-  return true;
 });
 
 window.addEventListener('beforeunload', (e) => {

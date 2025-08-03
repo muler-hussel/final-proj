@@ -15,8 +15,8 @@
       <h1 class="text-2xl font-bold text-gray-800">Study Information Sheet</h1>
       <p class="text-lg font-semibold text-gray-700">MSc Individual Project (COMSM3201)</p>
       <div class="text-gray-600 space-x-4">
-        <span>Contact Name: Zhu Xuefei</span>
-        <span>Email: ft24227@bristol.ac.uk</span>
+        <span>Contact Name: XXX</span>
+        <span>Email: XXX@bristol.ac.uk</span>
         <span>Date: Aug 03 2025</span>
       </div>
     </div>
@@ -45,7 +45,7 @@
       <br><br>
       Yours faithfully,
       <br><br>
-      Zhu Xuefei
+      XXXX
 
     </div>
   </a-modal>

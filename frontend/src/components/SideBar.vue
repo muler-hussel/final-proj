@@ -71,7 +71,6 @@ export default defineComponent({
     }
 
     const handleLogout = () => {
-      session.clearSession();
       auth.clearToken();
       router.push('/');
     };

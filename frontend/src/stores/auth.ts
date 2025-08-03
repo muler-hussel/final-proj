@@ -22,9 +22,9 @@ export const useAuthStore = defineStore('auth', {
     },
     
     clearToken() {
+      this.clearStorage();
       this.token = null;
       this.tokenExpires = null;
-      this.clearStorage();
       localStorage.removeItem('auth');
     },
 
