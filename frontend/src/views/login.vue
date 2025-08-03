@@ -2,12 +2,13 @@
   <div class="flex">
     <SideBar></SideBar>
     <div class="min-h-screen w-full flex items-center justify-center flex-col">
-      <div class="w-full sm:w-3/4 md:w-1/2 lg:w-1/3
-            flex flex-col 
-            sm:p-8 md:p-12 lg:p-15
-            border border-gray-200 rounded-lg shadow-sm
-            mx-auto"> 
-        <h1 class="font-semibold text-2xl text-indigo-900 mb-2 text-center">Login to YOURTravel</h1>
+      <div class="w-full sm:w-3/4 md:w-1/2 lg:w-1/3 flex flex-col 
+        sm:p-8 md:p-12 lg:p-15 border border-gray-200 rounded-lg shadow-sm mx-auto"
+      > 
+        <div class="text-2xl flex justify-center gap-2">
+          <h1 class="font-semibold text-indigo-900 mb-2 text-center">Login to </h1>
+          <span class="text-gradient font-bold">YOURT</span><span class="-ml-2 font-semibold text-indigo-900">ravel</span>
+        </div>
         <p class="mb-10 text-center text-gray-500 text-sm">Enter your user name to login</p>
         <a-textarea v-model:value="userName"  placeholder="User Name" :auto-size="{ minRows: 2 }" />
         <p class="mt-4 ml-2 text-xs text-violet-400">Don't have an account? Automatically registered upon logging in</p>
@@ -17,8 +18,6 @@
           @click="handleLogin"
           :disabled="userName === ''"
         >Login</a-button>
-
-        <p class="mt-4 text-center text-gray-300 text-xs">By Logging In, you agree to our Terms of Service and Privacy Policy</p>
       </div>
     </div>
   </div>

@@ -1,12 +1,13 @@
-from app.services.shared import language_model
+from app.services.shared import language_model, openai_language_model
 from langchain_core.output_parsers import StrOutputParser, JsonOutputParser
 from pydantic import BaseModel
 from typing import List, Optional
 from app.models.session import SessionState, Message, History
 from app.utils.prompts import (
   INTENT_CLASSIFIER_PROMPT,
+  PRIMARY_PROMPT,
+  GENERATE_SESSION_TITLE_PROMPT,
   BASIC_PROMPT,
-  GENERATE_SESSION_TITLE_PROMPT
 )
 from app.utils.logger import logger
 from app.services.redis_service import redis_service
@@ -30,13 +31,19 @@ class ChatService:
 
     self.intent_classifier_chain = (
       INTENT_CLASSIFIER_PROMPT
-      | language_model
+      | openai_language_model
       | JsonOutputParser()
     )
 
     self.primary_assistant_chain = (
+      PRIMARY_PROMPT
+      | openai_language_model
+      | StrOutputParser()
+    )
+
+    self.basic_chain = (
       BASIC_PROMPT
-      | language_model
+      | openai_language_model
       | StrOutputParser()
     )
 
@@ -51,7 +58,8 @@ class ChatService:
       return "New Trip"
   
   # Processing prompt
-  async def orchestrate_planning_step(self, session_state: SessionState, user_input: str) -> int:
+  async def orchestrate_planning_step(self, session_state: SessionState, user_input: str):
+    result = None
     if session_state.todo_step == -1:
       result = await recommend_service.recommend_places(session_state, user_input)
       session_state.todo_step = 1
@@ -61,10 +69,10 @@ class ChatService:
         "user_input": user_input,
       })
       intent_set = set(classified_intent)
+      print(classified_intent)
       # logger.info(f"intentions: {classified_intent}")
 
       # Dispatch different AI according to intent
-      # If GENERAL_QUERY, AI is free to answer
       if "ADVANCE_STEP" in intent_set:
         session_state.todo_step += 1
         todoType = session_state.todo[session_state.todo_step]
@@ -84,6 +92,19 @@ class ChatService:
       if "ITINERARY_GENERATION" in intent_set:
         session_state.todo_step = 2
         result = await itinerary_service.create_itinerary(session_state, user_input)
+      # If GENERAL_QUERY, AI is free to answer
+      if not result and (("GENERAL_QUERY" in intent_set) or ("OTHER" in intent_set)):
+        history = await redis_service.get_simplified_history(session_state)
+        content: str = await self.basic_chain.ainvoke({
+          "user_input": user_input,
+          "history": history,
+        })
+        result = Message(content=content)
+        user_history_entry = History(
+          role="ai",
+          message=result
+        )
+        await redis_service.append_history(session_state, user_history_entry)
     return result, session_state
   
   async def get_ai_response(self, session_state: SessionState, user_input: str, first_prompt: Optional[str] = None, todo_prompt: Optional[str] = None):   

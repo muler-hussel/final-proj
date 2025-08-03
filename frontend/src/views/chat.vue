@@ -250,21 +250,22 @@ export default defineComponent({
       scrollBottom();
     });
 
-    onBeforeRouteLeave(async (to, from, next) => {
+    onBeforeRouteLeave(async (to, from) => {
       firstPromptStore.clearFirstPrompt();
       if (useItinerary.currentIndex && useItinerary.ifChanged()) {
-        Modal.confirm({
-          title: "Changes you made may not be saved.",
-          content: "Do you want to save?",
-          onOk: async () => {
-            await useItinerary.handleSave();
-            next();
-          },
-          onCancel: () => next()
-        });
-      } else {
-        next();
-      }
+        return new Promise((resolve) => {
+          Modal.confirm({
+            title: "Changes you made may not be saved.",
+            content: "Do you want to save?",
+            onOk: async () => {
+              await useItinerary.handleSave();
+              resolve(true);
+            },
+            onCancel: () => resolve(false)
+          });
+        })
+      } 
+      return true;
     });
 
     return {

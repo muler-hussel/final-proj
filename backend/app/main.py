@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.db.mongodb import mongodb
 from contextlib import asynccontextmanager
-from app.api import auth, chat, recommend
+from app.api import auth, chat, recommend, survey
 from app.utils.async_listener import RedisExpiredListener
 import asyncio
 
@@ -34,6 +34,7 @@ app.add_middleware(
 app.include_router(auth.router)
 app.include_router(chat.router)
 app.include_router(recommend.router)
+app.include_router(survey.router)
 
 @app.get("/")
 def root():

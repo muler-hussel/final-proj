@@ -9,7 +9,7 @@ class UserProfile:
 
   async def _create_indexes(self):
     await self.collection.create_indexes([
-      IndexModel([("userName", 1)], unique=True)
+      IndexModel([("username", 1)], unique=True)
     ])
 
   async def create_user(self, username: str):

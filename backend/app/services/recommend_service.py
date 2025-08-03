@@ -6,7 +6,7 @@ from app.models.place_info import PlaceInfo
 from app.models.recommend import LongTermProfile, TagWeight, UserBehavior
 from app.models.shortlist import ShortlistItem, PlaceReview, PlaceGeo, PlaceDetail, PlaceCard
 from app.models.session import SessionState, Message, History
-from app.services.shared import language_model
+from app.services.shared import language_model, openai_language_model
 from app.services.redis_service import redis_service
 from app.utils.prompts import (
   EXTRACT_PREFERENCES_PROMPT, 
@@ -67,7 +67,7 @@ class RecommendService:
 
     self.recommend_places_chain = (
       RECOMMEND_NEW_PLACES_PROMPT
-      | language_model
+      | openai_language_model
       | JsonOutputParser(pydantic_object=LLMRes)
     )
 
@@ -85,7 +85,7 @@ class RecommendService:
 
     self.popular_recommends_chain = (
       RECOMMEND_POPULAR_PLACES_PROMPT
-      | language_model
+      | openai_language_model
       | JsonOutputParser(pydantic_object=PlaceCard)
     )
     
@@ -254,13 +254,13 @@ class RecommendService:
         if not place_info:
           result = self.gmaps.place(place_id, ESSENTIAL_FIELDS).get("result")
           place_info = self.google_to_shortlist(result, description, recommend_reason)
-        
-    place_info.description = description
-    place_info.info.recommend_reason = recommend_reason
-    # Save in Redis and MongoDB
-    await redis_service.save_place_info(place_info.name, place_info)
-    await self.save_place_info(place_info)
-    asyncio.create_task(self.enrich_place_detail(place_info.name))
+    if place_info: 
+      place_info.description = description
+      place_info.info.recommend_reason = recommend_reason
+      # Save in Redis and MongoDB
+      await redis_service.save_place_info(place_info.name, place_info)
+      await self.save_place_info(place_info)
+      asyncio.create_task(self.enrich_place_detail(place_info.name))
     
     return place_info
 
@@ -327,14 +327,11 @@ class RecommendService:
       return
     try:
       redis_service.set(lock_key, "1", ex=300)
-      print(place_name)
       place = await redis_service.get_place_info(place_name)
 
       if not place:
-        print(1)
         place = await self.get_place_info(place_name)
       if not place:
-        print(2)
         place = await self.get_or_fetch_place_brief(place_name, None, None)
       
       if not place:

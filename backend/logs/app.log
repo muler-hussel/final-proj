@@ -1,264 +1,45 @@
-2025-07-30 01:04:30,370 - [INFO] - googlemaps.client - 146b650eff26308110a49a8e6988111b24be06cf - API queries_quota: 60
-2025-07-30 01:08:36,053 - [INFO] - googlemaps.client - 146b650eff26308110a49a8e6988111b24be06cf - API queries_quota: 60
-2025-07-30 01:09:15,658 - [INFO] - googlemaps.client - 146b650eff26308110a49a8e6988111b24be06cf - API queries_quota: 60
-2025-07-30 01:09:47,896 - [INFO] - googlemaps.client - 146b650eff26308110a49a8e6988111b24be06cf - API queries_quota: 60
-2025-07-30 01:10:22,644 - [INFO] - googlemaps.client - 146b650eff26308110a49a8e6988111b24be06cf - API queries_quota: 60
-2025-07-30 01:14:12,253 - [INFO] - googlemaps.client - 146b650eff26308110a49a8e6988111b24be06cf - API queries_quota: 60
-2025-07-30 06:45:21,871 - [INFO] - googlemaps.client - 146b650eff26308110a49a8e6988111b24be06cf - API queries_quota: 60
-2025-07-30 06:47:01,651 - [ERROR] - asyncio - 146b650eff26308110a49a8e6988111b24be06cf - Task exception was never retrieved
-future: <Task finished name='Task-1036' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:323> exception=OutputParserException('Invalid json output: ```json\n{\n  "pros": [\n    "Rich history",\n    "Beautiful scenery",\n    "Cultural experience",\n    "Delicious food",\n    "Unique architecture"\n  ],\n  "cons": [\n    "Crowded areas",\n    "Variable weather",\n    "Language barrier",\n    "Tourist traps"\n  ],\n  "advice_trip": "## Jinghang Waterway Trip Advice\\n\\n### Itinerary Suggestions:\\n\\n*   **Day 1:** Arrive in Hangzhou, explore West Lake, and take a boat tour.\\n*   **Day 2:** Visit Wuzhen Water Town, famous for its canals and ancient architecture.\\n*   **Day 3:** Travel to Suzhou, explore the classical gardens, and visit the Silk Museum.\\n*   **Day 4:** Explore Zhouzhuang Water Town, known as the \\"Venice of the East.\\"\\n*   **Day 5:** Arrive in Shanghai, visit the Bund, and enjoy the city views.\\n\\n### Must-See Spots:\\n\\n*   **West Lake (Hangzhou):** Scenic lake with temples, gardens, and islands.\\n*   **Wuzhen:** Ancient water town with well-preserved architecture.\\n*   **Classical Gardens (Suzhou):** UNESCO World Heritage sites showcasing traditional Chinese garden design.\\n*   **Zhouzhuang:** Picturesque water town with canals and historic houses.\\n*   **The Bund (Shanghai):** Iconic waterfront area with colonial-era buildings.\\n\\n### Local Tips:\\n\\n*   **Learn basic Mandarin phrases:** It will enhance your experience.\\n*   **Try local cuisine:** Sample dishes like Xiaolongbao and Hangzhou-style noodles.\\n*   **Bargain at markets:** Negotiate prices for souvenirs and local products.\\n*   **Be aware of scams:** Watch out for overly friendly vendors or unofficial guides.\\n\\n### Transportation Advice:\\n\\n*   **High-speed trains:** Efficient for traveling between major cities.\\n*   **Buses:** Affordable for reaching smaller towns and attractions.\\n*   **Taxis and ride-sharing apps:** Convenient for getting around cities.\\n*   **Boat tours:** A must for experiencing the waterways.\\n\\n### Budget Estimates:\\n\\n*   **Accommodation:** \\$30-100 per night (depending on the type of lodging).\\n*   **Food:** \\$20-50 per day (sampling local eateries and restaurants).\\n*   **Transportation:** \\$15-40 per day (trains, buses, and local transport).\\n*   **Activities and entrance fees:** \\$20-50 per day (sightseeing and attractions).\\n\\n**Note:** These are rough estimates, and your actual expenses may vary based on your travel style and preferences."\n}\n```\nFor troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/errors/OUTPUT_PARSING_FAILURE ')>
-Traceback (most recent call last):
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\output_parsers\json.py", line 82, in parse_result
-    return parse_json_markdown(text)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\utils\json.py", line 150, in parse_json_markdown
-    return _parse_json(json_str, parser=parser)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\utils\json.py", line 166, in _parse_json
-    return parser(json_str)
-           ^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\utils\json.py", line 123, in parse_partial_json
-    return json.loads(s, strict=strict)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\json\__init__.py", line 359, in loads
-    return cls(**kw).decode(s)
-           ^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\json\decoder.py", line 337, in decode
-    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\json\decoder.py", line 353, in raw_decode
-    obj, end = self.scan_once(s, idx)
-               ^^^^^^^^^^^^^^^^^^^^^^
-json.decoder.JSONDecodeError: Invalid \escape: line 15 column 1660 (char 1904)
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "D:\finalPro\backend\app\services\recommend_service.py", line 356, in enrich_place_detail
-    enrich_data = await self.enrich_place_detail_chain.ainvoke(place_name)
-                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\runnables\base.py", line 3089, in ainvoke
-    input_ = await coro_with_context(part(), context, create_task=True)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\output_parsers\base.py", line 219, in ainvoke
-    return await self._acall_with_config(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\runnables\base.py", line 1991, in _acall_with_config
-    output: Output = await coro_with_context(coro, context)
-                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\output_parsers\base.py", line 280, in aparse_result
-    return await run_in_executor(None, self.parse_result, result, partial=partial)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\runnables\config.py", line 616, in run_in_executor
-    return await asyncio.get_running_loop().run_in_executor(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\concurrent\futures\thread.py", line 58, in run
-    result = self.fn(*self.args, **self.kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\runnables\config.py", line 607, in wrapper
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\output_parsers\json.py", line 85, in parse_result
-    raise OutputParserException(msg, llm_output=text) from e
-langchain_core.exceptions.OutputParserException: Invalid json output: ```json
-{
-  "pros": [
-    "Rich history",
-    "Beautiful scenery",
-    "Cultural experience",
-    "Delicious food",
-    "Unique architecture"
-  ],
-  "cons": [
-    "Crowded areas",
-    "Variable weather",
-    "Language barrier",
-    "Tourist traps"
-  ],
-  "advice_trip": "## Jinghang Waterway Trip Advice\n\n### Itinerary Suggestions:\n\n*   **Day 1:** Arrive in Hangzhou, explore West Lake, and take a boat tour.\n*   **Day 2:** Visit Wuzhen Water Town, famous for its canals and ancient architecture.\n*   **Day 3:** Travel to Suzhou, explore the classical gardens, and visit the Silk Museum.\n*   **Day 4:** Explore Zhouzhuang Water Town, known as the \"Venice of the East.\"\n*   **Day 5:** Arrive in Shanghai, visit the Bund, and enjoy the city views.\n\n### Must-See Spots:\n\n*   **West Lake (Hangzhou):** Scenic lake with temples, gardens, and islands.\n*   **Wuzhen:** Ancient water town with well-preserved architecture.\n*   **Classical Gardens (Suzhou):** UNESCO World Heritage sites showcasing traditional Chinese garden design.\n*   **Zhouzhuang:** Picturesque water town with canals and historic houses.\n*   **The Bund (Shanghai):** Iconic waterfront area with colonial-era buildings.\n\n### Local Tips:\n\n*   **Learn basic Mandarin phrases:** It will enhance your experience.\n*   **Try local cuisine:** Sample dishes like Xiaolongbao and Hangzhou-style noodles.\n*   **Bargain at markets:** Negotiate prices for souvenirs and local products.\n*   **Be aware of scams:** Watch out for overly friendly vendors or unofficial guides.\n\n### Transportation Advice:\n\n*   **High-speed trains:** Efficient for traveling between major cities.\n*   **Buses:** Affordable for reaching smaller towns and attractions.\n*   **Taxis and ride-sharing apps:** Convenient for getting around cities.\n*   **Boat tours:** A must for experiencing the waterways.\n\n### Budget Estimates:\n\n*   **Accommodation:** \$30-100 per night (depending on the type of lodging).\n*   **Food:** \$20-50 per day (sampling local eateries and restaurants).\n*   **Transportation:** \$15-40 per day (trains, buses, and local transport).\n*   **Activities and entrance fees:** \$20-50 per day (sightseeing and attractions).\n\n**Note:** These are rough estimates, and your actual expenses may vary based on your travel style and preferences."
-}
-```
-For troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/errors/OUTPUT_PARSING_FAILURE 
-2025-07-30 06:47:13,390 - [ERROR] - asyncio - 146b650eff26308110a49a8e6988111b24be06cf - Task exception was never retrieved
-future: <Task finished name='Task-1498' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:323> exception=OutputParserException('Invalid json output: ```json\n{\n  "pros": [\n    "Epic battles",\n    "Memorable characters",\n    "Stunning landscapes",\n    "Strong narrative"\n  ],\n  "cons": [\n    "Dark themes",\n    "Intense violence",\n    "Long journey"\n  ],\n  "advice_trip": "## Journey to the Two Towers\\n\\nWhile the Two Towers is a work of fiction, one can still craft a thematic trip inspired by its key elements:\\n\\n**Itinerary Suggestions:**\\n\\n*   **Day 1-3:** Embark on a hiking adventure through mountainous regions reminiscent of the Misty Mountains. Locations like the Scottish Highlands or the Swiss Alps offer stunning scenery.\\n*   **Day 4-5:** Explore ancient forests, such as the Redwood National Park in California, to capture the essence of Fangorn Forest.\\n*   **Day 6-7:** Visit historical castles and fortresses (e.g., in Wales or Scotland) that evoke the grandeur and strategic importance of fortresses like Helm\'s Deep.\\n\\n**Must-See Spots:**\\n\\n*   **Mountain Peaks:** Hike to high vantage points for panoramic views.\\n*   **Dense Forests:** Immerse yourself in the tranquility and mystery of old-growth forests.\\n*   **Medieval Fortifications:** Explore the architecture and history of castles and defensive structures.\\n\\n**Local Tips:**\\n\\n*   Pack for varied weather conditions, especially in mountainous regions.\\n*   Wear sturdy hiking boots and comfortable clothing.\\n*   Learn basic navigation skills or hire a local guide for wilderness excursions.\\n\\n**Transportation Advice:**\\n\\n*   Consider renting a car for flexibility in reaching remote locations.\\n*   Utilize local bus or train services for inter-city travel.\\n*   Hiking and walking will be your primary modes of transport within natural areas.\\n\\n**Budget Estimates:**\\n\\n*   Accommodation: \\$75 - \\$200 per night (mix of hotels, hostels, and campsites).\\n*   Food: \\$30 - \\$60 per day (ranging from self-catering to restaurant meals).\\n*   Activities: \\$20 - \\$50 per day (park entrance fees, guided tours).\\n*   Transportation: \\$30 - \\$100 per day (depending on rental car or public transport).\\n"\n}\n```\nFor troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/errors/OUTPUT_PARSING_FAILURE ')>
-Traceback (most recent call last):
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\output_parsers\json.py", line 82, in parse_result
-    return parse_json_markdown(text)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\utils\json.py", line 150, in parse_json_markdown
-    return _parse_json(json_str, parser=parser)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\utils\json.py", line 166, in _parse_json
-    return parser(json_str)
-           ^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\utils\json.py", line 123, in parse_partial_json
-    return json.loads(s, strict=strict)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\json\__init__.py", line 359, in loads
-    return cls(**kw).decode(s)
-           ^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\json\decoder.py", line 337, in decode
-    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\json\decoder.py", line 353, in raw_decode
-    obj, end = self.scan_once(s, idx)
-               ^^^^^^^^^^^^^^^^^^^^^^
-json.decoder.JSONDecodeError: Invalid \escape: line 13 column 1527 (char 1722)
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "D:\finalPro\backend\app\services\recommend_service.py", line 356, in enrich_place_detail
-    enrich_data = await self.enrich_place_detail_chain.ainvoke(place_name)
-                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\runnables\base.py", line 3089, in ainvoke
-    input_ = await coro_with_context(part(), context, create_task=True)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\output_parsers\base.py", line 219, in ainvoke
-    return await self._acall_with_config(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\runnables\base.py", line 1991, in _acall_with_config
-    output: Output = await coro_with_context(coro, context)
-                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\output_parsers\base.py", line 280, in aparse_result
-    return await run_in_executor(None, self.parse_result, result, partial=partial)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\runnables\config.py", line 616, in run_in_executor
-    return await asyncio.get_running_loop().run_in_executor(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\concurrent\futures\thread.py", line 58, in run
-    result = self.fn(*self.args, **self.kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\runnables\config.py", line 607, in wrapper
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\output_parsers\json.py", line 85, in parse_result
-    raise OutputParserException(msg, llm_output=text) from e
-langchain_core.exceptions.OutputParserException: Invalid json output: ```json
-{
-  "pros": [
-    "Epic battles",
-    "Memorable characters",
-    "Stunning landscapes",
-    "Strong narrative"
-  ],
-  "cons": [
-    "Dark themes",
-    "Intense violence",
-    "Long journey"
-  ],
-  "advice_trip": "## Journey to the Two Towers\n\nWhile the Two Towers is a work of fiction, one can still craft a thematic trip inspired by its key elements:\n\n**Itinerary Suggestions:**\n\n*   **Day 1-3:** Embark on a hiking adventure through mountainous regions reminiscent of the Misty Mountains. Locations like the Scottish Highlands or the Swiss Alps offer stunning scenery.\n*   **Day 4-5:** Explore ancient forests, such as the Redwood National Park in California, to capture the essence of Fangorn Forest.\n*   **Day 6-7:** Visit historical castles and fortresses (e.g., in Wales or Scotland) that evoke the grandeur and strategic importance of fortresses like Helm's Deep.\n\n**Must-See Spots:**\n\n*   **Mountain Peaks:** Hike to high vantage points for panoramic views.\n*   **Dense Forests:** Immerse yourself in the tranquility and mystery of old-growth forests.\n*   **Medieval Fortifications:** Explore the architecture and history of castles and defensive structures.\n\n**Local Tips:**\n\n*   Pack for varied weather conditions, especially in mountainous regions.\n*   Wear sturdy hiking boots and comfortable clothing.\n*   Learn basic navigation skills or hire a local guide for wilderness excursions.\n\n**Transportation Advice:**\n\n*   Consider renting a car for flexibility in reaching remote locations.\n*   Utilize local bus or train services for inter-city travel.\n*   Hiking and walking will be your primary modes of transport within natural areas.\n\n**Budget Estimates:**\n\n*   Accommodation: \$75 - \$200 per night (mix of hotels, hostels, and campsites).\n*   Food: \$30 - \$60 per day (ranging from self-catering to restaurant meals).\n*   Activities: \$20 - \$50 per day (park entrance fees, guided tours).\n*   Transportation: \$30 - \$100 per day (depending on rental car or public transport).\n"
-}
-```
-For troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/errors/OUTPUT_PARSING_FAILURE 
-2025-07-30 06:47:26,723 - [ERROR] - asyncio - 146b650eff26308110a49a8e6988111b24be06cf - Task exception was never retrieved
-future: <Task finished name='Task-2202' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:323> exception=AttributeError("'NoneType' object has no attribute 'description'")>
-Traceback (most recent call last):
-  File "D:\finalPro\backend\app\services\recommend_service.py", line 349, in enrich_place_detail
-    place_info = await self.get_or_fetch_place_brief(p.name, p.description, p.recommend_reason)
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\finalPro\backend\app\services\recommend_service.py", line 258, in get_or_fetch_place_brief
-    place_info.description = description
-    ^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'NoneType' object has no attribute 'description'
-2025-07-30 06:49:16,964 - [ERROR] - asyncio - 146b650eff26308110a49a8e6988111b24be06cf - Task exception was never retrieved
-future: <Task finished name='Task-3084' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:323> exception=AttributeError("'NoneType' object has no attribute 'description'")>
-Traceback (most recent call last):
-  File "D:\finalPro\backend\app\services\recommend_service.py", line 349, in enrich_place_detail
-    place_info = await self.get_or_fetch_place_brief(p.name, p.description, p.recommend_reason)
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\finalPro\backend\app\services\recommend_service.py", line 258, in get_or_fetch_place_brief
-    place_info.description = description
-    ^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'NoneType' object has no attribute 'description'
-2025-07-30 06:50:50,908 - [ERROR] - asyncio - 146b650eff26308110a49a8e6988111b24be06cf - Task exception was never retrieved
-future: <Task finished name='Task-5163' coro=<RecommendService.enrich_place_detail() done, defined at D:\finalPro\backend\app\services\recommend_service.py:323> exception=OutputParserException('Invalid json output: ```json\n{\n  "pros": [\n    "Stunning landscapes",\n    "Coffee region",\n    "Affordable prices",\n    "Cocora Valley"\n  ],\n  "cons": [\n    "Crowded",\n    "Rainy weather",\n    "Limited nightlife"\n  ],\n  "advice_trip": "### Salento Trip Advice\\n\\n**Itinerary Suggestions:**\\n\\n*   **Day 1:** Arrive in Salento, explore the town, coffee tour.\\n*   **Day 2:** Cocora Valley hike, see wax palm trees.\\n*   **Day 3:** Visit nearby fincas, horseback riding.\\n\\n**Must-See Spots:**\\n\\n*   **Cocora Valley:** Iconic landscape.\\n*   **Coffee Farms:** Learn about coffee production.\\n*   **Salento Town:** Colorful architecture.\\n\\n**Local Tips:**\\n\\n*   Best time to visit: dry season (Dec-Feb, Jun-Aug).\\n*   Try local trout (trucha).\\n*   Learn basic Spanish phrases.\\n\\n**Transportation Advice:**\\n\\n*   Fly to Pereira or Armenia, then take a bus to Salento.\\n*   Walkable town, use jeeps to Cocora Valley.\\n\\n**Budget Estimates:**\\n\\n*   **Budget:** \\$30-50/day (hostel, local food, transport).\\n*   **Mid-range:** \\$50-100/day (private rooms, restaurants)."\n}\n```\nFor troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/errors/OUTPUT_PARSING_FAILURE ')>
-Traceback (most recent call last):
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\output_parsers\json.py", line 82, in parse_result
-    return parse_json_markdown(text)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\utils\json.py", line 150, in parse_json_markdown
-    return _parse_json(json_str, parser=parser)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\utils\json.py", line 166, in _parse_json
-    return parser(json_str)
-           ^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\utils\json.py", line 123, in parse_partial_json
-    return json.loads(s, strict=strict)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\json\__init__.py", line 359, in loads
-    return cls(**kw).decode(s)
-           ^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\json\decoder.py", line 337, in decode
-    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\json\decoder.py", line 353, in raw_decode
-    obj, end = self.scan_once(s, idx)
-               ^^^^^^^^^^^^^^^^^^^^^^
-json.decoder.JSONDecodeError: Invalid \escape: line 13 column 745 (char 933)
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "D:\finalPro\backend\app\services\recommend_service.py", line 356, in enrich_place_detail
-    enrich_data = await self.enrich_place_detail_chain.ainvoke(place_name)
-                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\runnables\base.py", line 3089, in ainvoke
-    input_ = await coro_with_context(part(), context, create_task=True)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\output_parsers\base.py", line 219, in ainvoke
-    return await self._acall_with_config(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\runnables\base.py", line 1991, in _acall_with_config
-    output: Output = await coro_with_context(coro, context)
-                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\output_parsers\base.py", line 280, in aparse_result
-    return await run_in_executor(None, self.parse_result, result, partial=partial)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\runnables\config.py", line 616, in run_in_executor
-    return await asyncio.get_running_loop().run_in_executor(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\concurrent\futures\thread.py", line 58, in run
-    result = self.fn(*self.args, **self.kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\runnables\config.py", line 607, in wrapper
-    return func(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Program Files (x86)\Python\Python312\Lib\site-packages\langchain_core\output_parsers\json.py", line 85, in parse_result
-    raise OutputParserException(msg, llm_output=text) from e
-langchain_core.exceptions.OutputParserException: Invalid json output: ```json
-{
-  "pros": [
-    "Stunning landscapes",
-    "Coffee region",
-    "Affordable prices",
-    "Cocora Valley"
-  ],
-  "cons": [
-    "Crowded",
-    "Rainy weather",
-    "Limited nightlife"
-  ],
-  "advice_trip": "### Salento Trip Advice\n\n**Itinerary Suggestions:**\n\n*   **Day 1:** Arrive in Salento, explore the town, coffee tour.\n*   **Day 2:** Cocora Valley hike, see wax palm trees.\n*   **Day 3:** Visit nearby fincas, horseback riding.\n\n**Must-See Spots:**\n\n*   **Cocora Valley:** Iconic landscape.\n*   **Coffee Farms:** Learn about coffee production.\n*   **Salento Town:** Colorful architecture.\n\n**Local Tips:**\n\n*   Best time to visit: dry season (Dec-Feb, Jun-Aug).\n*   Try local trout (trucha).\n*   Learn basic Spanish phrases.\n\n**Transportation Advice:**\n\n*   Fly to Pereira or Armenia, then take a bus to Salento.\n*   Walkable town, use jeeps to Cocora Valley.\n\n**Budget Estimates:**\n\n*   **Budget:** \$30-50/day (hostel, local food, transport).\n*   **Mid-range:** \$50-100/day (private rooms, restaurants)."
-}
-```
-For troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/errors/OUTPUT_PARSING_FAILURE 
-2025-07-30 06:52:04,019 - [INFO] - googlemaps.client - 146b650eff26308110a49a8e6988111b24be06cf - API queries_quota: 60
-2025-07-30 06:56:58,936 - [INFO] - googlemaps.client - 146b650eff26308110a49a8e6988111b24be06cf - API queries_quota: 60
-2025-07-30 06:57:22,625 - [INFO] - googlemaps.client - 146b650eff26308110a49a8e6988111b24be06cf - API queries_quota: 60
-2025-07-30 07:04:21,966 - [INFO] - googlemaps.client - 146b650eff26308110a49a8e6988111b24be06cf - API queries_quota: 60
-2025-07-30 07:11:33,180 - [INFO] - googlemaps.client - 146b650eff26308110a49a8e6988111b24be06cf - API queries_quota: 60
-2025-07-30 07:11:41,547 - [INFO] - googlemaps.client - 146b650eff26308110a49a8e6988111b24be06cf - API queries_quota: 60
-2025-07-30 07:11:50,606 - [INFO] - googlemaps.client - 146b650eff26308110a49a8e6988111b24be06cf - API queries_quota: 60
-2025-07-30 07:20:42,124 - [INFO] - googlemaps.client - 146b650eff26308110a49a8e6988111b24be06cf - API queries_quota: 60
-2025-07-30 07:27:56,711 - [INFO] - googlemaps.client - 146b650eff26308110a49a8e6988111b24be06cf - API queries_quota: 60
-2025-07-30 07:28:57,171 - [INFO] - googlemaps.client - 146b650eff26308110a49a8e6988111b24be06cf - API queries_quota: 60
-2025-07-30 07:30:10,023 - [INFO] - googlemaps.client - 146b650eff26308110a49a8e6988111b24be06cf - API queries_quota: 60
-2025-07-30 07:34:20,704 - [INFO] - googlemaps.client - 146b650eff26308110a49a8e6988111b24be06cf - API queries_quota: 60
-2025-07-30 07:40:00,044 - [INFO] - googlemaps.client - 146b650eff26308110a49a8e6988111b24be06cf - API queries_quota: 60
-2025-07-30 07:40:35,609 - [INFO] - googlemaps.client - 146b650eff26308110a49a8e6988111b24be06cf - API queries_quota: 60
-2025-07-30 07:42:22,852 - [INFO] - googlemaps.client - 146b650eff26308110a49a8e6988111b24be06cf - API queries_quota: 60
-2025-07-30 08:14:19,262 - [INFO] - googlemaps.client - 146b650eff26308110a49a8e6988111b24be06cf - API queries_quota: 60
-2025-07-30 08:14:28,258 - [INFO] - googlemaps.client - 146b650eff26308110a49a8e6988111b24be06cf - API queries_quota: 60
-2025-07-30 08:24:41,622 - [INFO] - googlemaps.client - 146b650eff26308110a49a8e6988111b24be06cf - API queries_quota: 60
-2025-07-30 08:25:05,928 - [INFO] - googlemaps.client - 146b650eff26308110a49a8e6988111b24be06cf - API queries_quota: 60
+2025-08-04 00:04:45,014 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 00:14:21,295 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 00:16:10,089 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 00:16:19,763 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 00:24:07,444 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 00:24:39,809 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 00:25:15,035 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 00:25:48,180 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 00:28:16,570 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 00:28:57,416 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 00:29:39,005 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 00:29:55,948 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 00:31:40,482 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 00:31:52,399 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 00:33:27,401 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 00:33:51,720 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 00:33:59,771 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 00:48:50,017 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 02:16:52,776 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 02:17:09,865 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 02:17:53,573 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 02:19:24,166 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 02:58:37,708 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 04:16:19,128 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 04:21:30,046 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 04:30:25,939 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 04:44:12,424 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 04:44:20,831 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 04:47:07,759 - [INFO] - googlemaps.client - unknown - API queries_quota: 60
+2025-08-04 04:47:16,164 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 04:50:11,078 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 04:53:12,338 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 04:54:10,600 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 04:55:18,265 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 05:06:30,108 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 05:06:47,650 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 05:06:58,535 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 05:10:35,554 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 05:12:01,224 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 05:17:56,964 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 05:21:33,056 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 05:23:48,931 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 05:23:57,375 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 05:24:06,075 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60
+2025-08-04 05:25:13,712 - [INFO] - googlemaps.client - f2cff67b4d82f7d5e0185e436a5099559787462d - API queries_quota: 60

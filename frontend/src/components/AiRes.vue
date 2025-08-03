@@ -2,7 +2,7 @@
   <div class="flex flex-col p-4 gap-y-4">
     <div class="inline-block">
       <p class="text-gray-700 text-justify leading-8 whitespace-normal" v-html="renderedMessage"></p>
-      <FastForwardOutlined style="color:#9370DB;" class="hover:cursor-pointer" @click="$emit('next')" />
+      <FastForwardOutlined v-if="recommendations && recommendations.length > 0" style="color:#9370DB;" class="hover:cursor-pointer" @click="$emit('next')" />
     </div>
 
     <div v-if="itinerary && itinerary.length > 0">
@@ -10,6 +10,7 @@
         Open in canvas
         <template #icon><ExpandAltOutlined /></template>
       </a-button>
+      <ItineraryCalendar :events="itinerary" :recommends="recommendations" v-if="useItinerary.itineraryOpen"></ItineraryCalendar>
     </div>
 
     <div v-else-if="recommendations && recommendations.length > 0">
@@ -42,7 +43,6 @@
       </a-card>
     </div>
   </div>
-  <ItineraryCalendar :events="itinerary" :recommends="recommendations" v-if="useItinerary.itineraryOpen"></ItineraryCalendar>
 </template>
 
 <script setup lang="ts">

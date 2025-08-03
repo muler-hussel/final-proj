@@ -17,14 +17,14 @@
           class="shadow-lg shadow-violet-300/20"
         />
         <div class="flex justify-end mt-3 gap-x-5 items-center">
-          <a-popover>
+          <!-- <a-popover>
             <template #content>
               <p>Skips all recommendations.</p>
               <p>Create your trip directly with your request.</p>
             </template>
             <a-switch v-model:checked="easyPlan" size="small" />
             <span class="text-sm text-gray-500 ml-2">Easy Plan</span>
-          </a-popover>
+          </a-popover> -->
           <a-button @click="submitPrompt" :disabled="prompt === ''">Submit</a-button>
         </div>
       </section>

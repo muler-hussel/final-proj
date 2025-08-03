@@ -44,11 +44,11 @@ export const useUserSessionsStore = defineStore('userSessions', {
       if (this.sessions.length > 0) {
         return;
       }
-
       const auth = useAuthStore();
       if (auth.isAuthenticated) {
         try {
           const userId = auth.token;
+          console.log(userId)
           const res = await axios.post("/chat/allSessions", { user_id: userId });
           this.sessions = [...res.data];
           this.saveToStorage();

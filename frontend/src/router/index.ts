@@ -13,6 +13,11 @@ const router = createRouter({
       component: () => import('../views/login.vue')
     },
     {
+      path: '/survey',
+      component: () => import('../views/survey.vue'),
+      meta: { requiresAuth: true } 
+    },
+    {
       path: '/chat/:sessionId',
       component: () => import('../views/chat.vue'),
       meta: { requiresAuth: true } 

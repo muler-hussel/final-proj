@@ -315,7 +315,7 @@ const calendarOptions = ref<CalendarOptions>({
     right: 'next'
   },
   allDaySlot: false,
-  slotMinTime: '07:00',
+  slotMinTime: '06:00',
   slotMaxTime: '24:00',
   height: 'auto',
   editable: true,
@@ -462,8 +462,6 @@ watch(discardPlaces, () => {
 }); 
 
 onMounted(() => {
-  // Something wrong with onMounted, mount for 3 times. If initDraggable() here, 3 instances exsits every time.
-  // Due to parent components mount for several times.
   useItinerary.registerExtractFn(extractEventData);
   if (events.length > 0) {
     const firstEvent = events[0]

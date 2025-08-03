@@ -7,7 +7,8 @@
       <FormOutlined style="color:#9370DB;" class="hover:cursor-pointer" @click="toChatPage" />
       <HistoryOutlined style="color:#9370DB;" class="hover:cursor-pointer" @click="toggleCard" />
     </div>
-    <div class="flex pb-10 text-2xl">
+    <div class="pb-8 text-2xl gap-y-7 flex-col flex">
+      <SnippetsOutlined style="color:#9370DB;" class="hover:cursor-pointer" @click="toSurveyPage" />
       <UserOutlined 
         style="color:#9370DB;" 
         class="hover:cursor-pointer" 
@@ -106,6 +107,10 @@ export default defineComponent({
       await userSession.deleteSession(sessionId);
     }
 
+    const toSurveyPage = () => {
+      router.push('/survey');
+    }
+
     onMounted(async () => {
       await userSession.initialize();
       document.addEventListener('click', handleClickOutside);
@@ -127,6 +132,7 @@ export default defineComponent({
       loadSession,
       currentSessionId,
       deleteSession,
+      toSurveyPage,
     }
   }
 })

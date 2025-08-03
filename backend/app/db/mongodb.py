@@ -4,6 +4,7 @@ from app.models.user_profile import UserProfile
 from app.models.user_preference import UserPreference
 from app.models.place_info import PlaceInfo
 from app.models.db_session import DbSession
+from app.models.user_survey import UserSurvey
 import os
 from dotenv import load_dotenv
 
@@ -15,6 +16,7 @@ class MongoDB:
     self.user_preference = None
     self.place_info = None
     self.session = None
+    self.survey = None
 
   async def connect(self):
     """connect mongodb"""
@@ -26,6 +28,7 @@ class MongoDB:
       self.user_preference = UserPreference(self.db)
       self.place_info = PlaceInfo(self.db)
       self.session = DbSession(self.db)
+      self.survey = UserSurvey(self.db)
       await self.client.admin.command('ping') 
       print("Successfully connected to MongoDB!")
     except ConnectionFailure as e:

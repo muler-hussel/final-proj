@@ -45,7 +45,7 @@ class RedisService:
     key = self._get_session_metadata_key(user_id, session_id)
     data = self._redis_client.get(key)
     if not data:
-      await self._get_session_from_db(user_id, session_id)
+      data = await self._get_session_from_db(user_id, session_id)
     if data:
       try:
         return SessionState.model_validate_json(data)
@@ -79,7 +79,7 @@ class RedisService:
               "update_time": update_time
             })
           except Exception as e:
-              print(f"Error parsing session metadata for {session_id}: {e}")
+            print(f"Error parsing session metadata for {session_id}: {e}")
       if cursor == b"0":
         break
 
@@ -93,12 +93,12 @@ class RedisService:
     key = session_state.get_redis_key()
     try:
       json_data = session_state.model_dump_json()
-      history = session_state.history
-      shortlist = session_state.shortlist
-      for h in history:
-        self._redis_client.rpush(session_state.history_key, h.model_dump_json())
-      for s in shortlist:
-        self._redis_client.hset(session_state.shortlist_key, s.name, s.model_dump_json())
+      # history = session_state.history
+      # shortlist = session_state.shortlist
+      # for h in history:
+      #   self._redis_client.rpush(session_state.history_key, h.model_dump_json())
+      # for s in shortlist:
+      #   self._redis_client.hset(session_state.shortlist_key, s.name, s.model_dump_json())
 
       self._redis_client.set(key, json_data, ex=3600)
       return True
@@ -130,20 +130,20 @@ class RedisService:
       return session_state
     return None
 
-  async def delete_session(self, session_state: SessionState) -> bool:
-    histroy_key = session_state.history_key
-    shortlist_key = session_state.shortlist_key
-    meta_key = self._get_session_metadata_key(session_state.user_id, session_state.session_id)
+  async def delete_session(self, user_id: str, session_id: str) -> bool:
+    histroy_key = "user:{user_id}:session:{session_id}:history"
+    shortlist_key = "user:{user_id}:session:{session_id}:shortlist"
+    meta_key = self._get_session_metadata_key(user_id, session_id)
 
     try:
       self.delete(histroy_key)
       self.delete(shortlist_key)
       self.delete(meta_key)
 
-      asyncio.create_task(self._delete_session_in_db(session_state.user_id, session_state.session_id))
+      asyncio.create_task(self._delete_session_in_db(user_id, session_id))
       return True
     except Exception as e:
-      print(f"Fail to delete session {session_state.user_id}/{session_state.session_id}: {e}")
+      print(f"Fail to delete session {user_id}/{session_id}: {e}")
       return False
 
   # Deal with metadata except from title and slot
@@ -193,7 +193,7 @@ class RedisService:
 
   # Handle with itinerary
   async def save_itinerary(self, session_state: SessionState, itinerary: DailyItinerary, chat_idx: int):
-    history = await redis_service.get_history(session_state.user_id, session_state.session_id)
+    history = await self.get_history(session_state.user_id, session_state.session_id)
     if (chat_idx >= len(history)) or (history[chat_idx].role != 'ai') :
       print("Trying to modify a wrong message")
       return False
@@ -238,6 +238,7 @@ class RedisService:
     try:
       item_id = item.name
       self._redis_client.hset(session_state.shortlist_key, item_id, item.model_dump_json())
+      asyncio.create_task(self._shortlist_to_mongodb(session_state))
       return True
     except Exception as e:
       print(f"Error adding to shortlist for {session_state.user_id}/{session_state.session_id}: {e}")
@@ -265,6 +266,7 @@ class RedisService:
     
     try:
       self._redis_client.hdel(session_state.shortlist_key, item_id)
+      asyncio.create_task(self._shortlist_to_mongodb(session_state))
       return True
     except Exception as e:
       print(f"Error removing from shortlist for {session_state.user_id}/{session_state.session_id}: {e}")

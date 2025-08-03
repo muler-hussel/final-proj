@@ -1,9 +1,9 @@
 import { fileURLToPath, URL } from 'node:url'
-
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import tailwindcss from '@tailwindcss/vite'
+ import { createHtmlPlugin } from "vite-plugin-html"
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
@@ -37,7 +37,3 @@ export default defineConfig(({ mode }) => {
     },
   }
 })
-function createHtmlPlugin(arg0: { inject: { data: { VITE_GOOGLE_API: string } } }): import("vite").PluginOption {
-  throw new Error('Function not implemented.')
-}
-

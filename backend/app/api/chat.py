@@ -59,16 +59,11 @@ async def get_session_with_userId(data: ChatRequest = Body(...)):
 @router.post("/{session_id}")
 async def get_session(session_id: str = Path(...), data: ChatRequest = Body(...)):
   user_id = data.user_id
-  db = get_database()
-  session_state = await DbSession(db).get_sesssion(user_id, session_id)
-  if not session_state:
-    raise HTTPException(status_code=404, detail="Session not found or expired")
+
+  session_state = await redis_service.load_session_state(user_id, session_id)
+  history = await redis_service.get_history(user_id, session_id)
+  shortlist = await redis_service.get_shortlist(user_id, session_id)
   
-  history = session_state.history
-  shortlist = session_state.shortlist
-
-  await redis_service.save_from_db(session_state)
-
   response = {
     "messages": history,
     "short_term_profile": session_state.short_term_profile,
@@ -171,11 +166,4 @@ async def update_itinerary(session_id: str = Path(...), data: ChatRequest = Body
 # Delete session
 @router.post("/{session_id}/delete")
 async def delete_session(session_id: str = Path(...), data: ChatRequest = Body(...)):
-  user_id = data.user_id
-
-  session_state = await redis_service.load_session_state(user_id, session_id)
-  if session_state:
-    await redis_service.delete_session(session_state)
-  if not session_state:
-    db = await get_database()
-    await DbSession(db).delete_session(user_id, session_id)
+  await redis_service.delete_session(data.user_id, session_id)

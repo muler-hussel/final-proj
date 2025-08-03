@@ -42,8 +42,8 @@ Hello! It's a pleasure to plan the journey for you. If you want to provide more 
 If you want to step forward, click the **next button** below.
 """
 
-# Response of ai
-BASIC_PROMPT = ChatPromptTemplate([
+# Response of ai at first time
+PRIMARY_PROMPT = ChatPromptTemplate([
   ("system", """You are a polite and helpful AI travel assistant. Your goal is to guide the user through planning their trip.
   
   Current Session Context:
@@ -63,6 +63,13 @@ BASIC_PROMPT = ChatPromptTemplate([
   6.  **Maintain a conversational and helpful tone.**
   """),
   ("human", "User Input: {user_input}\nFirst Prompt: {first_prompt}\ntodo: {todo_prompt}")
+])
+
+# Response of ai if user not ask for recommendation or itinerary
+BASIC_PROMPT = ChatPromptTemplate([
+  ("system", """You are a polite and helpful AI travel assistant. Your goal is to help user plan their trip, only answer topics related to travelling.
+  """),
+  ("human", "User Input: {user_input}\nChat history: {history}\n\n")
 ])
 
 # Extract preferences from user behavior or input
