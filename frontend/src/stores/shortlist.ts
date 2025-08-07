@@ -66,6 +66,7 @@ export const useShortlistStore = defineStore('shortlist', {
 
     clearLocalStorage(sessionId: string) {
       if (typeof window === 'undefined') return;
+      this.clearShortlist();
       localStorage.removeItem(`shortlist_items:${sessionId}`);
     },
 

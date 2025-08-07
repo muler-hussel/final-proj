@@ -29,6 +29,7 @@ import { useRouter } from 'vue-router';
 import SideBar from '@/components/SideBar.vue';
 import { useAuthStore } from '@/stores/auth.ts';
 import axios from "axios";
+import { useUserSessionsStore } from '@/stores/userSessions.ts';
 
 export default defineComponent({
   components: {
@@ -38,6 +39,7 @@ export default defineComponent({
     const userName = ref<string>('');
     const auth = useAuthStore();
     const router = useRouter();
+    const userSessions = useUserSessionsStore();
 
     const handleLogin = async () => {
       const res = await axios.post('/login', {userName: userName.value});
@@ -48,6 +50,7 @@ export default defineComponent({
       } else {
         router.push('/');
       }
+      await userSessions.initialize();
     };
 
     return {

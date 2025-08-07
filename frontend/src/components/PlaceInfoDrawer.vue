@@ -163,7 +163,7 @@ export default defineComponent({
     const renderedRcommendReason = computed(() => marked.parse(item.value?.info?.recommend_reason ?? ''));
     const value = computed(() => item.value?.info?.rating)
     const weekday_text = computed(() => item.value?.info?.weekday_text ?? null);
-    const todayIndex = new Date().getDay();
+    const todayIndex = new Date().getDay() + 6;
 
     const dynamic_weekday = computed(() => {
       if (!weekday_text.value || weekday_text.value?.length == 0) return;

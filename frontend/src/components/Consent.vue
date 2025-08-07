@@ -3,6 +3,7 @@
     v-model:open="useSurvey.consentOpen"
     width="100%"
     wrap-class-name="full-modal"
+    @cancel="handelCancel"
   >
     <template #footer>
       <a-button key="cancel" @click="handelCancel">cancel</a-button>
@@ -91,6 +92,7 @@ import { useRouter } from 'vue-router';
 
 const useSurvey = useSurveyStore();
 const plainOptions = ['Yes', 'No'];
+const router = useRouter();
 
 const value1 = ref<string>('');
 const value2 = ref<string>('');
@@ -149,7 +151,6 @@ const handleSubmit = async () => {
 
 const handelCancel = () => {
   useSurvey.onConsentCancel();
-  const router = useRouter();
   router.push('/');
 }
 

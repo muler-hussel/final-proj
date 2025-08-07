@@ -30,7 +30,7 @@ class UserSurvey:
   async def save_consent(self, user_id: str, consent_hash: str):
     await self.collection.update_one(
       {"user_id": user_id},
-      {"$set": {"is_consented": True, "consent_hash": consent_hash, "expire_at": datetime(2025,8,5,0,0,0)}},
+      {"$set": {"is_consented": True, "consent_hash": consent_hash, "expire_at": datetime(2025,12,31,0,0,0)}},
       upsert=True
     )
   

@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, Body
 from app.services.redis_service import redis_service
-from app.models.recommend import UserBehavior
+from app.models.recommend import LongTermProfile, UserBehavior
 from pydantic import BaseModel
 from typing import List
 from app.models.shortlist import ShortlistItem
@@ -13,6 +13,9 @@ class BehaviorTrack(BaseModel):
 
 class PlaceReq(BaseModel):
   place_name: str
+
+class TopicReq(BaseModel):
+  user_id: str
 
 router = APIRouter(prefix="/recommend", tags=["recommend"])
 
@@ -37,3 +40,10 @@ async def get_place_detail(req: PlaceReq = Body(...)) -> ShortlistItem:
   place = await recommend_service.enrich_place_detail(place_name)
 
   return place
+
+@router.post("/topics")
+async def recommend_topics(req: TopicReq = Body(...)):
+  user_id = req.user_id
+  topics = await recommend_service.recommend_topics(user_id)
+
+  return topics

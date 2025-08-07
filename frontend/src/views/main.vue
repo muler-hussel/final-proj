@@ -33,7 +33,7 @@
         <div class="flex gap-x-4 justify-center mb-6 hover:cursor-pointer text-gradient text-xl font-medium">
           <h2>What you may want </h2>
           <p>|</p>
-          <SyncOutlined style="color:#9370DB;"/>
+          <SyncOutlined style="color:#9370DB;" @click="recommendTopics"/>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 ml-2 mr-2">
           <a-card 
@@ -60,6 +60,7 @@ import { useRouter } from 'vue-router';
 import { useFirstPromStore } from '@/stores/firstPrompt';
 import { useAuthStore } from '@/stores/auth';
 import { useUserSessionsStore } from '@/stores/userSessions';
+import axios from 'axios';
 
 export default defineComponent({
   components: {
@@ -69,7 +70,7 @@ export default defineComponent({
     const prompt = ref<string>('');
     const easyPlan = ref<boolean>(false);
     const router = useRouter();
-    const cardData = [
+    const cardData = ref([
       {
         title: "Hidden Gems",
         description: "Find secret gardens and offbeat attractions in Kyoto."
@@ -94,12 +95,12 @@ export default defineComponent({
         title: "5 Days, Zero Regrets",
         description: "Epic 5-day Iceland itinerary with adventure highlights."
       }
-    ]
+    ])
     const firstPromptStore = useFirstPromStore()
     const auth = useAuthStore();
     const userSessions = useUserSessionsStore()
     
-    const submitPrompt = async () => {
+    const submitPrompt = () => {
       router.push("/chat/new");
       firstPromptStore.firstPromptData = {
         isEasyPlan: easyPlan.value,
@@ -111,11 +112,13 @@ export default defineComponent({
       prompt.value = card.description
     }
 
+    const recommendTopics = async () => {
+      const result = await axios.post("/recommend/topics", {user_id: auth.token});
+      cardData.value = result.data;
+    }
+
     onMounted(async () => {
       auth.initialize();
-      if (auth.isAuthenticated) {
-        await userSessions.initialize();
-      }
       userSessions.setCurrentSession(null);
     });
     
@@ -125,6 +128,7 @@ export default defineComponent({
       prompt,
       submitPrompt,
       hadleCardClick,
+      recommendTopics,
     }
   }
 })

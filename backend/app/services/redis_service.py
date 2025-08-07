@@ -46,13 +46,15 @@ class RedisService:
     data = self._redis_client.get(key)
     if not data:
       data = await self._get_session_from_db(user_id, session_id)
+      if isinstance(data, SessionState):
+        return data
     if data:
       try:
         return SessionState.model_validate_json(data)
       except Exception as e:
         print(f"Error loading session state for {user_id}: {e}")
         return None
-    return data
+    return None
 
   async def load_session_with_userId(self, user_id: str):
     pattern = f"user:{user_id}:session:*:metadata"
@@ -76,7 +78,8 @@ class RedisService:
             sessions.append({
               "session_id": session_id,
               "title": title,
-              "update_time": update_time
+              "update_time": update_time,
+              "short_term_profile": data.get("short_term_profile", {})
             })
           except Exception as e:
             print(f"Error parsing session metadata for {session_id}: {e}")
@@ -86,7 +89,7 @@ class RedisService:
     sessions.sort(key=lambda x: x["update_time"], reverse=True)
     return sessions
   
-  async def save_from_db(self, session_state: SessionState) -> bool:
+  def save_from_db(self, session_state: SessionState) -> bool:
     if not self._redis_client:
       return False
 
@@ -316,7 +319,7 @@ class RedisService:
     db = get_database()
     data = await DbSession(db).get_sesssion(user_id, session_id)
     if data:
-      await self.save_from_db(data)
+      self.save_from_db(data)
     return data
   
   async def _delete_session_in_db(self, user_id: str, session_id: str):

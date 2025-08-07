@@ -28,7 +28,7 @@ export const useAuthStore = defineStore('auth', {
       localStorage.removeItem('auth');
     },
 
-    initialize() {
+    async initialize() {
       const raw = localStorage.getItem('auth');
       if (!raw) return;
 

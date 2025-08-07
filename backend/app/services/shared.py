@@ -12,7 +12,7 @@ try:
   # Must use ChatOpenAi instead of BaseChatOpenAi for function call. (Seems like BaseChatOpenAi is an interface, but used well before
   # openai_language_model = ChatOpenAI(model_name="gpt-3.5-turbo-1106", openai_api_key=OPENAI_KEY, base_url="https://free.v36.cm")
   openai_language_model = ChatOpenAI(model_name="o4-mini", openai_api_key=OPENAI_KEY)
-  language_model = ChatGoogleGenerativeAI(model="gemini-2.0-flash-001", google_api_key=GEMINI_KEY)
+  language_model = ChatGoogleGenerativeAI(model="gemini-2.5-flash-lite", google_api_key=GEMINI_KEY)
 except:
   print("Fail to initialize llm")
   raise

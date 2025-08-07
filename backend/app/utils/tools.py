@@ -79,7 +79,7 @@ async def get_route_info(origin: str, destination: str, mode: Literal["WALK", "T
       response = requests.post(url, headers=headers, data=json.dumps(new_body))
       data = response.json()
       mode = 'WALK'
-    if data and mode.upper() != 'DRIVE': 
+    if data and mode.upper() == 'WALK': 
       duration = float(data["routes"][0]["duration"][:-1])
       if duration > 3600:
         new_body = {
@@ -112,12 +112,12 @@ async def get_route_info(origin: str, destination: str, mode: Literal["WALK", "T
           route_steps.append(RouteStep(
             step_mode=step_mode,
             step_duration=_format_duration(step_duration),
-            departure_stop=steps[step_start]["transitDetails"]["stopDetails"]["departureStop"]["name"],
-            departure_time=steps[step_start]["transitDetails"]["stopDetails"]["departureTime"],
-            arrival_stop=steps[step_end]["transitDetails"]["stopDetails"]["arrivalStop"]["name"],
-            arrival_time=steps[step_end]["transitDetails"]["stopDetails"]["arrivalTime"],
-            transit_name=steps[step_start]["transitDetails"]["transitLine"]["name"], # May not have nameShort
-            color=steps[step_start]["transitDetails"]["transitLine"]["color"],
+            departure_stop=steps[step_start].get("transitDetails", {}).get("stopDetails", {}).get("departureStop", {}).get("name", ""),
+            departure_time=steps[step_start].get("transitDetails", {}).get("stopDetails", {}).get("departureTime", ""),
+            arrival_stop=steps[step_end].get("transitDetails", {}).get("stopDetails", {}).get("arrivalStop", {}).get("name", ""),
+            arrival_time=steps[step_end].get("transitDetails", {}).get("stopDetails", {}).get("arrivalTime", ""),
+            transit_name = steps[step_start].get("transitDetails", {}).get("transitLine", {}).get("name", ""),
+            color=steps[step_start].get("transitDetails", {}).get("transitLine", {}).get("color", ""),
           ))
         else:
           route_steps.append(RouteStep(

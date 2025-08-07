@@ -129,6 +129,7 @@ export const useUserBehaviorStore = defineStore('userBehavior', {
 
     clearStorage(sessionId: string) {
       if (typeof window === 'undefined') return;
+      this.clearBehavior();
       localStorage.removeItem(`tracking_data:${sessionId}`);
     },
 

@@ -1,5 +1,6 @@
+from collections import defaultdict
 from pydantic import BaseModel
-from typing import List, Any, Optional
+from typing import Dict, List, Any, Optional
 from app.db.mongodb import get_database
 from app.models.user_preference import UserPreference
 from app.models.place_info import PlaceInfo
@@ -14,6 +15,7 @@ from app.utils.prompts import (
   PLACE_DETAIL_ENRICH_PROMPT,
   CITY_POPULAR_ATTRACTIONS_PROMPT,
   RECOMMEND_POPULAR_PLACES_PROMPT,
+  TOPIC_RECOMMEND_PROMPT,
 )
 from langchain_core.output_parsers import JsonOutputParser
 import math
@@ -36,6 +38,10 @@ class LLMExtract(BaseModel):
 class LLMRes(BaseModel):
   content: str
   recommendations: Optional[List[PlaceCard]] = []
+
+class TopicRec(BaseModel):
+  title: str
+  description: str
 
 # Fields needed in shortlist item
 ESSENTIAL_FIELDS = [
@@ -67,7 +73,7 @@ class RecommendService:
 
     self.recommend_places_chain = (
       RECOMMEND_NEW_PLACES_PROMPT
-      | openai_language_model
+      | language_model
       | JsonOutputParser(pydantic_object=LLMRes)
     )
 
@@ -85,8 +91,14 @@ class RecommendService:
 
     self.popular_recommends_chain = (
       RECOMMEND_POPULAR_PLACES_PROMPT
-      | openai_language_model
+      | language_model
       | JsonOutputParser(pydantic_object=PlaceCard)
+    )
+
+    self.topic_recommends_chain = (
+      TOPIC_RECOMMEND_PROMPT
+      | language_model
+      | JsonOutputParser()
     )
     
     self.sigmoid_scale = 0.5
@@ -115,9 +127,9 @@ class RecommendService:
     long_term_profile = await self.get_long_preferences(session_state.user_id)
     # Update shortlist
     if (user_behavior != None): 
-      place_names = []
+      place_names = set()
       for behavior in user_behavior:
-        place_names.append(behavior.place_name)
+        place_names.add(behavior.place_name)
         if behavior.event_type == 'shortlist':
           shortlist_place = await redis_service.get_place_info(behavior.place_name)
           if shortlist_place is None:
@@ -127,7 +139,7 @@ class RecommendService:
           await redis_service.add_to_shortlist(session_state, shortlist_place)
         elif behavior.event_type == 'unshortlist':
           await redis_service.remove_from_shortlist(session_state, behavior.place_name)
-
+    
     raw_data = await self.extract_preferences_chain.ainvoke({
       "places": place_names, 
       "user_input": user_input,
@@ -199,12 +211,6 @@ class RecommendService:
       "history": history,
     })
 
-    raw_popular = await self.popular_recommends_chain.ainvoke({
-      "user_input": user_input,
-      "recommended_places": recommended_places,
-      "history": history,
-    })
-
     # logger.info(f"short_term_profile: {short_term_profile}, user_input: {user_input}, recommend_places: {raw_data}")
     
     result = LLMRes(**raw_data)
@@ -213,8 +219,6 @@ class RecommendService:
       content=result.content
     )
 
-    populars = [PlaceCard(**p) for p in raw_popular]
-
     for place in recommendations:
       # If place information is in DB, get place info, else fetch from google map api
       session_state.add_recommended_places(place.name)
@@ -222,6 +226,14 @@ class RecommendService:
       if place_info:
         response.recommendations.append(place_info)
     
+    raw_popular = await self.popular_recommends_chain.ainvoke({
+      "user_input": user_input,
+      "recommended_places": session_state.recommended_places,
+      "history": history,
+    })
+
+    populars = [PlaceCard(**p) for p in raw_popular]
+
     for place in populars:
       # If place information is in DB, get place info, else fetch from google map api
       session_state.add_recommended_places(place.name)
@@ -263,6 +275,48 @@ class RecommendService:
       asyncio.create_task(self.enrich_place_detail(place_info.name))
     
     return place_info
+
+  async def update_longterm_profile(self, user_id: str, session_info: List) -> LongTermProfile:
+    decaying_preferences: Dict[str, float] = defaultdict(float)
+    avoids_set = set()
+    
+    for i, session in enumerate(session_info):
+      stp = session.get("short_term_profile", {})
+      decay = 1.0 / (i + 1)
+      for tag, tag_weight in stp.preferences.items():
+        decaying_preferences[tag] += tag_weight.weight * decay
+      avoids_set.update(stp.avoids, [])
+      
+    normalized_preferences = {}
+    if decaying_preferences:
+      max_weight = max(decaying_preferences.values())
+      if max_weight > 0:
+        normalized_preferences = {
+          tag: TagWeight(tag=tag, weight=round(weight / max_weight, 4))
+          for tag, weight in decaying_preferences.items()
+        }
+      else:
+        normalized_preferences = {
+          tag: TagWeight(tag=tag, weight=0.0)
+          for tag in decaying_preferences
+        }
+      
+    long_term_pref = LongTermProfile(
+      user_id=user_id,
+      verified_preferences={},
+      decaying_preferences=normalized_preferences,
+      avoids=list(avoids_set),
+    )
+    
+    await self.save_long_preferences(long_term_pref)
+    return long_term_pref
+
+  async def recommend_topics(self, user_id: str) -> List[TopicRec]:
+    long_term_profile = await self.get_long_preferences(user_id)
+    raw_result = await self.topic_recommends_chain.ainvoke({"long_term_profile": long_term_profile})
+
+    result = [TopicRec(**r) for r in raw_result]
+    return result
 
   def raw_behavior_score(self, behavior: UserBehavior) -> float:
     return (

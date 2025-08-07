@@ -202,6 +202,7 @@ const setOperations = {
 
 // Calendar receive from discardPlaces
 const handleEventReceive = (info: EventReceiveArg) => {
+  console.log(3)
   if (!info.draggedEl.dataset.transfer) return;
   const place = JSON.parse(info.draggedEl.dataset.transfer);
   info.event.setProp('title', place.name);
@@ -458,11 +459,13 @@ const initDraggable = () => {
 };
 
 watch(discardPlaces, () => {
+  console.log(2)
   initDraggable();
 }); 
 
 onMounted(() => {
   useItinerary.registerExtractFn(extractEventData);
+  console.log(1)
   if (events.length > 0) {
     const firstEvent = events[0]
     const places = firstEvent.discarded_places || []

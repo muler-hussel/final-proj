@@ -10,6 +10,7 @@ from app.utils.prompts import PROMPT_FIRST_INPUT
 from app.db.mongodb import get_database
 from app.models.db_session import DbSession
 from typing import List
+from app.services.recommend_service import recommend_service
 
 router = APIRouter(prefix="/chat", tags=["chat"])
 
@@ -51,8 +52,9 @@ async def get_session_with_userId(data: ChatRequest = Body(...)):
   if len(sessions) == 0:
     return session_info
   for s in sessions:
-    session_info.append({"session_id": s.session_id, "title": s.title, "update_time": s.update_time})
+    session_info.append({"session_id": s.session_id, "title": s.title, "update_time": s.update_time, "short_term_profile": s.short_term_profile})
   session_info.sort(key=lambda x: x["update_time"], reverse=True)
+  await recommend_service.update_longterm_profile(user_id, session_info)
   return [AllSessionRes(**s) for s in session_info]
 
 # Get session when refresh or from history chats

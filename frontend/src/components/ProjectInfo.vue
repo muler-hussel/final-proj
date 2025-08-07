@@ -3,6 +3,7 @@
     v-model:open="useSurvey.projectInfoOpen"
     width="100%"
     wrap-class-name="full-modal"
+    @cancel="handelCancel"
   > 
     <template #footer>
       <a-button key="cancel" @click="handelCancel">cancel</a-button>

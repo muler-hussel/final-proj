@@ -37,7 +37,7 @@
       class="flex flex-row p-3 text-sm text-gray-700 hover:bg-gray-200/50 hover:cursor-pointer active:bg-gray-200/100 rounded-lg "
       :class="{ 'bg-violet-200 hover:bg-violet-200': currentSessionId === s.session_id }"
     >
-      <div v-if="s" @click="loadSession(s.session_id)">{{ s.title }}</div>
+      <div v-if="s" @click="loadSession(s.session_id)" class="truncate overflow-hidden">{{ s.title }}</div>
       <DeleteOutlined class="flex ml-auto hover:bg-gray-300/100 hover:cursor-pointer rounded-lg" @click.stop="deleteSession(s.session_id)"/>
     </div>
   </div>

@@ -87,9 +87,14 @@ class ItineraryService:
     for i in range(len(itinerary)):
       if itinerary[i].type == 'visit':
         place_name = itinerary[i].place_name
+        print(place_name)
+        idx = place_name.rfind(",")
+        short_place_name = place_name[:idx].strip()
+        itinerary[i].place_name = short_place_name
         # If recommend more places
-        if place_name and (place_name != "null") and (place_name not in shortlist_names):
+        if place_name and (place_name != "null") and (short_place_name not in shortlist_names):
           place_info = await recommend_service.get_or_fetch_place_brief(place_name, None, None)
+          itinerary[i].place_name = place_info.name
           response.recommendations.append(place_info)
     
     itinerary = await self.update_itinerary_time(itinerary)

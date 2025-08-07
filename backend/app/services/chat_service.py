@@ -13,6 +13,8 @@ from app.utils.logger import logger
 from app.services.redis_service import redis_service
 from app.services.recommend_service import recommend_service
 from app.services.itinerary_service import itinerary_service
+from app.db.mongodb import get_database
+from app.models.db_session import DbSession
 
 class SlotDataExtractor(BaseModel):
   destination: Optional[str]
@@ -31,19 +33,19 @@ class ChatService:
 
     self.intent_classifier_chain = (
       INTENT_CLASSIFIER_PROMPT
-      | openai_language_model
+      | language_model
       | JsonOutputParser()
     )
 
     self.primary_assistant_chain = (
       PRIMARY_PROMPT
-      | openai_language_model
+      | language_model
       | StrOutputParser()
     )
 
     self.basic_chain = (
       BASIC_PROMPT
-      | openai_language_model
+      | language_model
       | StrOutputParser()
     )
 
@@ -61,6 +63,13 @@ class ChatService:
   async def orchestrate_planning_step(self, session_state: SessionState, user_input: str):
     result = None
     if session_state.todo_step == -1:
+      db = get_database()
+      sessions = await DbSession(db).get_sessions_by_user_id(session_state.user_id)
+      session_info = []
+      for s in sessions:
+        session_info.append({"update_time": s.update_time, "short_term_profile": s.short_term_profile})
+      session_info.sort(key=lambda x: x["update_time"], reverse=True)
+      await recommend_service.update_longterm_profile(session_state.user_id, session_info)
       result = await recommend_service.recommend_places(session_state, user_input)
       session_state.todo_step = 1
     else:

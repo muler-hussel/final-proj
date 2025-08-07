@@ -4,14 +4,14 @@
     <div class="flex flex-col h-screen w-full">
       <!-- top -->
       <div class="flex h-15 border-b border-violet-100 shadow-lg shadow-violet-200/30 p-6 items-center">
-        <div class="w-1/4 flex flex-row gap-2">
+        <div class="w-1/4 flex flex-row gap-2" id="title">
           <p class="ml-2 font-semibold text-indigo-900 
             hover:cursor-pointer hover:underline 
             truncate overflow-hidden text-ellipsis"
-            @click="onEditTitle"
+            @click.stop="onEditTitle"
             v-if="!changeTitle"
           >{{ title }}</p>
-          <EditOutlined style="color:#9370DB;" class="hover:cursor-pointer" @click="onEditTitle" v-if="!changeTitle" />
+          <EditOutlined style="color:#9370DB;" class="hover:cursor-pointer" @click.stop="onEditTitle" v-if="!changeTitle" />
           <a-input v-model:value="title" placeholder="Enter your trip title" v-else @pressEnter="completeChange">
             <template #suffix>
               <EnterOutlined style="color:#9370DB; font-size: smaller;" />
@@ -63,9 +63,9 @@
       <!-- bottom -->
       <div class="w-3/5 h-10 mb-3 mx-auto">
         <a-input v-model:value="prompt" placeholder="Tell me something..." size="large" class="gap-x-1" @pressEnter="fetchAiRes(prompt)">
-          <template #prefix>
+          <!-- <template #prefix>
             <PlusCircleOutlined style="color:#9370DB;" class="hover:cursor-pointer" />
-          </template>
+          </template> -->
           <template #suffix>
             <EnterOutlined style="color:#9370DB; font-size: smaller;" @click="fetchAiRes(prompt)"/>
           </template>
@@ -228,6 +228,13 @@ export default defineComponent({
       }
     }
 
+    const handleClickOutside = (event: MouseEvent) => {
+      const titleEl = document.getElementById("title");
+      if (titleEl && !titleEl.contains(event.target as Node)) {
+        changeTitle.value = false;
+      }
+    }
+
     onMounted(async () => {
       const sessionId = route.params.sessionId as string | undefined;
       if (sessionId) {
@@ -248,6 +255,7 @@ export default defineComponent({
         }
       }
       scrollBottom();
+      document.addEventListener('click', handleClickOutside);
     });
 
     onBeforeRouteLeave(async (to, from) => {
@@ -259,12 +267,14 @@ export default defineComponent({
             content: "Do you want to save?",
             onOk: async () => {
               await useItinerary.handleSave();
+              document.addEventListener('click', handleClickOutside);
               resolve(true);
             },
             onCancel: () => resolve(false)
           });
         })
       } 
+      document.addEventListener('click', handleClickOutside);
       return true;
     });
 

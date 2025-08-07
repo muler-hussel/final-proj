@@ -48,7 +48,6 @@ export const useUserSessionsStore = defineStore('userSessions', {
       if (auth.isAuthenticated) {
         try {
           const userId = auth.token;
-          console.log(userId)
           const res = await axios.post("/chat/allSessions", { user_id: userId });
           this.sessions = [...res.data];
           this.saveToStorage();
@@ -137,6 +136,8 @@ export const useUserSessionsStore = defineStore('userSessions', {
 
     clearStorage() {
       if (typeof window === 'undefined') return;
+      this.sessions = [];
+      this.currentSessionId = null;
       localStorage.removeItem('user_sessions_data');
     },
   },
